@@ -4,8 +4,9 @@
   "description": "Complete Node.js Guide",
   "main": "app.js",
   "scripts": {
+    "start": "NODE_ENV=production MONGO_USER=stevebreese MONGO_PASSWORD=abcdefg MONTO_DEFAULT_DATABASE=shop STRIPE_KEY=sk_test_abcdefghijklmnopqrstuvwxyz node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
+    "star:dev": "nodemon app.js",
     "start-server": "node app.js"
   },
   "author": "Maximilian Schwarzmüller",
