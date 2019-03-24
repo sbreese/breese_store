@@ -77,8 +77,7 @@ router.get('/reset/:token', authController.getNewPassword);
 router.get('/reset-password', authController.getNewPassword);
 
 router.post(
-  // '/new-password', 
-  '/reset/:token',
+  '/new-password', 
   [
     body('password', 'Password must be at least 5 characters in length and be letters and numbers.')
       .isLength({ min: 5 })

@@ -257,8 +257,7 @@ exports.getNewPassword = (req, res, next) => {
         message = null;
       }
       res.render('auth/new-password', {
-        // path: '/new-password',
-        path: `/reset/${token}`,
+        path: '/new-password',
         pageTitle: 'New Password',
         errorMessage: message,
         oldInput: {
