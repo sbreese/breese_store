@@ -55,6 +55,25 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
+exports.getEnterNewPassword = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+  res.render('auth/enter-new-password', {
+    path: '/enter-new-password',
+    pageTitle: 'Signup',
+    errorMessage: message,
+    oldInput: {
+      email: '',
+      password: ''
+    },
+    validationErrors: []
+  });
+};
+
 exports.getProfile = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
