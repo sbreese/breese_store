@@ -80,14 +80,12 @@ exports.getProfile = (req, res, next) => {
   } else {
     message = null;
   }
-  res.render('auth/signup', {
-    path: '/signup',
-    pageTitle: 'Signup',
+  res.render('auth/profile', {
+    path: '/profile',
+    pageTitle: 'Edit Profile',
     errorMessage: message,
     oldInput: {
-      email: '',
-      password: '',
-      confirmPassword: ''
+      email: req.user.email
     },
     validationErrors: []
   });
@@ -302,7 +300,7 @@ exports.postNewPassword = (req, res, next) => {
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
 
-try {
+
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -319,33 +317,6 @@ try {
       validationErrors: errors.array()
     });
   }
-
-  /*
-  if (!errors.isEmpty()) {
-    console.log(errors.array());
-    console.log(newPassword);
-    console.log(userId);
-    console.log(passwordToken);
-    // console.log(errors.array()[0].msg)
-    return res.render('auth/new-password', {
-      path: `/reset/${passwordToken}`,
-      pageTitle: 'Reset Password',
-      errorMessage: 'Password must be 8 characters or longer' 
-      oldInput: {
-        password: newPassword,
-        userId: userId,
-        passwordToken: passwordToken
-      },
-      validationErrors: errors.array()
-    });
-}*/
-
-}
-catch(error) {
-  console.error("Finally, here is the error:");
-  console.error(error);
-}
-
 
   let resetUser;
 
