@@ -67,7 +67,6 @@ exports.getEnterNewPassword = (req, res, next) => {
     pageTitle: 'Signup',
     errorMessage: message,
     oldInput: {
-      email: '',
       password: ''
     },
     validationErrors: []
@@ -310,11 +309,11 @@ try {
     console.log(errors.array());
     return res.status(422).render('auth/enter-new-password', {
       path: '/enter-new-password',
-      pageTitle: 'Signup',
+      pageTitle: 'Enter Valid Password',
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        email: 'cool',
         password: newPassword,
+        userId: userId
       },
       validationErrors: errors.array()
     });
