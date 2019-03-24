@@ -313,7 +313,8 @@ try {
       errorMessage: errors.array()[0].msg,
       oldInput: {
         password: newPassword,
-        userId: userId
+        userId: userId,
+        passwordToken: passwordToken
       },
       validationErrors: errors.array()
     });
