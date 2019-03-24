@@ -293,8 +293,8 @@ exports.postReset = (req, res, next) => {
           req.flash('error', 'No account with that email found.');
           return res.redirect('/reset');
         }
-        user.resetToken = token;
-        user.resetTokenExpiration = Date.now() + 3600000;
+        user.passwordResetToken = token;
+        user.passwordResetExpires = Date.now() + 3600000;
         return user.save();
       })
       .then(result => {
@@ -319,7 +319,7 @@ exports.postReset = (req, res, next) => {
 
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
-  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+  User.findOne({ passwordResetToken: token, passwordResetExpires: { $gt: Date.now() } })
     .then(user => {
       let message = req.flash('error');
       if (message.length > 0) {
@@ -376,8 +376,8 @@ exports.postNewPassword = (req, res, next) => {
   let resetUser;
 
   User.findOne({
-    resetToken: passwordToken,
-    resetTokenExpiration: { $gt: Date.now() },
+    passwordResetToken: passwordToken,
+    passwordResetExpires: { $gt: Date.now() },
     _id: userId
   })
     .then(user => {
@@ -386,8 +386,8 @@ exports.postNewPassword = (req, res, next) => {
     })
     .then(hashedPassword => {
       resetUser.password = hashedPassword;
-      resetUser.resetToken = undefined;
-      resetUser.resetTokenExpiration = undefined;
+      resetUser.passwordResetToken = undefined;
+      resetUser.passwordResetExpires = undefined;
       return resetUser.save();
     })
     .then(result => {

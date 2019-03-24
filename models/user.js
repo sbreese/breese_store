@@ -11,8 +11,8 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  resetToken: String,
-  resetTokenExpiration: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
   first_name: {
     type: String,
     required: false
