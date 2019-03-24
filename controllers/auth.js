@@ -276,7 +276,6 @@ exports.getNewPassword = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-
 };
 
 exports.postNewPassword = (req, res, next) => {
