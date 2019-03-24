@@ -284,6 +284,7 @@ exports.postNewPassword = (req, res, next) => {
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
 
+try {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
@@ -292,7 +293,7 @@ exports.postNewPassword = (req, res, next) => {
     console.log(passwordToken);
     // console.log(errors.array()[0].msg)
     return res.render('auth/new-password', {
-      path: `/reset/${passwordToken}`, // '/new-password', // `/reset/${passwordToken}`,
+      path: `/reset/${passwordToken}`,
       pageTitle: 'Reset Password',
       errorMessage: 'Password must be 8 characters or longer',
       oldInput: {
@@ -303,6 +304,12 @@ exports.postNewPassword = (req, res, next) => {
       validationErrors: errors.array()
     });
   }
+
+}
+catch(error) {
+  console.error("Finally, here is the error:");
+  console.error(error);
+}
 
   let resetUser;
 
