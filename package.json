@@ -4,7 +4,7 @@
   "description": "Complete Node.js Guide",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production MONGO_USER=breese MONGO_PASSWORD=breese MONTO_DEFAULT_DATABASE=breese SENDGRID_API_KEY=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 FROM_EMAIL=sbreese@gmail.com STRIPE_KEY=sk_test_abcdefghijklmnopqrstuvwxyz node app.js",
+    "start": "NODE_ENV=production MONGO_USER=breese MONGO_PASSWORD=breese MONTO_DEFAULT_DATABASE=breese SENDGRID_API_KEY=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 FROM_EMAIL=me@stevebreese.com STRIPE_KEY=sk_test_abcdefghijklmnopqrstuvwxyz node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "star:dev": "nodemon app.js",
     "start-server": "node app.js"
