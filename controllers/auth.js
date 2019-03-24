@@ -85,7 +85,9 @@ exports.getProfile = (req, res, next) => {
     pageTitle: 'Edit Profile',
     errorMessage: message,
     oldInput: {
-      email: req.user.email
+      email: req.user.email,
+      first_name: req.user.first_name,
+      last_name: req.user.last_name,
     },
     validationErrors: []
   });
@@ -103,7 +105,7 @@ exports.updateProfile = (req, res, next) => {
       pageTitle: 'Edit Profile',
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        email: email,
+        email,
         first_name,
         last_name
       },
