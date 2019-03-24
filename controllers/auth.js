@@ -289,14 +289,13 @@ try {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('auth/signup', {
-      path: '/signup',
+    return res.status(422).render('auth/enter-new-password', {
+      path: '/enter-new-password',
       pageTitle: 'Signup',
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: 'cool',
         password: newPassword,
-        confirmPassword: 'req.body.confirmPassword'
       },
       validationErrors: errors.array()
     });
