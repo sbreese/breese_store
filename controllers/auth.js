@@ -290,7 +290,7 @@ exports.postNewPassword = (req, res, next) => {
       pageTitle: 'Reset Password',
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        password,
+        password: newPassword,
         userId,
         passwordToken
       },
