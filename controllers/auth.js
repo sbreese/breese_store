@@ -206,6 +206,8 @@ exports.postLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const first_name = req.body.first_name;
+  const last_name = req.body.last_name;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -215,11 +217,11 @@ exports.postSignup = (req, res, next) => {
       pageTitle: 'Signup',
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        email: email,
-        password: password,
+        email,
+        password,
         confirmPassword: req.body.confirmPassword,
-        first_name: first_name,
-        last_name: last_name
+        first_name,
+        last_name
       },
       validationErrors: errors.array()
     });
@@ -229,10 +231,10 @@ exports.postSignup = (req, res, next) => {
     .hash(password, 12)
     .then(hashedPassword => {
       const user = new User({
-        email: email,
+        email,
         password: hashedPassword,
-        first_name: first_name,
-        last_name: last_name,
+        first_name,
+        last_name,
         cart: { items: [] }
       });
       return user.save();
