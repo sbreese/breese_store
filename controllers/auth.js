@@ -295,13 +295,13 @@ try {
     return res.render('auth/new-password', {
       path: `/reset/${passwordToken}`,
       pageTitle: 'Reset Password',
-      errorMessage: 'Password must be 8 characters or longer',
-      oldInput: {
+      errorMessage: 'Password must be 8 characters or longer'
+      /* oldInput: {
         password: newPassword,
         userId: userId,
         passwordToken: passwordToken
       },
-      validationErrors: errors.array()
+      validationErrors: errors.array() */
     });
   }
 
