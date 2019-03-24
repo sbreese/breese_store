@@ -18,7 +18,21 @@ router.post(
     body('email')
       .isEmail()
       .withMessage('Please enter a valid email address.')
-      .normalizeEmail()
+      .normalizeEmail(),
+    body(
+      'first_name',
+      'First name is required.'
+    )
+      .isLength({ min: 1 })
+      .isAlphanumeric()
+      .trim(),
+    body(
+      'last_name',
+      'Last name is required.'
+    )
+      .isLength({ min: 1 })
+      .isAlphanumeric()
+      .trim()
   ],
   authController.updateProfile
 );
@@ -72,7 +86,21 @@ router.post(
           throw new Error('Passwords have to match!');
         }
         return true;
-      })
+      }),
+    body(
+      'first_name',
+      'First name is required.'
+    )
+      .isLength({ min: 1 })
+      .isAlphanumeric()
+      .trim(),
+    body(
+      'last_name',
+      'Last name is required.'
+    )
+      .isLength({ min: 1 })
+      .isAlphanumeric()
+      .trim()
   ],
   authController.postSignup
 );

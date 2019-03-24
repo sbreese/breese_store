@@ -93,6 +93,7 @@ exports.getProfile = (req, res, next) => {
 
 exports.updateProfile = (req, res, next) => {
   const email = req.body.email;
+  const first_name = req.body.email;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -102,7 +103,9 @@ exports.updateProfile = (req, res, next) => {
       pageTitle: 'Edit Profile',
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        email: email
+        email: email,
+        first_name,
+        last_name
       },
       validationErrors: errors.array()
     });
@@ -111,10 +114,14 @@ exports.updateProfile = (req, res, next) => {
   User.findById(req.session.user._id)
   .then(user => {
     user.email = email;
+    user.first_name = first_name;
+    user.last_name = last_name;
     return user.save();
   })
   .then(result => {
     req.session.user.email = email;
+    req.session.user.first_name = first_name;
+    req.session.user.last_name = last_name;
     res.redirect('/');
     // return transporter.sendMail({
     //   to: email,
@@ -210,7 +217,9 @@ exports.postSignup = (req, res, next) => {
       oldInput: {
         email: email,
         password: password,
-        confirmPassword: req.body.confirmPassword
+        confirmPassword: req.body.confirmPassword,
+        first_name: first_name,
+        last_name: last_name
       },
       validationErrors: errors.array()
     });
@@ -222,6 +231,8 @@ exports.postSignup = (req, res, next) => {
       const user = new User({
         email: email,
         password: hashedPassword,
+        first_name: first_name,
+        last_name: last_name,
         cart: { items: [] }
       });
       return user.save();

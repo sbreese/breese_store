@@ -13,6 +13,14 @@ const userSchema = new Schema({
   },
   resetToken: String,
   resetTokenExpiration: Date,
+  first_name: {
+    type: String,
+    required: false
+  },
+  last_name: {
+    type: String,
+    required: false
+  },
   cart: {
     items: [
       {
