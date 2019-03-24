@@ -13,6 +13,17 @@ router.get('/signup', authController.getSignup);
 router.get('/profile', authController.getProfile);
 
 router.post(
+  '/profile',
+  [
+    body('email')
+      .isEmail()
+      .withMessage('Please enter a valid email address.')
+      .normalizeEmail()
+  ],
+  authController.updateProfile
+);
+
+router.post(
   '/login',
   [
     body('email')

@@ -91,6 +91,45 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
+exports.updateProfile = (req, res, next) => {
+  const email = req.body.email;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).render('auth/profile', {
+      path: '/profile',
+      pageTitle: 'Edit Profile',
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        email: email
+      },
+      validationErrors: errors.array()
+    });
+  }
+
+  User.findById(req.session.user._id)
+  .then(user => {
+    user.email = email;
+    return user.save();
+  })
+  .then(result => {
+    req.session.user.email = email;
+    res.redirect('/');
+    // return transporter.sendMail({
+    //   to: email,
+    //   from: 'shop@node-complete.com',
+    //   subject: 'Signup succeeded!',
+    //   html: '<h1>You successfully signed up!</h1>'
+    // });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
+
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
