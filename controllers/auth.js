@@ -277,7 +277,6 @@ exports.getNewPassword = (req, res, next) => {
       return next(error);
     });
 
-  }
 };
 
 exports.postNewPassword = (req, res, next) => {
