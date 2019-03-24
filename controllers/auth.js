@@ -328,7 +328,7 @@ catch(error) {
   console.error(error);
 }
 
-/*
+
   let resetUser;
 
   User.findOne({
@@ -357,5 +357,4 @@ catch(error) {
       return next(error);
     });
 
-    */
 };
