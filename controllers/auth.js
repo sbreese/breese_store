@@ -286,6 +286,23 @@ exports.postNewPassword = (req, res, next) => {
 
 try {
   const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).render('auth/signup', {
+      path: '/signup',
+      pageTitle: 'Signup',
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        email: 'cool',
+        password: newPassword,
+        confirmPassword: 'req.body.confirmPassword'
+      },
+      validationErrors: errors.array()
+    });
+  }
+
+  /*
   if (!errors.isEmpty()) {
     console.log(errors.array());
     console.log(newPassword);
@@ -293,9 +310,9 @@ try {
     console.log(passwordToken);
     // console.log(errors.array()[0].msg)
     return res.render('auth/new-password', {
-      /* path: `/reset/${passwordToken}`, */
+      path: `/reset/${passwordToken}`,
       pageTitle: 'Reset Password',
-      /* errorMessage: 'Password must be 8 characters or longer' */
+      errorMessage: 'Password must be 8 characters or longer' 
       oldInput: {
         password: newPassword,
         userId: userId,
@@ -303,7 +320,7 @@ try {
       },
       validationErrors: errors.array()
     });
-  }
+}*/
 
 }
 catch(error) {
@@ -311,6 +328,7 @@ catch(error) {
   console.error(error);
 }
 
+/*
   let resetUser;
 
   User.findOne({
@@ -338,4 +356,6 @@ catch(error) {
       console.log(error);
       return next(error);
     });
+
+    */
 };
