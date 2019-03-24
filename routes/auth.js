@@ -23,15 +23,19 @@ router.post(
       'first_name',
       'First name is required.'
     )
-      .isLength({ min: 1 })
-      .isAlphanumeric()
+    .isAlpha()
+    .withMessage('Must be only alphabetical chars')
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
       .trim(),
     body(
       'last_name',
       'Last name is required.'
     )
-      .isLength({ min: 1 })
-      .isAlphanumeric()
+    .isAlpha()
+    .withMessage('Must be only alphabetical chars')
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
       .trim()
   ],
   authController.updateProfile
