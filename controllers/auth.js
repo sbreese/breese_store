@@ -287,6 +287,9 @@ exports.postNewPassword = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
+    console.log(newPassword);
+    console.log(userId);
+    console.log(newPassword);
     // console.log(errors.array()[0].msg)
     return res.status(422).render('auth/new-password', {
       path: '/new-password', // `/reset/${passwordToken}`,
