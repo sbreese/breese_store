@@ -259,6 +259,10 @@ exports.getNewPassword = (req, res, next) => {
         path: '/new-password',
         pageTitle: 'New Password',
         errorMessage: message,
+        oldInput: {
+          password: ''
+        },
+        validationErrors: [],
         userId: user._id.toString(),
         passwordToken: token
       });
