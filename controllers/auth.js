@@ -276,6 +276,8 @@ exports.getNewPassword = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
+
+  }
 };
 
 exports.postNewPassword = (req, res, next) => {
@@ -287,7 +289,7 @@ exports.postNewPassword = (req, res, next) => {
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(422).render('auth/new-password', {
-      path: `/reset/${passwordToken}`,
+      path: `/reset-password`,
       pageTitle: 'Reset Password',
       errorMessage: errors.array()[0].msg,
       oldInput: {
