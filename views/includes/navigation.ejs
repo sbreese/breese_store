@@ -40,6 +40,11 @@
                     <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
                 </li>
             <% } else { %>
+                <% if (user.access_level > 8) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/users' ? 'active' : '' %>" href="/users">Admin Users</a>
+                </li>
+                <% } %>
                 <li class="main-header__item">
                     <a class="<%= path === '/profile' ? 'active' : '' %>" href="/profile">Profile</a>
                 </li>
