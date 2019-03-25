@@ -180,10 +180,26 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true;
             req.session.user = user;
 
-            return req.session.save(err => {
-              console.log(err);
-              res.redirect('/');
-            });
+                        // steves additions
+                        Order.find({ 'user.userId': user._id })
+                        .then(orders => {
+                          console.log("Here is the raw orders for " + user._id);
+                          console.log(orders);
+                          req.session.orders = orders;
+            
+                          return req.session.save(err => {
+                            console.log(err);
+                            res.redirect('/');
+                          });
+                          
+                        })
+                        .catch(err => {
+                          console.log(err);
+                          res.redirect('/login');
+                        });
+                        // end steves addition
+
+
           }
           return res.status(422).render('auth/login', {
             path: '/login',
