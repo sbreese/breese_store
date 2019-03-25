@@ -76,8 +76,8 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.user = req.session.user;
   console.log("Here is the orders:");
-  console.log(req.session.user.orders);
-  res.locals.orders = req.session.user.orders || [];
+  console.log(req.session.user && req.session.user.orders);
+  res.locals.orders = req.session.user && req.session.user.orders || [];
   next();
 });
 
