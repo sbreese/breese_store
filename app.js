@@ -77,7 +77,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   console.log("Here is the orders:");
   console.log(req.session.user && req.session.user.raw_orders);
-  res.locals.orders = [req.session.user.raw_orders || [];
+  res.locals.orders = req.session.user.raw_orders || [];
   next();
 });
 
