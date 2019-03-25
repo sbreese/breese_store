@@ -14,7 +14,7 @@
                     <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
                 </li>
 
-                <% if (user.raw_orders && raw_orders.length > 0) { %>
+                <% if (login_orders > 0) { %>
                     <li class="main-header__item">
                         <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
                     </li>

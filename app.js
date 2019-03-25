@@ -80,7 +80,7 @@ app.use((req, res, next) => {
   console.log("Here is the login orders:");
   console.log(req.session.login_orders);
   // res.locals.orders = req.session.user.raw_orders || [];
-  // res.locals.user.raw_orders = [];
+  res.locals.login_orders = req.session.login_orders || [];
   next();
 });
 
