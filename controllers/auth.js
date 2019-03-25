@@ -431,6 +431,8 @@ exports.getUsers = (req, res, next) => {
     })
     .catch(err => {
       const error = new Error(err);
+      console.log("OOPS, an error:");
+      console.log(error);
       error.httpStatusCode = 500;
       return next(error);
     });
