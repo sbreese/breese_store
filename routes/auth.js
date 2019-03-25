@@ -132,4 +132,7 @@ router.post(
   authController.postNewPassword
 );
 
+const isAuth = require('../middleware/is-auth');
+router.get('/users', isAuth, authController.getUsers);
+
 module.exports = router;
