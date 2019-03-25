@@ -36,7 +36,8 @@ const userSchema = new Schema({
   access_level: {
     type: Number,
     required: true
-  }
+  },
+  orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }]
 });
 
 userSchema.methods.addToCart = function(product) {
