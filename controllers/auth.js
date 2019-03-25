@@ -208,7 +208,7 @@ exports.postLogin = (req, res, next) => {
                         console.log(orders);
                         req.session.isLoggedIn = true;
                         req.session.user = user;
-                        req.session.user.raw_orders = orders;
+                        req.session.login_orders = orders;
           
                         return req.session.save(err => {
                           console.log(err);
