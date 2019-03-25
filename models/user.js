@@ -32,6 +32,10 @@ const userSchema = new Schema({
         quantity: { type: Number, required: true }
       }
     ]
+  },
+  access_level: {
+    type: Number,
+    required: true
   }
 });
 
@@ -71,7 +75,7 @@ userSchema.methods.clearCart = function() {
   return this.save();
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, breeseMethodUsers);
 
 // const mongodb = require('mongodb');
 // const getDb = require('../util/database').getDb;

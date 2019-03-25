@@ -238,7 +238,8 @@ exports.postSignup = (req, res, next) => {
         password: hashedPassword,
         first_name,
         last_name,
-        cart: { items: [] }
+        cart: { items: [] },
+        access_level: 1
       });
       return user.save();
     })
