@@ -202,7 +202,8 @@ exports.postLogin = (req, res, next) => {
         });
     })
     .then(user => {
-
+console.log("actually got here");
+console.log(user);
             // steves additions
             Order.find({ 'user.userId': user._id })
             .then(orders => {
