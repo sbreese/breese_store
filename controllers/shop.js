@@ -189,6 +189,9 @@ exports.postOrder = (req, res, next) => {
         products: products
       });
       return order.save();
+    })    
+    .then(order => {
+      return req.user.addOrderToUser(order);
     })
     .then(result => {
       const charge = stripe.charges.create({
