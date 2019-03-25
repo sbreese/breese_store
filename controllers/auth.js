@@ -183,6 +183,8 @@ exports.postLogin = (req, res, next) => {
             // steves additions
             Order.find({ 'user.userId': user._id })
             .then(orders => {
+              console.log("Here is the raw orders for " + user._id);
+              console.log(orders);
               req.session.orders = orders;
             })
             .catch(err => {
