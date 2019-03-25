@@ -185,7 +185,7 @@ exports.postLogin = (req, res, next) => {
             .then(orders => {
               console.log("Here is the raw orders for " + user._id);
               console.log(orders);
-              req.session.user.orders = orders;
+              req.session.orders = orders;
 
               return req.session.save(err => {
                 console.log(err);
