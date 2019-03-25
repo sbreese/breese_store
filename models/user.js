@@ -75,7 +75,7 @@ userSchema.methods.clearCart = function() {
   return this.save();
 };
 
-module.exports = mongoose.model('User', userSchema, breeseMethodUsers);
+module.exports = mongoose.model('User', userSchema, 'breeseMethodUsers');
 
 // const mongodb = require('mongodb');
 // const getDb = require('../util/database').getDb;
