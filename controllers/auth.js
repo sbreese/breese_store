@@ -404,6 +404,8 @@ exports.postNewPassword = (req, res, next) => {
 
 };
 
+const ITEMS_PER_PAGE = 2;
+
 exports.getUsers = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
