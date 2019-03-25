@@ -75,10 +75,10 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.user = req.session.user;
-  console.log("Here is the orders:");
-  console.log(req.session.user && req.session.user.raw_orders);
+  console.log("Here is the user:");
+  console.log(req.session.user);
   // res.locals.orders = req.session.user.raw_orders || [];
-  res.locals.user.raw_orders = req.session.user.raw_orders || [];
+  // res.locals.user.raw_orders = [];
   next();
 });
 
