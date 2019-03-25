@@ -433,7 +433,7 @@ exports.getUsers = (req, res, next) => {
     .countDocuments()
     .then(numUsers => {
       totalItems = numUsers;
-      return User.find(
+      /*return User.find(
         {
           $lookup:
             {
@@ -443,7 +443,9 @@ exports.getUsers = (req, res, next) => {
               as: 'orders'
             }
        }
-      )
+      )*/
+      return User.find()
+        .populate({ path: 'orders.user.userId', select: 'products' })
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
