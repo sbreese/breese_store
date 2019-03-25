@@ -140,6 +140,7 @@ exports.updateProfile = (req, res, next) => {
   });
 };
 
+const Order = require('../models/order');
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -189,7 +190,7 @@ exports.postLogin = (req, res, next) => {
               res.redirect('/login');
             });
             // end steves addition
-            
+
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
