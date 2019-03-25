@@ -450,6 +450,8 @@ exports.getUsers = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(users => {
+      console.log("We did it!");
+      console.log(users);
       res.render('auth/user-list', {
         users,
         pageTitle: 'Users',
