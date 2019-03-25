@@ -177,14 +177,6 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then(doMatch => {
           if (doMatch) {
-            /*req.session.isLoggedIn = true;
-            req.session.user = user;
-            return req.session.save(err => {
-              console.log(err);
-              res.redirect('/');
-            });*/
-            console.log("OK lets return user");
-            console.log(user);
             return user;
           }
           return res.status(422).render('auth/login', {
@@ -199,30 +191,28 @@ exports.postLogin = (req, res, next) => {
           });
         })
         .then(user => {
-          console.log("actually got here");
-          console.log(user);
-                      // steves additions
-                      Order.find({ 'user.userId': user._id })
-                      .then(orders => {
-                        console.log("Here is the raw orders for " + user._id);
-                        console.log(orders);
-                        req.session.isLoggedIn = true;
-                        req.session.user = user;
-                        req.session.login_orders = orders;
           
-                        return req.session.save(err => {
-                          console.log(err);
-                          res.redirect('/');
-                        });
+          // steves additions
+          Order.find({ 'user.userId': user._id })
+          .then(orders => {
+            
+            req.session.isLoggedIn = true;
+            req.session.user = user;
+            req.session.login_orders = orders;
+
+            return req.session.save(err => {
+              console.log(err);
+              res.redirect('/');
+            });
+
+          })
+          .catch(err => {
+            console.log(err);
+            res.redirect('/login');
+          });
+          // end steves addition
           
-                      })
-                      .catch(err => {
-                        console.log(err);
-                        res.redirect('/login');
-                      });
-                      // end steves addition
-          
-              })
+        })
         .catch(err => {
           console.log(err);
           res.redirect('/login');
@@ -443,7 +433,17 @@ exports.getUsers = (req, res, next) => {
     .countDocuments()
     .then(numUsers => {
       totalItems = numUsers;
-      return User.find()
+      return User.find(
+        {
+          $lookup:
+            {
+              from: 'breeseMethodUsers',
+              localField: '_id',
+              foreignField: 'user.userId',
+              as: 'orders'
+            }
+       }
+      )
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
