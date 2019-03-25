@@ -177,12 +177,13 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then(doMatch => {
           if (doMatch) {
-            req.session.isLoggedIn = true;
+            /*req.session.isLoggedIn = true;
             req.session.user = user;
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
-            });
+            });*/
+            return user;
           }
           return res.status(422).render('auth/login', {
             path: '/login',
@@ -199,6 +200,30 @@ exports.postLogin = (req, res, next) => {
           console.log(err);
           res.redirect('/login');
         });
+    })
+    .then(user => {
+
+            // steves additions
+            Order.find({ 'user.userId': user._id })
+            .then(orders => {
+              console.log("Here is the raw orders for " + user._id);
+              console.log(orders);
+              req.session.isLoggedIn = true;
+              req.session.user = user;
+              req.session.user.raw_orders = orders;
+
+              return req.session.save(err => {
+                console.log(err);
+                res.redirect('/');
+              });
+
+            })
+            .catch(err => {
+              console.log(err);
+              res.redirect('/login');
+            });
+            // end steves addition
+
     })
     .catch(err => {
       const error = new Error(err);
