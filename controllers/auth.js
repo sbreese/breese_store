@@ -433,19 +433,8 @@ exports.getUsers = (req, res, next) => {
     .countDocuments()
     .then(numUsers => {
       totalItems = numUsers;
-      /*return User.find(
-        {
-          $lookup:
-            {
-              from: 'breeseMethodUsers',
-              localField: '_id',
-              foreignField: 'user.userId',
-              as: 'orders'
-            }
-       }
-      )*/
       return User.find()
-        .populate('orders') // { path: 'orders.user.userId', select: 'products' })
+        .populate('orders')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
