@@ -183,6 +183,8 @@ exports.postLogin = (req, res, next) => {
               console.log(err);
               res.redirect('/');
             });*/
+            console.log("OK lets return user");
+            console.log(user);
             return user;
           }
           return res.status(422).render('auth/login', {
