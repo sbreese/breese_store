@@ -445,7 +445,7 @@ exports.getUsers = (req, res, next) => {
        }
       )*/
       return User.find()
-        .populate({ path: 'orders.user.userId', select: '_id products' })
+        .populate({ path: 'orders.user.userId', select: 'products' })
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
