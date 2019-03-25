@@ -178,6 +178,18 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+
+            // steves additions
+            Order.find({ 'user.userId': user._id })
+            .then(orders => {
+              req.session.orders = orders;
+            })
+            .catch(err => {
+              console.log(err);
+              res.redirect('/login');
+            });
+            // end steves addition
+            
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
