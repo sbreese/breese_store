@@ -219,7 +219,7 @@ exports.deleteOrder = (req, res, next) => {
       if (!order) {
         return next(new Error('Order not found.'));
       }
-      return Product.deleteOne({ _id: orderId });
+      return Order.deleteOne({ _id: orderId });
     })
     .then(() => {
       console.log('DESTROYED ORDER');
