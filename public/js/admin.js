@@ -22,6 +22,7 @@ const deleteProduct = btn => {
     });
 };
 
+/*
 document.getElementsByClassName('deleteProduct').onclick = function() {
   console.log("Are you sure?");
   var retVal = confirm("Are you sure you want to delete this product?");
@@ -30,3 +31,4 @@ document.getElementsByClassName('deleteProduct').onclick = function() {
      deleteProduct(this)
   }
 };
+*/
