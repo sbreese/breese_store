@@ -23,8 +23,10 @@ const deleteProduct = btn => {
 };
 
 document.getElementsByClassName('deleteProduct').onclick = function() {
+  console.log("Are you sure?");
   var retVal = confirm("Are you sure you want to delete this product?");
   if (retVal === true) {
+    console.log("True clicked!");
      deleteProduct(this)
   }
 };
