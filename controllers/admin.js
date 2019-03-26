@@ -229,3 +229,19 @@ exports.deleteOrder = (req, res, next) => {
       res.status(500).json({ message: 'Deleting order failed.' });
     });
 };
+
+exports.shippedOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+
+  Order.findById(orderId)
+  .then(order => {
+    order.fulfillment_status = 8;
+    return order.save().then(result => {
+      console.log('MARKED AS SHIPPED!');
+      res.status(200).json({ message: 'Success fully marked as shipped!' });
+    });
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Marking order as shipped failed.' });
+  });
+};
