@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="/css/product.css">
     </head>
 
     <body>
@@ -9,7 +9,7 @@
             <% if (users.length > 0) { %>
                 <div class="grid">
                     <% for (let user of users) { %>
-                        <article class="card user-item">
+                        <article class="card product-item">
                             <header class="card__header">
                                 <h1 class="product__title">
                                     <%= user.first_name %> <%= user.last_name %>
