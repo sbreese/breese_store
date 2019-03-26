@@ -19,6 +19,10 @@ const orderSchema = new Schema({
       required: true,
       ref: 'User'
     }
+  },
+  fulfillment_status: {
+    type: Number,
+    required: true
   }
 });
 

@@ -32,6 +32,12 @@
                                                             <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li>
                                                         <% }); %>
                                                     </ul>
+                                                    <div class="card__actions">
+                                                        <input type="hidden" value="<%= order._id %>" name="orderId">
+                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                        <button class="btn" type="button" onclick="shippedOrder(this)">Shipped</button>
+                                                        <button class="btn" type="button" onclick="deleteOrder(this)">Delete</button>
+                                                    </div>
                                                 </li>
                                             <% }); %>
                                         </ul>
@@ -49,3 +55,4 @@
                     <% } %>
         </main>
             <%- include('../includes/end.ejs') %>
+            <script src="/js/orders.js"></script>

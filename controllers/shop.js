@@ -186,7 +186,8 @@ exports.postOrder = (req, res, next) => {
           email: req.user.email,
           userId: req.user
         },
-        products: products
+        products: products,
+        fulfillment_status: 0
       });
       return order.save();
     })    
