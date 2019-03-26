@@ -21,3 +21,10 @@ const deleteProduct = btn => {
       console.log(err);
     });
 };
+
+const getConfirmation = (this) => {
+  var retVal = confirm("Are you sure you want to delete this product?");
+  if (retVal === true) {
+     deleteProduct(this)
+  }
+}
