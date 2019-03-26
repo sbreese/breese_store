@@ -8,10 +8,10 @@
     <main>
         <% if (users.length > 0) { %>
             <table class="ExcelTable2007">
-                <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th></tr>
+                <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
                 <tr><td class="heading">1</td><td>First Name</td><td>Last Name</td><td>Email</td><td>Order #</td><td>Invoice</td><td>Products (Qty)</td><td>Action Buttons</td></tr>
                 <% /* for (let user of users) { */ users.forEach(function(user, index) { %>
-                    <tr><td class="heading">{%= index + 2 %}</td><td><%= user.first_name %></td><td><%= user.last_name %></td><td><%= user.email %></td>
+                    <tr><td class="heading"><%= index + 2 %></td><td><%= user.first_name %></td><td><%= user.last_name %></td><td><%= user.email %></td>
                     <% if (user.orders.length <= 0) { %>
                         <td>User has not ordered!</td><td></td><td></td><td></td>
                     <% } else { %>
