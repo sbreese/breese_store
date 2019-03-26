@@ -54,6 +54,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
+const orderRoutes = require('./routes/order');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
@@ -106,6 +107,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
+app.use('/admin', orderRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
