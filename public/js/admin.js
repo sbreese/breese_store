@@ -22,9 +22,9 @@ const deleteProduct = btn => {
     });
 };
 
-const getConfirmation = (this) => {
+document.getElementsByClassName('deleteProduct').onclick = function() {
   var retVal = confirm("Are you sure you want to delete this product?");
   if (retVal === true) {
      deleteProduct(this)
   }
-}
+};
