@@ -423,7 +423,7 @@ exports.postNewPassword = (req, res, next) => {
 
 };
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 10;
 
 exports.getUsers = (req, res, next) => {
   const page = +req.query.page || 1;
