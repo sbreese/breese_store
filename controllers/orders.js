@@ -11,7 +11,7 @@ exports.getAllOrders = (req, res, next) => {
     .then(numOrders => {
       totalItems = numOrders;
       return Order.find()
-        .populate('user')
+        // .populate('user')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
