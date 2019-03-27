@@ -43,3 +43,10 @@
 	background-image: url(../img/excel-2007-header-left.gif);
 	background-repeat: none;
 }
+
+/* Steve's additions */
+.orders__products {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
