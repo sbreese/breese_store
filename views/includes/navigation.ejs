@@ -33,10 +33,10 @@
             </li>
             <% if (user.access_level > 8) { %>
                 <li class="main-header__item">
-                    <a class="<%= path === '/admin/orders' ? 'active' : '' %>" href="/users">Admin Orders</a>
+                    <a class="<%= path === '/admin/orders' ? 'active' : '' %>" href="/admin/users">Admin Orders</a>
                 </li>
                 <li class="main-header__item">
-                    <a class="<%= path === '/admin/users' ? 'active' : '' %>" href="/users">Admin Users</a>
+                    <a class="<%= path === '/admin/users' ? 'active' : '' %>" href="/admin/users">Admin Users</a>
                 </li>
             <% } %>
         </ul>
