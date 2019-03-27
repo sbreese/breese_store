@@ -97,6 +97,12 @@ exports.updateProfile = (req, res, next) => {
   const email = req.body.email;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
+  const address_line1 = req.body.address_line1;
+  const address_line2 = req.body.address_line2;
+  const city = req.body.city;
+  const state = req.body.state;
+  const postalCode = req.body.postalCode;
+  const country = req.body.country;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -108,7 +114,13 @@ exports.updateProfile = (req, res, next) => {
       oldInput: {
         email,
         first_name,
-        last_name
+        last_name,
+        address_line1,
+        address_line2,
+        city,
+        state,
+        postalCode,
+        country
       },
       validationErrors: errors.array()
     });
@@ -119,12 +131,24 @@ exports.updateProfile = (req, res, next) => {
     user.email = email;
     user.first_name = first_name;
     user.last_name = last_name;
+    user.address_line1 = address_line1;
+    user.address_line2 = address_line2;
+    user.city = city;
+    user.state = state;
+    user.postalCode = postalCode;
+    user.country = country;
     return user.save();
   })
   .then(result => {
     req.session.user.email = email;
     req.session.user.first_name = first_name;
     req.session.user.last_name = last_name;
+    req.session.user.address_line1 = address_line1;
+    req.session.user.address_line2 = address_line2;
+    req.session.user.city = city;
+    req.session.user.state = state;
+    req.session.user.postalCode = postalCode;
+    req.session.user.country = country;
     res.redirect('/');
     // return transporter.sendMail({
     //   to: email,
@@ -230,6 +254,12 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
+  const address_line1 = req.body.address_line1;
+  const address_line2 = req.body.address_line2;
+  const city = req.body.city;
+  const state = req.body.state;
+  const postalCode = req.body.postalCode;
+  const country = req.body.country;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -243,7 +273,13 @@ exports.postSignup = (req, res, next) => {
         password,
         confirmPassword: req.body.confirmPassword,
         first_name,
-        last_name
+        last_name,
+        address_line1,
+        address_line2,
+        city,
+        state,
+        postalCode,
+        country
       },
       validationErrors: errors.array()
     });
@@ -257,6 +293,12 @@ exports.postSignup = (req, res, next) => {
         password: hashedPassword,
         first_name,
         last_name,
+        address_line1,
+        address_line2,
+        city,
+        state,
+        postalCode,
+        country,
         cart: { items: [] },
         access_level: 1
       });

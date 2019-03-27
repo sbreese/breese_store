@@ -108,7 +108,42 @@ router.post(
     .withMessage('Must be only alphabetical chars')
     .isLength({ min: 2 })
     .withMessage('Must be at least 2 chars long')
-      .trim()
+    .trim(),
+    body(
+      'address_line1',
+      'Address is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
+    .trim(),
+    body(
+      'city',
+      'City is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
+    .trim(),
+    body(
+      'state',
+      'State is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
+    .trim(),
+    body(
+      'postalCode',
+      'Postal Code is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
+    .trim(),
+    body(
+      'country',
+      'Country is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Must be at least 2 chars long')
+    .trim()
   ],
   authController.postSignup
 );

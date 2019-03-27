@@ -21,6 +21,26 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  address_line1: {
+    type: String,
+    required: false
+  },
+  address_line2: {
+    type: String,
+    required: false
+  },
+  city: {
+    type: String,
+    required: false
+  },
+  state: {
+    type: String,
+    required: false
+  },
+  postalCode: {
+    type: String,
+    required: false
+  },
   cart: {
     items: [
       {
