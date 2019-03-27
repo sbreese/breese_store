@@ -1,11 +1,11 @@
 
 const deleteUser = btn => {
-    const orderId = btn.parentNode.querySelector('[name=orderId]').value;
+    const userId = btn.parentNode.querySelector('[name=userId]').value;
     const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
   
-    const orderElement = btn.closest('.user_row');
+    const userElement = btn.closest('.user_row');
   
-    fetch('/admin/user/' + orderId, {
+    fetch('/admin/user/' + userId, {
       method: 'DELETE',
       headers: {
         'csrf-token': csrf
@@ -16,7 +16,7 @@ const deleteUser = btn => {
       })
       .then(data => {
         console.log(data);
-        orderElement.parentNode.removeChild(orderElement);
+        userElement.parentNode.removeChild(userElement);
       })
       .catch(err => {
         console.log(err);
