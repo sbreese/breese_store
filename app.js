@@ -109,7 +109,7 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 app.use('/admin', orderRoutes);
-app.use('/users', usersRoutes);
+app.use('/admin', usersRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
