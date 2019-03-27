@@ -133,6 +133,6 @@ router.post(
 );
 
 const isAuth = require('../middleware/is-auth');
-router.get('/users', isAuth, authController.getUsers);
+router.get('/admin/users', isAuth, authController.getUsers);
 
 module.exports = router;

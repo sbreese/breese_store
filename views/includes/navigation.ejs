@@ -19,18 +19,28 @@
                         <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
                     </li>
                 <% } %>
-                <% if (user.access_level > 5) { %>
-                <li class="main-header__item">
-                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
-                    </a>
-                </li>
-                <li class="main-header__item">
-                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
-                    </a>
-                </li>
-                <% } %>
             <% } %>
         </ul>
+        <% if (user.access_level > 5) { %>
+        <ul class="main-header__item-list">
+            <li class="main-header__item">
+                <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                </a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                </a>
+            </li>
+            <% if (user.access_level > 8) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/orders' ? 'active' : '' %>" href="/users">Admin Orders</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/users' ? 'active' : '' %>" href="/users">Admin Users</a>
+                </li>
+            <% } %>
+        </ul>
+        <% } %>
         <ul class="main-header__item-list">
             <% if (!isAuthenticated) { %>
                 <li class="main-header__item">
@@ -40,11 +50,6 @@
                     <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
                 </li>
             <% } else { %>
-                <% if (user.access_level > 8) { %>
-                <li class="main-header__item">
-                    <a class="<%= path === '/users' ? 'active' : '' %>" href="/users">Admin Users</a>
-                </li>
-                <% } %>
                 <li class="main-header__item">
                     <a class="<%= path === '/profile' ? 'active' : '' %>" href="/profile">Profile</a>
                 </li>
