@@ -116,11 +116,11 @@ exports.updateProfile = (req, res, next) => {
 
   User.findById(req.session.user._id)
   .then(user => {
+    console.log("Here is the raw email:");
+    console.log(email);
     user.email = email;
     user.first_name = first_name;
     user.last_name = last_name;
-    console.log("Here is the email:");
-    console.log(user.email);
     return user.save();
   })
   .then(result => {
