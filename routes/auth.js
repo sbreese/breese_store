@@ -12,13 +12,13 @@ router.get('/signup', authController.getSignup);
 
 router.get('/profile', authController.getProfile);
 
+// .normalizeEmail(), <-- This stupid function removes periods from emails
 router.post(
   '/profile',
   [
     body('email')
       .isEmail()
       .withMessage('Please enter a valid email address.')
-      // .normalizeEmail(), <-- This stupid function removes periods from emails
     body(
       'first_name',
       'First name is required.'
