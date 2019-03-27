@@ -9,32 +9,18 @@
         <% if (users.length > 0) { %>
             <table class="ExcelTable2007">
                 <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
-                <tr><td class="heading">1</td><td>First Name</td><td>Last Name</td><td>Email</td><td>Order #</td><td>Invoice</td><td>Products (Qty)</td><td>Action Buttons</td></tr>
-                <% /* for (let user of users) { */ users.forEach(function(user, index) { %>
-                    <tr><td class="heading"><%= index + 2 %></td><td><%= user.first_name %></td><td><%= user.last_name %></td><td><%= user.email %></td>
-                    <% if (user.orders.length <= 0) { %>
-                        <td>User has not ordered!</td><td></td><td></td><td></td>
-                    <% } else { %>
-                        <% user.orders.forEach(order => { %>
-                            <td style="background-color: <%= order.fulfillment_status === 8 ? 'green' : 'white' %>"><%= order._id %></td>
-                            <td><a href="/orders/<%= order._id %>">Invoice</a></td>
-                            <td>
-                                <ul class="orders__products">
-                                <% order.products.forEach(p => { %>
-                                    <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li>
-                                <% }); %>
-                                </ul>
-                            </td>
-                            <td>
-                                <input type="hidden" value="<%= order._id %>" name="orderId">
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                <button class="btn" type="button" onclick="shippedOrder(this)">Shipped</button>
-                                <button class="btn" type="button" onclick="deleteOrder(this)">Delete</button>
-                            </td>
-                        <% }); %>
-                    <% } %>
+                <tr><td class="heading">1</td><td>First Name</td><td>Last Name</td><td>Email</td><td>Address</td><td>City</td><td>State</td><td>Country</td><td>Orders</td><td>Action Buttons</td></tr>
+                <% users.forEach(function(user, index) { %>
+                    <tr><td class="heading"><%= index + 2 %></td><td><%= user.first_name %></td><td><%= user.last_name %></td><td><%= user.email %></td><td><%= user.address_line1 %><%= user.address_line2 && '<br>' %><%= user.address_line2 %></td>
+                        <td><%= user.city %></td><td><%= user.state %></td><td><%= user.country %></td>
+                        <td><% user.orders.length %></td>
+                        <td>
+                            <input type="hidden" value="<%= user._id %>" name="userId">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn" type="button" onclick="deleteUser(this)">Delete</button>
+                        </td>
                     </tr>
-                <% /*}*/ }); %>
+                <% }); %>
             </table>
         <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
         <% } else { %>
