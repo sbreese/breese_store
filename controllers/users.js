@@ -24,6 +24,9 @@ exports.getUsers = (req, res, next) => {
     .then(users => {
       console.log("We did it!");
       console.log(users);
+      if (!Array.isArray(users)) {
+        users = [users];
+      }
       res.render('users/user-list', {
         users,
         pageTitle: 'Users',
