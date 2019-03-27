@@ -18,7 +18,7 @@ router.post(
     body('email')
       .isEmail()
       .withMessage('Please enter a valid email address.')
-      .normalizeEmail(),
+      // .normalizeEmail(), <-- This stupid function removes periods from emails
     body(
       'first_name',
       'First name is required.'
