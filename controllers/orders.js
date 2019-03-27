@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const Order = require('../models/order');
 
 const ITEMS_PER_PAGE = 10;
 
@@ -6,18 +6,18 @@ exports.getAllOrders = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
-  User.find()
+  Order.find()
     .countDocuments()
-    .then(numUsers => {
-      totalItems = numUsers;
-      return User.find()
-        .populate('orders')
+    .then(numOrders => {
+      totalItems = numOrders;
+      return Order.find()
+        .populate('user')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
-    .then(users => {
+    .then(orders => {
       res.render('orders/order-list', {
-        users,
+        orders,
         pageTitle: 'Orders',
         path: '/admin/orders',
         currentPage: page,

@@ -182,10 +182,7 @@ exports.postOrder = (req, res, next) => {
         return { quantity: i.quantity, product: { ...i.productId._doc } };
       });
       const order = new Order({
-        user: {
-          email: req.user.email,
-          userId: req.user
-        },
+        user: req.user,
         products: products,
         fulfillment_status: 0
       });

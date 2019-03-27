@@ -10,15 +10,9 @@ const orderSchema = new Schema({
     }
   ],
   user: {
-    email: {
-      type: String,
-      required: true
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
-    }
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   fulfillment_status: {
     type: Number,
