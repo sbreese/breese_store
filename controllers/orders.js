@@ -16,10 +16,10 @@ exports.getAllOrders = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(users => {
-      res.render('auth/user-list', {
+      res.render('orders/order-list', {
         users,
-        pageTitle: 'Users',
-        path: '/users',
+        pageTitle: 'Orders',
+        path: '/admin/orders',
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,

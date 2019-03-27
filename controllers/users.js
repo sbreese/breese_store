@@ -18,10 +18,10 @@ exports.getUsers = (req, res, next) => {
     .then(users => {
       console.log("We did it!");
       console.log(users);
-      res.render('auth/user-list', {
+      res.render('users/user-list', {
         users,
         pageTitle: 'Users',
-        path: '/users',
+        path: '/admin/users',
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
