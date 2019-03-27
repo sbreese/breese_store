@@ -41,6 +41,10 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  country: {
+    type: String,
+    required: false
+  },
   cart: {
     items: [
       {

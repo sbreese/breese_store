@@ -88,6 +88,12 @@ exports.getProfile = (req, res, next) => {
       email: req.user.email,
       first_name: req.user.first_name,
       last_name: req.user.last_name,
+      address_line1: req.user.address_line1,
+      address_line2: req.user.address_line2,
+      city: req.user.city,
+      state: req.user.state,
+      postalCode: req.user.postalCode,
+      country: req.user.country
     },
     validationErrors: []
   });
