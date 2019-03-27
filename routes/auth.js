@@ -18,7 +18,7 @@ router.post(
   [
     body('email')
       .isEmail()
-      .withMessage('Please enter a valid email address.')
+      .withMessage('Please enter a valid email address.'),
     body(
       'first_name',
       'First name is required.'
