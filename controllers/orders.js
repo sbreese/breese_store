@@ -17,7 +17,7 @@ exports.getAllOrders = (req, res, next) => {
     })
     .then(orders => {
       console.log("Here are order user!");
-      console.log("orders[0].user");
+      console.log(orders[0].user);
       res.render('orders/order-list', {
         orders,
         pageTitle: 'Orders',
