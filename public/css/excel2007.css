@@ -9,7 +9,7 @@
 }
 
 .ExcelTable2007 TH {
-	background-image: url(excel-2007-header-bg.gif);
+	background-image: url(../img/excel-2007-header-bg.gif);
 	background-repeat: repeat-x; 
 	font-weight: normal;
 	font-size: 14px;
@@ -40,6 +40,6 @@
 }
 
 .ExcelTable2007 TH.heading {
-	background-image: url(excel-2007-header-left.gif);
+	background-image: url(../img/excel-2007-header-left.gif);
 	background-repeat: none;
 }
