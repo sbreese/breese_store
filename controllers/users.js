@@ -12,7 +12,7 @@ exports.getUsers = (req, res, next) => {
     .then(numUsers => {
       totalItems = numUsers;
       if (userId) {
-        return User.findOne({ _id: new ObjectId(userId) })
+        return User.findById(userId)
         .populate('orders');
       } else {
         return User.find()
