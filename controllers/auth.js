@@ -95,6 +95,8 @@ exports.getProfile = (req, res, next) => {
 
 exports.updateProfile = (req, res, next) => {
   const email = req.body.email;
+  console.log("Here is the raw raw email:");
+  console.log(req.body.email);
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
 
@@ -116,8 +118,6 @@ exports.updateProfile = (req, res, next) => {
 
   User.findById(req.session.user._id)
   .then(user => {
-    console.log("Here is the raw email:");
-    console.log(email);
     user.email = email;
     user.first_name = first_name;
     user.last_name = last_name;
