@@ -6,8 +6,14 @@ const ordersController = require('../controllers/orders');
 
 const router = express.Router();
 
-router.delete('/order/:orderId', isAuth, adminController.deleteOrder);
-router.patch('/order/:orderId', isAuth, adminController.shippedOrder);
+// /admin/orders => GET
 router.get('/orders', isAuth, ordersController.getAllOrders);
+
+// /admin/orders/:orderId => PATCH
+router.patch('/order/:orderId', isAuth, adminController.shippedOrder);
+
+// /admin/orders/:orderId => DELETE
+router.delete('/order/:orderId', isAuth, adminController.deleteOrder);
+
 
 module.exports = router;

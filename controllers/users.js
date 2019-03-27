@@ -5,15 +5,21 @@ const ITEMS_PER_PAGE = 10;
 exports.getUsers = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
+  const userId = req.params.userId;
 
   User.find()
     .countDocuments()
     .then(numUsers => {
       totalItems = numUsers;
-      return User.find()
+      if (userId) {
+        return User.findOne({ _id: new ObjectId(userId) })
+        .populate('orders');
+      } else {
+        return User.find()
         .populate('orders')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
+      }
     })
     .then(users => {
       console.log("We did it!");
