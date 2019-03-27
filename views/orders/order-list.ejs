@@ -9,9 +9,11 @@
         <% if (orders.length > 0) { %>
             <table class="ExcelTable2007">
                 <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
-                <tr><td class="heading">1</td><td>Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
+                <tr><td class="heading">1</td><td>Customer</td><td>Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
                 <% orders.forEach(function(order, index) { %>
-                    <tr style="background-color: <%= order.fulfillment_status === 8 ? 'green' : 'white' %>"><td class="heading"><%= index + 2 %></td><td><%= order._id %></td>
+                    <tr style="background-color: <%= order.fulfillment_status === 8 ? 'green' : 'white' %>"><td class="heading"><%= index + 2 %></td>
+                        <td><a href="/admin/users/<%= order.user._id %>"><%= order.user.first_name %> <%= order.user.last_name %></a></td>
+                        <td><%= order._id %></td>
                         <td>
                             <ul class="orders__products">
                             <% order.products.forEach(p => { %>
