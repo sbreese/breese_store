@@ -17,9 +17,6 @@ exports.getAllOrders = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(orders => {
-      console.log("Here are order user!");
-
-      console.log(orders[0].user);
       res.render('orders/order-list', {
         moment,
         orders,
