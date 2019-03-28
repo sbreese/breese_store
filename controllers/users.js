@@ -48,6 +48,8 @@ exports.getUser = (req, res, next) => {
   .populate('orders')
     .then(user => {
       
+      console.log("OK, lets up and render this shit");
+      console.log(user);
       res.render('users/user-detail', {
         user,
         pageTitle: 'User Detail',
