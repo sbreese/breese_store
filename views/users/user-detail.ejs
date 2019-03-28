@@ -18,7 +18,7 @@
                     <tr><td class="heading">6</td><td>State:</td><td colspan="4"><%= user.state %></td></tr>
                     <tr><td class="heading">7</td><td>Country:</td><td colspan="4"><%= user.country %></td></tr>
                 <% if (user.orders.length > 0) { %>
-                    <tr><td class="heading">8</td><td colspan="4">Orders:</td></tr>
+                    <tr><td class="heading">8</td><td colspan="5">Orders:</td></tr>
                     <tr><td class="heading">9</td><td colspan="2">Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
                     <% user.orders.forEach(function(order, index) { %>
                         <tr class='user_row'>
@@ -44,6 +44,11 @@
                     <tr><td class="heading">8</td><td colspan="3">User has no orders</td><td></td><td></td>
                 <% } %>
             </table>
+            <p>
+                <input type="hidden" value="<%= user._id %>" name="userId">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="btn" type="button" onclick="confirm('Are you sure you want to delete this user (<%= user.first_name %> <%= user.last_name %>)?') && deleteUser(this)">Delete User</button>
+            </p>
         <% } else { %>
             <h1>User Not Found!</h1>
         <% } %>
