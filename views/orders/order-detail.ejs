@@ -17,7 +17,14 @@
                     <tr><td class="heading">5</td><td>Shipping<br>Address:</td><td colspan="4"><%= order.user.address_line1 %><%= order.user.address_line2 && '<br>' %><%= order.user.address_line2 %><br><%= order.user.city %>, <%= order.user.state %> <%= order.user.postalCode %><%= order.user.country !== 'USA' ? `<br>${order.user.country}` : '' %></td></tr>
 
                     <% if (order.products.length > 0) { %>
-                        <tr><td class="heading">6</td><td colspan="5"><%= order.products.length %> Products Ordered:</td></tr>
+                        <tr><td class="heading">6</td><td colspan="5"><%= order.products.length %> Product<%= order.products.length > 1 ? 's' : '' %> Ordered:</td></tr>
+                        <tr><td class="heading">7</td><td colspan="2">Product</td><td>Quanity</td></tr>
+                        <% order.products && order.products.forEach(p => { %>
+                            <tr>
+                                <td class="heading"><%= index + 8 %></td>
+                                <td><%= p.product.title %></td><td><%= p.quantity %></td>
+                            </tr>
+                        <% }); %>
                     <% } else { %>
                         <tr><td class="heading">8</td><td colspan="3">Order has no products! (this is very unusual and should be investigated)</td><td></td><td></td>
                     <% } %>
