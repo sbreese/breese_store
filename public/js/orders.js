@@ -27,7 +27,7 @@ const deleteOrder = btn => {
     const orderId = btn.parentNode.querySelector('[name=orderId]').value;
     const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
   
-    const orderElement = btn.closest('.user_row');
+    const orderElement = btn.closest('.order_row');
   
     fetch('/admin/order/' + orderId, {
       method: 'PATCH',
