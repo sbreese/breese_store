@@ -32,6 +32,12 @@
                                 </ul>
                             </td>
                             <td><a href="/orders/<%= order._id %>">Invoice</a></td>
+                            <td>
+                                <input type="hidden" value="<%= order._id %>" name="orderId">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn" type="button" onclick="shippedOrder(this)">Shipped</button>
+                                <button class="btn" type="button" onclick="deleteOrder(this)">Delete</button>
+                            </td>
                         </tr>
                     <% }); %>
                 <% } else { %>
