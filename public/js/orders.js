@@ -1,3 +1,10 @@
+function addClass(el, className)
+{
+    if (el.classList)
+        el.classList.add(className)
+    else if (!hasClass(el, className))
+        el.className += " " + className;
+}
 
 const deleteOrder = btn => {
     const orderId = btn.parentNode.querySelector('[name=orderId]').value;
@@ -40,7 +47,8 @@ const deleteOrder = btn => {
       })
       .then(data => {
         console.log(data);
-        orderElement.style.background = 'green';
+        // orderElement.style.background = 'green';
+        addClass(orderElement, 'green');
       })
       .catch(err => {
         console.log(err);
