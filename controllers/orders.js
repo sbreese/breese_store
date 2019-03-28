@@ -48,8 +48,10 @@ exports.getOrder = (req, res, next) => {
     .then(order => {
       const productCt = order.products.length;
       const firstProdQty = order.products[0].quantity;
+      console.log("Here is the raw order:");
+      console.log(order, productCt, firstProdQty);
       res.render('orders/order-detail', {
-        user: order,
+        order,
         pageTitle: `Order for ${productCt} product${productCt > 1 ? 's' : ''}, including ${firstProdQty} ${order.products[0].title}${firstProdQty > 1 ? 's' : ''}`,
         path: '/admin/orders'
       });
