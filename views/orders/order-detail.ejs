@@ -15,7 +15,7 @@
                     <tr><td class="heading">3</td><td>Order Date:</td><td colspan="4"><%= order._id.getTimestamp().toLocaleString("en-US", {timeZone: "America/Chicago"}).replace(/:\d{2}\s/,' ') %></td></tr>
                     <tr><td class="heading">4</td><td>Invoice:</td><td colspan="4"><a href="/orders/<%= order._id %>">PDF format</a></td></tr>
 
-                    <tr><td class="heading">5</td><td>Shipping<br>Address:</td><td colspan="4"><%= order.user.address_line1 %></td></tr>
+                    <tr><td class="heading">5</td><td>Shipping<br>Address:</td><td colspan="4"><%= order.user.first_name %></td></tr>
 
             </table>
             <p>
