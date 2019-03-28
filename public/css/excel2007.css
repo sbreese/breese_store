@@ -26,6 +26,10 @@
 	border-width: 0px 1px 1px 0px;
 }
 
+.ExcelTable2007 .green td {
+	background-color: green;
+}
+
 .ExcelTable2007 TD B {
 	border: 0px;
 	background-color: white;
