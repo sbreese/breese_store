@@ -26,7 +26,7 @@
                             <td><%= order._id %></td>
                             <td>
                                 <ul class="orders__products">
-                                    <% order.products.forEach(p => { %>
+                                    <% order.products && order.products.forEach(p => { %>
                                         <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li>
                                     <% }); %>
                                 </ul>
