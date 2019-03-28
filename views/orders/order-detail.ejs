@@ -19,7 +19,7 @@
                     <% if (order.products.length > 0) { %>
                         <tr><td class="heading">6</td><td colspan="5"><%= order.products.length %> Product<%= order.products.length > 1 ? 's' : '' %> Ordered:</td></tr>
                         <tr><td class="heading">7</td><td colspan="2">Product</td><td>Quanity</td></tr>
-                        <% order.products && order.products.forEach(p => { %>
+                        <% order.products && order.products.forEach((p, index) => { %>
                             <tr>
                                 <td class="heading"><%= index + 8 %></td>
                                 <td><%= p.product.title %></td><td><%= p.quantity %></td>
