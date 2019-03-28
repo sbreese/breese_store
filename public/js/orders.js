@@ -27,7 +27,7 @@ const deleteOrder = btn => {
       })
       .then(data => {
         console.log(data);
-        if (orderElement.tagName === 'TR') {
+        if (orderElement) {
           orderElement.parentNode.removeChild(orderElement);
         } else {
           window.location.href = '/admin/orders';
