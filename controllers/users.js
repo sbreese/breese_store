@@ -47,13 +47,11 @@ exports.getUser = (req, res, next) => {
   User.findById(userId)
   .populate('orders')
     .then(user => {
-      console.log("We did it!");
-      console.log(user);
       
       res.render('users/user-detail', {
         user,
         pageTitle: 'User Detail',
-        path: '/admin/users'
+        path: `/admin/users/{$userId}`
       });
 
   })
