@@ -21,7 +21,8 @@
                     <tr><td class="heading">8</td><td>Orders:</td><td>Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
                     <% user.orders.forEach(function(order, index) { %>
                         <tr class='user_row'>
-                            <td class="heading"><%= index + 8 %></td>
+                            <td class="heading"><%= index + 9 %></td>
+                            <td><%= order._id %></td>
                         </tr>
                     <% }); %>
                 <% } else { %>
