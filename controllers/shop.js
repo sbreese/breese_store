@@ -214,7 +214,7 @@ exports.postOrder = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   console.log("Do we got the simple user id?");
       console.log(req.user._id);
-  Order.find({ 'user.userId': req.user._id })
+  Order.find({ 'user': req.user._id })
     .then(orders => {
       console.log("Do we got the simple orders?");
       console.log(orders);
