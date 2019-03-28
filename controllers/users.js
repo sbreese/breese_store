@@ -67,7 +67,7 @@ exports.getUser = (req, res, next) => {
 };*/
 exports.getUser = (req, res, next) => {
   const userId = req.params.userId;
-  Product.findById(userId)
+  User.findById(userId)
     .then(user => {
       res.render('users/user-detail', {
         user: user,
