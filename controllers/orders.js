@@ -52,7 +52,7 @@ exports.getOrder = (req, res, next) => {
       console.log(order, productCt, firstProdQty);
       res.render('orders/order-detail', {
         order,
-        pageTitle: `Order for ${productCt} product${productCt > 1 ? 's' : ''}, including ${firstProdQty} ${order.products[0].title}${firstProdQty > 1 ? 's' : ''}`,
+        pageTitle: `Order for ${productCt} product${productCt > 1 ? 's' : ''}, including ${firstProdQty} ${order.product[0].product.title}${firstProdQty > 1 ? 's' : ''}`,
         path: '/admin/orders'
       });
     })
