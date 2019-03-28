@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const moment = require('moment');
 
 const ITEMS_PER_PAGE = 10;
 
@@ -17,8 +18,10 @@ exports.getAllOrders = (req, res, next) => {
     })
     .then(orders => {
       console.log("Here are order user!");
+
       console.log(orders[0].user);
       res.render('orders/order-list', {
+        moment,
         orders,
         pageTitle: 'Orders',
         path: '/admin/orders',
