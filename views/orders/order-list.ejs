@@ -21,7 +21,7 @@
                             <% }); %>
                             </ul>
                         </td>
-                        <td><%= order._id.getTimestamp().toLocaleString("en-US", {timeZone: "America/Chicago"}) %></td>
+                        <td><%= order._id.getTimestamp().toLocaleString("en-US", {timeZone: "America/Chicago", hour: '2-digit', minute:'2-digit'}) %></td>
                         <td><a href="/orders/<%= order._id %>">Invoice</a></td>
                         <td>
                             <input type="hidden" value="<%= order._id %>" name="orderId">
