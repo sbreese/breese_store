@@ -52,8 +52,8 @@ exports.getUser = (req, res, next) => {
       console.log(user);
       res.render('users/user-detail', {
         user,
-        pageTitle: 'User Detail',
-        path: `/admin/users/{$userId}`
+        pageTitle: 'User Detail'
+        // path: `/admin/users/{$userId}`
       });
 
   })
