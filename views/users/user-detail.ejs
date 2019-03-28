@@ -23,7 +23,7 @@
                     <% user.orders.forEach(function(order, index) { %>
                         <tr class='user_row'>
                             <td class="heading"><%= index + 10 %></td>
-                            <td><%= order._id %></td>
+                            <td colspan="2"><%= order._id %></td>
                             <td>
                                 <ul class="orders__products">
                                     <% order.products && order.products.forEach(p => { %>
@@ -31,6 +31,7 @@
                                     <% }); %>
                                 </ul>
                             </td>
+                            <td><a href="/orders/<%= order._id %>">Invoice</a></td>
                         </tr>
                     <% }); %>
                 <% } else { %>
