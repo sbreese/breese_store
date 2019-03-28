@@ -7,13 +7,6 @@ const hasClass = (el, className) => {
   return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
 }
 
-const addClass = (el, className) => {
-    if (el.classList)
-        el.classList.add(className)
-    else if (!hasClass(el, className))
-        el.className += " " + className;
-}
-
 /**
  * Button actions
  */
@@ -65,8 +58,14 @@ const deleteOrder = btn => {
           // applies to order-detail page:
           const list = document.querySelectorAll("td.order_row");
           for (var i = 0; i < list.length; ++i) {
-            list[i].classList.add('green');
-            list[i].textContent = 'Shipped';
+
+            if (hasClass(list[i], 'green')) {
+              list[i].classList.remove("mystyle");
+              list[i].textContent = 'NOT shipped';
+            } else {
+              list[i].classList.add('green');
+              list[i].textContent = 'Shipped';
+            }
           }
         }
       })
