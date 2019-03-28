@@ -60,7 +60,7 @@ const deleteOrder = btn => {
           for (var i = 0; i < list.length; ++i) {
 
             if (hasClass(list[i], 'green')) {
-              list[i].classList.remove("mystyle");
+              list[i].classList.remove("green");
               list[i].textContent = 'NOT shipped';
             } else {
               list[i].classList.add('green');
