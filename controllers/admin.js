@@ -5,7 +5,6 @@ const fileHelper = require('../util/file');
 const { validationResult } = require('express-validator/check');
 
 const Product = require('../models/product');
-const Order = require('../models/order');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -210,38 +209,4 @@ exports.deleteProduct = (req, res, next) => {
     .catch(err => {
       res.status(500).json({ message: 'Deleting product failed.' });
     });
-};
-
-exports.deleteOrder = (req, res, next) => {
-  const orderId = req.params.orderId;
-  Order.findById(orderId)
-    .then(order => {
-      if (!order) {
-        return next(new Error('Order not found.'));
-      }
-      return Order.deleteOne({ _id: orderId });
-    })
-    .then(() => {
-      console.log('DESTROYED ORDER');
-      res.status(200).json({ message: 'Success!' });
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Deleting order failed.' });
-    });
-};
-
-exports.shippedOrder = (req, res, next) => {
-  const orderId = req.params.orderId;
-
-  Order.findById(orderId)
-  .then(order => {
-    order.fulfillment_status = 8;
-    return order.save().then(result => {
-      console.log('MARKED AS SHIPPED!');
-      res.status(200).json({ message: 'Success fully marked as shipped!' });
-    });
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Marking order as shipped failed.' });
-  });
 };

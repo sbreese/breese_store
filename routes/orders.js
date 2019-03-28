@@ -1,6 +1,5 @@
 const express = require('express');
 
-const adminController = require('../controllers/admin');
 const isAuth = require('../middleware/is-auth');
 const ordersController = require('../controllers/orders');
 
@@ -13,10 +12,10 @@ router.get('/orders', isAuth, ordersController.getAllOrders);
 router.get('/orders/:orderId', isAuth, ordersController.getOrder);
 
 // /admin/orders/:orderId => PATCH
-router.patch('/order/:orderId', isAuth, adminController.shippedOrder);
+router.patch('/order/:orderId', isAuth, ordersController.shippedOrder);
 
 // /admin/orders/:orderId => DELETE
-router.delete('/order/:orderId', isAuth, adminController.deleteOrder);
+router.delete('/order/:orderId', isAuth, ordersController.deleteOrder);
 
 
 module.exports = router;

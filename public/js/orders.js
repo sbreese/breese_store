@@ -51,7 +51,6 @@ const deleteOrder = btn => {
       })
       .then(data => {
         console.log(data);
-        // addClass(orderElement, 'green');
         if (orderElement) {
           orderElement.classList.add('green');
         } else {
@@ -62,9 +61,11 @@ const deleteOrder = btn => {
             if (hasClass(list[i], 'green')) {
               list[i].classList.remove("green");
               list[i].textContent = 'NOT shipped';
+              btn.textContent = "Shipped";
             } else {
               list[i].classList.add('green');
               list[i].textContent = 'Shipped';
+              btn.textContent = "Unshipped";
             }
           }
         }

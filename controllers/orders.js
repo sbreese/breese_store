@@ -62,3 +62,37 @@ exports.getOrder = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.deleteOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+  Order.findById(orderId)
+    .then(order => {
+      if (!order) {
+        return next(new Error('Order not found.'));
+      }
+      return Order.deleteOne({ _id: orderId });
+    })
+    .then(() => {
+      console.log('DESTROYED ORDER');
+      res.status(200).json({ message: 'Success!' });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Deleting order failed.' });
+    });
+};
+
+exports.shippedOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+
+  Order.findById(orderId)
+  .then(order => {
+    order.fulfillment_status = order.fulfillment_status < 8 ? 8 : 0;
+    return order.save().then(result => {
+      console.log('MARKED AS SHIPPED!');
+      res.status(200).json({ message: 'Success fully marked as shipped!' });
+    });
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Marking order as shipped failed.' });
+  });
+};
