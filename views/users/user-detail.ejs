@@ -19,6 +19,11 @@
                     <tr><td class="heading">7</td><td>Country:</td><td colspan="4"><%= user.country %></td></tr>
                 <% if (user.orders.length > 0) { %>
                     <tr><td class="heading">8</td><td>Orders:</td><td>Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
+                    <% user.orders.forEach(function(order, index) { %>
+                        <tr class='user_row'>
+                            <td class="heading"><%= index + 8 %></td>
+                        </tr>
+                    <% }); %>
                 <% } else { %>
                     <tr><td class="heading">8</td><td colspan="3">User has no orders</td><td></td><td></td>
                 <% } %>
