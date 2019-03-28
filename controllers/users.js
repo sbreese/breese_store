@@ -53,13 +53,7 @@ exports.getUser = (req, res, next) => {
       res.render('users/user-detail', {
         user,
         pageTitle: 'User Detail',
-        path: '/admin/users',
-        currentPage: page,
-        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-        hasPreviousPage: page > 1,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+        path: '/admin/users'
       });
 
   })
