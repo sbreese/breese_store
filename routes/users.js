@@ -3,10 +3,12 @@ const router = express.Router();
 const usersController = require('../controllers/users');
 const isAuth = require('../middleware/is-auth');
 
-// /admin/users/:userId => GET
-router.get('/users/:userId', isAuth, usersController.getUser);
 // /admin/users => GET
 router.get('/users', isAuth, usersController.getUsers);
+
+// /admin/users/:userId => GET
+router.get('/users/:userId', isAuth, usersController.getUser);
+
 // /admin/user => DELETE
 router.delete('/user/:userId', isAuth, usersController.deleteUser);
 

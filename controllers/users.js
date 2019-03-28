@@ -40,7 +40,7 @@ exports.getUsers = (req, res, next) => {
       return next(error);
     });
 };
-
+/*
 exports.getUser = (req, res, next) => {
   const userId = req.params.userId;
 
@@ -64,6 +64,22 @@ exports.getUser = (req, res, next) => {
     error.httpStatusCode = 500;
     return next(error);
   });
+};*/
+exports.getUser = (req, res, next) => {
+  const userId = req.params.userId;
+  Product.findById(userId)
+    .then(user => {
+      res.render('users/user-detail', {
+        user: user,
+        pageTitle: `${user.first_name} ${user.last_name}`,
+        path: '/admin/users'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.deleteUser = (req, res, next) => {
