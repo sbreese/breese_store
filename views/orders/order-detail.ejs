@@ -11,9 +11,10 @@
             <table class="ExcelTable2007">
                     <tr><th class="heading"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
                     <tr><td class="heading">1</td><td>Customer:</td><td colspan="4"><a href="/admin/users/<%= order.user._id %>"><%= order.user.first_name %> <%= order.user.last_name %></a></td></tr>
-
                     <tr><td class="heading">2</td><td>Order #:</td><td colspan="4"><%= order._id %></td></tr>
                     <tr><td class="heading">3</td><td>Order Date:</td><td colspan="4"><%= order._id.getTimestamp().toLocaleString("en-US", {timeZone: "America/Chicago"}).replace(/:\d{2}\s/,' ') %></td></tr>
+
+                    <tr><td class="heading">4</td><td>Invoice:</td><td colspan="4"><a href="/orders/<%= order._id %>">PDF format</a></td></tr>
 
             </table>
             <p>
