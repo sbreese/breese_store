@@ -14,8 +14,13 @@
                     <tr><td class="heading">2</td><td>Order #:</td><td colspan="4"><%= order._id %></td></tr>
                     <tr><td class="heading">3</td><td>Order Date:</td><td colspan="4"><%= order._id.getTimestamp().toLocaleString("en-US", {timeZone: "America/Chicago"}).replace(/:\d{2}\s/,' ') %></td></tr>
                     <tr><td class="heading">4</td><td>Invoice:</td><td colspan="4"><a href="/orders/<%= order._id %>">PDF format</a></td></tr>
-
                     <tr><td class="heading">5</td><td>Shipping<br>Address:</td><td colspan="4"><%= order.user.address_line1 %><%= order.user.address_line2 && '<br>' %><%= order.user.address_line2 %><br><%= order.user.city %>, <%= order.user.state %> <%= order.user.postalCode %><%= order.user.country !== 'USA' ? `<br>${order.user.country}` : '' %></td></tr>
+
+                    <% if (order.products.length > 0) { %>
+                        <tr><td class="heading">6</td><td colspan="5"><%= order.products.length %> Products Ordered:</td></tr>
+                    <% } else { %>
+                        <tr><td class="heading">8</td><td colspan="3">Order has no products! (this is very unusual and should be investigated)</td><td></td><td></td>
+                    <% } %>
 
             </table>
             <p>
