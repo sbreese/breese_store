@@ -6,50 +6,11 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-            <% if (user) { %>
-                <table class="ExcelTable2007">
-                    <tr><th class="heading"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
-                    <tr><td class="heading">1</td><td>First Name:</td><td><%= user.first_name %></td></tr>
-                    <tr><td class="heading">2</td><td>Last Name:</td><td><%= user.last_name %></td></tr>
-                    <tr><td class="heading">3</td><td>Email:</td><td><%= user.email %></td></tr>
-                    <tr><td class="heading">4</td><td>Address:</td><td><%= user.address_line1 %><%= user.address_line2 && '<br>' %><%= user.address_line2 %></td></tr>
-                    <tr><td class="heading">5</td><td>City:</td><td><%= user.city %></td></tr>
-                    <tr><td class="heading">6</td><td>State:</td><td><%= user.state %></td></tr>
-                    <tr><td class="heading">7</td><td>Country:</td><td><%= user.country %></td></tr>
-                    <% if (user.orders.length > 0) { %>
-                        <tr><td class="heading">8</td><td>Orders:</td><td>Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td>
-                        <% user.orders.forEach(function(order, index) { %>
-                            <tr class='user_row'>
-                                <td class="heading"><%= index + 8 %></td>
-                                <td><%= order._id %></td>
-                                <td>
-                                    <ul class="orders__products">
-                                    <% order.products.forEach(p => { %>
-                                        <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li>
-                                    <% }); %>
-                                    </ul>
-                                </td>
-                                <td><a href="/orders/<%= order._id %>">Invoice</a></td>
-                                <td>
-                                    <input type="hidden" value="<%= order._id %>" name="orderId">
-                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                    <button class="btn" type="button" onclick="shippedOrder(this)">Shipped</button>
-                                    <button class="btn" type="button" onclick="deleteOrder(this)">Delete</button>
-                                </td>
-                            </tr>
-                        <% }); %>
-                    <% } else { %>
-                        <tr><td class="heading">8</td><td colspan="3">User has no orders</td><td></td><td></td>
-                    <% } %>
-                </table>
-                <p>
-                    <input type="hidden" value="<%= user._id %>" name="userId">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button class="btn" type="button" onclick="confirm('Are you sure you want to delete this user (<%= user.first_name %> <%= user.last_name %>)?') && deleteUser(this)">Delete User</button>
-                </p>
-            <% } else { %>
-                <h1>User Not Found!</h1>
-            <% } %>
+        <% if (user) { %>
+
+        <% } else { %>
+            <h1>User Not Found!</h1>
+        <% } %>
     </main>
         <%- include('../includes/end.ejs') %>
         <script src="/js/users.js"></script>
