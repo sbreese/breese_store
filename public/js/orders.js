@@ -58,8 +58,15 @@ const deleteOrder = btn => {
       })
       .then(data => {
         console.log(data);
-        // orderElement.style.background = 'green';
-        addClass(orderElement, 'green');
+        // addClass(orderElement, 'green');
+        orderElement.classList.add('green');
+
+        // applies to order-detail page:
+        const list = document.querySelectorAll("td.order_row");
+        for (var i = 0; i < list.length; ++i) {
+          list[i].classList.add('cf');
+          list[i].textContent = 'Shipped';
+        }
       })
       .catch(err => {
         console.log(err);
