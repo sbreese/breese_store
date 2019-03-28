@@ -26,7 +26,7 @@
 	border-width: 0px 1px 1px 0px;
 }
 
-.ExcelTable2007 .green td {
+.ExcelTable2007 .green td, .ExcelTable2007 td.green {
 	background-color: green;
 }
 
