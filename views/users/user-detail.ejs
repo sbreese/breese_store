@@ -16,13 +16,14 @@
                     <tr><td class="heading">4</td><td>Address:</td><td colspan="4"><%= user.address_line1 %><%= user.address_line2 && '<br>' %><%= user.address_line2 %></td></tr>
                     <tr><td class="heading">5</td><td>City:</td><td colspan="4"><%= user.city %></td></tr>
                     <tr><td class="heading">6</td><td>State:</td><td colspan="4"><%= user.state %></td></tr>
-                    <tr><td class="heading">7</td><td>Country:</td><td colspan="4"><%= user.country %></td></tr>
+                    <tr><td class="heading">7</td><td>Postal Code:</td><td colspan="4"><%= user.postalCode %></td></tr>
+                    <tr><td class="heading">8</td><td>Country:</td><td colspan="4"><%= user.country %></td></tr>
                 <% if (user.orders.length > 0) { %>
-                    <tr><td class="heading">8</td><td colspan="5">Orders:</td></tr>
-                    <tr><td class="heading">9</td><td colspan="2">Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
+                    <tr><td class="heading">9</td><td colspan="5">Orders:</td></tr>
+                    <tr><td class="heading">10</td><td colspan="2">Order #</td><td>Products (Qty)</td><td>Invoice</td><td>Action Buttons</td></tr>
                     <% user.orders.forEach(function(order, index) { %>
                         <tr class='user_row'>
-                            <td class="heading"><%= index + 10 %></td>
+                            <td class="heading"><%= index + 11 %></td>
                             <td colspan="2"><%= order._id %></td>
                             <td>
                                 <ul class="orders__products">

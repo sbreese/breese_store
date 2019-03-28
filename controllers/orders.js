@@ -41,3 +41,22 @@ exports.getAllOrders = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.getOrder = (req, res, next) => {
+  const orderId = req.params.orderId;
+  Order.findById(orderId).populate('user')
+    .then(order => {
+      const productCt = order.products.length;
+      const firstProdQty = order.products[0].quantity;
+      res.render('orders/order-detail', {
+        user: order,
+        pageTitle: `Order for ${productCt} product${productCt > 1 ? 's' : ''}, including ${firstProdQty} ${order.products[0].title}${firstProdQty > 1 ? 's' : ''}`,
+        path: '/admin/orders'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};

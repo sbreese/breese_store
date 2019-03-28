@@ -9,6 +9,9 @@ const router = express.Router();
 // /admin/orders => GET
 router.get('/orders', isAuth, ordersController.getAllOrders);
 
+// /admin/orders/:userId => GET
+router.get('/orders/:orderId', isAuth, ordersController.getOrder);
+
 // /admin/orders/:orderId => PATCH
 router.patch('/order/:orderId', isAuth, adminController.shippedOrder);
 

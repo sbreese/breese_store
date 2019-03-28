@@ -1,25 +1,29 @@
-function hasClass(el, className)
-{
-    if (el.classList)
-        return el.classList.contains(className);
-    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+/**
+ * Helper functions
+ */
+const hasClass = (el, className) => {
+  if (el.classList)
+      return el.classList.contains(className);
+  return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
 }
 
-function addClass(el, className)
-{
+const addClass = (el, className) => {
     if (el.classList)
         el.classList.add(className)
     else if (!hasClass(el, className))
         el.className += " " + className;
 }
 
+/**
+ * Button actions
+ */
 const deleteOrder = btn => {
     const orderId = btn.parentNode.querySelector('[name=orderId]').value;
     const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
   
     const orderElement = btn.closest('.user_row');
-  
-    fetch('/admin/order/' + orderId, {
+
+    fetch(`/admin/order/${orderId}`, {
       method: 'DELETE',
       headers: {
         'csrf-token': csrf

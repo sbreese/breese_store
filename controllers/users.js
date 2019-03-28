@@ -40,31 +40,7 @@ exports.getUsers = (req, res, next) => {
       return next(error);
     });
 };
-/*
-exports.getUser = (req, res, next) => {
-  const userId = req.params.userId;
 
-  User.findById(userId)
-  .populate('orders')
-    .then(user => {
-      
-      console.log("OK, lets up and render this shit");
-      console.log(user);
-      res.render('users/user-detail', {
-        pageTitle: 'User Detail',
-        path: `/users/user-detail`,
-        user
-      });
-
-  })
-  .catch(err => {
-    const error = new Error(err);
-    console.log("OOPS, an error:");
-    console.log(error);
-    error.httpStatusCode = 500;
-    return next(error);
-  });
-};*/
 exports.getUser = (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId).populate('orders')

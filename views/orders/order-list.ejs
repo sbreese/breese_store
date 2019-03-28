@@ -13,7 +13,7 @@
                 <% orders.forEach(function(order, index) { %>
                     <tr class="order_row<%= order.fulfillment_status === 8 ? ' green' : '' %>"><td class="heading"><%= index + 2 %></td>
                         <td><a href="/admin/users/<%= order.user._id %>"><%= order.user.first_name %> <%= order.user.last_name %></a></td>
-                        <td><%= order._id %></td>
+                        <td><a href="/admin/orders/<%= order._id %>"><%= order._id %></a></td>
                         <td>
                             <ul class="orders__products">
                             <% order.products.forEach(p => { %>
