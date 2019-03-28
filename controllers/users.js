@@ -67,7 +67,7 @@ exports.getUser = (req, res, next) => {
 };*/
 exports.getUser = (req, res, next) => {
   const userId = req.params.userId;
-  User.findById(userId)
+  User.findById(userId).populate('orders')
     .then(user => {
       res.render('users/user-detail', {
         user: user,
