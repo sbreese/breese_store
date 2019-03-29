@@ -132,7 +132,7 @@ exports.updateProfile = (req, res, next) => {
     });
   }
 
-  User.findById(req.session.user._id)
+  User.findById(req.body.other_user_id ? req.body.other_user_id : req.session.user._id)
   .then(user => {
     user.email = email;
     user.first_name = first_name;
@@ -146,16 +146,20 @@ exports.updateProfile = (req, res, next) => {
     return user.save();
   })
   .then(result => {
-    req.session.user.email = email;
-    req.session.user.first_name = first_name;
-    req.session.user.last_name = last_name;
-    req.session.user.address_line1 = address_line1;
-    req.session.user.address_line2 = address_line2;
-    req.session.user.city = city;
-    req.session.user.state = state;
-    req.session.user.postalCode = postalCode;
-    req.session.user.country = country;
-    res.redirect('/');
+    if (req.body.other_user_id) {
+      res.redirect(`/admin/users/${req.body.other_user_id}`);
+    } else {
+      req.session.user.email = email;
+      req.session.user.first_name = first_name;
+      req.session.user.last_name = last_name;
+      req.session.user.address_line1 = address_line1;
+      req.session.user.address_line2 = address_line2;
+      req.session.user.city = city;
+      req.session.user.state = state;
+      req.session.user.postalCode = postalCode;
+      req.session.user.country = country;
+      res.redirect('/');
+    }
     // return transporter.sendMail({
     //   to: email,
     //   from: 'shop@node-complete.com',

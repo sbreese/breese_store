@@ -9,6 +9,9 @@ router.get('/users', isAuth, usersController.getUsers);
 // /admin/users/:userId => GET
 router.get('/users/:userId', isAuth, usersController.getUser);
 
+// /admin/users/:userId => GET
+router.get('/users/:userId/edit', isAuth, usersController.getEditUser);
+
 // /admin/user => DELETE
 router.delete('/user/:userId', isAuth, usersController.deleteUser);
 

@@ -58,6 +58,34 @@ exports.getUser = (req, res, next) => {
     });
 };
 
+exports.getEditUser = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  const userId = req.params.userId;
+  User.findById(userId).populate('orders')
+    .then(user => {
+
+    res.render('auth/profile', {
+      path: '/profile',
+      pageTitle: 'Edit Profile',
+      errorMessage: message,
+      oldInput: user,
+      validationErrors: []
+    });
+
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
+
 exports.deleteUser = (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId)
