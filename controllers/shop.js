@@ -273,7 +273,7 @@ exports.getInvoice = (req, res, next) => {
               formatter.format(prod.product.price)
           );
       });
-      pdfDoc.text('---');
+      pdfDoc.text('-----------------------');
       pdfDoc.fontSize(20).text('Total Price: ' + formatter.format(totalPrice));
 
       pdfDoc.end();
