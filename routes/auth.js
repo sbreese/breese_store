@@ -47,7 +47,7 @@ router.post(
   [
     body('email')
       .isEmail()
-      .withMessage('Please enter a valid email address.')
+      .withMessage('Please enter a valid email address.'),
     body('password', 'Password has to be valid.')
       .isLength({ min: 5 })
       .isAlphanumeric()
@@ -75,7 +75,7 @@ router.post(
             );
           }
         });
-      })
+      }),
     body(
       'password',
       'Please enter a password with only numbers and text and at least 5 characters.'
