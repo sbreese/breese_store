@@ -6,9 +6,9 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <% if (filterCondition) {
+        <% if (filterField && filterValue) {
             <div><h3>Filter set</h3>
-                <h4><%= filterField%> = <%= filterValue %></h4>
+                <h4><%= filterField %> = <%= filterValue %></h4>
             </div>
         <% } %>
         <% if (orders.length > 0) { %>
