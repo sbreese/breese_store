@@ -218,9 +218,7 @@ form {
   cursor: pointer;
 }
 
-.btn.ship {
-  width: 49px;
-}
+
 
 .btn:hover,
 .btn:active {
