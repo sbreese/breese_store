@@ -61,7 +61,7 @@ const deleteOrder = btn => {
             btn.textContent = "Shipped";
           } else {
             orderElement.classList.add('green');
-            btn.textContent = "Unshipped";
+            btn.textContent = "Unship";
           }
           
         } else {
@@ -76,7 +76,7 @@ const deleteOrder = btn => {
             } else {
               list[i].classList.add('green');
               list[i].textContent = 'Shipped';
-              btn.textContent = "Unshipped";
+              btn.textContent = "Unship";
             }
           }
         }
