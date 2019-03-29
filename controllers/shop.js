@@ -178,10 +178,10 @@ exports.postCart = (req, res, next) => {
     console.log(req.session.cart_items);
     console.log("with:");
     console.log(updatedCartItems);
-    // req.session.cart_items = updatedCartItems;
-    cosole.log("Here are cart items:")
+    req.session.cart_items = updatedCartItems;
+    console.log("Here are cart items:")
     console.log(req.session.cart_items);
-    res.redirect('/user-cart');
+    res.redirect('/cart');
 
   } else {
 
