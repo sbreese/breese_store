@@ -144,7 +144,7 @@ exports.postCart = (req, res, next) => {
     
     let newQuantity = 1;
     
-    const updatedCartItems = [...req.session.cart_items.items];
+    const updatedCartItems = [...req.session.cart_items];
     console.log("Check point 3:");
     if (cartProductIndex >= 0) {
       console.log("Check point 4:");
