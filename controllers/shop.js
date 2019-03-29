@@ -140,7 +140,7 @@ exports.postCart = (req, res, next) => {
     } else {
       console.log("Check point 2:");
       req.session.cart_items = [];
-      cartProductIndex
+      const cartProductIndex = -1;
     } 
     
     let newQuantity = 1;
