@@ -140,7 +140,14 @@ exports.postCartDeleteProduct = (req, res, next) => {
     });
 };
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+});
+
 exports.getCheckout = (req, res, next) => {
+  
   req.user
     .populate('cart.items.productId')
     .execPopulate()
@@ -154,7 +161,7 @@ exports.getCheckout = (req, res, next) => {
         path: '/checkout',
         pageTitle: 'Checkout',
         products: products,
-        totalSum: total
+        totalSum: formatter.format(total)
       });
     })
     .catch(err => {
