@@ -127,13 +127,13 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
 
-  console.log("We at least got here!");
-  console.log(req);
-  
   if (!req.user) {
 
+    console.log("We at least got here!");
+    console.log(prodId);
+
     const cartProductIndex = req.session.cart_items.findIndex(cp => {
-      return cp.productId.toString() === product._id.toString();
+      return cp.productId.toString() === prodId;
     });
     let newQuantity = 1;
     const updatedCartItems = [...req.session.cart_items.items];
@@ -143,7 +143,7 @@ exports.postCart = (req, res, next) => {
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       updatedCartItems.push({
-        productId: product._id,
+        productId: prodId,
         quantity: newQuantity
       });
     }
