@@ -139,7 +139,7 @@ exports.postCart = (req, res, next) => {
       console.log(prodId);
       cartProductIndex = req.session.cart_items.findIndex(cp => {
         
-        return cp.productId.toString() === prodId;
+        return cp.productId === prodId;
       });
       console.log("Index: " + cartProductIndex);
     } else {
