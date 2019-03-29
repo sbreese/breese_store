@@ -6,6 +6,11 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
+        <% if (filterCondition) {
+            <div><h3>Filter set</h3>
+                <h4><%= filterField%> = <%= filterValue %></h4>
+            </div>
+        <% } %>
         <% if (orders.length > 0) { %>
             <table class="ExcelTable2007">
                 <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>

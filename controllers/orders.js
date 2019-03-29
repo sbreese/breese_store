@@ -8,15 +8,13 @@ exports.getAllOrders = (req, res, next) => {
 
   const filterField = req.params.filterField;
   const filterValue = req.params.filterValue;
-  const findCondition = filterField && filterValue && { [filterField]: filterValue};
-  console.log("Here is the find condition:");
-  console.log(findCondition);
+  const filterCondition = filterField && filterValue && { [filterField]: filterValue};
 
-  Order.find(findCondition)
+  Order.find(filterCondition)
     .countDocuments()
     .then(numOrders => {
       totalItems = numOrders;
-      return Order.find(findCondition)
+      return Order.find(filterCondition)
         .populate('user')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
@@ -24,6 +22,8 @@ exports.getAllOrders = (req, res, next) => {
     .then(orders => {
       res.render('orders/order-list', {
         orders,
+        filterField,
+        filterValue,
         pageTitle: 'Orders',
         path: '/admin/orders',
         currentPage: page,
