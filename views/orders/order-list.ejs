@@ -26,7 +26,7 @@
                         <td>
                             <input type="hidden" value="<%= order._id %>" name="orderId">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <button class="btn" type="button" onclick="shippedOrder(this)">Shipped</button>
+                            <button class="btn" type="button" onclick="shippedOrder(this)"><%= order.fulfillment_status === 8 ? 'Unship' : 'Shipped' %></button>
                             <button class="btn" type="button" onclick="confirm('Are you sure you want to delete this order (<%= order._id %>)?') && deleteOrder(this)">Delete</button>
                         </td>
                     </tr>
