@@ -109,6 +109,8 @@ exports.getCart = (req, res, next) => {
       return next(error);
     });
   } else {
+    console.log("What is in this cart_items?");
+    console.log(req.session.cart_items);
     res.render('shop/cart', {
       path: '/cart',
       pageTitle: 'Your Cart',
