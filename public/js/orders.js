@@ -58,10 +58,10 @@ const deleteOrder = btn => {
         if (orderElement) {
           if (hasClass(orderElement, 'green')) {
             orderElement.classList.remove("green");
-            btn.textContent = "Unshipped";
+            btn.textContent = "Shipped";
           } else {
             orderElement.classList.add('green');
-            btn.textContent = "Shipped";
+            btn.textContent = "Unshipped";
           }
           
         } else {
