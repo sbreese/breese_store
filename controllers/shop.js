@@ -92,6 +92,8 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   if (req.user) {
+    console.log("What is in this req user?");
+    console.log(req.user);
     req.user
     .populate('cart.items.productId')
     .execPopulate()
