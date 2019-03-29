@@ -11,6 +11,9 @@ router.get('/orders', isAuth, ordersController.getAllOrders);
 // /admin/orders/:userId => GET
 router.get('/orders/:orderId', isAuth, ordersController.getOrder);
 
+// /admin/orders/:filterField/:filterValue => GET
+router.get('/orders/:filterField/:filterValue', isAuth, ordersController.getAllOrders);
+
 // /admin/orders/:orderId => PATCH
 router.patch('/order/:orderId', isAuth, ordersController.shippedOrder);
 

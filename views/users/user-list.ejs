@@ -15,7 +15,7 @@
                         <td><%= user._id.getTimestamp().toLocaleDateString() %></td>
                         <td><%= user.address_line1 %><%= user.address_line2 && '<br>' %><%= user.address_line2 %></td>
                         <td><%= user.city %></td><td><%= user.state %></td><td><%= user.country %></td>
-                        <td><%= user.orders.length %></td>
+                        <td><a href="/admin/orders/user/<%= user._id %>"><%= user.orders.length %></a></td>
                         <td>
                             <input type="hidden" value="<%= user._id %>" name="userId">
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

@@ -1,5 +1,4 @@
 const Order = require('../models/order');
-const moment = require('moment');
 
 const ITEMS_PER_PAGE = 10;
 
@@ -7,7 +6,10 @@ exports.getAllOrders = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
-  Order.find()
+  const filterField = req.params.filterField;
+  const filterValue = req.params.filterValue;
+
+  Order.find(filterField && filterValue && { filterField: filterValue})
     .countDocuments()
     .then(numOrders => {
       totalItems = numOrders;
@@ -18,7 +20,6 @@ exports.getAllOrders = (req, res, next) => {
     })
     .then(orders => {
       res.render('orders/order-list', {
-        moment,
         orders,
         pageTitle: 'Orders',
         path: '/admin/orders',
