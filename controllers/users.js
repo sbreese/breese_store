@@ -71,8 +71,8 @@ exports.getEditUser = (req, res, next) => {
     .then(user => {
 
       console.log("Did we get the other person's profile?");
-      console.log(userId);
-      
+      console.log(user);
+
     res.render('auth/profile', {
       path: '/profile',
       pageTitle: 'Edit Profile',
