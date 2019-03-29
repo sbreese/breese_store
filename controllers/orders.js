@@ -16,7 +16,7 @@ exports.getAllOrders = (req, res, next) => {
     .countDocuments()
     .then(numOrders => {
       totalItems = numOrders;
-      return Order.find()
+      return Order.find(findCondition)
         .populate('user')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
