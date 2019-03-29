@@ -136,7 +136,9 @@ exports.postCart = (req, res, next) => {
       return cp.productId.toString() === prodId;
     });
     let newQuantity = 1;
+    console.log("Check point 1:");
     const updatedCartItems = [...req.session.cart_items.items];
+    console.log("Check point 2:");
   
     if (cartProductIndex >= 0) {
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
