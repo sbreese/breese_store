@@ -218,6 +218,12 @@ form {
   cursor: pointer;
 }
 
+.btn:hover,
+.btn:active {
+  background-color: #00695c;
+  color: white;
+}
+
 .btn:disabled {
     color: rgb(190, 192, 197);
     cursor: default;
@@ -226,10 +232,11 @@ form {
     border-color: rgb(190, 192, 197);
 }
 
-.btn:hover,
-.btn:active {
-  background-color: #00695c;
-  color: white;
+.btn:disabled:hover,
+.btn:disabled:active {
+    box-shadow: none;
+    color: rgb(190, 192, 197);
+    cursor: not-allowed;
 }
 
 .btn.danger {
