@@ -8,8 +8,11 @@ exports.getAllOrders = (req, res, next) => {
 
   const filterField = req.params.filterField;
   const filterValue = req.params.filterValue;
+  const findCondition = filterField && filterValue && { filterField: filterValue};
+  console.log("Here is the find condition:");
+  console.log(findCondition);
 
-  Order.find(filterField && filterValue && { filterField: filterValue})
+  Order.find()
     .countDocuments()
     .then(numOrders => {
       totalItems = numOrders;
