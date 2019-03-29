@@ -90,6 +90,16 @@ exports.getIndex = (req, res, next) => {
     });
 };
 
+exports.getUserCart = (req, res, next) => {
+    console.log("What is in this cart_items?");
+    console.log(req.session.cart_items);
+    res.render('shop/cart', {
+      path: '/cart',
+      pageTitle: 'Your Cart',
+      products: req.session.cart_items
+    });
+};
+
 exports.getCart = (req, res, next) => {
   console.log("We at least got here!");
   console.log(req);
@@ -171,7 +181,7 @@ exports.postCart = (req, res, next) => {
     req.session.cart_items = updatedCartItems;
     cosole.log("Here are cart items:")
     console.log(req.session.cart_items);
-    res.redirect('/cart');
+    res.redirect('/user-cart');
 
   } else {
 
