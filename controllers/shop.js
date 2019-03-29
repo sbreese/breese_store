@@ -139,20 +139,23 @@ exports.postCart = (req, res, next) => {
     } else {
       req.session.cart_items = [];
     } 
-    console.log("Check point 1:");
+    
     let newQuantity = 1;
-    console.log("Check point 2:");
+    
     const updatedCartItems = [...req.session.cart_items.items];
-  
+    console.log("Check point 1:");
     if (cartProductIndex >= 0) {
+      console.log("Check point 2:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
+      console.log("Check point 3:");
       updatedCartItems.push({
         productId: prodId,
         quantity: newQuantity
       });
     }
+    console.log("Check point 4:");
     
     req.session.cart_items = updatedCartItems;
     cosole.log("Here are cart items:")
