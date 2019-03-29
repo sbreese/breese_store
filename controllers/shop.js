@@ -91,6 +91,8 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+  console.log("We at least got here!");
+  console.log(req);
   if (req.user) {
     console.log("What is in this req user?");
     console.log(req.user);
