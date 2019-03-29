@@ -70,6 +70,9 @@ exports.getEditUser = (req, res, next) => {
   User.findById(userId).populate('orders')
     .then(user => {
 
+      console.log("Did we get the other person's profile?");
+      console.log(userId);
+      
     res.render('auth/profile', {
       path: '/profile',
       pageTitle: 'Edit Profile',
