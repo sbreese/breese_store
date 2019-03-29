@@ -140,12 +140,13 @@ exports.postCart = (req, res, next) => {
     } else {
       console.log("Check point 2:");
       req.session.cart_items = [];
+      cartProductIndex
     } 
     
     let newQuantity = 1;
     
     const updatedCartItems = [...req.session.cart_items];
-    console.log("Check point 3:");
+    console.log("Check point 3:", cartProductIndex);
     if (cartProductIndex >= 0) {
       console.log("Check point 4:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
