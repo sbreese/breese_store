@@ -136,9 +136,10 @@ exports.postCart = (req, res, next) => {
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       console.log("Check point 1, got cart items!:");
       cartProductIndex = req.session.cart_items.findIndex(cp => {
-        console.log(req.session.cart_items);
+        
         return cp.productId.toString() === prodId;
       });
+      console.log("Index: " + cartProductIndex);
     } else {
       console.log("Check point 2:");
       req.session.cart_items = [];
