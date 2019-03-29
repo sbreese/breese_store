@@ -132,22 +132,23 @@ exports.postCart = (req, res, next) => {
     console.log("We at least got here!");
     console.log(req.session);
 
+    const cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       console.log("Check point 1, got cart items!:");
-      const cartProductIndex = req.session.cart_items.findIndex(cp => {
+      cartProductIndex = req.session.cart_items.findIndex(cp => {
         console.log(req.session.cart_items);
         return cp.productId.toString() === prodId;
       });
     } else {
       console.log("Check point 2:");
       req.session.cart_items = [];
-      const cartProductIndex = -1;
     } 
     
     let newQuantity = 1;
     
     const updatedCartItems = [...req.session.cart_items];
     console.log("Check point 3:");
+    console.log(cartProductIndex);
     if (cartProductIndex >= 0) {
       console.log("Check point 4:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
