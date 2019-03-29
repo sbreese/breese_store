@@ -127,6 +127,9 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
 
+  console.log("We at least got here!");
+  console.log(req);
+  
   if (!req.user) {
 
     const cartProductIndex = req.session.cart_items.findIndex(cp => {
@@ -146,6 +149,8 @@ exports.postCart = (req, res, next) => {
     }
     
     req.session.cart_items = updatedCartItems;
+    cosole.log("Here are cart items:")
+    console.log(req.session.cart_items);
     res.redirect('/cart');
 
   } else {
