@@ -141,30 +141,31 @@ exports.postCart = (req, res, next) => {
         
         return cp.productId === prodId;
       });
-      console.log("Index: " + cartProductIndex);
+      console.log("Index: ");
+      console.log(cartProductIndex);
     } else {
       console.log("Check point 2:");
       req.session.cart_items = [];
     } 
-    
+    console.log("Check point 3:");
     let newQuantity = 1;
     
     const updatedCartItems = [...req.session.cart_items];
-    console.log("Check point 3:");
+    console.log("Check point 4:");
     console.log(updatedCartItems);
     if (cartProductIndex >= 0) {
-      console.log("Check point 4:");
+      console.log("Check point 5:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
-      console.log("Check point 5:");
+      console.log("Check point 6:");
       updatedCartItems.push({
         productId: prodId,
         quantity: newQuantity
       });
-      console.log("Check point 6:");
+      console.log("Check point 7:");
     }
-    console.log("Check point 7:");
+    console.log("Check point 8:");
     
     req.session.cart_items = updatedCartItems;
     cosole.log("Here are cart items:")
