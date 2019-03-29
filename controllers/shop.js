@@ -134,22 +134,24 @@ exports.postCart = (req, res, next) => {
 
     if (req.session.cart_items) {
       const cartProductIndex = req.session.cart_items.findIndex(cp => {
+        console.log(req.session.cart_items);
         return cp.productId.toString() === prodId;
       });
     } else {
+      console.log("Check point 2:");
       req.session.cart_items = [];
     } 
     
     let newQuantity = 1;
     
     const updatedCartItems = [...req.session.cart_items.items];
-    console.log("Check point 1:");
+    console.log("Check point 3:");
     if (cartProductIndex >= 0) {
-      console.log("Check point 2:");
+      console.log("Check point 4:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
-      console.log("Check point 3:");
+      console.log("Check point 5:");
       updatedCartItems.push({
         productId: prodId,
         quantity: newQuantity
