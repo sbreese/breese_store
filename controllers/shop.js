@@ -130,7 +130,7 @@ exports.postCart = (req, res, next) => {
   if (!req.user) {
 
     console.log("We at least got here!");
-    console.log(prodId);
+    console.log(req.session);
 
     if (req.session.cart_items) {
       const cartProductIndex = req.session.cart_items.findIndex(cp => {
