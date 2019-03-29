@@ -6,9 +6,9 @@ exports.getAllOrders = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
-  /*const filterField = req.params.filterField;
+  const filterField = req.params.filterField;
   const filterValue = req.params.filterValue;
-  const findCondition = ;
+  /*const findCondition = ;
   console.log("Here is the find condition:");*/
   console.log(filterField && filterValue && { [filterField]: filterValue});
 
