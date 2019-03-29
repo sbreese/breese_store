@@ -8,7 +8,7 @@
     <main>
         <% if (users.length > 0) { %>
             <table class="ExcelTable2007">
-                <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr>
+                <tr><th class="heading"> </th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
                 <tr><td class="heading">1</td><td>Last Name, First Name</td><td>Email</td><td>Join Date</td><td>Address</td><td>City</td><td>State</td><td>Country</td><td>Orders</td><td>Action Buttons</td></tr>
                 <% users.forEach(function(user, index) { %>
                     <tr class='user_row'><td class="heading"><%= index + 2 %></td><td><a href="/admin/users/<%= user._id %>"><%= user.last_name %>, <%= user.first_name %></a></td><td><%= user.email %></td>
