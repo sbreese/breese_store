@@ -41,13 +41,13 @@ router.post(
   authController.updateProfile
 );
 
+// .normalizeEmail(),
 router.post(
   '/login',
   [
     body('email')
       .isEmail()
       .withMessage('Please enter a valid email address.')
-      .normalizeEmail(),
     body('password', 'Password has to be valid.')
       .isLength({ min: 5 })
       .isAlphanumeric()
@@ -56,12 +56,13 @@ router.post(
   authController.postLogin
 );
 
+// .normalizeEmail(),
 router.post(
   '/signup',
   [
     check('email')
       .isEmail()
-      .withMessage('Please enter a valid email.')
+      .withMessage('Please enter a valid email address.')
       .custom((value, { req }) => {
         // if (value === 'test@test.com') {
         //   throw new Error('This email address if forbidden.');
@@ -75,7 +76,6 @@ router.post(
           }
         });
       })
-      .normalizeEmail(),
     body(
       'password',
       'Please enter a password with only numbers and text and at least 5 characters.'
