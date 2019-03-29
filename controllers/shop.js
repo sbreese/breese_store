@@ -270,8 +270,7 @@ exports.getInvoice = (req, res, next) => {
               ' - ' +
               prod.quantity +
               ' x ' +
-              '$' +
-              prod.product.price
+              formatter.format(prod.product.price)
           );
       });
       pdfDoc.text('---');
