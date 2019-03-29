@@ -132,13 +132,16 @@ exports.postCart = (req, res, next) => {
     console.log("We at least got here!");
     console.log(prodId);
 
-    const cartProductIndex = req.session.cart_items.findIndex(cp => {
-      console.log("Check point 1:");
-      return cp.productId.toString() === prodId;
-    });
-    console.log("Check point 2:");
+    if (req.session.cart_items) {
+      const cartProductIndex = req.session.cart_items.findIndex(cp => {
+        return cp.productId.toString() === prodId;
+      });
+    } else {
+      req.session.cart_items = [];
+    } 
+    console.log("Check point 1:");
     let newQuantity = 1;
-    console.log("Check point 3:");
+    console.log("Check point 2:");
     const updatedCartItems = [...req.session.cart_items.items];
   
     if (cartProductIndex >= 0) {
