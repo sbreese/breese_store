@@ -56,7 +56,14 @@ const deleteOrder = btn => {
       .then(data => {
         console.log(data);
         if (orderElement) {
-          orderElement.classList.add('green');
+          if (hasClass(list[i], 'green')) {
+            orderElement.classList.remove("green");
+            btn.textContent = "Unshipped";
+          } else {
+            orderElement.classList.add('green');
+            btn.textContent = "Shipped";
+          }
+          
         } else {
           // applies to order-detail page:
           const list = document.querySelectorAll("td.order_row");
