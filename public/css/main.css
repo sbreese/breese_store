@@ -218,6 +218,14 @@ form {
   cursor: pointer;
 }
 
+.btn:disabled {
+    color: rgb(190, 192, 197);
+    cursor: default;
+    box-shadow: none;
+    background: transparent;
+    border-color: rgb(190, 192, 197);
+}
+
 .btn:hover,
 .btn:active {
   background-color: #00695c;
