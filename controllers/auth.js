@@ -274,10 +274,11 @@ exports.postSignup = (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log("Let's return to the signup page...");
     console.log(errors.array());
     return res.status(422).render('auth/signup', {
       path: '/signup',
-      pageTitle: req.session.cart_items && req.session.cart_items.length ? 'Customer Information' : 'Signup',
+      pageTitle: 'Customer Information',
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email,
