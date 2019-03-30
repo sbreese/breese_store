@@ -96,7 +96,8 @@ exports.getProfile = (req, res, next) => {
       postalCode: req.user.postalCode,
       country: req.user.country
     },
-    validationErrors: []
+    validationErrors: [],
+    products: undefined
   });
 };
 
