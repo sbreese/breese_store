@@ -279,7 +279,7 @@ exports.postSignup = (req, res, next) => {
     return res.status(422).render('auth/signup', {
       path: '/signup',
       pageTitle: 'Customer Information',
-      errorMessage: 'you suck', errors.array()[0].msg,
+      errorMessage: 'you suck', // errors.array()[0].msg,
       oldInput: {
         email,
         password: '',
