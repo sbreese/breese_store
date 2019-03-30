@@ -310,7 +310,7 @@ exports.postSignup = (req, res, next) => {
         state,
         postalCode,
         country,
-        cart: { items: [] },
+        cart: { items: req.session.cart_items.length ? req.session.cart_items : [] },
         access_level: 1
       });
       return user.save();
@@ -325,9 +325,15 @@ exports.postSignup = (req, res, next) => {
             req.session.user = user;
             req.session.login_orders = orders;
 
+            let signUpRedirect = '/';
+            if (req.session.cart_items.length) {
+              req.session.cart_items = [];
+              signUpRedirect += 'checkout';
+            }
+
             return req.session.save(err => {
               console.log(err);
-              res.redirect( req.session.cart_items.length ? '/checkout' : '/');
+              res.redirect(signUpRedirect);
             });
 
           })
