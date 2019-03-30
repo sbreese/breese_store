@@ -281,8 +281,8 @@ exports.postSignup = (req, res, next) => {
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email,
-        password,
-        confirmPassword: req.body.confirmPassword,
+        password: '',
+        confirmPassword: '',
         first_name,
         last_name,
         address_line1,
@@ -296,6 +296,7 @@ exports.postSignup = (req, res, next) => {
     });
   }
 
+  console.log("Did we get past the return?");
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
