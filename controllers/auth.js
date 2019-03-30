@@ -295,7 +295,6 @@ exports.postSignup = (req, res, next) => {
       },
       validationErrors: errors.array()
     });
-  }
 
   console.log("Did we get past the return?");
   bcrypt
