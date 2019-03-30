@@ -244,7 +244,7 @@ exports.postLogin = (req, res, next) => {
 
             return req.session.save(err => {
               console.log(err);
-              res.redirect('/');
+              res.redirect(user.cart.items.length > 0 ? '/cart' : '/');
             });
 
           })
