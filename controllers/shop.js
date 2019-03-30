@@ -205,16 +205,26 @@ exports.postCart = (req, res, next) => {
 
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  req.user
-    .removeFromCart(prodId)
-    .then(result => {
-      res.redirect('/cart');
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+
+  if (req.user) {
+    req.user
+      .removeFromCart(prodId)
+      .then(result => {
+        res.redirect('/cart');
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+  } else {
+
+    const updatedCartItems = req.session.cart_items.filter(item => {
+      return item.product._id !== prodId;
     });
+    req.session.cart_items = updatedCartItems;
+    res.redirect('/cart');
+  }
 };
 
 const formatter = new Intl.NumberFormat('en-US', {
