@@ -1,6 +1,9 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
+    <% if (products && products.length) { %>
+        <link rel="stylesheet" href="/css/cart.css">
+    <% } %>
 </head>
 
 <body>
