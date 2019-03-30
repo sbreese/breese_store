@@ -117,7 +117,7 @@
                         value="<%= oldInput.country ? oldInput.country : 'USA' %>">
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Update Profile</button>
+            <button class="btn" type="submit"><%= products && products.length ? 'Continue to Payment' : 'Update Profile' %></button>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>
