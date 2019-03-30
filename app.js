@@ -78,7 +78,7 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.user = req.session.user;
   res.locals.orders = req.session.login_orders || [];
-  // res.locals.cart_items = req.session.cart_items || [];
+  res.locals.cart_items = req.session.cart_items || [];
   next();
 });
 

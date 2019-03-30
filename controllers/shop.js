@@ -140,48 +140,30 @@ exports.postCart = (req, res, next) => {
 
   if (!req.user) {
 
-    console.log("We at least got here!");
     const productTitle = req.body.productTitle;
 
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
-      console.log("Check point 1:");
       
-      console.log(prodId);
       cartProductIndex = req.session.cart_items.findIndex(cp => {
         return cp.product._id === prodId;
       });
-      console.log("Index: ");
-      console.log(cartProductIndex);
     } else {
-      console.log("Check point 2:");
       req.session.cart_items = [];
     } 
-    console.log("Check point 3:");
     let newQuantity = 1;
     
     const updatedCartItems = [...req.session.cart_items];
-    console.log("Check point 4:");
-    console.log(updatedCartItems);
     if (cartProductIndex >= 0) {
-      console.log("Check point 5:");
       newQuantity = req.session.cart_items[cartProductIndex].quantity + 1;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
-      console.log("Check point 6:");
       updatedCartItems.push({
         product: {_id: prodId, title: productTitle },
         quantity: newQuantity
       });
-      console.log("Check point 7:");
     }
-    console.log("Check point 8, will populate:");
-    console.log(req.session.cart_items);
-    console.log("with:");
-    console.log(updatedCartItems);
     req.session.cart_items = updatedCartItems;
-    console.log("Here are cart items:")
-    console.log(req.session.cart_items);
     res.redirect('/cart');
 
   } else {
