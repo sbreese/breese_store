@@ -276,8 +276,8 @@ exports.postSignup = (req, res, next) => {
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(422).render('auth/signup', {
-      path: '/signup',
-      pageTitle: 'Signup',
+      path: req.session.cart_items && req.session.cart_items.length ? '/customer-information' : '/signup',
+      pageTitle: req.session.cart_items && req.session.cart_items.length ? 'Customer Information' : 'Signup',
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email,
@@ -315,8 +315,29 @@ exports.postSignup = (req, res, next) => {
       });
       return user.save();
     })
-    .then(result => {
-      res.redirect('/login');
+    .then(user => {
+
+          // steves additions
+          Order.find({ 'user.userId': user._id })
+          .then(orders => {
+            
+            req.session.isLoggedIn = true;
+            req.session.user = user;
+            req.session.login_orders = orders;
+
+            return req.session.save(err => {
+              console.log(err);
+              res.redirect('/');
+            });
+
+          })
+          .catch(err => {
+            console.log(err);
+            res.redirect('/login');
+          });
+          // end steves addition
+
+      // res.redirect('/login'); <-- Steve commented out
       // return transporter.sendMail({
       //   to: email,
       //   from: 'shop@node-complete.com',
