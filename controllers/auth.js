@@ -327,7 +327,7 @@ exports.postSignup = (req, res, next) => {
 
             return req.session.save(err => {
               console.log(err);
-              res.redirect('/');
+              res.redirect( req.session.cart_items.length ? '/checkout' : '/');
             });
 
           })
