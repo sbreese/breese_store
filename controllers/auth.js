@@ -276,7 +276,7 @@ exports.postSignup = (req, res, next) => {
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(422).render('auth/signup', {
-      path: req.session.cart_items && req.session.cart_items.length ? '/customer-information' : '/signup',
+      path: '/signup',
       pageTitle: req.session.cart_items && req.session.cart_items.length ? 'Customer Information' : 'Signup',
       errorMessage: errors.array()[0].msg,
       oldInput: {
