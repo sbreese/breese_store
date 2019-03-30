@@ -274,12 +274,11 @@ exports.postSignup = (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log("Let's return to the signup page...");
     console.log(errors.array());
     return res.status(422).render('auth/signup', {
       path: '/signup',
       pageTitle: 'Customer Information',
-      errorMessage: 'you suck', // errors.array()[0].msg,
+      errorMessage: errors.array()[0].msg,
       oldInput: {
         email,
         password: '',
@@ -298,7 +297,6 @@ exports.postSignup = (req, res, next) => {
     });
   }
 
-  console.log("Did we get past the return?");
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
@@ -320,31 +318,21 @@ exports.postSignup = (req, res, next) => {
     })
     .then(user => {
 
-          // steves additions
-          Order.find({ 'user.userId': user._id })
-          .then(orders => {
-            
-            req.session.isLoggedIn = true;
-            req.session.user = user;
-            req.session.login_orders = orders;
+      // steves additions            
+      req.session.isLoggedIn = true;
+      req.session.user = user;
 
-            let signUpRedirect = '/';
-            if (req.session.cart_items.length) {
-              req.session.cart_items = [];
-              signUpRedirect += 'checkout';
-            }
+      let signUpRedirect = '/';
+      if (req.session.cart_items.length) {
+        req.session.cart_items = [];
+        signUpRedirect += 'checkout';
+      }
 
-            return req.session.save(err => {
-              console.log(err);
-              res.redirect(signUpRedirect);
-            });
-
-          })
-          .catch(err => {
-            console.log(err);
-            res.redirect('/login');
-          });
-          // end steves addition
+      return req.session.save(err => {
+        console.log(err);
+        res.redirect(signUpRedirect);
+      });
+      // end steves addition
 
       // res.redirect('/login'); <-- Steve commented out
       // return transporter.sendMail({

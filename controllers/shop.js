@@ -265,6 +265,7 @@ exports.postOrder = (req, res, next) => {
       return order.save();
     })    
     .then(order => {
+      req.session.login_orders.push(order);
       return req.user.addOrderToUser(order);
     })
     .then(result => {
