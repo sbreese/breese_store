@@ -293,8 +293,10 @@ exports.postSignup = (req, res, next) => {
         postalCode,
         country
       },
+      products: req.session.cart_items,
       validationErrors: errors.array()
     });
+  }
 
   console.log("Did we get past the return?");
   bcrypt
