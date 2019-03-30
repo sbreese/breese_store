@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
+router.get('/shipping-address', authController.getSignup);
 
 router.get('/profile', authController.getProfile);
 
