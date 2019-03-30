@@ -100,6 +100,46 @@ exports.getProfile = (req, res, next) => {
   });
 };
 
+exports.getConfirmInformation = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  req.user
+  .populate('cart.items.product')
+  .execPopulate()
+  .then(user => {
+    const products = user.cart.items;
+    res.render('auth/profile', {
+      path: '/confirm-information',
+      pageTitle: 'Confirm Your Information',
+      products: products,
+      errorMessage: message,
+      oldInput: {
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        address_line1: user.address_line1,
+        address_line2: user.address_line2,
+        city: user.city,
+        state: user.state,
+        postalCode: user.postalCode,
+        country: user.country
+      },
+      validationErrors: []
+    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+
+};
+
 exports.updateProfile = (req, res, next) => {
   const email = req.body.email;
   const first_name = req.body.first_name;

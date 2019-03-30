@@ -10,6 +10,7 @@ router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 router.get('/customer-information', authController.getSignup);
+router.get('/confirm-information', authController.getConfirmInformation);
 
 router.get('/profile', authController.getProfile);
 
