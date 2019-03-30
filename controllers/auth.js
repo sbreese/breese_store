@@ -200,7 +200,11 @@ exports.updateProfile = (req, res, next) => {
       req.session.user.state = state;
       req.session.user.postalCode = postalCode;
       req.session.user.country = country;
-      res.redirect('/');
+      if (req.body.checkout) {
+        res.redirect('/checkout');
+      } else {
+        res.redirect('/');
+      }
     }
     // return transporter.sendMail({
     //   to: email,
