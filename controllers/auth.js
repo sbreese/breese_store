@@ -226,7 +226,14 @@ exports.postLogin = (req, res, next) => {
           });
         })
         .then(user => {
-          
+          if (req.session.cart_items.length) {
+            user.cart = req.session.cart_items;
+            req.session.cart_items = [];
+            return user.save();
+          }
+          return user;
+        })
+        .then(user => {
           // steves additions
           Order.find({ 'user.userId': user._id })
           .then(orders => {
