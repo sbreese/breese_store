@@ -90,23 +90,10 @@ exports.getIndex = (req, res, next) => {
     });
 };
 
-/* TRASH
-exports.getUserCart = (req, res, next) => {
-    console.log("What is in this cart_items?");
-    console.log(req.session.cart_items);
-    res.render('shop/cart', {
-      path: '/cart',
-      pageTitle: 'Your Cart',
-      products: req.session.cart_items
-    });
-};*/
+
 
 exports.getCart = (req, res, next) => {
-  console.log("We at least got here!");
-  console.log(req);
   if (req.user) {
-    console.log("What is in this req user?");
-    console.log(req.user);
     req.user
     .populate('cart.items.product')
     .execPopulate()
@@ -124,11 +111,37 @@ exports.getCart = (req, res, next) => {
       return next(error);
     });
   } else {
-    console.log("What is in this cart_items?");
-    console.log(req.session.cart_items);
     res.render('shop/cart', {
       path: '/cart',
       pageTitle: 'Your Cart',
+      products: req.session.cart_items
+    });
+  }
+
+};
+
+exports.getShoppingCart = (req, res, next) => {
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      const products = user.cart.items;
+      res.render('shop/cart', {
+        path: '/cart',
+        pageTitle: 'Your Cart',
+        products: products
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    res.render('newDesign/shopping-cart', {
+      path: '/shopping-cart',
+      pageTitle: 'Your Shopping Cart',
       products: req.session.cart_items
     });
   }
