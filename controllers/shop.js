@@ -127,9 +127,9 @@ exports.getShoppingCart = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'Your Cart',
+      res.render('newDesign/shopping-cart', {
+        path: '/shopping-cart',
+        pageTitle: 'Your Shopping Cart',
         products: products
       });
     })
