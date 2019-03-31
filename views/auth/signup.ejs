@@ -11,17 +11,17 @@
 
     <main>
 
-            <% if (products && products.length) { %>
-                <ul class="cart__item-list">
-                    <% products.forEach(p => { %>
-                        <li class="cart__item">
-                            <h1><%= p.product.title %></h1>
-                            <h2>Quantity: <%= p.quantity %></h2>
-                        </li>
-                    <% }) %>
-                </ul>
-                <hr>
-            <% } %>
+        <% if (products && products.length) { %>
+            <ul class="cart__item-list">
+                <% products.forEach(p => { %>
+                    <li class="cart__item">
+                        <h1><%= p.product.title %></h1>
+                        <h2>Quantity: <%= p.quantity %></h2>
+                    </li>
+                <% }) %>
+            </ul>
+            <hr>
+        <% } %>
 
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
