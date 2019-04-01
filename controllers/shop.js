@@ -62,6 +62,7 @@ exports.getIndex = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+  Category.find().then(categories => {
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -72,7 +73,8 @@ exports.getIndex = (req, res, next) => {
     })
     .then(products => {
       res.render('newDesign/index', {
-        prods: products,
+        products,
+        categories,
         pageTitle: 'Shop',
         path: '/',
         currentPage: page,
@@ -83,11 +85,12 @@ exports.getIndex = (req, res, next) => {
         lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
       });
     })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 
