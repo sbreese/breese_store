@@ -6,6 +6,7 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const Product = require('../models/product');
 const Order = require('../models/order');
+const Category = require('../models/category');
 
 const ITEMS_PER_PAGE = 2;
 
