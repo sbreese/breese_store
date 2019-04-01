@@ -27,12 +27,13 @@ const store = new MongoDBStore({
 });
 const csrfProtection = csrf();
 
+// Removed new Date().toISOString() + '-' +  from filename
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
+    cb(null, file.originalname);
   }
 });
 

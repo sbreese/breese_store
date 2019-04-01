@@ -21,15 +21,15 @@ const productSchema = new Schema({
   },
   image2Url: {
     type: String,
-    required: true
+    required: false
   },
   image3Url: {
     type: String,
-    required: true
+    required: false
   },
   image4Url: {
     type: String,
-    required: true
+    required: false
   },
   userId: {
     type: Schema.Types.ObjectId,

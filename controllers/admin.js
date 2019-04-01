@@ -19,9 +19,7 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  console.log("OK, lets go to files");
   const images = req.files;
-  console.log("Did we make it past files?");
   console.log(images);
   const price = req.body.price;
   const description = req.body.description;
@@ -59,10 +57,10 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const image1Url = images[0] ? images[0].path : '';
-  const image2Url = images[1] ? images[1].path : '';
-  const image3Url = images[2] ? images[2].path : '' ;
-  const image4Url = images[3] ? images[3].path : '';
+  const image1Url = typeof images[0] === 'undefined' ? '' : images[0].path;
+  const image2Url = typeof images[1] === 'undefined' ? '' : images[1].path;
+  const image3Url = typeof images[2] === 'undefined' ? '' : images[2].path;
+  const image4Url = typeof images[3] === 'undefined' ? '' : images[3].path;
 
   const product = new Product({
     // _id: new mongoose.Types.ObjectId('5badf72403fd8b5be0366e81'),
