@@ -26,7 +26,7 @@ exports.postAddCategory = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('admin/edit-category', {
+    return res.status(422).render('categories/edit-category', {
       pageTitle: 'Add Category',
       path: '/admin/add-category',
       editing: false,
@@ -90,7 +90,7 @@ exports.getEditCategory = (req, res, next) => {
       }
       console.log("Hi Steve, here is what I'll get for you.");
       console.log(category);
-      res.render('category/edit-category', {
+      res.render('categories/edit-category', {
         pageTitle: 'Edit Category',
         path: '/admin/edit-category',
         editing: editMode,
