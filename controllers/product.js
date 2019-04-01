@@ -187,6 +187,7 @@ exports.getProducts = (req, res, next) => {
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(products => {
+      console.log("OK, lets output these product:");
       console.log(products);
       res.render('products/products', {
         prods: products,
