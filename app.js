@@ -53,7 +53,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
-const categoryRoutes = require('./routes/category');
+const categoryRoutes = require('./routes/categories');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 const orderRoutes = require('./routes/orders');
