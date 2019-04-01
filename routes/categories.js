@@ -40,6 +40,7 @@ router.post(
   categoryController.postAddCategory
 );
 
+// /admin/edit-category => GET
 router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
 /*
 router.post(

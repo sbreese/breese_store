@@ -83,6 +83,8 @@ exports.getEditCategory = (req, res, next) => {
     return res.redirect('/');
   }
   const categoryId = req.params.categoryId;
+  console.log("Hi Steve, here is what I'll get for you.");
+  console.log(categoryId);
   Category.findById(categoryId)
     .then(category => {
       if (!category) {
@@ -92,7 +94,7 @@ exports.getEditCategory = (req, res, next) => {
         pageTitle: 'Edit Category',
         path: '/admin/edit-category',
         editing: editMode,
-        category: category,
+        category,
         hasError: false,
         errorMessage: null,
         validationErrors: []
