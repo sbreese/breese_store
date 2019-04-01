@@ -60,7 +60,7 @@ exports.postAddProduct = (req, res, next) => {
   const image2Url = typeof images[images.length - 2] === 'undefined' ? '' : images[images.length - 2].path;
   const image3Url = typeof images[images.length - 3] === 'undefined' ? '' : images[images.length - 3].path;*/
   const imageUrls = [];
-  for (i = 1; i <= images.length; i++) {
+  for (i = 0; i < images.length; i++) {
     imageUrls.push(typeof images[i] === 'undefined' ? '' : images[i].path);
   }
 
