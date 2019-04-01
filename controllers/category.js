@@ -88,8 +88,6 @@ exports.getEditCategory = (req, res, next) => {
       if (!category) {
         return res.redirect('/');
       }
-      console.log("Hi Steve, here is what I'll get for you.");
-      console.log(category);
       res.render('categories/edit-category', {
         pageTitle: 'Edit Category',
         path: '/admin/edit-category',
@@ -173,7 +171,7 @@ exports.getCategories = (req, res, next) => {
 
 exports.deleteCategory = (req, res, next) => {
   const categoryId = req.params.categoryId;
-  Category.findById(prodId)
+  Category.findById(categoryId)
     .then(category => {
       if (!category) {
         return next(new Error('Category not found.'));
