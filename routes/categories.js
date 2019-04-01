@@ -12,9 +12,9 @@ const router = express.Router();
  * Complete CRUD for Categories
  */
 // /admin/add-category => GET
-/*
-router.get('/add-category', isAuth, categoryController.getAddCategory);
 
+router.get('/add-category', isAuth, categoryController.getAddCategory);
+/*
 // /admin/categories => GET
 router.get('/categories', isAuth, categoryController.getcategories);
 
