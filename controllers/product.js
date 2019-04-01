@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator/check');
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
-  res.render('admin/edit-product', {
+  res.render('products/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
     editing: false,
@@ -23,7 +23,7 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   if (!images.length) {
-    return res.status(422).render('admin/edit-product', {
+    return res.status(422).render('products/edit-product', {
       pageTitle: 'Add Product',
       path: '/admin/add-product',
       editing: false,
@@ -41,7 +41,7 @@ exports.postAddProduct = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('admin/edit-product', {
+    return res.status(422).render('products/edit-product', {
       pageTitle: 'Add Product',
       path: '/admin/add-product',
       editing: false,
@@ -80,7 +80,7 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect('/admin/products');
     })
     .catch(err => {
-      // return res.status(500).render('admin/edit-product', {
+      // return res.status(500).render('products/edit-product', {
       //   pageTitle: 'Add Product',
       //   path: '/admin/add-product',
       //   editing: false,
@@ -108,11 +108,14 @@ exports.getEditProduct = (req, res, next) => {
   }
   const prodId = req.params.productId;
   Product.findById(prodId)
+    .populate('category')
     .then(product => {
       if (!product) {
         return res.redirect('/');
       }
-      res.render('admin/edit-product', {
+      console.log("Here is populated Product:");
+      console.log(product);
+      res.render('products/edit-product', {
         pageTitle: 'Edit Product',
         path: '/admin/edit-product',
         editing: editMode,
@@ -139,7 +142,7 @@ exports.postEditProduct = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).render('admin/edit-product', {
+    return res.status(422).render('products/edit-product', {
       pageTitle: 'Edit Product',
       path: '/admin/edit-product',
       editing: true,
@@ -185,7 +188,7 @@ exports.getProducts = (req, res, next) => {
     // .populate('userId', 'name')
     .then(products => {
       console.log(products);
-      res.render('admin/products', {
+      res.render('products/products', {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products'
