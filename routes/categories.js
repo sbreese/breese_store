@@ -39,9 +39,9 @@ router.post(
   isAuth,
   categoryController.postAddCategory
 );
-/*
-router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
 
+router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
+/*
 router.post(
   '/edit-category',
   [
