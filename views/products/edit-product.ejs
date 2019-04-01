@@ -28,6 +28,19 @@
                     id="images" multiple>
             </div>
             <div class="form-control">
+                    <label for="category">Category</label>
+                    <select 
+                        class="<%= validationErrors.find(e => e.param === 'category') ? 'invalid' : '' %>"
+                        name="category" 
+                        id="category" 
+                        value="<% if (editing || hasError) { %><%= product.category %><% } %>">
+                        <option value="">--Please choose a category--</option>
+                        <% for (let category of categories) { %>
+                            <option value="<%= category._id %>"<%= category._id === product.category._id ? ' selected' : '' %>><%= category.title %></option>
+                        <% } %>
+                    </select>
+                </div>
+            <div class="form-control">
                 <label for="price">Price</label>
                 <input 
                     class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
