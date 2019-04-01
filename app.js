@@ -53,6 +53,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
+const categoryRoutes = require('./routes/category');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 const orderRoutes = require('./routes/orders');
@@ -110,6 +111,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
+app.use('/category', categoryRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', usersRoutes);
 app.use(shopRoutes);
