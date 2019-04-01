@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/add-category', isAuth, categoryController.getAddCategory);
 
 // /admin/categories => GET
-router.get('/categories', isAuth, categoryController.getcategories);
+router.get('/categories', isAuth, categoryController.getCategories);
 /*
 // /admin/add-category => POST
 router.post(
