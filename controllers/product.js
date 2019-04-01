@@ -5,6 +5,7 @@ const fileHelper = require('../util/file');
 const { validationResult } = require('express-validator/check');
 
 const Product = require('../models/product');
+const Category = require('../models/category');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('products/edit-product', {
@@ -107,23 +108,26 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect('/');
   }
   const prodId = req.params.productId;
-  Product.findById(prodId)
-    .populate('category')
-    .then(product => {
-      if (!product) {
-        return res.redirect('/');
-      }
-      console.log("Here is populated Product:");
-      console.log(product);
-      res.render('products/edit-product', {
-        pageTitle: 'Edit Product',
-        path: '/admin/edit-product',
-        editing: editMode,
-        product: product,
-        hasError: false,
-        errorMessage: null,
-        validationErrors: []
-      });
+  Category.find().then(categories => {
+    Product.findById(prodId)
+      .populate('category')
+      .then(product => {
+        if (!product) {
+          return res.redirect('/');
+        }
+        console.log("Here are all categories:");
+        console.log(categories);
+        res.render('products/edit-product', {
+          pageTitle: 'Edit Product',
+          path: '/admin/edit-product',
+          editing: editMode,
+          product,
+          categories,
+          hasError: false,
+          errorMessage: null,
+          validationErrors: []
+        });
+      })
     })
     .catch(err => {
       const error = new Error(err);
@@ -187,8 +191,6 @@ exports.getProducts = (req, res, next) => {
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(products => {
-      console.log("OK, lets output these product:");
-      console.log(products);
       res.render('products/products', {
         prods: products,
         pageTitle: 'Admin Products',
