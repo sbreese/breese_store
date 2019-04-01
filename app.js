@@ -111,7 +111,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/admin', adminRoutes);
-app.use('/category', categoryRoutes);
+app.use('/admin', categoryRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', usersRoutes);
 app.use(shopRoutes);

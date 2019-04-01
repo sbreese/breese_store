@@ -12,6 +12,7 @@ const router = express.Router();
  * Complete CRUD for Categories
  */
 // /admin/add-category => GET
+/*
 router.get('/add-category', isAuth, categoryController.getAddCategory);
 
 // /admin/categories => GET
@@ -59,5 +60,5 @@ router.post(
 );
 
 router.delete('/category/:categoryId', isAuth, categoryController.deleteCategory);
-
+*/
 module.exports = router;
