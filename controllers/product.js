@@ -167,6 +167,8 @@ exports.postEditProduct = (req, res, next) => {
       if (product.userId.toString() !== req.user._id.toString()) {
         return res.redirect('/');
       }
+      console.log("Here is updated category:");
+      console.log(updatedCategory);
       product.title = updatedTitle;
       product.category = updatedCategory;
       product.price = updatedPrice;
