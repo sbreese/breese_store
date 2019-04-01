@@ -88,7 +88,7 @@ exports.getEditCategory = (req, res, next) => {
       if (!category) {
         return res.redirect('/');
       }
-      res.render('admin/edit-category', {
+      res.render('category/edit-category', {
         pageTitle: 'Edit Category',
         path: '/admin/edit-category',
         editing: editMode,
