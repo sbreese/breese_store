@@ -42,7 +42,8 @@ router.post(
 
 // /admin/edit-category => GET
 router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
-/*
+
+// /admin/edit-category => POST
 router.post(
   '/edit-category',
   [
@@ -59,9 +60,9 @@ router.post(
       .trim()
   ],
   isAuth,
-  categoryController.postEditcategory
+  categoryController.postEditCategory
 );
 
 router.delete('/category/:categoryId', isAuth, categoryController.deleteCategory);
-*/
+
 module.exports = router;
