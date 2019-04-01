@@ -29,6 +29,7 @@
             </div>
             <div class="form-control">
                     <label for="category">Category</label>
+                    Does <%= category._id %> equals <%= product.category._id %>?
                     <select 
                         class="<%= validationErrors.find(e => e.param === 'category') ? 'invalid' : '' %>"
                         name="category" 
