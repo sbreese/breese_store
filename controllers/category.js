@@ -83,13 +83,13 @@ exports.getEditCategory = (req, res, next) => {
     return res.redirect('/');
   }
   const categoryId = req.params.categoryId;
-  console.log("Hi Steve, here is what I'll get for you.");
-  console.log(categoryId);
   Category.findById(categoryId)
     .then(category => {
       if (!category) {
         return res.redirect('/');
       }
+      console.log("Hi Steve, here is what I'll get for you.");
+      console.log(category);
       res.render('category/edit-category', {
         pageTitle: 'Edit Category',
         path: '/admin/edit-category',
