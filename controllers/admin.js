@@ -56,20 +56,23 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const image1Url = typeof images[images.length - 1] === 'undefined' ? '' : images[images.length - 1].path;
+  /*const image1Url = typeof images[images.length - 1] === 'undefined' ? '' : images[images.length - 1].path;
   const image2Url = typeof images[images.length - 2] === 'undefined' ? '' : images[images.length - 2].path;
-  const image3Url = typeof images[images.length - 3] === 'undefined' ? '' : images[images.length - 3].path;
-  const image4Url = typeof images[images.length - 4] === 'undefined' ? '' : images[images.length - 4].path;
+  const image3Url = typeof images[images.length - 3] === 'undefined' ? '' : images[images.length - 3].path;*/
+  const imageUrls = [];
+  for (i = 1; i <= images.length; i++) {
+    const imageUrls[i+1] = typeof images[i] === 'undefined' ? '' : images[i].path;
+  }
 
   const product = new Product({
     // _id: new mongoose.Types.ObjectId('5badf72403fd8b5be0366e81'),
     title: title,
     price: price,
     description: description,
-    image1Url,
-    image2Url,
-    image3Url,
-    image4Url,
+    image1Url: imageUrls[0],
+    image2Url: imageUrls[1],
+    image3Url: imageUrls[2],
+    image4Url: imageUrls[3],
     userId: req.user
   });
   product
