@@ -20,21 +20,33 @@
                     id="title" 
                     value="<% if (editing || hasError) { %><%= product.title %><% } %>">
             </div>
-            <!-- <div class="form-control">
-                <label for="imageUrl">Image URL</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>"
-                    type="text" 
-                    name="imageUrl" 
-                    id="imageUrl" 
-                    value="<% if (editing || hasError) { %><%= product.imageUrl %><% } %>">
-            </div> -->
             <div class="form-control">
-                <label for="image">Image</label>
+                <label for="image1">Image #1 (main image)</label>
                 <input 
                     type="file" 
-                    name="image" 
-                    id="image" >
+                    name="image1" 
+                    id="image1" >
+            </div>
+            <div class="form-control">
+                    <label for="image2">Image #2 (only used on detail modal)</label>
+                    <input 
+                        type="file" 
+                        name="image2" 
+                        id="image2" >
+            </div>
+            <div class="form-control">
+                    <label for="image3">Image #3 (only used on detail modal)</label>
+                    <input 
+                        type="file" 
+                        name="image3" 
+                        id="image3" >
+            </div>
+            <div class="form-control">
+                    <label for="image4">Image #4 (60w * 80h icon for use on cart page)</label>
+                    <input 
+                        type="file" 
+                        name="image4" 
+                        id="image4" >
             </div>
             <div class="form-control">
                 <label for="price">Price</label>

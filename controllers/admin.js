@@ -19,7 +19,7 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const image = req.file;
+  const images = req.files;
   const price = req.body.price;
   const description = req.body.description;
   if (!image) {
@@ -56,14 +56,20 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const imageUrl = image.path;
+  const image1Url = images[0] ? images[0].path : '';
+  const image2Url = images[1] ? images[1].path : '';
+  const image3Url = images[2] ? images[2].path : '' ;
+  const image4Url = images[3] ? images[3].path : '';
 
   const product = new Product({
     // _id: new mongoose.Types.ObjectId('5badf72403fd8b5be0366e81'),
     title: title,
     price: price,
     description: description,
-    imageUrl: imageUrl,
+    image1Url,
+    image2Url,
+    image3Url,
+    image4Url,
     userId: req.user
   });
   product
@@ -81,7 +87,7 @@ exports.postAddProduct = (req, res, next) => {
       //   hasError: true,
       //   product: {
       //     title: title,
-      //     imageUrl: imageUrl,
+      //     image1Url: image1Url,
       //     price: price,
       //     description: description
       //   },
@@ -158,8 +164,8 @@ exports.postEditProduct = (req, res, next) => {
       product.price = updatedPrice;
       product.description = updatedDesc;
       if (image) {
-        fileHelper.deleteFile(product.imageUrl);
-        product.imageUrl = image.path;
+        fileHelper.deleteFile(product.image1Url);
+        product.image1Url = image.path;
       }
       return product.save().then(result => {
         console.log('UPDATED PRODUCT!');
@@ -199,7 +205,7 @@ exports.deleteProduct = (req, res, next) => {
       if (!product) {
         return next(new Error('Product not found.'));
       }
-      fileHelper.deleteFile(product.imageUrl);
+      fileHelper.deleteFile(product.image1Url);
       return Product.deleteOne({ _id: prodId, userId: req.user._id });
     })
     .then(() => {

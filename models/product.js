@@ -15,7 +15,19 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
-  imageUrl: {
+  image1Url: {
+    type: String,
+    required: true
+  },
+  image2Url: {
+    type: String,
+    required: true
+  },
+  image3Url: {
+    type: String,
+    required: true
+  },
+  image4Url: {
     type: String,
     required: true
   },
@@ -32,11 +44,11 @@ module.exports = mongoose.model('Product', productSchema);
 // const getDb = require('../util/database').getDb;
 
 // class Product {
-//   constructor(title, price, description, imageUrl, id, userId) {
+//   constructor(title, price, description, image1Url, id, userId) {
 //     this.title = title;
 //     this.price = price;
 //     this.description = description;
-//     this.imageUrl = imageUrl;
+//     this.image1Url = image1Url;
 //     this._id = id ? new mongodb.ObjectId(id) : null;
 //     this.userId = userId;
 //   }
