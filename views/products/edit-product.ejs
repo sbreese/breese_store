@@ -33,7 +33,7 @@
                         class="<%= validationErrors.find(e => e.param === 'category') ? 'invalid' : '' %>"
                         name="category" 
                         id="category" 
-                        value="<% if (editing || hasError) { %><%= product.category %><% } %>">
+                        >
                         <option value="">--Please choose a category--</option>
                         <% for (let category of categories) { %>
                             <option value="<%= category._id %>" selected="<%= category._id == product.category._id ? 'selected' : 'false' %>"><%= category.title %></option>

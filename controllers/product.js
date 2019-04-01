@@ -115,8 +115,6 @@ exports.getEditProduct = (req, res, next) => {
         if (!product) {
           return res.redirect('/');
         }
-        console.log("Here are all categories:");
-        console.log(categories);
         res.render('products/edit-product', {
           pageTitle: 'Edit Product',
           path: '/admin/edit-product',
@@ -139,6 +137,7 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
+  const updatedCategory = req.body.category;
   const updatedPrice = req.body.price;
   const image = req.file;
   const updatedDesc = req.body.description;
@@ -153,6 +152,7 @@ exports.postEditProduct = (req, res, next) => {
       hasError: true,
       product: {
         title: updatedTitle,
+        category: updatedCategory,
         price: updatedPrice,
         description: updatedDesc,
         _id: prodId
@@ -168,6 +168,7 @@ exports.postEditProduct = (req, res, next) => {
         return res.redirect('/');
       }
       product.title = updatedTitle;
+      product.category = updatedCategory;
       product.price = updatedPrice;
       product.description = updatedDesc;
       if (image) {
