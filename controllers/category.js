@@ -172,14 +172,13 @@ exports.getCategories = (req, res, next) => {
 };
 
 exports.deleteCategory = (req, res, next) => {
-  const prodId = req.params.categoryId;
+  const categoryId = req.params.categoryId;
   Category.findById(prodId)
     .then(category => {
       if (!category) {
         return next(new Error('Category not found.'));
       }
-      fileHelper.deleteFile(category.image1Url);
-      return Category.deleteOne({ _id: prodId, userId: req.user._id });
+      return Category.deleteOne({ _id: categoryId });
     })
     .then(() => {
       console.log('DESTROYED CATEGORY');

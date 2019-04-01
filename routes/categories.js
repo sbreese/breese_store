@@ -63,6 +63,7 @@ router.post(
   categoryController.postEditCategory
 );
 
+// /admin/category:categoryId => DELETE
 router.delete('/category/:categoryId', isAuth, categoryController.deleteCategory);
 
 module.exports = router;
