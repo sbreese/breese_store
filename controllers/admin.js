@@ -20,10 +20,9 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const images = req.files;
-  console.log(images);
   const price = req.body.price;
   const description = req.body.description;
-  if (!image) {
+  if (!images.length) {
     return res.status(422).render('admin/edit-product', {
       pageTitle: 'Add Product',
       path: '/admin/add-product',
