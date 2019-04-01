@@ -177,13 +177,13 @@ exports.postEditCategory = (req, res, next) => {
 };
 
 exports.getCategories = (req, res, next) => {
-  Category.find({ userId: req.user._id })
+  Category.find()
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(categories => {
       console.log(categories);
       res.render('categories/categories', {
-        prods: categories,
+        categories,
         pageTitle: 'Admin Categories',
         path: '/categories/categories'
       });
