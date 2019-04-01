@@ -36,7 +36,7 @@
                         >
                         <option value="">--Please choose a category--</option>
                         <% for (let category of categories) { %>
-                            <option value="<%= category._id %>" selected="<%= category.title == product.category.title ? 'selected' : 'false' %>"><%= category.title %></option>
+                            <option value="<%= category._id %>"<%= category.title == product.category.title ? ' selected' : '' %>><%= category.title %></option>
                         <% } %>
                     </select>
                 </div>
