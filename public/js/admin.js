@@ -22,13 +22,26 @@ const deleteProduct = btn => {
     });
 };
 
-/*
-document.getElementsByClassName('deleteProduct').onclick = function() {
-  console.log("Are you sure?");
-  var retVal = confirm("Are you sure you want to delete this product?");
-  if (retVal === true) {
-    console.log("True clicked!");
-     deleteProduct(this)
-  }
+const deleteCategory = btn => {
+  const categoryId = btn.parentNode.querySelector('[name=categoryId]').value;
+  const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
+
+  const categoryElement = btn.closest('article');
+
+  fetch('/admin/category/' + categoryId, {
+    method: 'DELETE',
+    headers: {
+      'csrf-token': csrf
+    }
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log(data);
+      categoryElement.parentNode.removeChild(categoryElement);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
-*/
