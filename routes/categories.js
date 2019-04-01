@@ -14,10 +14,10 @@ const router = express.Router();
 // /admin/add-category => GET
 
 router.get('/add-category', isAuth, categoryController.getAddCategory);
-/*
+
 // /admin/categories => GET
 router.get('/categories', isAuth, categoryController.getcategories);
-
+/*
 // /admin/add-category => POST
 router.post(
   '/add-category',
