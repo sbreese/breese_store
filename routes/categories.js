@@ -17,7 +17,7 @@ router.get('/add-category', isAuth, categoryController.getAddCategory);
 
 // /admin/categories => GET
 router.get('/categories', isAuth, categoryController.getCategories);
-/*
+
 // /admin/add-category => POST
 router.post(
   '/add-category',
@@ -32,12 +32,14 @@ router.post(
       .trim(),
     body('description')
       .isLength({ min: 5, max: 400 })
-      .trim()
+      .trim(),
+    body('displayOrder')
+      .isNumeric()
   ],
   isAuth,
   categoryController.postAddCategory
 );
-
+/*
 router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
 
 router.post(

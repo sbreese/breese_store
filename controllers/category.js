@@ -18,25 +18,10 @@ exports.getAddCategory = (req, res, next) => {
 };
 
 exports.postAddCategory = (req, res, next) => {
+  const code = req.body.code;
   const title = req.body.title;
-  const images = req.files;
-  const price = req.body.price;
   const description = req.body.description;
-  if (!images.length) {
-    return res.status(422).render('categories/edit-category', {
-      pageTitle: 'Add Category',
-      path: '/admin/add-category',
-      editing: false,
-      hasError: true,
-      category: {
-        title: title,
-        price: price,
-        description: description
-      },
-      errorMessage: 'Attached file is not an image.',
-      validationErrors: []
-    });
-  }
+  const displayOrder = req.body.displayOrder;
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -47,30 +32,21 @@ exports.postAddCategory = (req, res, next) => {
       editing: false,
       hasError: true,
       category: {
-        title: title,
-        price: price,
-        description: description
+        code,
+        title,
+        description,
+        displayOrder
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array()
     });
   }
 
-  const imageUrls = [];
-  for (i = 0; i < images.length; i++) {
-    imageUrls.push(typeof images[i] === 'undefined' ? '' : images[i].path);
-  }
-
   const category = new Category({
-    // _id: new mongoose.Types.ObjectId('5badf72403fd8b5be0366e81'),
-    title: title,
-    price: price,
-    description: description,
-    image1Url: imageUrls[0],
-    image2Url: imageUrls[1],
-    image3Url: imageUrls[2],
-    image4Url: imageUrls[3],
-    userId: req.user
+    code,
+    title,
+    description,
+    displayOrder
   });
   category
     .save()
