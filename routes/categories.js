@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const { body } = require('express-validator/check');
 
-const adminController = require('../controllers/admin');
+const categoryController = require('../controllers/category');
 const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
@@ -12,10 +12,10 @@ const router = express.Router();
  * Complete CRUD for Categories
  */
 // /admin/add-category => GET
-router.get('/add-category', isAuth, adminController.getAddCategory);
+router.get('/add-category', isAuth, categoryController.getAddCategory);
 
 // /admin/categories => GET
-router.get('/categories', isAuth, adminController.getcategories);
+router.get('/categories', isAuth, categoryController.getcategories);
 
 // /admin/add-category => POST
 router.post(
@@ -34,10 +34,10 @@ router.post(
       .trim()
   ],
   isAuth,
-  adminController.postAddCategory
+  categoryController.postAddCategory
 );
 
-router.get('/edit-category/:categoryId', isAuth, adminController.getEditCategory);
+router.get('/edit-category/:categoryId', isAuth, categoryController.getEditCategory);
 
 router.post(
   '/edit-category',
@@ -55,9 +55,9 @@ router.post(
       .trim()
   ],
   isAuth,
-  adminController.postEditcategory
+  categoryController.postEditcategory
 );
 
-router.delete('/category/:categoryId', isAuth, adminController.deleteCategory);
+router.delete('/category/:categoryId', isAuth, categoryController.deleteCategory);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator/check');
 const Category = require('../models/category');
 
 exports.getAddCategory = (req, res, next) => {
-  res.render('admin/edit-category', {
+  res.render('categories/edit-category', {
     pageTitle: 'Add Category',
     path: '/admin/add-category',
     editing: false,
@@ -23,7 +23,7 @@ exports.postAddCategory = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   if (!images.length) {
-    return res.status(422).render('admin/edit-category', {
+    return res.status(422).render('categories/edit-category', {
       pageTitle: 'Add Category',
       path: '/admin/add-category',
       editing: false,
@@ -41,9 +41,9 @@ exports.postAddCategory = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('admin/edit-category', {
+    return res.status(422).render('categories/edit-category', {
       pageTitle: 'Add Category',
-      path: '/admin/add-category',
+      path: '/categories/add-category',
       editing: false,
       hasError: true,
       category: {
@@ -77,7 +77,7 @@ exports.postAddCategory = (req, res, next) => {
     .then(result => {
       // console.log(result);
       console.log('Created Category');
-      res.redirect('/admin/categories');
+      res.redirect('/categories/categories');
     })
     .catch(err => {
       // return res.status(500).render('admin/edit-category', {
@@ -112,9 +112,9 @@ exports.getEditCategory = (req, res, next) => {
       if (!category) {
         return res.redirect('/');
       }
-      res.render('admin/edit-category', {
+      res.render('categories/edit-category', {
         pageTitle: 'Edit Category',
-        path: '/admin/edit-category',
+        path: '/categories/edit-category',
         editing: editMode,
         category: category,
         hasError: false,
@@ -137,9 +137,9 @@ exports.postEditCategory = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).render('admin/edit-category', {
+    return res.status(422).render('categories/edit-category', {
       pageTitle: 'Edit Category',
-      path: '/admin/edit-category',
+      path: '/categories/edit-category',
       editing: true,
       hasError: true,
       category: {
@@ -166,7 +166,7 @@ exports.postEditCategory = (req, res, next) => {
       }
       return category.save().then(result => {
         console.log('UPDATED CATEGORY!');
-        res.redirect('/admin/categories');
+        res.redirect('/categories/categories');
       });
     })
     .catch(err => {
@@ -182,10 +182,10 @@ exports.getCategories = (req, res, next) => {
     // .populate('userId', 'name')
     .then(categories => {
       console.log(categories);
-      res.render('admin/categories', {
+      res.render('categories/categories', {
         prods: categories,
         pageTitle: 'Admin Categories',
-        path: '/admin/categories'
+        path: '/categories/categories'
       });
     })
     .catch(err => {
