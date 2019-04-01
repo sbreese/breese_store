@@ -26,9 +26,9 @@ exports.postAddCategory = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('categories/edit-category', {
+    return res.status(422).render('admin/edit-category', {
       pageTitle: 'Add Category',
-      path: '/categories/add-category',
+      path: '/admin/add-category',
       editing: false,
       hasError: true,
       category: {
@@ -53,7 +53,7 @@ exports.postAddCategory = (req, res, next) => {
     .then(result => {
       // console.log(result);
       console.log('Created Category');
-      res.redirect('/categories/categories');
+      res.redirect('/admin/categories');
     })
     .catch(err => {
       // return res.status(500).render('admin/edit-category', {
