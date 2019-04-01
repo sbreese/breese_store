@@ -108,7 +108,7 @@ exports.getEditCategory = (req, res, next) => {
 };
 
 exports.postEditCategory = (req, res, next) => {
-  const prodId = req.body.categoryId;
+  const categoryId = req.body.categoryId;
   const updatedTitle = req.body.title;
   const updatedDesc = req.body.description;
 
@@ -130,13 +130,12 @@ exports.postEditCategory = (req, res, next) => {
     });
   }
 
-  Category.findById(prodId)
+  Category.findById(categoryId)
     .then(category => {
       if (category.userId.toString() !== req.user._id.toString()) {
         return res.redirect('/');
       }
       category.title = updatedTitle;
-      category.price = updatedPrice;
       category.description = updatedDesc;
       if (image) {
         fileHelper.deleteFile(category.image1Url);
