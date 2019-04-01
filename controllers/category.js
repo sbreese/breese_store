@@ -109,21 +109,25 @@ exports.getEditCategory = (req, res, next) => {
 
 exports.postEditCategory = (req, res, next) => {
   const categoryId = req.body.categoryId;
+  const updatedCode = req.body.code;
   const updatedTitle = req.body.title;
   const updatedDesc = req.body.description;
+  const updatedDisplayOrder = req.body.displayOrder;
 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(422).render('categories/edit-category', {
       pageTitle: 'Edit Category',
-      path: '/categories/edit-category',
+      path: '/admin/edit-category',
       editing: true,
       hasError: true,
       category: {
+        code: updatedCode,
         title: updatedTitle,
         description: updatedDesc,
-        _id: prodId
+        displayOrder: updatedDisplayOrder,
+        _id: categoryId
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array()
@@ -132,18 +136,13 @@ exports.postEditCategory = (req, res, next) => {
 
   Category.findById(categoryId)
     .then(category => {
-      if (category.userId.toString() !== req.user._id.toString()) {
-        return res.redirect('/');
-      }
+      category.code = updatedCode;
       category.title = updatedTitle;
       category.description = updatedDesc;
-      if (image) {
-        fileHelper.deleteFile(category.image1Url);
-        category.image1Url = image.path;
-      }
+      category.displayOrder = updatedDisplayOrder;
       return category.save().then(result => {
         console.log('UPDATED CATEGORY!');
-        res.redirect('/categories/categories');
+        res.redirect('/admin/categories');
       });
     })
     .catch(err => {
