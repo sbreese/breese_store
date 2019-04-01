@@ -69,6 +69,7 @@ exports.getIndex = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
       return Product.find()
+        .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
     })
