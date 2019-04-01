@@ -19,7 +19,10 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
+  console.log("OK, lets go to files");
   const images = req.files;
+  console.log("Did we make it past files?");
+  console.log(images);
   const price = req.body.price;
   const description = req.body.description;
   if (!image) {
