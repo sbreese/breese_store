@@ -29,7 +29,6 @@
             </div>
             <div class="form-control">
                     <label for="category">Category</label>
-                    Does <%= category._id %> equals <%= product.category._id %>?
                     <select 
                         class="<%= validationErrors.find(e => e.param === 'category') ? 'invalid' : '' %>"
                         name="category" 
@@ -37,7 +36,7 @@
                         value="<% if (editing || hasError) { %><%= product.category %><% } %>">
                         <option value="">--Please choose a category--</option>
                         <% for (let category of categories) { %>
-                            <option value="<%= category._id %>"<%= category._id === product.category._id ? ' selected' : '' %>><%= category.title %></option>
+                            <option value="<%= category._id %>"<%= category._id === product.category._id ? ' selected' : '' %>>Does <%= category._id %> equals <%= product.category._id %>?<%= category.title %></option>
                         <% } %>
                     </select>
                 </div>
