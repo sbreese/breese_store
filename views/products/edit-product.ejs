@@ -11,53 +11,7 @@
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
         <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" enctype="multipart/form-data">
-            <div class="form-control">
-                <label for="title">Title</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
-                    type="text" 
-                    name="title" 
-                    id="title" 
-                    value="<% if (editing || hasError) { %><%= product.title %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="images">Image (1,2,3,4)</label>
-                <input 
-                    type="file" 
-                    name="images" 
-                    id="images" multiple>
-            </div>
-            <div class="form-control">
-                    <label for="category">Category</label>
-                    <select 
-                        class="<%= validationErrors.find(e => e.param === 'category') ? 'invalid' : '' %>"
-                        name="category" 
-                        id="category" 
-                        >
-                        <option value="">--Please choose a category--</option>
-                        <% for (let category of categories) { %>
-                            <option value="<%= category._id %>"<%= category.title == product.category.title ? ' selected' : '' %>><%= category.title %></option>
-                        <% } %>
-                    </select>
-                </div>
-            <div class="form-control">
-                <label for="price">Price</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
-                    type="number" 
-                    name="price" 
-                    id="price" 
-                    step="0.01" 
-                    value="<% if (editing || hasError) { %><%= product.price %><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="description">Description</label>
-                <textarea 
-                    class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
-                    name="description" 
-                    id="description" 
-                    rows="5"><% if (editing || hasError) { %><%= product.description %><% } %></textarea>
-            </div>
+
             <% if (editing) { %>
                 <input type="hidden" value="<%= product._id %>" name="productId">
             <% } %>
