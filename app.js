@@ -81,6 +81,7 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
+  
   next();
 });
 
@@ -90,6 +91,8 @@ app.use((req, res, next) => {
     return next();
   }
   User.findById(req.session.user._id)
+    .populate('cart.items.product')
+    .execPopulate()
     .then(user => {
       if (!user) {
         return next();
