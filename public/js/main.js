@@ -272,7 +272,7 @@
         e.preventDefault();
         console.log("Hi Steve, here is the this for what you just clicked!");
         console.log($(this));
-        console.log($(this).id);
+        console.log($(this).attr('id'));
         $('.js-modal1').addClass('show-modal1');
     });
 
