@@ -8,7 +8,7 @@ const Product = require('../models/product');
 const Order = require('../models/order');
 const Category = require('../models/category');
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 20;
 
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
