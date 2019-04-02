@@ -14,6 +14,7 @@ exports.getAddProduct = (req, res, next) => {
       path: '/admin/add-product',
       editing: false,
       categories,
+      product: null,
       hasError: false,
       errorMessage: null,
       validationErrors: []
