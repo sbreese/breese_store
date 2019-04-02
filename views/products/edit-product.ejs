@@ -20,7 +20,18 @@
                         name="title" 
                         id="title" 
                         value="<% if (editing || hasError) { %><%= product.title %><% } %>">
+            </div>
+            <div class="form-control">
+                    <label for="images">Image (1,2,3,4)</label>
+                    <input 
+                        type="file" 
+                        name="images" 
+                        id="images" multiple>
                 </div>
+
+
+
+
             <% if (editing) { %>
                 <input type="hidden" value="<%= product._id %>" name="productId">
             <% } %>
