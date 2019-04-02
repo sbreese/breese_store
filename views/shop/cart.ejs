@@ -6,24 +6,24 @@
         <%- include('../includes/navigation.ejs') %>
         <main>
                 <% if (products.length > 0) { %>
-
                     <ul class="cart__item-list">
+                        <% products.forEach(p => { %>
+                            <li class="cart__item">
 
-                            <% products.forEach(p => { %>
-                                <li class="cart__item">
+                                <h1><%= p.product.title %></h1>
 
-                                </li>
-                            <% }) %>
 
-                        </ul>
-                        <hr>
-                        <div class="centered">
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <hr>
+                    <div class="centered">
                             <!--<form action="/create-order" method="POST">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="btn">Order Now!</button>
                             </form>-->
                             <a class="btn" href="/<%= cart_items.length ? 'customer-information' : 'confirm-information' %>">Order Now!</a>
-                        </div>
+                    </div>
                     
                 <% } else { %>
                     <div>
