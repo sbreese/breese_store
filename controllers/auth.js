@@ -271,7 +271,7 @@ exports.postLogin = (req, res, next) => {
           });
         })
         .then(user => {
-          if (req.session.cart_items.length) {
+          if (req.session.cart_items && req.session.cart_items.length) {
             user.cart.items = req.session.cart_items;
             req.session.cart_items = [];
             return user.save();
