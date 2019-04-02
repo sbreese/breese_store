@@ -99,6 +99,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   if (req.user) {
+    console.log("We got here and got a user!");
     req.user
     .populate('cart.items.product')
     .execPopulate()
