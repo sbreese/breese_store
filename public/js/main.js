@@ -274,7 +274,7 @@
     });
 
     $('.js-hide-modal1').on('click',function(){
-        $('.js-modal1').removeClass('show-modal1');
+        $('.js-modal-all').removeClass('show-modal1');
     });
 
 
