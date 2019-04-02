@@ -91,8 +91,8 @@ app.use((req, res, next) => {
     return next();
   }
   User.findById(req.session.user._id)
-    .populate('cart.items.product')
-    .execPopulate()
+  .populate('cart.items.product')
+
     .then(user => {
       if (!user) {
         return next();
