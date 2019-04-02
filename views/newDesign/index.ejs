@@ -258,9 +258,9 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 
-			<% if (products.length > 0) { %>
+			<% if (cart_items.length > 0) { %>
 				<ul class="header-cart-wrapitem w-full">
-					<% products.forEach(p => { %>
+					<% cart_items.forEach(p => { %>
 						<li class="header-cart-item flex-w flex-t m-b-12">
 
 							<% if (p.product) { %>
