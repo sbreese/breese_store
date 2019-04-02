@@ -8,13 +8,21 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 
 exports.getAddProduct = (req, res, next) => {
-  res.render('products/edit-product', {
-    pageTitle: 'Add Product',
-    path: '/admin/add-product',
-    editing: false,
-    hasError: false,
-    errorMessage: null,
-    validationErrors: []
+  Category.find().then(categories => {
+    res.render('products/edit-product', {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      editing: false,
+      categories,
+      hasError: false,
+      errorMessage: null,
+      validationErrors: []
+    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
   });
 };
 
