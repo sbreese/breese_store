@@ -5,6 +5,20 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main>
+                <% if (products.length > 0) { %>
 
+                    hi
+                <% } else { %>
+                    <div>
+                        <h1>
+                            Your Shopping Cart is empty.
+                        </h1>
+                    </div>
+                    <div>
+                        <p>
+                             Continue shopping on the <a href="/">The Breese Method homepage</a>.
+                        </p>
+                    </div>
+                <% } %>
         </main>
         <%- include('../includes/end.ejs') %>
