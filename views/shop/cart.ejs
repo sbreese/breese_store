@@ -7,7 +7,18 @@
         <main>
                 <% if (products.length > 0) { %>
 
-                    hi
+                    <ul class="cart__item-list">
+
+                        </ul>
+                        <hr>
+                        <div class="centered">
+                            <!--<form action="/create-order" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="btn">Order Now!</button>
+                            </form>-->
+                            <a class="btn" href="/<%= cart_items.length ? 'customer-information' : 'confirm-information' %>">Order Now!</a>
+                        </div>
+                    
                 <% } else { %>
                     <div>
                         <h1>
