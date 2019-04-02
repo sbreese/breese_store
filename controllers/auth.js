@@ -175,6 +175,8 @@ exports.updateProfile = (req, res, next) => {
   }
 
   User.findById(req.body.other_user_id ? req.body.other_user_id : req.session.user._id)
+  .populate('cart.items.product')
+  .execPopulate()
   .then(user => {
     user.email = email;
     user.first_name = first_name;
