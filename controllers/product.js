@@ -53,19 +53,27 @@ exports.postAddProduct = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('products/edit-product', {
-      pageTitle: 'Add Product',
-      path: '/admin/add-product',
-      editing: false,
-      hasError: true,
-      product: {
-        title,
-        category,
-        price,
-        description
-      },
-      errorMessage: errors.array()[0].msg,
-      validationErrors: errors.array()
+    Category.find().then(categories => {
+      return res.status(422).render('products/edit-product', {
+        pageTitle: 'Add Product',
+        path: '/admin/add-product',
+        editing: false,
+        hasError: true,
+        categories,
+        product: {
+          title,
+          category,
+          price,
+          description
+        },
+        errorMessage: errors.array()[0].msg,
+        validationErrors: errors.array()
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
   }
 
