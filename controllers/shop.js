@@ -85,7 +85,7 @@ exports.getIndex = (req, res, next) => {
           const products = user.cart.items;
 
           res.render('newDesign/index', {
-            products: req.user.cart.items,
+            products: products,
             categories,
             pageTitle: 'Shop',
             path: '/',
