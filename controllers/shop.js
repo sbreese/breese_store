@@ -61,19 +61,19 @@ exports.getProduct = (req, res, next) => {
 
 const getSeason = (month = new Date().getMonth()) => {
 
-  if (3 <= month <= 5) {
-      return 'Spring' + month;
+  if (2 <= month <= 4) {
+      return 'Spring';
   }
 
-  if (6 <= month <= 8) {
+  if (5 <= month <= 7) {
       return 'Summer';
   }
 
-  if (9 <= month <= 11) {
+  if (8 <= month <= 10) {
       return 'Fall';
   }
 
-  // Months 12, 01, 02
+  // Months 11, 0, 1 (12, 01, 02)
   return 'Winter';
 }
 
