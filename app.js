@@ -68,7 +68,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(
   session({
     secret: 'my secret',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: store
   })
