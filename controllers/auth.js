@@ -293,6 +293,7 @@ console.log("OK, lets save this shit!");
 console.log(req.session.user.cart && req.session.user.cart.items);
 console.log("Should equal:");
 console.log(user.cart && user.cart.items);
+            return req.session;
             /*return req.session.save(err => {
               console.log(err);
               res.redirect(user.cart.items.length > 0 ? '/cart' : '/');
