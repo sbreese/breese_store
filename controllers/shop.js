@@ -118,7 +118,6 @@ exports.getIndex = (req, res, next) => {
             previousPage: page - 1,
             lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
           });
-          
         })
         .catch(err => {
           const error = new Error(err);
@@ -126,9 +125,9 @@ exports.getIndex = (req, res, next) => {
           return next(error);
         });
       } else {
-
         res.render('newDesign/index', {
-          products: req.session.cart_items,
+          products,
+          cart_items: req.session.cart_items,
           categories,
           pageTitle: 'Shop',
           path: '/',
@@ -139,10 +138,7 @@ exports.getIndex = (req, res, next) => {
           previousPage: page - 1,
           lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
         });
-
       }
-
-
     })
   })
   .catch(err => {
@@ -152,7 +148,36 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
+exports.getAbout = (req, res, next) => {
 
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/about', {
+        cart_items: user.cart.items,
+        pageTitle: 'About',
+        path: '/about'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    res.render('newDesign/about', {
+      cart_items: req.session.cart_items,
+      pageTitle: 'Shop',
+      path: '/about'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
 
 exports.getCart = (req, res, next) => {
   if (req.user) {
@@ -160,7 +185,6 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
-      console.log("We got here and got a user!");
       const products = user.cart.items;
       res.render('shop/cart', {
         path: '/cart',
