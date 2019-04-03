@@ -148,6 +148,37 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
+exports.getBlog = (req, res, next) => {
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/blog', {
+        cart_items: user.cart.items,
+        pageTitle: 'Blog',
+        path: '/blog'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    res.render('newDesign/blog', {
+      cart_items: req.session.cart_items,
+      pageTitle: 'Blog',
+      path: '/blog'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
+
 exports.getAbout = (req, res, next) => {
 
   if (req.user) {
