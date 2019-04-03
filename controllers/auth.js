@@ -244,8 +244,6 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .populate('cart.items.product')
     .then(user => {
-      console.log("Just logged in, did it populate?");
-      console.log(user.cart.items);
       if (!user) {
         return res.status(422).render('auth/login', {
           path: '/login',
@@ -284,6 +282,8 @@ exports.postLogin = (req, res, next) => {
           return user;
         })
         .then(user => {
+          console.log("Just logged in, did it populate?");
+          console.log(user.cart.items);
           // steves additions
           Order.find({ 'user.userId': user._id })
           .then(orders => {
