@@ -69,7 +69,7 @@ const getSeasonYear = () => {
 
   let targetDate = new Date();
 
-  targetDate.addDays(20);
+  // targetDate.addDays(20);
   /*
   targetDate.setDate(targetDate.getDate() + 20);
     */
