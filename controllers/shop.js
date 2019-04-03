@@ -76,7 +76,8 @@ const getSeasonYear = () => {
   const monthNumber = targetDate.getMonth();
 
   const year = targetDate.getYear();
-
+console.log("The year is :");
+console.log(year);
   if (2 <= monthNumber <= 4) {
       return `Spring ${year}`;
   }
