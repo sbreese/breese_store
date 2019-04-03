@@ -76,13 +76,13 @@ exports.getIndex = (req, res, next) => {
     .then(products => {
 
       if (req.user) {
-        /* 
+        
         req.user
         .populate('cart.items.product')
         .execPopulate()
         .then(user => {
           console.log("We got here and got a user!");
-          const products = user.cart.items;*/
+          const products = user.cart.items;
 
           res.render('newDesign/index', {
             products: req.user.cart.items,
@@ -96,17 +96,17 @@ exports.getIndex = (req, res, next) => {
             previousPage: page - 1,
             lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
           });
-          /*
+          
         })
         .catch(err => {
           const error = new Error(err);
           error.httpStatusCode = 500;
           return next(error);
-        });*/
+        });
       } else {
 
         res.render('newDesign/index', {
-          products: req.session.cart_items
+          products: req.session.cart_items,
           categories,
           pageTitle: 'Shop',
           path: '/',
