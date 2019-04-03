@@ -74,18 +74,51 @@ exports.getIndex = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-      res.render('newDesign/index', {
-        products,
-        categories,
-        pageTitle: 'Shop',
-        path: '/',
-        currentPage: page,
-        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-        hasPreviousPage: page > 1,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
-      });
+
+      if (req.user) {
+        req.user
+        .populate('cart.items.product')
+        .execPopulate()
+        .then(user => {
+          console.log("We got here and got a user!");
+          const products = user.cart.items;
+
+          res.render('newDesign/index', {
+            products: products
+            categories,
+            pageTitle: 'Shop',
+            path: '/',
+            currentPage: page,
+            hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+            hasPreviousPage: page > 1,
+            nextPage: page + 1,
+            previousPage: page - 1,
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+          });
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
+      } else {
+
+        res.render('newDesign/index', {
+          products: req.session.cart_items
+          categories,
+          pageTitle: 'Shop',
+          path: '/',
+          currentPage: page,
+          hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+        });
+
+      }
+
+
     })
   })
   .catch(err => {
