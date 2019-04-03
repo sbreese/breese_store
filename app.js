@@ -81,7 +81,8 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
-  
+  console.log("DO I have product information?");
+  console.log(res.locals.cart_items);
   next();
 });
 
@@ -96,8 +97,6 @@ app.use((req, res, next) => {
       if (!user) {
         return next();
       }
-      console.log("DO I have product information?");
-      console.log(user.cart.items);
       req.user = user;
       next();
     })
