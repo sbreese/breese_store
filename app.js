@@ -96,6 +96,8 @@ app.use((req, res, next) => {
       if (!user) {
         return next();
       }
+      console.log("DO I have product information?");
+      console.log(user);
       req.user = user;
       next();
     })
