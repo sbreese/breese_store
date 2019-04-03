@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Shopping Cart</title>
+	<title>Shoping Cart</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -76,7 +76,7 @@
 							<li>
 								<a href="/">Home</a>
 								<ul class="sub-menu">
-									<li><a href="/">Homepage 1</a></li>
+									<li><a href="index.html">Homepage 1</a></li>
 									<li><a href="home-02.html">Homepage 2</a></li>
 									<li><a href="home-03.html">Homepage 3</a></li>
 								</ul>
@@ -87,7 +87,7 @@
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
+								<a href="shopping-cart">Features</a>
 							</li>
 
 							<li>
@@ -201,7 +201,7 @@
 				</li>
 
 				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="shopping-cart" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
 				<li>
@@ -333,45 +333,7 @@
 								Update Cart
 							</div>
 						</div>
-                    </div>
-                    
-                    <% if (products.length > 0) { %>
-                        <ul class="cart__item-list">
-                            <% products.forEach(p => { %>
-                                <li class="cart__item">
-                                    <h1><%= p.product.title %></h1>
-                                    <h2>Quantity: <%= p.quantity %></h2>
-                                    <form action="/cart-delete-item" method="POST">
-                                        <input type="hidden" value="<%= p.product._id %>" name="productId">
-                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <button class="btn danger" type="submit">Delete</button>
-                                    </form>
-                                </li>
-                            <% }) %>
-                        </ul>
-                        <hr>
-                        <div class="centered">
-                            <!--<form action="/create-order" method="POST">
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                <button type="submit" class="btn">Order Now!</button>
-                            </form>-->
-                            <a class="btn" href="/<%= cart_items.length ? 'customer-information' : 'confirm-information' %>">Order Now!</a>
-                        </div>
-                        
-                    <% } else { %>
-                        <div>
-                            <h1>
-                                Your Shopping Cart is empty.
-                            </h1>
-                        </div>
-                        <div>
-                            <p>
-                                 Continue shopping on the <a href="/">The Breese Method homepage</a>.
-                            </p>
-                        </div>
-                    <% } %>
-
-
+					</div>
 				</div>
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
