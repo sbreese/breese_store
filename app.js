@@ -82,11 +82,11 @@ app.use((req, res, next) => {
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
   
-  req.session.user.populate('cart.items.product').execPopulate().then(user => {
+  req.session.user.populate('cart.items.product').execPopulate();
     console.log("DO I have product information?");
   console.log(req.session.user && req.session.user.cart);
     next();
-  });
+
   
 });
 
