@@ -306,11 +306,10 @@ exports.getShoppingCart = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
-      const products = user.cart.items;
       res.render('newDesign/shopping-cart', {
-        path: '/shopping-cart',
-        pageTitle: 'Your Shopping Cart',
-        products: products
+        cart_items: user.cart.items,
+        pageTitle: 'Shopping Cart',
+        path: '/shopping-cart'
       });
     })
     .catch(err => {
@@ -320,9 +319,13 @@ exports.getShoppingCart = (req, res, next) => {
     });
   } else {
     res.render('newDesign/shopping-cart', {
-      path: '/shopping-cart',
-      pageTitle: 'Your Shopping Cart',
-      products: req.session.cart_items
+      cart_items: req.session.cart_items,
+      pageTitle: 'Shopping Cart',
+      path: '/shopping-cart'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
   }
 
