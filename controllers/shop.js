@@ -59,22 +59,27 @@ exports.getProduct = (req, res, next) => {
     });
 };
 
-const getSeason = (month = new Date().getMonth()) => {
+const getSeasonYear = () => {
 
-  if (2 <= month <= 4) {
-      return 'Spring';
+  let targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 20);
+  const monthNumber = targetDate.getMonth();
+  const year = targetDate.getYear();
+
+  if (2 <= monthNumber <= 4) {
+      return `Spring ${year}`;
   }
 
-  if (5 <= month <= 7) {
-      return 'Summer';
+  if (5 <= monthNumber <= 7) {
+      return `Summer ${year}`;
   }
 
-  if (8 <= month <= 10) {
-      return 'Fall';
+  if (8 <= monthNumber <= 10) {
+      return `Fall ${year}`;
   }
 
   // Months 11, 0, 1 (12, 01, 02)
-  return 'Winter';
+  return `Winter ${year}`;
 }
 
 exports.getIndex = (req, res, next) => {
@@ -103,7 +108,7 @@ exports.getIndex = (req, res, next) => {
             products,
             cart_items: user.cart.items,
             categories,
-            season: getSeason(),
+            seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
             path: '/',
             currentPage: page,
