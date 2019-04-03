@@ -68,8 +68,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(
   session({
     secret: 'my secret',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: store
   })
 );
@@ -81,9 +81,13 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user;
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
-  console.log("DO I have product information?");
+  
+  req.session.user.populate('cart.items.product').execPopulate().then(user => {
+    console.log("DO I have product information?");
   console.log(req.session.user && req.session.user.cart);
-  next();
+    next();
+  });
+  
 });
 
 app.use((req, res, next) => {
@@ -92,7 +96,6 @@ app.use((req, res, next) => {
     return next();
   }
   User.findById(req.session.user._id)
-  .populate('cart.items.product')
     .then(user => {
       if (!user) {
         return next();
