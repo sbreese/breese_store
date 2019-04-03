@@ -97,7 +97,7 @@ app.use((req, res, next) => {
         return next();
       }
       console.log("DO I have product information?");
-      console.log(cart.items);
+      console.log(user.cart.items);
       req.user = user;
       next();
     })
