@@ -81,12 +81,13 @@ exports.getIndex = (req, res, next) => {
         .populate('cart.items.product')
         .execPopulate()
         .then(user => {
-          const products = user.cart.items;
+          // const products = user.cart.items;
           console.log("We got here and got a user!");
           console.log("Products:");
           console.log(products);
           res.render('newDesign/index', {
-            products: products,
+            products,
+            cart_items: user.cart.items,
             categories,
             pageTitle: 'Shop',
             path: '/',
