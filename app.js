@@ -79,8 +79,6 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.user = req.session.user;
-  console.log("What will this be?");
-  console.log(res.locals.user && res.locals.user.cart);
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
   
