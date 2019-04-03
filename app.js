@@ -78,7 +78,7 @@ app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.user = req.session.user;
+  res.locals.user = req.session.user.populate('cart.items.product');
   res.locals.orders = req.session.login_orders || [];
   res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
   console.log("DO I have product information?");

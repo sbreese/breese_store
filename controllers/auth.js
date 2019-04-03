@@ -285,9 +285,7 @@ exports.postLogin = (req, res, next) => {
 
           // steves additions
           Order.find({ 'user.userId': user._id })
-          .then(orders => {
-            console.log("Just logged in, did it populate?");
-            console.log(user.cart.items);        
+          .then(orders => {   
             req.session.isLoggedIn = true;
             req.session.user = user;
             req.session.login_orders = orders;
