@@ -59,6 +59,24 @@ exports.getProduct = (req, res, next) => {
     });
 };
 
+const getSeason = (month = new Date().getMonth()) => {
+
+  if (3 <= month <= 5) {
+      return 'Spring' + month;
+  }
+
+  if (6 <= month <= 8) {
+      return 'Summer';
+  }
+
+  if (9 <= month <= 11) {
+      return 'Fall';
+  }
+
+  // Months 12, 01, 02
+  return 'Winter';
+}
+
 exports.getIndex = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
@@ -85,6 +103,7 @@ exports.getIndex = (req, res, next) => {
             products,
             cart_items: user.cart.items,
             categories,
+            season: getSeason(),
             pageTitle: 'Shop',
             path: '/',
             currentPage: page,
