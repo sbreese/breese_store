@@ -242,6 +242,7 @@ exports.postLogin = (req, res, next) => {
   }
 
   User.findOne({ email: email })
+    .populate('cart.items.product')
     .then(user => {
       if (!user) {
         return res.status(422).render('auth/login', {
