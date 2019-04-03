@@ -70,12 +70,12 @@ const getSeasonYear = () => {
   let targetDate = new Date();
 
   // targetDate.addDays(20);
-  /*
+
   targetDate.setDate(targetDate.getDate() + 20);
-    */
+
   const monthNumber = targetDate.getMonth();
 
-  const year = targetDate.getYear();
+  const year = targetDate.getFullYear();
 console.log("The year is :");
 console.log(year);
   if (2 <= monthNumber <= 4) {
