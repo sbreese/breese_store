@@ -290,9 +290,9 @@ exports.postLogin = (req, res, next) => {
             req.session.user = user;
             req.session.login_orders = orders;
 console.log("OK, lets save this shit!");
-console.log(req.session.user);
+console.log(req.session.user.cart);
 console.log("Should equal:");
-console.log(user);
+console.log(user.cart);
             return req.session.save(err => {
               console.log(err);
               res.redirect(user.cart.items.length > 0 ? '/cart' : '/');
