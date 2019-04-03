@@ -82,6 +82,8 @@ exports.getIndex = (req, res, next) => {
         .execPopulate()
         .then(user => {
           console.log("We got here and got a user!");
+          console.log("categories:");
+          console.log(categories);
           const products = user.cart.items;
 
           res.render('newDesign/index', {
