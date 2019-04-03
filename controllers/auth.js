@@ -291,6 +291,7 @@ exports.postLogin = (req, res, next) => {
             req.session.login_orders = orders;
 console.log("OK, lets save this shit!");
 console.log(req.session.user);
+console.log(user);
             return req.session.save(err => {
               console.log(err);
               res.redirect(user.cart.items.length > 0 ? '/cart' : '/');
