@@ -179,6 +179,37 @@ exports.getAbout = (req, res, next) => {
   }
 };
 
+exports.getContact = (req, res, next) => {
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/contact', {
+        cart_items: user.cart.items,
+        pageTitle: 'Contact',
+        path: '/contact'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    res.render('newDesign/contact', {
+      cart_items: req.session.cart_items,
+      pageTitle: 'Contact',
+      path: '/contact'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
+
 exports.getCart = (req, res, next) => {
   if (req.user) {
     req.user
