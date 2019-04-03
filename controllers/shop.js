@@ -179,6 +179,37 @@ exports.getBlog = (req, res, next) => {
   }
 };
 
+exports.getBlogDetail = (req, res, next) => {
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/blog-detail', {
+        cart_items: user.cart.items,
+        pageTitle: 'Blog Detail',
+        path: '/blog-detail'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    res.render('newDesign/blog-detail', {
+      cart_items: req.session.cart_items,
+      pageTitle: 'Blog Detail',
+      path: '/blog-detail'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
+
 exports.getAbout = (req, res, next) => {
 
   if (req.user) {

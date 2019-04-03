@@ -12,6 +12,7 @@ router.get('/', shopController.getIndex);
 router.get('/about', shopController.getAbout);
 
 router.get('/blog', shopController.getBlog);
+router.get('/blog-detail', shopController.getBlogDetail);
 
 router.get('/contact', shopController.getContact);
 
