@@ -77,20 +77,6 @@ app.use(
 app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.user = req.session.user;
-  res.locals.orders = req.session.login_orders || [];
-  res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
-  
-    console.log("DO I have product information?");
-  console.log(req.session.user && req.session.user.cart);
-    next();
-
-  
-});
-
-/*
-app.use((req, res, next) => {
   // throw new Error('Sync Dummy');
   if (!req.session.user) {
     return next();
@@ -106,7 +92,23 @@ app.use((req, res, next) => {
     .catch(err => {
       next(new Error(err));
     });
-});*/
+});
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.user = req.session.user;
+  res.locals.orders = req.session.login_orders || [];
+  res.locals.cart_items = req.session.user && req.session.user.cart.items || req.session.cart_items || [];
+  
+    console.log("DO I have product information?");
+  console.log(req.session.user && req.session.user.cart);
+    next();
+
+  
+});
+
+
+
 
 app.post('/create-order', isAuth, shopController.postOrder);
 
