@@ -127,7 +127,7 @@ exports.getIndex = (req, res, next) => {
       } else {
         console.log("Ugh, don't got a user!");
         res.render('newDesign/index', {
-          products: products || [],
+          products,
           cart_items: req.session.cart_items || [],
           categories: categories || [],
           seasonYear: getSeasonYear(),
