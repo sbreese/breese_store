@@ -230,7 +230,7 @@ exports.getAbout = (req, res, next) => {
     });
   } else {
     res.render('newDesign/about', {
-      cart_items: req.session.cart_items,
+      cart_items: req.session.cart_items || [],
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
