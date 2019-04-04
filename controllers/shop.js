@@ -130,6 +130,7 @@ exports.getIndex = (req, res, next) => {
           products,
           cart_items: req.session.cart_items,
           categories,
+          seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
           path: '/',
           currentPage: page,
