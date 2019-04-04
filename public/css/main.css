@@ -1906,6 +1906,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .wrap-table-shopping-cart {
   overflow: auto;
+  border-top: 1px solid #e6e6e6;
   border-left: 1px solid #e6e6e6;
   border-right: 1px solid #e6e6e6;
 }
