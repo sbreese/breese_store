@@ -22,7 +22,7 @@ router.get('/products/:productId', shopController.getProduct);
 
 // router.get('/cart', isAuth, shopController.getCart);
 router.get('/cart', shopController.getCart); // OLD
-// router.get('/shopping-cart', shopController.getShoppingCart); // NEW
+router.get('/shopping-cart', shopController.getShoppingCart); // NEW
 
 // router.post('/cart', isAuth, shopController.postCart);
 router.post('/cart', shopController.postCart);

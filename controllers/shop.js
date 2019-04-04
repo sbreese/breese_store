@@ -300,7 +300,6 @@ exports.getCart = (req, res, next) => {
 
 };
 
-/*
 exports.getShoppingCart = (req, res, next) => {
   if (req.user) {
     req.user
@@ -330,7 +329,7 @@ exports.getShoppingCart = (req, res, next) => {
     });
   }
 
-};*/
+};
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
