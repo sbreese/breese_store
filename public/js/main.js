@@ -212,9 +212,10 @@
     /*==================================================================
     [ +/- num product ]*/
     const changeQuantity = (btn, qtyChange) => {
-        console.log(btn);
-        const prodId = btn.parentNode.querySelector('[name=productId]').value;
-        const csrf = btn.parentNode.querySelector('[name=_csrf]').value;
+        
+        const prodId = btn.parent().children('[name=productId]').val();
+        const csrf = btn.parent().children('[name=_csrf]').val();
+        console.log(prodId, csrf);
       
         const productElement = btn.closest('article');
       
