@@ -99,7 +99,7 @@ exports.getIndex = (req, res, next) => {
     .then(products => {
 
       if (req.user) {
-        
+        console.log("OK, got a user!");
         req.user
         .populate('cart.items.product')
         .execPopulate()
@@ -125,6 +125,7 @@ exports.getIndex = (req, res, next) => {
           return next(error);
         });
       } else {
+        console.log("Ugh, don't got a user!");
         res.render('newDesign/index', {
           products,
           cart_items: req.session.cart_items,
