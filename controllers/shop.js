@@ -319,7 +319,7 @@ exports.getShoppingCart = (req, res, next) => {
     });
   } else {
     res.render('newDesign/shopping-cart', {
-      cart_items: req.session.cart_items,
+      cart_items: req.session.cart_items || [],
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
