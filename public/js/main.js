@@ -219,8 +219,8 @@
       
         const productElement = btn.closest('article');
       
-        fetch('/admin/product/' + prodId, {
-          method: 'DELETE',
+        fetch(`/cart/${prodId}/${qtyChange}`, {
+          method: 'PATCH',
           headers: {
             'csrf-token': csrf
           }
@@ -231,6 +231,9 @@
           .then(data => {
             console.log(data);
             productElement.parentNode.removeChild(productElement);
+            if (Number(btn.prev().val()) === 0) {
+                $(`#${prodId}`).remove();
+            }
           })
           .catch(err => {
             console.log(err);

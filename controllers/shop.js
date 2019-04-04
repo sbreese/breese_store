@@ -381,6 +381,64 @@ exports.postCart = (req, res, next) => {
   }
 };
 
+exports.patchCartQtyChange = (req, res, next) => {
+  const prodId = req.body.productId;
+  const qtyChange = req.body.qtyChange;
+
+  if (!req.user) {
+
+    const productTitle = req.body.productTitle;
+
+    let cartProductIndex = -1;
+    if (req.session.cart_items && req.session.cart_items.length > 0) {
+      
+      cartProductIndex = req.session.cart_items.findIndex(cp => {
+        return cp.product._id === prodId;
+      });
+    } else {
+      req.session.cart_items = [];
+    } 
+    // let newQuantity = 1;
+    
+    let updatedCartItems = [...req.session.cart_items];
+    if (cartProductIndex >= 0) {
+      const newQuantity = req.session.cart_items[cartProductIndex].quantity + qtyChange;
+      if (newQuantity > 0) {
+        updatedCartItems[cartProductIndex].quantity = newQuantity;
+      } else {
+        // Change results in 0 or less products.  Remove from temp cart:
+        updatedCartItems = req.session.cart_items.filter(item => {
+          return item.product._id !== prodId;
+        });
+      }
+    } else {
+      updatedCartItems.push({
+        product: {_id: prodId, title: productTitle },
+        quantity: qtyChange
+      });
+    }
+    req.session.cart_items = updatedCartItems;
+    res.redirect('/cart');
+
+  } else {
+
+    Product.findById(prodId)
+      .then(product => {
+        return req.user.addToCart(product);
+      })
+      .then(result => {
+        console.log(result);
+        res.redirect('/cart');
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+
+  }
+};
+
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
 

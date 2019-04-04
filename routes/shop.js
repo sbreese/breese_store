@@ -30,6 +30,9 @@ router.post('/cart', shopController.postCart);
 // router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
 router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
+// /cart/:productId/:qtyChange => PATCH
+router.patch('/cart/:productId/:qtyChange', ordersController.patchCartQtyChange);
+
 router.get('/checkout', isAuth, shopController.getCheckout);
 
 router.get('/orders', isAuth, shopController.getOrders);

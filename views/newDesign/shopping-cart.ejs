@@ -73,7 +73,7 @@
 								</tr>
 
 								<% cart_items.forEach(p => { %>
-								<tr class="table_row">
+								<tr class="table_row" id="<%= p.product._id %>">
 									<td class="column-1">
 										<div class="how-itemcart1">
 											<img src="<%= p.product.image1Url %>" alt="IMG">
