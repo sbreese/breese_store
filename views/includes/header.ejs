@@ -38,7 +38,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu">
+                        <li<%= path === '/' ? ' class="active-menu"' : '' %>>
                             <a href="index.html">Home</a>
                             <ul class="sub-menu">
                                 <li><a href="index.html">Homepage 1</a></li>
@@ -55,15 +55,15 @@
                             <a href="/shopping-cart">Features</a>
                         </li>
 
-                        <li>
+                        <li<%= path === '/blog' ? ' class="active-menu"' : '' %>>
                             <a href="blog">Blog</a>
                         </li>
 
-                        <li>
+                        <li<%= path === '/about' ? ' class="active-menu"' : '' %>>
                             <a href="about">About</a>
                         </li>
 
-                        <li>
+                        <li<%= path === '/contact' ? ' class="active-menu"' : '' %>>
                             <a href="contact">Contact</a>
                         </li>
                     </ul>
