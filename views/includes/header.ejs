@@ -1,4 +1,4 @@
-<header<%- path === '/about' ? ' class="header-v4"' : '' %>>
+<header<%- path === '/about' || path === '/shopping-cart' ? ' class="header-v4"' : '' %>>
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="wrap-menu-desktop">
+        <div class="wrap-menu-desktop<%- path === '/about' || path === '/shopping-cart' ? ' how-shadow1' : '' %>">
             <nav class="limiter-menu-desktop container">
                 
                 <!-- Logo desktop -->		
