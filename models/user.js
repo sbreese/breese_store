@@ -87,6 +87,36 @@ userSchema.methods.addToCart = function(product) {
   return this.save();
 };
 
+userSchema.methods.addQtyToCart = function(product, qtyChange) {
+  const cartProductIndex = this.cart.items.findIndex(cp => {
+    return cp.product.toString() === product._id.toString();
+  });
+  // let newQuantity = 1;
+  const updatedCartItems = [...this.cart.items];
+
+  if (cartProductIndex >= 0) {
+    newQuantity = this.cart.items[cartProductIndex].quantity + qtyChange;
+    if (newQuantity > 0) {
+      updatedCartItems[cartProductIndex].quantity = newQuantity;
+    } else {
+      // Change results in 0 or less products.  Remove from temp cart:
+      updatedCartItems = req.session.cart_items.filter(item => {
+        return item.product._id !== prodId;
+      });
+    }
+  } else {
+    updatedCartItems.push({
+      product: product._id,
+      quantity: qtyChange
+    });
+  }
+  const updatedCart = {
+    items: updatedCartItems
+  };
+  this.cart = updatedCart;
+  return this.save();
+};
+
 userSchema.methods.addOrderToUser = function(order) {
   this.orders.push(order._id);
   return this.save();

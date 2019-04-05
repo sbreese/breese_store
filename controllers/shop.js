@@ -383,7 +383,7 @@ exports.postCart = (req, res, next) => {
 
 exports.patchCartQtyChange = (req, res, next) => {
   const prodId = req.body.productId;
-  const qtyChange = req.body.qtyChange;
+  const qtyChange = Number(req.body.qtyChange);
 
   if (!req.user) {
 
@@ -424,7 +424,9 @@ exports.patchCartQtyChange = (req, res, next) => {
 
     Product.findById(prodId)
       .then(product => {
-        return req.user.addToCart(product);
+        if (qtyChange > 0) {
+          return req.user.addQtyToCart(product, qtyChange);
+        }
       })
       .then(result => {
         console.log(result);
