@@ -433,7 +433,7 @@ exports.patchCartQtyChange = (req, res, next) => {
   .then(cart_items => {
     console.log("Cart Items:");
     console.log(cart_items);
-    ejs.renderFile('../views/includes/shopping-cart-full.ejs', {
+    ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
       cart_items
     }, {}, function(err, html) {
       console.log("Path: "  +__dirname + '|../views/includes/shopping-cart-full.ejs');
