@@ -241,16 +241,28 @@
           });
       };
 
-    $('.btn-num-product-down').on('click', function(){
+    $('.btn-num-product-down.shopping-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(numProduct - 1);
         changeQuantity($(this), -1);
     });
 
-    $('.btn-num-product-up').on('click', function(){
+    $('.btn-num-product-up.shopping-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
         changeQuantity($(this), 1);
+    });
+
+    $('.btn-num-product-down.add-to-cart').on('click', function(){
+        var numProduct = Number($(this).next().val());
+        if(numProduct > 0) $(this).next().val(--numProduct);
+        $(this).parent().find('[name=num-product]').val(numProduct);
+    });
+
+    $('.btn-num-product-up.add-to-cart').on('click', function(){
+        var numProduct = Number($(this).prev().val());
+        $(this).prev().val(++numProduct);
+        $(this).parent().find('[name=num-product]').val(numProduct);
     });
 
     /*==================================================================
