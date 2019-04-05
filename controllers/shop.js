@@ -382,8 +382,8 @@ exports.postCart = (req, res, next) => {
 };
 
 exports.patchCartQtyChange = (req, res, next) => {
-  const prodId = req.body.productId;
-  const qtyChange = Number(req.body.qtyChange);
+  const prodId = req.params.productId;
+  const qtyChange = Number(req.params.qtyChange);
 
   if (!req.user) {
 
