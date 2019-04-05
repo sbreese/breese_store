@@ -218,7 +218,7 @@
         console.log(prodId, csrf);
       
         const productElement = btn.closest('article');
-        const path = `/cart/${prodId}/${qtyChange}`;
+        const path = `/cart/change/${prodId}/${qtyChange}`;
         console.log(path);
       
         fetch(path, {
