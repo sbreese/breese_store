@@ -226,8 +226,10 @@
             return result.json();
           })
           .then(data => {
-            console.log(data);
-            $('form').first().replaceWith(data.html);
+            console.log(data.html);
+            if (data.html) {
+                $('form.bg0').replaceWith(data.html);
+            }
           })
           .catch(err => {
             console.log(err);
