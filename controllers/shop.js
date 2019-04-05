@@ -394,8 +394,6 @@ exports.patchCartQtyChange = (req, res, next) => {
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       
       cartProductIndex = req.session.cart_items.findIndex(cp => {
-        console.log("Lets check if this is existing (equals above):");
-        console.log(cp.product._id);
         return cp.product._id.toString() === prodId;
       });
     } else {
@@ -416,7 +414,9 @@ exports.patchCartQtyChange = (req, res, next) => {
       } else {
         // Change results in 0 or less products.  Remove from temp cart:
         updatedCartItems = req.session.cart_items.filter(item => {
-          return item.product._id !== prodId;
+          console.log("Lets check if this is existing (equals above):");
+          console.log(`${item.product._id.toString()} == ${prodId}`);
+          return item.product._id.toString() !== prodId;
         });
       }
     } else {
