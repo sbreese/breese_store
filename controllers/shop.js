@@ -342,9 +342,6 @@ exports.postCart = (req, res, next) => {
   .then(product => {
 
   if (!req.user) {
-
-    // const productTitle = req.body.productTitle;
-
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       cartProductIndex = req.session.cart_items.findIndex(cp => {
@@ -370,7 +367,6 @@ exports.postCart = (req, res, next) => {
     return req.user.addToCart(product);
   }
 
-
   })
   .then(result => {
     console.log(result);
@@ -387,10 +383,14 @@ exports.patchCartQtyChange = (req, res, next) => {
   const prodId = req.params.productId;
   const qtyChange = Number(req.params.qtyChange);
 
+  Product.findById(prodId)
+  .then(product => {
+
   if (!req.user) {
 
-    const productTitle = req.body.productTitle;
-
+    // const productTitle = req.body.productTitle;
+    console.log("Let's update qty for non-auth user");
+    console.log(qtyChange);
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       
@@ -417,32 +417,29 @@ exports.patchCartQtyChange = (req, res, next) => {
       }
     } else {
       updatedCartItems.push({
-        product: {_id: prodId, title: productTitle },
+        product,
         quantity: qtyChange
       });
     }
-    req.session.cart_items = updatedCartItems;
-    res.status(200).json({ message: 'Success!' });
+    return req.session.cart_items = updatedCartItems;
+    // res.status(200).json({ message: 'Success!' });
 
   } else {
-
-    Product.findById(prodId)
-      .then(product => {
         // if (qtyChange > 0) {
           return req.user.addQtyToCart(product, qtyChange);
         // }
-      })
-      .then(result => {
-        console.log(result);
-        res.status(200).json({ message: 'Success!' });
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
-
   }
+
+  })
+  .then(result => {
+    console.log(result);
+    res.status(200).json({ message: 'Success!' });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {
