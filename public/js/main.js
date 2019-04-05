@@ -275,6 +275,7 @@
             const csrf = $(this).parent().find('[name=_csrf]').val();
             changeQuantity(productId, numProduct, csrf);
             swal(nameProduct, "is added to cart !", "success");
+            $('.js-modal-all').removeClass('show-modal1');
         });
     });
 
