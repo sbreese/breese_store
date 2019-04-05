@@ -99,14 +99,16 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
   if (cartProductIndex >= 0) {
     newQuantity = this.cart.items[cartProductIndex].quantity + qtyChange;
     console.log("Here is the new quantity for existing users:");
-    console.log(newQuantity);
+    console.log(qtyChange, newQuantity);
     if (newQuantity > 0) {
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       // Change results in 0 or less products.  Remove from temp cart:
       updatedCartItems = this.cart.items.filter(item => {
-        return item.product._id !== prodId;
+        return item.product._id.toString() !== product._id.toString();
       });
+      console.log("Here is remaining cart");
+      console.log(updatedCartItems);
     }
   } else {
     updatedCartItems.push({
