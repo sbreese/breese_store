@@ -232,9 +232,7 @@
           })
           .then(data => {
             console.log(data);
-            console.log("Does this equal 0?", Number(btn.next().val()));
             if (Number(btn.next().val()) === 0) {
-                console.log("OK, let's remove!");
                 $(`#${prodId}`).remove();
             }
           })
