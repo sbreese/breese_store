@@ -399,17 +399,11 @@ exports.patchCartQtyChange = (req, res, next) => {
       });
     } else {
       req.session.cart_items = [];
-    } 
-    // let newQuantity = 1;
-
-    console.log("Here is the cartProductIndex");
-    console.log(cartProductIndex);
+    }
     
     let updatedCartItems = [...req.session.cart_items];
     if (cartProductIndex >= 0) {
       const newQuantity = req.session.cart_items[cartProductIndex].quantity + qtyChange;
-      console.log("Here is the new quantity:");
-      console.log(newQuantity);
       if (newQuantity > 0) {
         updatedCartItems[cartProductIndex].quantity = newQuantity;
       } else {
@@ -437,10 +431,12 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   })
   .then(cart_items => {
+    console.log("Cart Items:");
     console.log(cart_items);
     ejs.renderFile(__dirname + '/views/includes/shopping-cart-full.ejs', {
       cart_items
     }, function(err, html) {
+      console.log("HTML:");
       console.log(html);
       res.status(200).json({ message: 'Success!', html });
     })
