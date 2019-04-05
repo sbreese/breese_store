@@ -256,13 +256,13 @@
     $('.btn-num-product-down.add-to-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(--numProduct);
-        $(this).parent().find('[name=num-product]').val(numProduct);
+        $(this).parent().parent().find('[name=num-product]').val(numProduct);
     });
 
     $('.btn-num-product-up.add-to-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(++numProduct);
-        $(this).parent().find('[name=num-product]').val(numProduct);
+        $(this).parent().parent().find('[name=num-product]').val(numProduct);
     });
 
     /*==================================================================
