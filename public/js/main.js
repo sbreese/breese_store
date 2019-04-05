@@ -249,7 +249,7 @@
         $(this).prev().val(numProduct + 1);
         const prodId = $(this).parent().children('[name=productId]').val();
         const csrf = $(this).parent().children('[name=_csrf]').val();
-        changeQuantity(prodId, 1, csrf;
+        changeQuantity(prodId, 1, csrf);
     });
 
     /*==================================================================
