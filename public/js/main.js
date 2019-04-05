@@ -218,8 +218,10 @@
         console.log(prodId, csrf);
       
         const productElement = btn.closest('article');
+        const path = `/cart/${prodId}/${qtyChange}`;
+        console.log(path);
       
-        fetch(`/cart/${prodId}/${qtyChange}`, {
+        fetch(path, {
           method: 'PATCH',
           headers: {
             'csrf-token': csrf
