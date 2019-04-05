@@ -437,8 +437,8 @@ exports.patchCartQtyChange = (req, res, next) => {
       cart_items
     }, {}, function(err, html) {
       console.log("Path: "  +__dirname + '|../views/includes/shopping-cart-full.ejs');
-      console.log("HTML:");
-      console.log(html);
+      console.log("err:");
+      console.log(err);
       res.status(200).json({ message: 'Success!', html });
     })
   })
