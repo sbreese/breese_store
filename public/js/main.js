@@ -233,7 +233,7 @@
           .then(data => {
             console.log(data);
             // productElement.parentNode.removeChild(productElement);
-            console.log("Does this equal 0?", Number(btn.prev().val()));
+            console.log("Does this equal 0?", Number(btn.next().val()));
             if (Number(btn.prev().val()) === 0) {
                 console.log("OK, let's remove!");
                 $(`#${prodId}`).remove();
