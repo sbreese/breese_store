@@ -426,9 +426,9 @@ exports.patchCartQtyChange = (req, res, next) => {
 
     Product.findById(prodId)
       .then(product => {
-        if (qtyChange > 0) {
+        // if (qtyChange > 0) {
           return req.user.addQtyToCart(product, qtyChange);
-        }
+        // }
       })
       .then(result => {
         console.log(result);
