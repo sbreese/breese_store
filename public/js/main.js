@@ -239,16 +239,16 @@
     $('.btn-num-product-down.shopping-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(numProduct - 1);
-        const prodId = btn.parent().children('[name=productId]').val();
-        const csrf = btn.parent().children('[name=_csrf]').val();
+        const prodId = $(this).parent().children('[name=productId]').val();
+        const csrf = $(this).parent().children('[name=_csrf]').val();
         changeQuantity(prodId, -1, csrf, true);
     });
 
     $('.btn-num-product-up.shopping-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
-        const prodId = btn.parent().children('[name=productId]').val();
-        const csrf = btn.parent().children('[name=_csrf]').val();
+        const prodId = $(this).parent().children('[name=productId]').val();
+        const csrf = $(this).parent().children('[name=_csrf]').val();
         changeQuantity(prodId, 1, csrf, true);
     });
 
