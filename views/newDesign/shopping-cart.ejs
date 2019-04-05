@@ -98,7 +98,7 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$<%= p.quantity * p.product.price %></td>
+									<td class="column-5">$<%= formatter.format(p.quantity * p.product.price) %></td>
 								</tr>
 								<% }) %>
 							</table>
@@ -413,6 +413,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<%- include('../includes/functions.ejs') %>
 
 </body>
 </html>
