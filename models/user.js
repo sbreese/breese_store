@@ -96,6 +96,8 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
 
   if (cartProductIndex >= 0) {
     newQuantity = this.cart.items[cartProductIndex].quantity + qtyChange;
+    console.log("Here is the new quantity for existing users:");
+    console.log(newQuantity);
     if (newQuantity > 0) {
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {

@@ -403,6 +403,8 @@ exports.patchCartQtyChange = (req, res, next) => {
     let updatedCartItems = [...req.session.cart_items];
     if (cartProductIndex >= 0) {
       const newQuantity = req.session.cart_items[cartProductIndex].quantity + qtyChange;
+      console.log("Here is the new quantity:");
+      console.log(newQuantity);
       if (newQuantity > 0) {
         updatedCartItems[cartProductIndex].quantity = newQuantity;
       } else {
