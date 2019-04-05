@@ -421,7 +421,6 @@ exports.patchCartQtyChange = (req, res, next) => {
       });
     }
     return req.session.cart_items = updatedCartItems;
-    // res.status(200).json({ message: 'Success!' });
 
   } else {
         // if (qtyChange > 0) {
@@ -431,15 +430,20 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   })
   .then(cart_items => {
-    console.log("Cart Items:");
-    console.log(cart_items);
-    ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
+
+    ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, csrfToken: req.csrfToken()
-    }, {}, function(err, html) {
-      console.log("Path: "  +__dirname + '|../views/includes/shopping-cart-full.ejs');
-      console.log("err:");
-      console.log(err);
-      res.status(200).json({ message: 'Success!', html });
+    }, {}, (err, cart) => {
+      console.log("Here is orig url:");
+      console.log(req.originalUrl);
+      if (req.originalUrl === '/shopping-cart') {
+        ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
+          cart_items, csrfToken: req.csrfToken()
+        }, {}, (err, html) => {
+          res.status(200).json({ message: 'Success!', cart, html });
+        })
+      }
+      res.status(200).json({ message: 'Success!', cart });
     })
   })
   .catch(err => {

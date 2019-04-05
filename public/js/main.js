@@ -226,9 +226,12 @@
             return result.json();
           })
           .then(data => {
-            console.log(data.html);
-            if (data.html) {
-                $('form.bg0').replaceWith(data.html);
+            console.log(data);
+            if (data.fullCart) {
+                $('form.bg0').replaceWith(data.fullCart);
+            }
+            if (data.cart) {
+                $('div.wrap-header-cart').replaceWith(data.cart);
             }
           })
           .catch(err => {
