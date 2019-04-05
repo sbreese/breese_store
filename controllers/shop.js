@@ -434,9 +434,9 @@ exports.patchCartQtyChange = (req, res, next) => {
     ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
-      console.log("Here is orig url:");
-      console.log(req.originalUrl);
-      if (req.originalUrl === '/shopping-cart') {
+      console.log("Here is path (not orig url):");
+      console.log(req.path);
+      if (req.path === '/shopping-cart') {
         ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
           cart_items, csrfToken: req.csrfToken()
         }, {}, (err, html) => {
