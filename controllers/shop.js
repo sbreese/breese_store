@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const ejs = require('ejs');
 const PDFDocument = require('pdfkit');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
@@ -435,9 +436,11 @@ exports.patchCartQtyChange = (req, res, next) => {
   }
 
   })
-  .then(result => {
-    console.log(result);
-    res.status(200).json({ message: 'Success!' });
+  .then(cart_items => {
+    console.log(cart_items);
+    res.status(200).json({ message: 'Success!', html: ejs.render('includes/shopping-cart-full', {
+      cart_items
+    }) });
   })
   .catch(err => {
     const error = new Error(err);

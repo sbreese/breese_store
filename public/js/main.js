@@ -211,7 +211,7 @@
 
     /*==================================================================
     [ +/- num product shopping-cart ]*/
-    const changeQuantity = (prodId, qtyChange, csrf, removeIfZero = false) => {
+    const changeQuantity = (prodId, qtyChange, csrf) => {
         
         // const prodId = btn.parent().children('[name=productId]').val();
         // const csrf = btn.parent().children('[name=_csrf]').val();
@@ -227,9 +227,7 @@
           })
           .then(data => {
             console.log(data);
-            if (removeIfZero && Number(removeIfZero.next().val()) === 0) {
-                $(`#${prodId}`).remove();
-            }
+            $('form').first().replaceWith(data.html);
           })
           .catch(err => {
             console.log(err);
@@ -238,10 +236,13 @@
 
     $('.btn-num-product-down.shopping-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+        if(numProduct > 0) $(this).next().val(--numProduct);
         const prodId = $(this).parent().children('[name=productId]').val();
         const csrf = $(this).parent().children('[name=_csrf]').val();
-        changeQuantity(prodId, -1, csrf, $(this));
+        if (Number($(this).next().val()) === 0) {
+            $(`#${prodId}`).remove();
+        }
+        changeQuantity(prodId, -1, csrf);
     });
 
     $('.btn-num-product-up.shopping-cart').on('click', function(){
