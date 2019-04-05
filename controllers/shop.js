@@ -396,7 +396,7 @@ exports.patchCartQtyChange = (req, res, next) => {
       cartProductIndex = req.session.cart_items.findIndex(cp => {
         console.log("Lets check if this is existing (equals above):");
         console.log(cp.product._id);
-        return cp.product._id === prodId;
+        return cp.product._id.toString() === prodId;
       });
     } else {
       req.session.cart_items = [];
