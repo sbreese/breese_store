@@ -222,7 +222,7 @@
         console.log(path);
       
         fetch(path, {
-          method: 'PATCH',
+          method: 'GET',
           headers: {
             'csrf-token': csrf
           }
