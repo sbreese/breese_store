@@ -100,7 +100,14 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$<%= p.quantity * p.product.price %></td>
+<%
+const moneyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  });
+%>
+									<td class="column-5">$<%= moneyFormatter(p.quantity * p.product.price) %></td>
 								</tr>
 								<% }) %>
 							</table>
