@@ -20,8 +20,8 @@ router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId', shopController.getProduct);
 
-// /cart/:productId/:qtyChange => PATCH
-router.get('/cart/change/:productId/:qtyChange', shopController.patchCartQtyChange);
+// /change-cart/:productId/:qtyChange => PATCH
+router.patch('/change-cart/:productId/:qtyChange', shopController.patchCartQtyChange);
 
 // router.get('/cart', isAuth, shopController.getCart);
 router.get('/cart', shopController.getCart); // OLD
