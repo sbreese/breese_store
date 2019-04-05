@@ -101,6 +101,8 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
     console.log("Here is the new quantity for existing users:");
     console.log(qtyChange, newQuantity);
     if (newQuantity > 0) {
+      console.log(`Surprisingly, ${newQuantity} is larger than 0`);
+     
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       // Change results in 0 or less products.  Remove from temp cart:
