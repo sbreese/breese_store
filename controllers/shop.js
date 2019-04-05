@@ -389,8 +389,7 @@ exports.patchCartQtyChange = (req, res, next) => {
   if (!req.user) {
 
     // const productTitle = req.body.productTitle;
-    console.log("Let's update qty for non-auth user");
-    console.log(prodId);
+    
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       
@@ -403,6 +402,9 @@ exports.patchCartQtyChange = (req, res, next) => {
       req.session.cart_items = [];
     } 
     // let newQuantity = 1;
+
+    console.log("Here is the cartProductIndex");
+    console.log(cartProductIndex);
     
     let updatedCartItems = [...req.session.cart_items];
     if (cartProductIndex >= 0) {
