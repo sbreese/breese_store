@@ -424,6 +424,9 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   } else {
 
+    console.log("OK, lets find this prodId:");
+    console.log(prodId);
+
     Product.findById(prodId)
       .then(product => {
         if (qtyChange > 0) {
