@@ -134,8 +134,8 @@ userSchema.methods.removeFromCart = function(product) {
 
   const updatedCartItems = this.cart.items.filter(item => {
     console.log("This SHOULD equal that:");
-    console.log(item.product._id.toString(), product._id.toString());
-    return item.product._id.toString() !== product._id.toString();
+    console.log(item.product._id.toString(), product);
+    return item.product._id.toString() !== product;
   });
   this.cart.items = updatedCartItems;
   return this.save();
