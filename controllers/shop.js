@@ -390,11 +390,13 @@ exports.patchCartQtyChange = (req, res, next) => {
 
     // const productTitle = req.body.productTitle;
     console.log("Let's update qty for non-auth user");
-    console.log(qtyChange);
+    console.log(prodId);
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
       
       cartProductIndex = req.session.cart_items.findIndex(cp => {
+        console.log("Lets check if this is existing (equals above):");
+        console.log(cp.product._id);
         return cp.product._id === prodId;
       });
     } else {
