@@ -438,7 +438,7 @@ exports.patchCartQtyChange = (req, res, next) => {
   })
   .then(cart_items => {
     console.log(cart_items);
-    ejs.renderFile('views/includes/shopping-cart-full', {
+    ejs.renderFile(__dirname + '/views/includes/shopping-cart-full.ejs', {
       cart_items
     }, function(err, html) {
       console.log(html);
