@@ -434,16 +434,14 @@ exports.patchCartQtyChange = (req, res, next) => {
     ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
-      console.log("Here is path (not orig url):");
-      console.log(req.path);
-      if (req.path === '/shopping-cart') {
+
         ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
           cart_items, csrfToken: req.csrfToken()
-        }, {}, (err, html) => {
-          res.status(200).json({ message: 'Success!', cart, html });
+        }, {}, (err, fullCart) => {
+          res.status(200).json({ message: 'Success!', cart, fullCart });
         })
-      }
-      res.status(200).json({ message: 'Success!', cart });
+      
+      //res.status(200).json({ message: 'Success!', cart });
     })
   })
   .catch(err => {
