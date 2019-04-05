@@ -31,7 +31,7 @@ router.post('/cart', shopController.postCart);
 router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
 // /cart/:productId/:qtyChange => PATCH
-router.patch('/cart/:productId/:qtyChange', ordersController.patchCartQtyChange);
+router.patch('/cart/:productId/:qtyChange', shopController.patchCartQtyChange);
 
 router.get('/checkout', isAuth, shopController.getCheckout);
 
