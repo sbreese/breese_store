@@ -232,8 +232,10 @@
           })
           .then(data => {
             console.log(data);
-            productElement.parentNode.removeChild(productElement);
+            // productElement.parentNode.removeChild(productElement);
+            console.log("Does this equal 0?", Number(btn.prev().val()));
             if (Number(btn.prev().val()) === 0) {
+                console.log("OK, let's remove!");
                 $(`#${prodId}`).remove();
             }
           })
