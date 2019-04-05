@@ -31,8 +31,9 @@
 </head>
 <body class="animsition">
 
+	<!-- Template Helper Functions -->
+	<% include ../includes/functions %>
 
-	<% include ../includes/functions %> 
 	<!-- Header -->
 	<%- include('../includes/header.ejs') %>
 
@@ -100,11 +101,7 @@
 											</div>
 										</div>
 									</td>
-									<td class="column-5"><%= new Intl.NumberFormat('en-US', {
-										style: 'currency',
-										currency: 'USD',
-										minimumFractionDigits: 2
-									  }).format(p.quantity * p.product.price) %><%= priceFormatter(p.quantity * p.product.price) %></td>
+									<td class="column-5"><%= priceFormatter(p.quantity * p.product.price) %></td>
 								</tr>
 								<% }) %>
 							</table>
