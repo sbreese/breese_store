@@ -131,10 +131,7 @@ userSchema.methods.addOrderToUser = function(order) {
 };
 
 userSchema.methods.removeFromCart = function(product) {
-
   const updatedCartItems = this.cart.items.filter(item => {
-    console.log("This SHOULD equal that:");
-    console.log(item.product._id.toString(), product);
     return item.product._id.toString() !== product;
   });
   this.cart.items = updatedCartItems;

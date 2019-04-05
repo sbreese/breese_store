@@ -338,13 +338,15 @@ exports.getShoppingCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
 
+  Product.findById(prodId)
+  .then(product => {
+
   if (!req.user) {
 
-    const productTitle = req.body.productTitle;
+    // const productTitle = req.body.productTitle;
 
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
-      
       cartProductIndex = req.session.cart_items.findIndex(cp => {
         return cp.product._id === prodId;
       });
@@ -359,30 +361,26 @@ exports.postCart = (req, res, next) => {
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       updatedCartItems.push({
-        product: {_id: prodId, title: productTitle },
+        product,
         quantity: newQuantity
       });
     }
-    req.session.cart_items = updatedCartItems;
-    res.redirect('/cart');
-
+    return req.session.cart_items = updatedCartItems;
   } else {
-
-    Product.findById(prodId)
-      .then(product => {
-        return req.user.addToCart(product);
-      })
-      .then(result => {
-        console.log(result);
-        res.redirect('/cart');
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
-
+    return req.user.addToCart(product);
   }
+
+
+  })
+  .then(result => {
+    console.log(result);
+    res.redirect('/cart');
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.patchCartQtyChange = (req, res, next) => {
@@ -449,10 +447,7 @@ exports.patchCartQtyChange = (req, res, next) => {
 
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-
   if (req.user) {
-    console.log("You are a user!, lets delet this:");
-    console.log(prodId);
     req.user
       .removeFromCart(prodId)
       .then(result => {
