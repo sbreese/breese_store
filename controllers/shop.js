@@ -438,7 +438,7 @@ exports.patchCartQtyChange = (req, res, next) => {
   })
   .then(cart_items => {
     console.log(cart_items);
-    res.status(200).json({ message: 'Success!', html: ejs.render('includes/shopping-cart-full', {
+    res.status(200).json({ message: 'Success!', html: await ejs.renderFile('includes/shopping-cart-full', {
       cart_items
     }) });
   })
