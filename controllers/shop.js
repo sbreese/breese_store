@@ -418,7 +418,7 @@ exports.patchCartQtyChange = (req, res, next) => {
       });
     }
     req.session.cart_items = updatedCartItems;
-    res.redirect('/cart');
+    res.status(200).json({ message: 'Success!' });
 
   } else {
 
@@ -430,7 +430,7 @@ exports.patchCartQtyChange = (req, res, next) => {
       })
       .then(result => {
         console.log(result);
-        res.redirect('/cart');
+        res.status(200).json({ message: 'Success!' });
       })
       .catch(err => {
         const error = new Error(err);
