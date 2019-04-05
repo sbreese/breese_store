@@ -227,7 +227,7 @@
           })
           .then(data => {
             console.log(data);
-            if (removeIfZero && Number(btn.next().val()) === 0) {
+            if (removeIfZero && Number(removeIfZero.next().val()) === 0) {
                 $(`#${prodId}`).remove();
             }
           })
@@ -241,7 +241,7 @@
         if(numProduct > 0) $(this).next().val(numProduct - 1);
         const prodId = $(this).parent().children('[name=productId]').val();
         const csrf = $(this).parent().children('[name=_csrf]').val();
-        changeQuantity(prodId, -1, csrf, true);
+        changeQuantity(prodId, -1, csrf, $(this));
     });
 
     $('.btn-num-product-up.shopping-cart').on('click', function(){
@@ -249,7 +249,7 @@
         $(this).prev().val(numProduct + 1);
         const prodId = $(this).parent().children('[name=productId]').val();
         const csrf = $(this).parent().children('[name=_csrf]').val();
-        changeQuantity(prodId, 1, csrf, true);
+        changeQuantity(prodId, 1, csrf;
     });
 
     /*==================================================================
