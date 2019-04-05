@@ -262,7 +262,8 @@
     $('.btn-num-product-up.add-to-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(++numProduct);
-        alert($(this).parent().prop("tagName")); // parent().parent().parent().find('[name=num-product]').val(numProduct);
+        // alert($(this).parent().prop("tagName")); // parent().parent().parent().find('[name=num-product]').val(numProduct);
+        alert($(this).parent().attr('class').split(/\s+/)):
     });
 
     /*==================================================================
