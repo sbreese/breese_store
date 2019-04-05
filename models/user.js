@@ -104,7 +104,7 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       // Change results in 0 or less products.  Remove from temp cart:
-      updatedCartItems = req.session.cart_items.filter(item => {
+      updatedCartItems = this.cart.items.filter(item => {
         return item.product._id !== prodId;
       });
     }
