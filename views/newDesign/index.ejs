@@ -1035,9 +1035,10 @@
 		$('.js-addcart-detail').each(function(){
 			const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			const productId = $(this).parent().find('[name=productId]').val();
+			const numProduct = $(this).parent().find('[name=num-product]').val();
 			const csrf = $(this).parent().find('[name=_csrf]').val();
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !" + csrf, "success");
+				swal(nameProduct, "is added to cart !" + numProduct, "success");
 			});
 		});
 	
