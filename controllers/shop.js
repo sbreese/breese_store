@@ -229,6 +229,8 @@ exports.getAbout = (req, res, next) => {
       return next(error);
     });
   } else {
+    console.log("Here is what non-auth cart items look like:");
+    console.log(req.session.cart_items);
     res.render('newDesign/about', {
       cart_items: req.session.cart_items || [],
       pageTitle: 'Shop',
