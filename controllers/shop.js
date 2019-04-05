@@ -450,6 +450,9 @@ exports.patchCartQtyChange = (req, res, next) => {
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
 
+  console.log("Old fashioned delete product:");
+  console.log(prodId);
+
   if (req.user) {
     req.user
       .removeFromCart(prodId)
