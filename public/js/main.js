@@ -211,17 +211,12 @@
 
     /*==================================================================
     [ +/- num product shopping-cart ]*/
-    const changeQuantity = (btn, qtyChange) => {
+    const changeQuantity = (prodId, qtyChange, csrf, removeIfZero = false) => {
         
-        const prodId = btn.parent().children('[name=productId]').val();
-        const csrf = btn.parent().children('[name=_csrf]').val();
-        console.log(prodId, csrf);
+        // const prodId = btn.parent().children('[name=productId]').val();
+        // const csrf = btn.parent().children('[name=_csrf]').val();
       
-        const productElement = btn.closest('article');
-        const path = `/change-cart/${prodId}/${qtyChange}`;
-        console.log(path);
-      
-        fetch(path, {
+        fetch(`/change-cart/${prodId}/${qtyChange}`, {
           method: 'PATCH',
           headers: {
             'csrf-token': csrf
@@ -232,7 +227,7 @@
           })
           .then(data => {
             console.log(data);
-            if (Number(btn.next().val()) === 0) {
+            if (removeIfZero && Number(btn.next().val()) === 0) {
                 $(`#${prodId}`).remove();
             }
           })
@@ -244,13 +239,17 @@
     $('.btn-num-product-down.shopping-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(numProduct - 1);
-        changeQuantity($(this), -1);
+        const prodId = btn.parent().children('[name=productId]').val();
+        const csrf = btn.parent().children('[name=_csrf]').val();
+        changeQuantity(prodId, -1, csrf, true);
     });
 
     $('.btn-num-product-up.shopping-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
-        changeQuantity($(this), 1);
+        const prodId = btn.parent().children('[name=productId]').val();
+        const csrf = btn.parent().children('[name=_csrf]').val();
+        changeQuantity(prodId, 1, csrf, true);
     });
 
     /*==================================================================
@@ -269,12 +268,13 @@
 
     $('.js-addcart-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        const productId = $(this).parent().find('[name=productId]').val();
         
-        const csrf = $(this).parent().find('[name=_csrf]').val();
-        $(this).on('click', function(){
+        $(this).on('click', function() {
+            const productId = $(this).parent().find('[name=productId]').val();
             const numProduct = $(this).parent().find('[name=num-product]').val();
-            swal(nameProduct, "is added to cart !" + numProduct, "success");
+            const csrf = $(this).parent().find('[name=_csrf]').val();
+            changeQuantity(productId, numProduct, csrf);
+            swal(nameProduct, "is added to cart !", "success");
         });
     });
 
