@@ -217,6 +217,8 @@ exports.getAbout = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
+      console.log("Here is what nlogged in users cart items look like:");
+      console.log(user.cart.items);
       res.render('newDesign/about', {
         cart_items: user.cart.items,
         pageTitle: 'About',
