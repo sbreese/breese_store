@@ -210,7 +210,7 @@
     });
 
     /*==================================================================
-    [ +/- num product ]*/
+    [ +/- num product shopping-cart ]*/
     const changeQuantity = (btn, qtyChange) => {
         
         const prodId = btn.parent().children('[name=productId]').val();
@@ -253,31 +253,29 @@
         changeQuantity($(this), 1);
     });
 
+    /*==================================================================
+    [ +/- num product add-to-cart ]*/
     $('.btn-num-product-down.add-to-cart').on('click', function(){
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(--numProduct);
         $(this).parent().parent().parent().parent().find('[name=num-product]').val(numProduct);
     });
 
+    $('.btn-num-product-up.add-to-cart').on('click', function(){
+        var numProduct = Number($(this).prev().val());
+        $(this).prev().val(++numProduct);
+        $(this).parent().find('[name=num-product]').val(numProduct);
+    });
+
     $('.js-addcart-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         const productId = $(this).parent().find('[name=productId]').val();
-        // const numProduct = $(this).parent().find('[name=num-product]').val();
         
         const csrf = $(this).parent().find('[name=_csrf]').val();
         $(this).on('click', function(){
             const numProduct = $(this).parent().find('[name=num-product]').val();
             swal(nameProduct, "is added to cart !" + numProduct, "success");
         });
-    });
-
-    $('.btn-num-product-up.add-to-cart').on('click', function(){
-        var numProduct = Number($(this).prev().val());
-        $(this).prev().val(++numProduct);
-        // alert($(this).parent().prop("tagName")); // parent().parent().parent().find('[name=num-product]').val(numProduct);
-        // alert($(this).parent().attr('class').split(/\s+/));
-        $(this).parent().find('[name=num-product]').val(numProduct);
-        alert($(this).parent().find('[name=num-product]').val());
     });
 
     /*==================================================================
