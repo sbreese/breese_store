@@ -434,7 +434,7 @@ exports.patchCartQtyChange = (req, res, next) => {
     console.log("Cart Items:");
     console.log(cart_items);
     ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
-      cart_items
+      cart_items, csrfToken = req.csrfToken()
     }, {}, function(err, html) {
       console.log("Path: "  +__dirname + '|../views/includes/shopping-cart-full.ejs');
       console.log("err:");
