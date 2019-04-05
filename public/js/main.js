@@ -262,13 +262,15 @@
     $('.js-addcart-detail').each(function(){
         const nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         const productId = $(this).parent().find('[name=productId]').val();
-        const numProduct = $(this).parent().find('[name=num-product]').val();
+        // const numProduct = $(this).parent().find('[name=num-product]').val();
+        
         const csrf = $(this).parent().find('[name=_csrf]').val();
         $(this).on('click', function(){
+            const numProduct = $(this).parent().find('[name=num-product]').val();
             swal(nameProduct, "is added to cart !" + numProduct, "success");
         });
     });
-    
+
     $('.btn-num-product-up.add-to-cart').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(++numProduct);
