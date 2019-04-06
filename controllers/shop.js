@@ -9,6 +9,8 @@ const Product = require('../models/product');
 const Order = require('../models/order');
 const Category = require('../models/category');
 
+// usage: items.reduce(sumItems)
+const sumItems = (accumulator, currentValue) => accumulator + currentValue.quantity;
 const ITEMS_PER_PAGE = 20;
 
 exports.getProducts = (req, res, next) => {
@@ -107,6 +109,7 @@ exports.getIndex = (req, res, next) => {
           res.render('newDesign/index', {
             products,
             cart_items: user.cart.items,
+            cart_total: user.cart.items.reduce(sumItems),
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
@@ -128,6 +131,7 @@ exports.getIndex = (req, res, next) => {
         res.render('newDesign/index', {
           products,
           cart_items: req.session.cart_items || [],
+          cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
           categories,
           seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
@@ -158,6 +162,7 @@ exports.getBlog = (req, res, next) => {
     .then(user => {
       res.render('newDesign/blog', {
         cart_items: user.cart.items,
+        cart_total: user.cart.items.reduce(sumItems),
         pageTitle: 'Blog',
         path: '/blog'
       });
@@ -170,6 +175,7 @@ exports.getBlog = (req, res, next) => {
   } else {
     res.render('newDesign/blog', {
       cart_items: req.session.cart_items,
+      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -201,6 +207,7 @@ exports.getBlogDetail = (req, res, next) => {
   } else {
     res.render('newDesign/blog-detail', {
       cart_items: req.session.cart_items,
+      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
       pageTitle: 'Blog Detail',
       path: '/blog-detail'
     }).catch(err => {
@@ -222,6 +229,7 @@ exports.getAbout = (req, res, next) => {
       console.log(user.cart.items);
       res.render('newDesign/about', {
         cart_items: user.cart.items,
+        cart_total: user.cart.items.reduce(sumItems),
         pageTitle: 'About',
         path: '/about'
       });
@@ -236,6 +244,7 @@ exports.getAbout = (req, res, next) => {
     console.log(req.session.cart_items);
     res.render('newDesign/about', {
       cart_items: req.session.cart_items || [],
+      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -255,6 +264,7 @@ exports.getContact = (req, res, next) => {
     .then(user => {
       res.render('newDesign/contact', {
         cart_items: user.cart.items,
+        cart_total: user.cart.items.reduce(sumItems),
         pageTitle: 'Contact',
         path: '/contact'
       });
@@ -267,6 +277,7 @@ exports.getContact = (req, res, next) => {
   } else {
     res.render('newDesign/contact', {
       cart_items: req.session.cart_items,
+      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -313,6 +324,7 @@ exports.getShoppingCart = (req, res, next) => {
     .then(user => {
       res.render('newDesign/shopping-cart', {
         cart_items: user.cart.items,
+        cart_total: user.cart.items.reduce(sumItems),
         pageTitle: 'Shopping Cart',
         path: '/shopping-cart'
       });
@@ -325,6 +337,7 @@ exports.getShoppingCart = (req, res, next) => {
   } else {
     res.render('newDesign/shopping-cart', {
       cart_items: req.session.cart_items || [],
+      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
