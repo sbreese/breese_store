@@ -161,6 +161,73 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
+exports.getProduct = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalItems;
+
+  Category.find().then(categories => {
+  Product.find()
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts;
+      return Product.find()
+        .populate('category')
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then(products => {
+
+      if (req.user) {
+        req.user
+        .populate('cart.items.product')
+        .execPopulate()
+        .then(user => {
+          res.render('newDesign/product', {
+            products,
+            cart_items: user.cart.items,
+            cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+            categories,
+            pageTitle: 'Product',
+            path: '/',
+            currentPage: page,
+            hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+            hasPreviousPage: page > 1,
+            nextPage: page + 1,
+            previousPage: page - 1,
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+          });
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
+      } else {
+        const cart_items = req.session.cart_items || [];
+        res.render('newDesign/product', {
+          products,
+          cart_items,
+          cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+          categories,
+          pageTitle: 'Product',
+          path: '/',
+          currentPage: page,
+          hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+        });
+      }
+    })
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
+
 exports.getBlog = (req, res, next) => {
 
   if (req.user) {
