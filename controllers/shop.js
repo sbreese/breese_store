@@ -249,6 +249,8 @@ exports.getProductDetail = (req, res, next) => {
     });
   } else {
     const cart_items = req.session.cart_items || [];
+    console.log("Well, we got here with ");
+    console.log(cart_items);
     res.render('newDesign/product-detail', {
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
