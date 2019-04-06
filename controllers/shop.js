@@ -228,7 +228,7 @@ exports.getProductPage = (req, res, next) => {
   });
 };
 
-exports.getProductDetal = (req, res, next) => {
+exports.getProductDetail = (req, res, next) => {
 
   if (req.user) {
     req.user
