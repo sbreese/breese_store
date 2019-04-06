@@ -476,25 +476,30 @@ exports.patchCartQtyChange = (req, res, next) => {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
 
-        ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
-          cart_items, csrfToken: req.csrfToken()
-        }, {}, (err, fullCart) => {
+      let total = 0;
+      cart_items.forEach(p => {
+        total += p.quantity * p.product.price;
+      });
 
-          const cart_total = sumPropertyValue(cart_items, 'quantity');
-          
-          ejs.renderFile('/app/views/includes/show-cart.ejs', {
+      ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
+        cart_items, totalSum: formatter.format(total), csrfToken: req.csrfToken()
+      }, {}, (err, fullCart) => {
+
+        const cart_total = sumPropertyValue(cart_items, 'quantity');
+        
+        ejs.renderFile('/app/views/includes/show-cart.ejs', {
+          cart_total
+        }, {}, (err, showCart) => {
+
+          ejs.renderFile('/app/views/includes/show-cart-mobile.ejs', {
             cart_total
-          }, {}, (err, showCart) => {
-
-            ejs.renderFile('/app/views/includes/show-cart-mobile.ejs', {
-              cart_total
-            }, {}, (err, showCartMobile) => {
-              res.status(200).json({ message: 'Success!', cart, fullCart, showCart, showCartMobile });
-            })
-
+          }, {}, (err, showCartMobile) => {
+            res.status(200).json({ message: 'Success!', cart, fullCart, showCart, showCartMobile });
           })
 
         })
+
+      })
       
     })
   })
