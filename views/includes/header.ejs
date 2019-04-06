@@ -47,11 +47,11 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="product.html">Shop</a>
+                        <li<%- path === '/product' ? ' class="active-menu"' : '' %>>
+                            <a href="product">Shop</a>
                         </li>
 
-                        <li class="label1" data-label1="hot">
+                        <li class="label1<%- path === '/shopping-cart' ? ' active-menu' : '' %>" data-label1="hot">
                             <a href="/shopping-cart">Features</a>
                         </li>
 
