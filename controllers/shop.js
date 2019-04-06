@@ -229,42 +229,56 @@ exports.getProductPage = (req, res, next) => {
 };
 
 exports.getProductDetail = (req, res, next) => {
+  const prodId = req.params.productId;
 
   Product.find()
   .limit(8)
   .then(products => {
-    if (req.user) {
-      req.user
-      .populate('cart.items.product')
-      .execPopulate()
-      .then(user => {
-        res.render('newDesign/product-detail', {
-          cart_items: user.cart.items,
-          cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-          products: products,
-          pageTitle: 'Product Detail',
-          path: '/product-detail'
+
+    Product.findById(prodId)
+    .then(product => {
+
+      if (req.user) {
+        req.user
+        .populate('cart.items.product')
+        .execPopulate()
+        .then(user => {
+          res.render('newDesign/product-detail', {
+            cart_items: user.cart.items,
+            cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+            products: products,
+            product: product,
+            pageTitle: product.title,
+            path: '/product-detail'
+          });
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
         });
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
-    } else {
-      const cart_items = req.session.cart_items || [];
-      res.render('newDesign/product-detail', {
-        cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-        products: products,
-        pageTitle: 'Product Detail',
-        path: '/product-detail'
-      }).catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
-    }
+      } else {
+        const cart_items = req.session.cart_items || [];
+        res.render('newDesign/product-detail', {
+          cart_items,
+          cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+          products: products,
+          product: product,
+          pageTitle: product.title,
+          path: '/product-detail'
+        }).catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
+      }
+
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 
   })
   .catch(err => {
