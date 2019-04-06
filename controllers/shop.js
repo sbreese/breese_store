@@ -348,15 +348,18 @@ exports.getShoppingCart = (req, res, next) => {
     });
   } else {
 
+    
     const cart_items = req.session.cart_items || [];
+    /*
     let total = 0;
     cart_items.forEach(p => {
       total += p.quantity * p.product.price;
-    });
+    });*/
 
     res.render('newDesign/shopping-cart', {
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      totalSum: 0, // formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
