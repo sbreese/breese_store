@@ -230,38 +230,48 @@ exports.getProductPage = (req, res, next) => {
 
 exports.getProductDetail = (req, res, next) => {
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
+  Product.find()
+  .limit(4)
+  .then(products => {
+    if (req.user) {
+      req.user
+      .populate('cart.items.product')
+      .execPopulate()
+      .then(user => {
+        res.render('newDesign/product-detail', {
+          cart_items: user.cart.items,
+          cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+          products: products,
+          pageTitle: 'Product Detail',
+          path: '/product-detail'
+        });
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    } else {
+      const cart_items = req.session.cart_items || [];
       res.render('newDesign/product-detail', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        cart_items,
+        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        products: products,
         pageTitle: 'Product Detail',
         path: '/product-detail'
+      }).catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-    const cart_items = req.session.cart_items || [];
-    console.log("Well, we got here with ");
-    console.log(cart_items);
-    res.render('newDesign/product-detail', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      pageTitle: 'Product Detail',
-      path: '/product-detail'
-    }).catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  }
+    }
+
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getBlog = (req, res, next) => {
