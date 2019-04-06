@@ -131,7 +131,7 @@ exports.getIndex = (req, res, next) => {
         res.render('newDesign/index', {
           products,
           cart_items: req.session.cart_items || [],
-          cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+          cart_total: req.session.cart_items ? Number(req.session.cart_items.reduce(sumItems)) : 0,
           categories,
           seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
