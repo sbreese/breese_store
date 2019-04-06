@@ -11,6 +11,12 @@ const Category = require('../models/category');
 
 // usage: sumPropertyValue(items, 'quantity')
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
+// usage: formatter.format(total)
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+});
 
 const ITEMS_PER_PAGE = 20;
 
@@ -350,16 +356,16 @@ exports.getShoppingCart = (req, res, next) => {
 
     
     const cart_items = req.session.cart_items || [];
-    /*
+    
     let total = 0;
     cart_items.forEach(p => {
       total += p.quantity * p.product.price;
-    });*/
+    });
 
     res.render('newDesign/shopping-cart', {
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      totalSum: 0, // formatter.format(total),
+      totalSum: formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
@@ -521,12 +527,6 @@ exports.postCartDeleteProduct = (req, res, next) => {
     res.redirect('/cart');
   }
 };
-
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2
-});
 
 exports.getCheckout = (req, res, next) => {
   
