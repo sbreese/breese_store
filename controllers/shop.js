@@ -11,6 +11,13 @@ const Category = require('../models/category');
 
 // usage: items.reduce(sumItems)
 const sumItems = (accumulator, currentValue) => accumulator + currentValue.quantity;
+
+const sumItemQty = function(items, prop){
+  return items.reduce( function(a, b){
+      return a + b[prop];
+  }, 0);
+};
+
 const ITEMS_PER_PAGE = 20;
 
 exports.getProducts = (req, res, next) => {
@@ -131,7 +138,7 @@ exports.getIndex = (req, res, next) => {
         res.render('newDesign/index', {
           products,
           cart_items: req.session.cart_items || [],
-          cart_total: req.session.cart_items ? Number(req.session.cart_items.reduce(sumItems)) : 0,
+          cart_total: req.session.cart_items ? sumItemQty(req.session.cart_items, 'quantity') : 0,
           categories,
           seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
