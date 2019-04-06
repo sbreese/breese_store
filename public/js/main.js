@@ -233,6 +233,12 @@
             if (data.cart) {
                 $('div.wrap-header-cart').replaceWith(data.cart);
             }
+            if (data.showCart) {
+                $('.limiter-menu-desktop .js-show-cart').replaceWith(data.showCart);
+            }
+            if (data.showCartMobile) {
+                $('.wrap-header-mobile .js-show-cart').replaceWith(data.showCartMobile);
+            }
           })
           .catch(err => {
             console.log(err);

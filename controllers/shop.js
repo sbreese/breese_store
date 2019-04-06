@@ -110,7 +110,7 @@ exports.getIndex = (req, res, next) => {
           res.render('newDesign/index', {
             products,
             cart_items: user.cart.items,
-            cart_total: user.cart.items.reduce(sumItems),
+            cart_total: sumPropertyValue(user.cart.items, 'quantity'),
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
@@ -163,7 +163,7 @@ exports.getBlog = (req, res, next) => {
     .then(user => {
       res.render('newDesign/blog', {
         cart_items: user.cart.items,
-        cart_total: user.cart.items.reduce(sumItems),
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
         pageTitle: 'Blog',
         path: '/blog'
       });
@@ -176,7 +176,7 @@ exports.getBlog = (req, res, next) => {
   } else {
     res.render('newDesign/blog', {
       cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -196,6 +196,7 @@ exports.getBlogDetail = (req, res, next) => {
     .then(user => {
       res.render('newDesign/blog-detail', {
         cart_items: user.cart.items,
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
         pageTitle: 'Blog Detail',
         path: '/blog-detail'
       });
@@ -208,7 +209,7 @@ exports.getBlogDetail = (req, res, next) => {
   } else {
     res.render('newDesign/blog-detail', {
       cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
       pageTitle: 'Blog Detail',
       path: '/blog-detail'
     }).catch(err => {
@@ -230,7 +231,7 @@ exports.getAbout = (req, res, next) => {
       console.log(user.cart.items);
       res.render('newDesign/about', {
         cart_items: user.cart.items,
-        cart_total: user.cart.items.reduce(sumItems),
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
         pageTitle: 'About',
         path: '/about'
       });
@@ -245,7 +246,7 @@ exports.getAbout = (req, res, next) => {
     console.log(req.session.cart_items);
     res.render('newDesign/about', {
       cart_items: req.session.cart_items || [],
-      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -265,7 +266,7 @@ exports.getContact = (req, res, next) => {
     .then(user => {
       res.render('newDesign/contact', {
         cart_items: user.cart.items,
-        cart_total: user.cart.items.reduce(sumItems),
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
         pageTitle: 'Contact',
         path: '/contact'
       });
@@ -278,7 +279,7 @@ exports.getContact = (req, res, next) => {
   } else {
     res.render('newDesign/contact', {
       cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -325,7 +326,7 @@ exports.getShoppingCart = (req, res, next) => {
     .then(user => {
       res.render('newDesign/shopping-cart', {
         cart_items: user.cart.items,
-        cart_total: user.cart.items.reduce(sumItems),
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
         pageTitle: 'Shopping Cart',
         path: '/shopping-cart'
       });
@@ -338,7 +339,7 @@ exports.getShoppingCart = (req, res, next) => {
   } else {
     res.render('newDesign/shopping-cart', {
       cart_items: req.session.cart_items || [],
-      cart_total: req.session.cart_items ? req.session.cart_items.reduce(sumItems) : 0,
+      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
@@ -452,10 +453,23 @@ exports.patchCartQtyChange = (req, res, next) => {
         ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
           cart_items, csrfToken: req.csrfToken()
         }, {}, (err, fullCart) => {
-          res.status(200).json({ message: 'Success!', cart, fullCart });
+
+          const cart_total = sumPropertyValue(cart_items, 'quantity');
+          
+          ejs.renderFile('/app/views/includes/show-cart.ejs', {
+            cart_total
+          }, {}, (err, showCart) => {
+
+            ejs.renderFile('/app/views/includes/show-cart-mobile.ejs', {
+              cart_total
+            }, {}, (err, showCartMobile) => {
+              res.status(200).json({ message: 'Success!', cart, fullCart, showCart, showCartMobile });
+            })
+
+          })
+
         })
       
-      //res.status(200).json({ message: 'Success!', cart });
     })
   })
   .catch(err => {
