@@ -129,12 +129,11 @@ exports.getIndex = (req, res, next) => {
           return next(error);
         });
       } else {
-        console.log("What is cart items?:");
-        console.log(req.session.cart_items);
+        const cart_items = req.session.cart_items || [];
         res.render('newDesign/index', {
           products,
-          cart_items: req.session.cart_items || [],
-          cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+          cart_items,
+          cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
           categories,
           seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
@@ -176,9 +175,10 @@ exports.getBlog = (req, res, next) => {
       return next(error);
     });
   } else {
+    const cart_items = req.session.cart_items || [];
     res.render('newDesign/blog', {
-      cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -209,9 +209,10 @@ exports.getBlogDetail = (req, res, next) => {
       return next(error);
     });
   } else {
+    const cart_items = req.session.cart_items || [];
     res.render('newDesign/blog-detail', {
-      cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       pageTitle: 'Blog Detail',
       path: '/blog-detail'
     }).catch(err => {
@@ -229,11 +230,10 @@ exports.getAbout = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
-      console.log("Here is what nlogged in users cart items look like:");
-      console.log(user.cart.items);
+      const cart_items = user.cart.items;
       res.render('newDesign/about', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        cart_items,
+        cart_total: sumPropertyValue(cart_items, 'quantity'),
         pageTitle: 'About',
         path: '/about'
       });
@@ -244,11 +244,10 @@ exports.getAbout = (req, res, next) => {
       return next(error);
     });
   } else {
-    console.log("Here is what non-auth cart items look like:");
-    console.log(req.session.cart_items);
+    const cart_items = req.session.cart_items || [];
     res.render('newDesign/about', {
-      cart_items: req.session.cart_items || [],
-      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -279,9 +278,10 @@ exports.getContact = (req, res, next) => {
       return next(error);
     });
   } else {
+    const cart_items = req.session.cart_items || [];
     res.render('newDesign/contact', {
-      cart_items: req.session.cart_items,
-      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -326,9 +326,17 @@ exports.getShoppingCart = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
+
+      const cart_items = user.cart.items;
+      let total = 0;
+      cart_items.forEach(p => {
+        total += p.quantity * p.product.price;
+      });
+
       res.render('newDesign/shopping-cart', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        cart_items,
+        cart_total: sumPropertyValue(cart_items, 'quantity'),
+        totalSum: formatter.format(total),
         pageTitle: 'Shopping Cart',
         path: '/shopping-cart'
       });
@@ -339,9 +347,16 @@ exports.getShoppingCart = (req, res, next) => {
       return next(error);
     });
   } else {
+
+    const cart_items = req.session.cart_items || [];
+    let total = 0;
+    cart_items.forEach(p => {
+      total += p.quantity * p.product.price;
+    });
+
     res.render('newDesign/shopping-cart', {
-      cart_items: req.session.cart_items || [],
-      cart_total: req.session.cart_items ? sumPropertyValue(req.session.cart_items, 'quantity') : 0,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
