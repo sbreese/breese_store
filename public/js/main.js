@@ -191,7 +191,7 @@
 
     /*==================================================================
     [ Cart ]*/
-    $('.js-show-cart').on('click',function(){
+    $(document.body).on('click', '.js-show-cart', function(){
         $('.js-panel-cart').addClass('show-header-cart');
     });
 
