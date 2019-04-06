@@ -228,6 +228,40 @@ exports.getProductPage = (req, res, next) => {
   });
 };
 
+exports.getProductDetal = (req, res, next) => {
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/product-detail', {
+        cart_items: user.cart.items,
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        pageTitle: 'Product Detail',
+        path: '/product-detail'
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    const cart_items = req.session.cart_items || [];
+    res.render('newDesign/product-detail', {
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      pageTitle: 'Product Detail',
+      path: '/product-detail'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
+
 exports.getBlog = (req, res, next) => {
 
   if (req.user) {
