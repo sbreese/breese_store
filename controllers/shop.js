@@ -161,7 +161,7 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
-exports.getProduct = (req, res, next) => {
+exports.getProductPage = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
@@ -188,7 +188,7 @@ exports.getProduct = (req, res, next) => {
             cart_total: sumPropertyValue(user.cart.items, 'quantity'),
             categories,
             pageTitle: 'Product',
-            path: '/',
+            path: '/product',
             currentPage: page,
             hasNextPage: ITEMS_PER_PAGE * page < totalItems,
             hasPreviousPage: page > 1,
@@ -210,7 +210,7 @@ exports.getProduct = (req, res, next) => {
           cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
           categories,
           pageTitle: 'Product',
-          path: '/',
+          path: '/product',
           currentPage: page,
           hasNextPage: ITEMS_PER_PAGE * page < totalItems,
           hasPreviousPage: page > 1,
