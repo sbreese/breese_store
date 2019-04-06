@@ -395,8 +395,26 @@
 	</section>
 
 
-	<!-- Related Products -->
-    <%- include('../includes/product-list.ejs') %>
+    <!-- Related Products -->
+	<section class="sec-relate-product bg0 p-t-45 p-b-105">
+        <div class="container">
+            <div class="p-b-45">
+                <h3 class="ltext-106 cl5 txt-center">
+                    Related Products
+                </h3>
+            </div>
+            <!-- Slide2 -->
+            <div class="wrap-slick2">
+                <div class="slick2">
+                    <% for (let product of products) { %>
+                        <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                        <%- include('../includes/product-card.ejs') %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
 
 	<!-- Footer -->
 	<%- include('../includes/footer.ejs') %>

@@ -231,7 +231,7 @@ exports.getProductPage = (req, res, next) => {
 exports.getProductDetail = (req, res, next) => {
 
   Product.find()
-  .limit(4)
+  .limit(8)
   .then(products => {
     if (req.user) {
       req.user
