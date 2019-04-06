@@ -129,6 +129,8 @@ exports.getIndex = (req, res, next) => {
           return next(error);
         });
       } else {
+        console.log("What is cart items?:");
+        console.log(req.session.cart_items);
         res.render('newDesign/index', {
           products,
           cart_items: req.session.cart_items || [],
