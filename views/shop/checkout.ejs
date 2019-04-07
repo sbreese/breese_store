@@ -1,35 +1,68 @@
-<%- include('../includes/headOLD.ejs') %>
-    <link rel="stylesheet" href="/css/cart.css">
-    
-    </head>
+<!-- HTML Head -->
+<%- include('../includes/head.ejs') %>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-        <main>
-            <ul class="cart__item-list">
-                <% products.forEach(p => { %>
-                    <li class="cart__item">
-                        <h1><%= p.product.title %></h1>
-                        <h2>Quantity: <%= p.quantity %></h2>
-                    </li>
-                <% }) %>
-            </ul>
-            <div class="centered">
-                <h2>Total: <%= totalSum %></h2>
+	<!-- Template Helper Functions -->
+    <% include ../includes/functions %>
+    
+    <link rel="stylesheet" href="/css/forms.css">
+
+	<!-- Header -->
+	<%- include('../includes/header.ejs') %>
+
+	<!-- Cart -->
+    <%- include('../includes/cart.ejs') %>
+
+
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+            
+            <a href="shopping-cart" class="stext-109 cl8 hov-cl1 trans-04">
+                    Shopping Cart
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
+			<span class="stext-109 cl4">
+				Checkout - Shipping Information
+			</span>
+		</div>
+	</div>
+		
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+
+                    <div class="centered">
+                        <h2>Total: <%= totalSum %></h2>
+                    </div>
+                    <div class="centered">
+                        <form action="/create-order" method="POST">
+                            <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_EhTLCvipLAoiGNczGzmVjq8m"
+                            data-amount="<%= totalSum * 100 %>"
+                            data-name="Your Order"
+                            data-description="Enter your credit card information into this secure form."
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-currency="usd">
+                            </script>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-            <div class="centered">
-                <form action="/create-order" method="POST">
-                    <script
-                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="pk_test_EhTLCvipLAoiGNczGzmVjq8m"
-                      data-amount="<%= totalSum * 100 %>"
-                      data-name="Your Order"
-                      data-description="Enter your credit card information into this secure form."
-                      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                      data-locale="auto"
-                      data-currency="usd">
-                    </script>
-                  </form>
-            </div>
-        </main>
-        <%- include('../includes/end.ejs') %>
+        </div>
+    </div>
+
+	<!-- Footer -->
+	<%- include('../includes/footer.ejs') %>
+
+<!-- Foot -->
+<%- include('../includes/foot.ejs') %>
