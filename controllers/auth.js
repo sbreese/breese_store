@@ -56,6 +56,8 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
+const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
+
 exports.getShippingAddress = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
