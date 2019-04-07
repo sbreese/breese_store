@@ -15,7 +15,7 @@
 
                     <% if (!isAuthenticated) { %>
                         <a class="flex-c-m trans-04 p-lr-25<%= path === '/login' ? ' active' : '' %>" href="/login">Login</a>
-                        <a class="flex-c-m trans-04 p-lr-25<%= path === '/signup' ? ' active' : '' %>" href="/<%- cart_total ? 'checkout-shipping-address">Checkout' : 'signup">Signup' %></a>
+                        <a class="flex-c-m trans-04 p-lr-25<%= path === '/create-user-account' ? ' active' : '' %>" href="/<%- cart_total ? 'checkout-shipping-address">Checkout' : 'create-user-account">Signup' %></a>
                     <% } else { %>
                         <a class="flex-c-m trans-04 p-lr-25<%= path === '/profile' ? ' active' : '' %>" href="/profile">My Account</a>
                         <form action="/logout" method="post">
