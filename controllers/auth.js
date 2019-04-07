@@ -56,6 +56,64 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
+exports.getCreateUserAccount = (req, res, next) => {
+
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/create-user-account', {
+        cart_items: user.cart.items,
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        pageTitle: 'Create User Account',
+        path: '/create-user-account',
+        errorMessage: message,
+        oldInput: {
+          email: '',
+          password: '',
+          confirmPassword: ''
+        },
+        products: req.session.cart_items,
+        validationErrors: []
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    const cart_items = req.session.cart_items || [];
+    res.render('newDesign/create-user-account', {
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      pageTitle: 'Create User Account',
+      path: '/create-user-account',
+      errorMessage: message,
+      oldInput: {
+        email: '',
+        password: '',
+        confirmPassword: ''
+      },
+      products: req.session.cart_items,
+      validationErrors: []
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+
+}
+
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
 exports.getShippingAddress = (req, res, next) => {
