@@ -45,7 +45,7 @@
 
 
 
-                    <div class="header-cart-content flex-w js-pscroll">
+                    <div class="header-cart-content js-pscroll">
 
                         <% if (cart_items.length > 0) { 
                             let total = 0;
@@ -78,10 +78,10 @@
                                 <% }) %>
                             </ul>
                                     
-                        <div class="centered">
+                        <div class="txt-center">
                             <h2>Total: <%= totalSum %></h2>
                         </div>
-                        <div class="centered">
+                        <div class="txt-center" style="margin-top: 1.5rem">
                             <form action="/create-order" method="POST">
                                 <script
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
