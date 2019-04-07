@@ -18,7 +18,7 @@ router.get('/profile', authController.getProfile);
 
 // .normalizeEmail(), <-- This stupid function removes periods from emails
 router.post(
-  '/checkout-shipping-address',
+  '/profile',
   [
     body('email')
       .isEmail()
@@ -62,7 +62,7 @@ router.post(
 
 // .normalizeEmail(),
 router.post(
-  '/signup',
+  '/checkout-shipping-address',
   [
     check('email')
       .isEmail()
