@@ -750,6 +750,50 @@ exports.getOrders = (req, res, next) => {
     });
 };
 
+exports.getMyOrders = (req, res, next) => {
+
+  req.user
+    .populate('cart.items.product')
+    .populate('orders')
+    .execPopulate()
+    .then(user => {
+console.log("Here is the orders:");
+      console.log(user.orders);
+      const cart_items = user.cart.items;
+      let total = 0;
+      cart_items.forEach(p => {
+        total += p.quantity * p.product.price;
+      });
+      res.render('newDesign/my-orders', {
+        path: '/my-orders',
+        pageTitle: 'Your Orders',
+        cart_items,
+        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        totalSum: formatter.format(total)
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+
+    /*
+  Order.find({ 'user': req.user._id })
+    .then(orders => {
+      res.render('newDesign/my-orders', {
+        path: '/my-orders',
+        pageTitle: 'Your Orders',
+        orders
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });*/
+};
+
 exports.getInvoice = (req, res, next) => {
   const orderId = req.params.orderId;
   Order.findById(orderId)
