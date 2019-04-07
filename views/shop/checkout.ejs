@@ -26,8 +26,13 @@
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
+            <a href="checkout-shipping-information" class="stext-109 cl8 hov-cl1 trans-04">
+                    Shipping Information
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
 			<span class="stext-109 cl4">
-				Checkout - Shipping Information
+				Payment
 			</span>
 		</div>
 	</div>
@@ -38,23 +43,72 @@
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
 
-                    <div class="centered">
-                        <h2>Total: <%= totalSum %></h2>
+
+
+                    <div class="header-cart-content flex-w js-pscroll">
+
+                        <% if (cart_items.length > 0) { 
+                            let total = 0;
+                            %>
+                            <ul class="header-cart-wrapitem w-full">
+                                <% cart_items.forEach(p => { %>
+                                    <li class="header-cart-item flex-w flex-t m-b-12">
+                
+                                        <% 
+                                        if (p.product) { 
+                                            total += p.quantity * p.product.price;
+                                        %>
+                                            <div class="header-cart-item-img">
+                                                <img src="<%= p.product.image1Url %>" alt="<%= p.product.title %>">
+                                            </div>
+                
+                                            <div class="header-cart-item-txt p-t-8">
+                                                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                                    <%= p.product.title %>
+                                                </a>
+                    
+                                                <span class="header-cart-item-info">
+                                                        <%= p.quantity %> x $<%= p.product.price %>
+                                                </span>
+                                            </div>
+                                        <% } else { %>
+                                            <p>Product not found</p>
+                                        <% } %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                                    
+                        <div class="centered">
+                            <h2>Total: <%= totalSum %></h2>
+                        </div>
+                        <div class="centered">
+                            <form action="/create-order" method="POST">
+                                <script
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="pk_test_EhTLCvipLAoiGNczGzmVjq8m"
+                                data-amount="<%= totalSum * 100 %>"
+                                data-name="Your Order"
+                                data-description="Enter your credit card information into this secure form."
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-locale="auto"
+                                data-currency="usd">
+                                </script>
+                            </form>
+                        </div>
                     </div>
-                    <div class="centered">
-                        <form action="/create-order" method="POST">
-                            <script
-                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="pk_test_EhTLCvipLAoiGNczGzmVjq8m"
-                            data-amount="<%= totalSum * 100 %>"
-                            data-name="Your Order"
-                            data-description="Enter your credit card information into this secure form."
-                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                            data-locale="auto"
-                            data-currency="usd">
-                            </script>
-                        </form>
-                    </div>
+
+                    <% } else { %>
+                        <div class="w-full">
+                            <div class="header-cart-total w-full p-tb-40">
+                                Your Shopping Cart is empty.
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div class="header-cart-total w-full p-tb-40">
+                                    Continue shopping on the <a href="/">The Breese Method homepage</a>.
+                            </div>
+                        </div>
+                    <% } %>
 
                 </div>
             </div>
