@@ -56,6 +56,62 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
+exports.getShippingAddress = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+
+  if (req.user) {
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      res.render('newDesign/checkout-shipping-address', {
+        cart_items: user.cart.items,
+        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        pageTitle: 'Checkout - Shipping Address',
+        path: '/checkout-shipping-address',
+        errorMessage: message,
+        oldInput: {
+          email: '',
+          password: '',
+          confirmPassword: ''
+        },
+        products: req.session.cart_items,
+        validationErrors: []
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  } else {
+    const cart_items = req.session.cart_items || [];
+    res.render('newDesign/checkout-shipping-address', {
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      pageTitle: 'Checkout - Shipping Address',
+      path: '/checkout-shipping-address',
+      errorMessage: message,
+      oldInput: {
+        email: '',
+        password: '',
+        confirmPassword: ''
+      },
+      products: req.session.cart_items,
+      validationErrors: []
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  }
+};
+
 exports.getEnterNewPassword = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
