@@ -16,7 +16,7 @@
 
                 <% if (orders.length > 0) { %>
                     <li class="main-header__item">
-                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                        <a class="<%= path === '/my-orders' ? 'active' : '' %>" href="/my-orders">My Orders</a>
                     </li>
                 <% } %>
             <% } %>
@@ -47,7 +47,7 @@
                     <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
                 </li>
                 <li class="main-header__item">
-                    <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
+                    <a class="<%= path === '/create-user-account' ? 'active' : '' %>" href="/create-user-account">Signup</a>
                 </li>
             <% } else { %>
                 <li class="main-header__item">
