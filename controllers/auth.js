@@ -388,6 +388,7 @@ exports.postSignup = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
+    const cart_items = req.session.cart_items;
     return res.status(422).render('newDesign/checkout-shipping-address', {
       path: '/checkout-shipping-address',
       pageTitle: 'Shipping Information',
@@ -405,7 +406,8 @@ exports.postSignup = (req, res, next) => {
         postalCode,
         country
       },
-      products: req.session.cart_items,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       validationErrors: errors.array()
     });
   }
