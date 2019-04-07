@@ -769,6 +769,7 @@ console.log("Here is the orders:");
         pageTitle: 'Your Orders',
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        orders: user.orders,
         totalSum: formatter.format(total)
       });
     })
