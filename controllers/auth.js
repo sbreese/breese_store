@@ -24,13 +24,6 @@ exports.getLogin = (req, res, next) => {
     message = null;
   }
 
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
-
   if (req.user) {
     req.user
     .populate('cart.items.product')
