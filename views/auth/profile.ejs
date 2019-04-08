@@ -105,7 +105,12 @@
                             id="country"
                             value="<%= oldInput.country ? oldInput.country : 'USA' %>">
                 </div>
-Hi!
+                <% if (cart_items.length) { %>
+                <input type="hidden" value="1" name="checkout">
+                <% } %>
+
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="btn" type="submit"><%= cart_items.length ? 'Continue to Payment' : 'Update Profile' %></button>
 
                 </form>
             </div>
