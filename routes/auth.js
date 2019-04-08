@@ -41,6 +41,13 @@ router.post(
     .withMessage('Must be only alphabetical chars')
     .isLength({ min: 2 })
     .withMessage('Must be at least 2 chars long')
+      .trim(),
+    body(
+      'address_line1',
+      'Address Line 1 is required.'
+    )
+    .isLength({ min: 2 })
+    .withMessage('Address Line 1 is required')
       .trim()
   ],
   authController.updateAccount
