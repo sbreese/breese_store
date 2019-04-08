@@ -6,7 +6,25 @@
 <body>
    <%- include('../includes/navigation.ejs') %>
 
-    <main>
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
+			<span class="stext-109 cl4">
+				Create User Account
+			</span>
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+                <h3>Login</h3>
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
@@ -35,5 +53,10 @@
         <div class="centered">
             <a href="/reset">Reset Password</a>
         </div>
-    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
 <%- include('../includes/end.ejs') %>
