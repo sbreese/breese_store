@@ -132,7 +132,7 @@
                 <input type="hidden" value="1" name="checkout">
             <% } %>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit"><%= products && products.length ? 'Continue to Payment' : 'Update Profile' %></button>
+            <button class="btn" type="submit"><%= cart_items.length ? 'Continue to Payment' : 'Update Profile' %></button>
         </form>
             </div>
         </div>

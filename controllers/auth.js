@@ -201,11 +201,12 @@ exports.getConfirmInformation = (req, res, next) => {
   .populate('cart.items.product')
   .execPopulate()
   .then(user => {
-    const products = user.cart.items;
+    const cart_items = user.cart.items;
     res.render('auth/profile', {
       path: '/confirm-information',
       pageTitle: 'Confirm Your Information',
-      products: products,
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       errorMessage: message,
       oldInput: {
         email: user.email,
