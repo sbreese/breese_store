@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport(
 
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
-exports.getLogin = (req, res, next) => {
+exports.getLoginBroke = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
     message = message[0];
@@ -59,6 +59,25 @@ exports.getLogin = (req, res, next) => {
     },
     validationErrors: []
   });*/
+};
+
+exports.getLogin = (req, res, next) => {
+  let message = req.flash('error');
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+  res.render('auth/login', {
+    path: '/login',
+    pageTitle: 'Login',
+    errorMessage: message,
+    oldInput: {
+      email: '',
+      password: ''
+    },
+    validationErrors: []
+  });
 };
 
 exports.getSignup = (req, res, next) => {
