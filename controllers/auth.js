@@ -294,7 +294,7 @@ exports.updateAccount = (req, res, next) => {
   // User.findById(req.body.other_user_id ? req.body.other_user_id : req.session.user._id)
   User.findOne({ _id: req.body.other_user_id ? req.body.other_user_id : req.session.user._id })
   .populate('cart.items.product')
-  .execPopulate()
+  // .execPopulate()
   .then(user => {
     console.log("Got our user!");
     user.email = email;
