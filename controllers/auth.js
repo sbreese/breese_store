@@ -26,52 +26,25 @@ exports.getLogin = (req, res, next) => {
     message = null;
   }
 
-  if (req.user) {
-    console.log("Did we get here?");
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
-      res.render('auth/login', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-        pageTitle: 'Login',
-        path: '/login',
-        errorMessage: message,
-        oldInput: {
-          email: '',
-          password: ''
-        },
-        validationErrors: []
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      // return next(error);
-      console.log(error);
-    });
-  } else {
-    console.log("Did we get here too?");
-    const cart_items = req.session.cart_items || [];
-    res.render('auth/login', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      pageTitle: 'Login',
-      path: '/login',
-      errorMessage: message,
-      oldInput: {
-        email: '',
-        password: ''
-      },
-      validationErrors: []
-    }).catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      //return next(error);
-       console.log(error);
-    });
-  }
+  console.log("OK, let's get non-auth cart items...");
+  const cart_items = req.session.cart_items || [];
+  res.render('auth/login', {
+    cart_items,
+    cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+    pageTitle: 'Login',
+    path: '/login',
+    errorMessage: message,
+    oldInput: {
+      email: '',
+      password: ''
+    },
+    validationErrors: []
+  }).catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+      // console.log(error);
+  });
 
   /*
   res.render('auth/login', {
