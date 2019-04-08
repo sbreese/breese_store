@@ -289,14 +289,10 @@ exports.updateAccount = (req, res, next) => {
       return next(error);
     });
   }
-  console.log("OK, no errors... here is our user to edit!");
-  console.log(req.body.other_user_id ? req.body.other_user_id : req.session.user._id);
-  // User.findById(req.body.other_user_id ? req.body.other_user_id : req.session.user._id)
+
   User.findOne({ _id: req.body.other_user_id ? req.body.other_user_id : req.session.user._id })
   .populate('cart.items.product')
-  // .execPopulate()
   .then(user => {
-    console.log("Got our user!");
     user.email = email;
     user.first_name = first_name;
     user.last_name = last_name;
