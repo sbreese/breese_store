@@ -73,9 +73,9 @@ exports.getEditUser = (req, res, next) => {
       console.log("Admin is now editing another user's account:");
       console.log(user);
 
-    res.render('auth/edit-account', {
-      path: '/edit-account',
-      pageTitle: 'Edit Account',
+    res.render('auth/edit-anothers-account', {
+      path: '/edit-anothers-account',
+      pageTitle: "Edit Another's Account",
       errorMessage: message,
       oldInput: user,
       validationErrors: []

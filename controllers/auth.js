@@ -262,13 +262,14 @@ exports.updateAccount = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const cart_items = user.cart.items;
-      return res.status(422).render('auth/edit-account', {
-        path: '/edit-account',
+      return res.status(422).render(req.body.other_user_id ? 'auth/edit-anothers-account' : 'auth/edit-account', {
+        path: req.body.other_user_id ? '/edit-anothers-account' : '/edit-account',
         pageTitle: 'Edit Account',
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         errorMessage: errors.array()[0].msg,
         oldInput: {
+          _id: req.body.other_user_id ? req.body.other_user_id : '',
           email,
           first_name,
           last_name,

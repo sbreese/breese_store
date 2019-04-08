@@ -50,10 +50,6 @@
                     <% } %>
                     <form class="login-form" action="/edit-account" method="POST" novalidate>
 
-                    <% if (user.access_level > 5 && oldInput._id) { %>
-                    <input type="hidden" name="other_user_id" value="<%= oldInput._id %>">
-                    <% } %>
-
                     <div class="form-control">
                         <label for="email">E-Mail</label>
                         <input 

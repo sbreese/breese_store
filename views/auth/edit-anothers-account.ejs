@@ -1,0 +1,103 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form class="login-form" action="/edit-account" method="POST" novalidate>
+
+            <% if (user.access_level > 5 && oldInput._id) { %>
+                <input type="hidden" name="other_user_id" value="<%= oldInput._id %>">
+            <% } %>
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    value="<%= oldInput.email %>">
+            </div>
+            <div class="form-control">
+                <label for="first_name">First Name</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'first_name') ? 'invalid' : '' %>"
+                    type="first_name" 
+                    name="first_name" 
+                    id="first_name" 
+                    value="<%= oldInput.first_name %>">
+            </div>
+            <div class="form-control">
+                <label for="last_name">Last Name</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'last_name') ? 'invalid' : '' %>"
+                    type="last_name"
+                    name="last_name"
+                    id="last_name"
+                    value="<%= oldInput.last_name %>">
+            </div>
+            <div class="form-control">
+                <label for="address_line1">Address Line 1</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'address_line1') ? 'invalid' : '' %>"
+                    type="address_line1"
+                    name="address_line1"
+                    id="address_line1"
+                    value="<%= oldInput.address_line1 %>">
+            </div>
+            <div class="form-control">
+                    <label for="last_name">Address Line 2</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'address_line2') ? 'invalid' : '' %>"
+                        type="address_line2"
+                        name="address_line2"
+                        id="address_line2"
+                        value="<%= oldInput.address_line2 %>">
+            </div>
+            <div class="form-control">
+                    <label for="city">City</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'city') ? 'invalid' : '' %>"
+                        type="city"
+                        name="city"
+                        id="city"
+                        value="<%= oldInput.city %>">
+            </div>
+            <div class="form-control">
+                    <label for="state">State</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'state') ? 'invalid' : '' %>"
+                        type="state"
+                        name="state"
+                        id="state"
+                        value="<%= oldInput.state %>">
+            </div>
+            <div class="form-control">
+                <label for="state">Postal Code</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'postalCode') ? 'invalid' : '' %>"
+                    type="postalCode"
+                    name="postalCode"
+                    id="postalCode"
+                    value="<%= oldInput.postalCode %>">
+            </div>
+            <div class="form-control">
+                    <label for="country">Country</label>
+                    <input
+                        class="<%= validationErrors.find(e => e.param === 'country') ? 'invalid' : '' %>"
+                        type="country"
+                        name="country"
+                        id="country"
+                        value="<%= oldInput.country ? oldInput.country : 'USA' %>">
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn" type="submit">Update Another's Account</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
