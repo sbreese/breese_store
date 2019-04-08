@@ -453,7 +453,7 @@ exports.postLogin = (req, res, next) => {
            
             return req.session.save(err => {
               console.log(err);
-              res.redirect(user.cart.items.length > 0 ? '/cart' : '/');
+              res.redirect(user.cart.items.length > 0 ? '/shopping-cart' : '/');
             });
 
           })
