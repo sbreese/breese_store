@@ -71,9 +71,9 @@ exports.getCreateUserAccount = (req, res, next) => {
   }
 
   const cart_items = req.session.cart_items || [];
-  res.render('auth/signup', {
-    path: '/signup',
-    pageTitle: 'Signup',
+  res.render('newDesign/create-user-account', {
+    path: '/create-user-account',
+    pageTitle: 'Create User Account',
     cart_items,
     cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
     errorMessage: message,
