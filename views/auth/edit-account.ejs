@@ -46,7 +46,7 @@
                     <h3><%= pageTitle %></h3>
 
                     <% if (errorMessage) { %>
-                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <div class="alert alert-warning"><%= errorMessage %></div>
                     <% } %>
                     <form class="login-form" action="/edit-account" method="POST" novalidate>
 
