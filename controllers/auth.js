@@ -18,49 +18,6 @@ const transporter = nodemailer.createTransport(
 
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
-exports.getLoginBroke = (req, res, next) => {
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
-
-  console.log("OK, let's get non-auth cart items...");
-  const cart_items = req.session.cart_items || [];
-  res.render('auth/login', {
-    cart_items,
-    cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-    pageTitle: 'Login',
-    path: '/login',
-    errorMessage: message,
-    oldInput: {
-      email: '',
-      password: ''
-    },
-    validationErrors: []
-  }).catch(err => {
-    const error = new Error(err);
-    console.log("whoa, here is that error I mentioned");
-    console.log(error);
-    error.httpStatusCode = 500;
-    return next(error);
-      // console.log(error);
-  });
-
-  /*
-  res.render('auth/login', {
-    path: '/login',
-    pageTitle: 'Login',
-    errorMessage: message,
-    oldInput: {
-      email: '',
-      password: ''
-    },
-    validationErrors: []
-  });*/
-};
-
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
