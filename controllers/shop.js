@@ -20,7 +20,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const ITEMS_PER_PAGE = 20;
 
-export.getShoppingCartData = req => {
+exports.getShoppingCartData = req => {
 
   return new Promise(function (resolve, reject) {
     if (req.user) {
