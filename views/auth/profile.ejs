@@ -87,6 +87,24 @@
                             id="state"
                             value="<%= oldInput.state %>">
                 </div>
+                <div class="form-control">
+                    <label for="state">Postal Code</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'postalCode') ? 'invalid' : '' %>"
+                        type="postalCode"
+                        name="postalCode"
+                        id="postalCode"
+                        value="<%= oldInput.postalCode %>">
+                </div>
+                <div class="form-control">
+                        <label for="country">Country</label>
+                        <input
+                            class="<%= validationErrors.find(e => e.param === 'country') ? 'invalid' : '' %>"
+                            type="country"
+                            name="country"
+                            id="country"
+                            value="<%= oldInput.country ? oldInput.country : 'USA' %>">
+                </div>
 Hi!
 
                 </form>
