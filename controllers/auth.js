@@ -162,7 +162,7 @@ exports.getEnterNewPassword = (req, res, next) => {
   });
 };
 
-exports.getProfile = (req, res, next) => {
+exports.getEditAccount = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
     message = message[0];
@@ -174,9 +174,9 @@ exports.getProfile = (req, res, next) => {
   .execPopulate()
   .then(user => {
     const cart_items = user.cart.items;
-    res.render('auth/profile', {
-      path: '/profile',
-      pageTitle: 'Edit Profile',
+    res.render('auth/edit-account', {
+      path: '/edit-account',
+      pageTitle: 'Edit Account',
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       errorMessage: message,
@@ -214,7 +214,7 @@ exports.getConfirmInformation = (req, res, next) => {
   .execPopulate()
   .then(user => {
     const cart_items = user.cart.items;
-    res.render('auth/profile', {
+    res.render('auth/edit-account', {
       path: '/confirm-information',
       pageTitle: 'Confirm Your Information',
       cart_items,
@@ -242,7 +242,7 @@ exports.getConfirmInformation = (req, res, next) => {
 
 };
 
-exports.updateProfile = (req, res, next) => {
+exports.updateAccount = (req, res, next) => {
   const email = req.body.email;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
@@ -256,9 +256,9 @@ exports.updateProfile = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('auth/profile', {
-      path: '/profile',
-      pageTitle: 'Edit Profile',
+    return res.status(422).render('auth/edit-account', {
+      path: '/edit-account',
+      pageTitle: 'Edit Account',
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email,

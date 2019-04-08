@@ -70,12 +70,12 @@ exports.getEditUser = (req, res, next) => {
   User.findById(userId).populate('orders')
     .then(user => {
 
-      console.log("Did we get the other person's profile?");
+      console.log("Admin is now editing another user's account:");
       console.log(user);
 
-    res.render('auth/profile', {
-      path: '/profile',
-      pageTitle: 'Edit Profile',
+    res.render('auth/edit-account', {
+      path: '/edit-account',
+      pageTitle: 'Edit Account',
       errorMessage: message,
       oldInput: user,
       validationErrors: []

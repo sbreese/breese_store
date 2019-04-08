@@ -15,11 +15,11 @@ router.get('/checkout-shipping-address', authController.getShippingAddress);
 router.get('/customer-information', authController.getSignup);
 router.get('/confirm-information', authController.getConfirmInformation);
 
-router.get('/profile', authController.getProfile);
+router.get('/edit-account', authController.getEditAccount);
 
 // .normalizeEmail(), <-- This stupid function removes periods from emails
 router.post(
-  '/profile',
+  '/edit-account',
   [
     body('email')
       .isEmail()
@@ -43,7 +43,7 @@ router.post(
     .withMessage('Must be at least 2 chars long')
       .trim()
   ],
-  authController.updateProfile
+  authController.updateAccount
 );
 
 // .normalizeEmail(),
