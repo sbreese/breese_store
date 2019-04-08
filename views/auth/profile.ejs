@@ -51,6 +51,24 @@
                         id="last_name"
                         value="<%= oldInput.last_name %>">
                 </div>
+                <div class="form-control">
+                    <label for="address_line1">Address Line 1</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'address_line1') ? 'invalid' : '' %>"
+                        type="address_line1"
+                        name="address_line1"
+                        id="address_line1"
+                        value="<%= oldInput.address_line1 %>">
+                </div>
+                <div class="form-control">
+                        <label for="last_name">Address Line 2</label>
+                        <input 
+                            class="<%= validationErrors.find(e => e.param === 'address_line2') ? 'invalid' : '' %>"
+                            type="address_line2"
+                            name="address_line2"
+                            id="address_line2"
+                            value="<%= oldInput.address_line2 %>">
+                </div>
 Hi!
 
                 </form>
