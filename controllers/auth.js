@@ -256,22 +256,37 @@ exports.updateAccount = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('auth/edit-account', {
-      path: '/edit-account',
-      pageTitle: 'Edit Account',
-      errorMessage: errors.array()[0].msg,
-      oldInput: {
-        email,
-        first_name,
-        last_name,
-        address_line1,
-        address_line2,
-        city,
-        state,
-        postalCode,
-        country
-      },
-      validationErrors: errors.array()
+
+    req.user
+    .populate('cart.items.product')
+    .execPopulate()
+    .then(user => {
+      const cart_items = user.cart.items;
+      return res.status(422).render('auth/edit-account', {
+        path: '/edit-account',
+        pageTitle: 'Edit Account',
+        cart_items,
+        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          email,
+          first_name,
+          last_name,
+          address_line1,
+          address_line2,
+          city,
+          state,
+          postalCode,
+          country
+        },
+        validationErrors: errors.array()
+      });
+
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
   }
 
