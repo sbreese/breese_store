@@ -16,6 +16,8 @@ const transporter = nodemailer.createTransport(
   })
 );
 
+const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
+
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -46,6 +48,7 @@ exports.getLogin = (req, res, next) => {
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
+      // console.log(error);
     });
   } else {
     const cart_items = req.session.cart_items || [];
@@ -64,6 +67,7 @@ exports.getLogin = (req, res, next) => {
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
+      // console.log(error);
     });
   }
 
@@ -158,8 +162,6 @@ exports.getCreateUserAccount = (req, res, next) => {
   }
 
 }
-
-const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
 exports.getShippingAddress = (req, res, next) => {
   let message = req.flash('error');
