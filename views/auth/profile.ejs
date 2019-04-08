@@ -15,9 +15,14 @@
             <div class="m-l-25 m-r--38 m-lr-0-xl">
 
                 <h3><%= pageTitle %></h3>
+
+                        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form class="login-form" action="/profile" method="POST" novalidate>
 Hi!
 
-        
+                </form>
             </div>
         </div>
     </div>
