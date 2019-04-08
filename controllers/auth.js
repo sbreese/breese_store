@@ -68,9 +68,12 @@ exports.getLogin = (req, res, next) => {
   } else {
     message = null;
   }
+  const cart_items = req.session.cart_items || [];
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
+    cart_items,
+    cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
     errorMessage: message,
     oldInput: {
       email: '',
