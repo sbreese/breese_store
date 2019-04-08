@@ -252,7 +252,7 @@ exports.updateAccount = (req, res, next) => {
   const state = req.body.state;
   const postalCode = req.body.postalCode;
   const country = req.body.country;
-  console.log("OK, let's update this account!");
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
@@ -289,7 +289,8 @@ exports.updateAccount = (req, res, next) => {
       return next(error);
     });
   }
-  console.log("OK, no errors... we can proceed with user find!");
+  console.log("OK, no errors... here is our user to edit!");
+  console.log(req.body.other_user_id ? req.body.other_user_id : req.session.user._id);
   User.findById(req.body.other_user_id ? req.body.other_user_id : req.session.user._id)
   .populate('cart.items.product')
   .execPopulate()
