@@ -38,7 +38,7 @@ exports.getLogin = (req, res, next) => {
         oldInput: {
           email: '',
           password: ''
-        }
+        },
         validationErrors: []
       });
     })
@@ -58,7 +58,7 @@ exports.getLogin = (req, res, next) => {
       oldInput: {
         email: '',
         password: ''
-      }
+      },
       validationErrors: []
     }).catch(err => {
       const error = new Error(err);
