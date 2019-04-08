@@ -27,6 +27,7 @@ exports.getLogin = (req, res, next) => {
   }
 
   if (req.user) {
+    console.log("Did we get here?");
     req.user
     .populate('cart.items.product')
     .execPopulate()
@@ -51,6 +52,7 @@ exports.getLogin = (req, res, next) => {
       console.log(error);
     });
   } else {
+    console.log("Did we get here too?");
     const cart_items = req.session.cart_items || [];
     res.render('auth/login', {
       cart_items,
