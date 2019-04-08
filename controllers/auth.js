@@ -47,8 +47,8 @@ exports.getLogin = (req, res, next) => {
     .catch(err => {
       const error = new Error(err);
       error.httpStatusCode = 500;
-      return next(error);
-      // console.log(error);
+      // return next(error);
+      console.log(error);
     });
   } else {
     const cart_items = req.session.cart_items || [];
@@ -66,8 +66,8 @@ exports.getLogin = (req, res, next) => {
     }).catch(err => {
       const error = new Error(err);
       error.httpStatusCode = 500;
-      return next(error);
-      // console.log(error);
+      //return next(error);
+       console.log(error);
     });
   }
 
