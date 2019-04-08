@@ -169,23 +169,35 @@ exports.getProfile = (req, res, next) => {
   } else {
     message = null;
   }
-  res.render('auth/profile', {
-    path: '/profile',
-    pageTitle: 'Edit Profile',
-    errorMessage: message,
-    oldInput: {
-      email: req.user.email,
-      first_name: req.user.first_name,
-      last_name: req.user.last_name,
-      address_line1: req.user.address_line1,
-      address_line2: req.user.address_line2,
-      city: req.user.city,
-      state: req.user.state,
-      postalCode: req.user.postalCode,
-      country: req.user.country
-    },
-    validationErrors: [],
-    products: undefined
+  req.user
+  .populate('cart.items.product')
+  .execPopulate()
+  .then(user => {
+    const cart_items = user.cart.items;
+    res.render('auth/profile', {
+      path: '/profile',
+      pageTitle: 'Edit Profile',
+      cart_items,
+      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      errorMessage: message,
+      oldInput: {
+        email: req.user.email,
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        address_line1: req.user.address_line1,
+        address_line2: req.user.address_line2,
+        city: req.user.city,
+        state: req.user.state,
+        postalCode: req.user.postalCode,
+        country: req.user.country
+      },
+      validationErrors: []
+    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
   });
 };
 
