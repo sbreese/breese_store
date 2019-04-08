@@ -41,6 +41,8 @@ exports.getLogin = (req, res, next) => {
     validationErrors: []
   }).catch(err => {
     const error = new Error(err);
+    console.log("whoa, here is that error I mentioned");
+    console.log(error);
     error.httpStatusCode = 500;
     return next(error);
       // console.log(error);
