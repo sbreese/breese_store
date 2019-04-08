@@ -1,8 +1,36 @@
-<%- include('includes/headOLD.ejs') %>
-</head>
+<!-- HTML Head -->
+<%- include('includes/head.ejs') %>
+	
+	<!-- Header -->
+	<%- include('includes/header.ejs') %>
 
-<body>
-    <%- include('includes/navigation.ejs') %>
-    <h1>Page Not Found!</h1>
+	<!-- Cart -->
+    <%- include('includes/cart.ejs') %>
 
-<%- include('includes/end.ejs') %>
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+		<h2 class="ltext-105 cl0 txt-center">
+			About
+		</h2>
+	</section>	
+
+	<!-- Content page -->
+	<section class="bg0 p-t-75 p-b-120">
+		<div class="container">
+			<div class="row p-b-148">
+				<div class="col-md-7 col-lg-8">
+					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+                        <h1>Page Not Found!</h1>
+
+                    </div>
+                </div>
+			</div>
+		</div>
+	</section>	
+	
+
+	<!-- Footer -->
+	<%- include('includes/footer.ejs') %>
+
+<!-- Foot -->
+<%- include('includes/foot.ejs') %>

@@ -20,6 +20,36 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const ITEMS_PER_PAGE = 20;
 
+export.getShoppingCartData = req => {
+
+  return new Promise(function (resolve, reject) {
+    if (req.user) {
+      req.user
+      .populate('cart.items.product')
+      .execPopulate()
+      .then(user => {
+        const cart_items = user.cart.items;
+        resolve({
+          cart_items,
+          cart_total: sumPropertyValue(cart_items, 'quantity')
+        });
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    } else {
+      const cart_items = req.session.cart_items || [];
+      resolve({
+        cart_items,
+        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0
+      });
+    }
+  });
+
+}
+
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
