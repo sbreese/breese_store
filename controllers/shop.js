@@ -322,6 +322,8 @@ exports.getBlog = (req, res, next) => {
 
   shopController.getShoppingCartData(req)
     .then(user_cart => {
+      console.log("What is user cart?");
+      console.log(user_cart);
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
