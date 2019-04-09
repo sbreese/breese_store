@@ -436,44 +436,17 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getShoppingCart = (req, res, next) => {
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
 
-      const cart_items = user.cart.items;
-      let total = 0;
-      cart_items.forEach(p => {
-        total += p.quantity * p.product.price;
-      });
-
-      res.render('newDesign/shopping-cart', {
-        cart_items,
-        cart_total: sumPropertyValue(cart_items, 'quantity'),
-        totalSum: formatter.format(total),
-        pageTitle: 'Shopping Cart',
-        path: '/shopping-cart'
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-
-    
-    const cart_items = req.session.cart_items || [];
-    
+  this.getShoppingCartData(req)
+  .then(user_cart => {
     let total = 0;
     cart_items.forEach(p => {
       total += p.quantity * p.product.price;
     });
 
     res.render('newDesign/shopping-cart', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
       totalSum: formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
@@ -482,7 +455,12 @@ exports.getShoppingCart = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 
 };
 
