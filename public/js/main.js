@@ -308,7 +308,8 @@
           .then(data => {
             console.log(data);
             if (data.linkToWishlist) {
-                $('.dis-block.icon-header-noti').replaceWith(data.linkToWishlist);
+                $('.dis-block.icon-header-noti').data('notify', 2);
+                // $('.dis-block.icon-header-noti').replaceWith(data.linkToWishlist);
             }
           })
           .catch(err => {
