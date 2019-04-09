@@ -322,6 +322,7 @@ exports.getProductDetail = (req, res, next) => {
 
 exports.getBlog = (req, res, next) => {
 
+  console.log("We should at least see this!");
   shopController.getShoppingCartData(req)
     .then(user_cart => {
       console.log("What is user cart?");
