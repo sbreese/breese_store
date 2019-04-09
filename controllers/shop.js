@@ -534,15 +534,12 @@ exports.patchCartQtyChange = (req, res, next) => {
         quantity: qtyChange
       });
     }
-    console.log("Should not get here 1");
     return req.session.cart_items = updatedCartItems;
 
   } else {
-    console.log("Should not get here 2");
     req.user.addQtyToCart(product, qtyChange);
     return req.user.cart.items;
   }
-  console.log("Should not get here 3");
 
   })
   .then(cart_items => {
@@ -607,10 +604,12 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
         error.httpStatusCode = 500;
         return next(error);
       });
+      console.log("Should not get here 1");
     } else {
       req.user
       .removeProductFromWishlist(prodId)
       .then(result => {
+        console.log("Should not get here 2");
         return result.cart.wishlist;
       })
       .catch(err => {
@@ -618,8 +617,9 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
         error.httpStatusCode = 500;
         return next(error);
       });
+      console.log("Should not get here 3");
     }
-
+    console.log("Should not get here 4");
 
   } else {
     // for guests, check if product already exists in wishlist
