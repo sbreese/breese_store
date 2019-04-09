@@ -639,9 +639,9 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   }
 
   })
-  .then(saved_user => {
+  .then(wishlist => {
     console.log("OK, lets see what we got in 2nd phase?");
-    console.log(saved_user);
+    console.log(wishlist);
 
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
       wishlist_total: wishlist.length
