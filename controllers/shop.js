@@ -595,8 +595,8 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     if (add) {
       req.user
       .addProductToWishlist(prodId)
-      .then(result => {
-        return result.cart.wishlist;
+      .then(wishlist => {
+        return wishlist;
       })
       .catch(err => {
         const error = new Error(err);
