@@ -585,8 +585,7 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   const prodId = req.params.productId;
   const add = Number(req.params.add);
 
-  console.log("OK, lets see what we got here?");
-  console.log(prodId);
+  
   console.log("|"+add+"|");
   Product.findById(prodId)
   .then(product => {
@@ -644,6 +643,9 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
 
   })
   .then(wishlist => {
+    console.log("OK, lets see what we got in 2nd phase?");
+    console.log(wishlist);
+
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
       wishlist_total: wishlist.length
     }, {}, (err, linkToWishlist) => {
