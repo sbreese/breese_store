@@ -329,13 +329,13 @@
         const prodId = $(this).parent().children('[name=productId]').val();
         const csrf = $(this).parent().children('[name=_csrf]').val();
         $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !" + prodId + "|" + csrf + "|", "success");
 
             if ($(this).hasClass('js-addedwish-b2')) {
                 $(this).removeClass('js-addedwish-b2');
                 addRemoveFromWishlist(prodId, 0, csrf);
             } else {
                 $(this).addClass('js-addedwish-b2');
+                swal(nameProduct, "is added to wishlist !", "success");
                 addRemoveFromWishlist(prodId, 1, csrf);
             }
             // $(this).off('click');
