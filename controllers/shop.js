@@ -31,7 +31,8 @@ exports.getShoppingCartData = req => {
         const cart_items = user.cart.items;
         resolve({
           cart_items,
-          cart_total: sumPropertyValue(cart_items, 'quantity')
+          cart_total: sumPropertyValue(cart_items, 'quantity'),
+          wishlist_total: user.cart.wishlist.length
         });
       })
       .catch(err => {
@@ -43,7 +44,8 @@ exports.getShoppingCartData = req => {
       const cart_items = req.session.cart_items || [];
       resolve({
         cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0
+        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        wishlist_total: req.session.wishlist && req.session.wishlist.length || 0
       });
     }
   });
