@@ -320,11 +320,8 @@ exports.getProductDetail = (req, res, next) => {
 
 exports.getBlog = (req, res, next) => {
 
-  console.log("We should at least see this!");
   this.getShoppingCartData(req)
     .then(user_cart => {
-      console.log("What is user cart?");
-      console.log(user_cart);
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
@@ -346,16 +343,17 @@ exports.getBlog = (req, res, next) => {
 
 exports.getBlogDetail = (req, res, next) => {
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
+  this.getShoppingCartData(req)
+    .then(user_cart => {
       res.render('newDesign/blog-detail', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        cart_items: user_cart.cart_items,
+        cart_total: user_cart.cart_total,
         pageTitle: 'Blog Detail',
         path: '/blog-detail'
+      }).catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
     })
     .catch(err => {
@@ -363,19 +361,6 @@ exports.getBlogDetail = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  } else {
-    const cart_items = req.session.cart_items || [];
-    res.render('newDesign/blog-detail', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      pageTitle: 'Blog Detail',
-      path: '/blog-detail'
-    }).catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  }
 };
 
 exports.getAbout = (req, res, next) => {
@@ -613,16 +598,12 @@ exports.patchCartQtyChange = (req, res, next) => {
     return req.session.cart_items = updatedCartItems;
 
   } else {
-        // if (qtyChange > 0) {
-          req.user.addQtyToCart(product, qtyChange);
-          return req.user.cart.items;
-        // }
+    req.user.addQtyToCart(product, qtyChange);
+    return req.user.cart.items;
   }
 
   })
   .then(cart_items => {
-    console.log("So, what do I have here?");
-    console.log(cart_items);
     ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
