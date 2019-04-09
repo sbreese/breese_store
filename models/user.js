@@ -145,8 +145,11 @@ userSchema.methods.addProductToWishlist = function(prod_id) {
   });
   if (!alreadyExists) {
     this.cart.wishlist.push(prod_id);
+    console.log("OK I pushed it!");
+    return this.save();
   }
-  return this.save();
+  console.log("OK, I did not push it. :-(");
+  return this;
 };
 
 userSchema.methods.removeProductFromWishlist = function(product) {
