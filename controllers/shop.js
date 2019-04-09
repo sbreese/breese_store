@@ -268,30 +268,11 @@ exports.getProductDetail = (req, res, next) => {
     Product.findById(prodId)
     .then(product => {
 
-      if (req.user) {
-        req.user
-        .populate('cart.items.product')
-        .execPopulate()
-        .then(user => {
-          res.render('newDesign/product-detail', {
-            cart_items: user.cart.items,
-            cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-            products: products,
-            product: product,
-            pageTitle: product.title,
-            path: '/product-detail'
-          });
-        })
-        .catch(err => {
-          const error = new Error(err);
-          error.httpStatusCode = 500;
-          return next(error);
-        });
-      } else {
-        const cart_items = req.session.cart_items || [];
+      this.getShoppingCartData(req)
+      .then(user_cart => {
         res.render('newDesign/product-detail', {
-          cart_items,
-          cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+          cart_items: user_cart.cart_items,
+          cart_total: user_cart.cart_total,
           products: products,
           product: product,
           pageTitle: product.title,
@@ -301,7 +282,12 @@ exports.getProductDetail = (req, res, next) => {
           error.httpStatusCode = 500;
           return next(error);
         });
-      }
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
 
     })
     .catch(err => {
