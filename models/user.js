@@ -143,14 +143,13 @@ userSchema.methods.addProductToWishlist = function(prod_id) {
   const alreadyExists = this.cart.wishlist.some(item => {
     return item._id.toString() === prod_id;
   });
-  console.log("1 if it exists:", alreadyExists);
+  console.log("true if it exists:", alreadyExists);
   if (!alreadyExists) {
     this.cart.wishlist.push(prod_id);
     console.log("OK I pushed it!");
-    return this.save();
   }
-  console.log("OK, I did not push it. :-(");
-  return this;
+  console.log("Now we will save and return");
+  return this.save();
 };
 
 userSchema.methods.removeProductFromWishlist = function(product) {
