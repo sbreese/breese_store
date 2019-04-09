@@ -150,9 +150,9 @@ userSchema.methods.addProductToWishlist = function(prod_id) {
   return this.save();
 };
 
-userSchema.methods.removeProductFromWishlist = function(product) {
+userSchema.methods.removeProductFromWishlist = function(prod_id) {
   const updatedWishlistItems = this.cart.wishlist.filter(item => {
-    return item._id.toString() !== product;
+    return item._id.toString() !== prod_id;
   });
   this.cart.wishlist = updatedWishlistItems;
   return this.save();

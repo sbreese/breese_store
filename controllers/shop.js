@@ -565,19 +565,13 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     if (add) {
       req.user.addProductToWishlist(prodId);
       return req.user.cart.wishlist;
-
-      console.log("Should not get here 1");
     } else {
-      console.log("OK, lets remove this shit:", prodId);
       req.user.removeProductFromWishlist(prodId);
-      
-        console.log("what is wishlist now after removal", req.user.cart.wishlist);
-        return req.user.cart.wishlist;
-      console.log("Should def not get here 3");
+      return req.user.cart.wishlist;
     }
-    console.log("Should not get here 4");
-
   } else {
+    console.log("OK, lets add or remove this shit:", prodId);
+    console.log("Pre add/remove:", req.session.wishlist);
     // for guests, check if product already exists in wishlist
     let wishlistProductIndex = -1;
     if (req.session.wishlist && req.session.wishlist.length > 0) {
