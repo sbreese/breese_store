@@ -615,8 +615,13 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
       wishlist_total: wishlist.length
     }, {}, (err, linkToWishlist) => {
-        res.status(200).json({ message: 'Success!', linkToWishlist });
-    })
+      ejs.renderFile('/app/views/includes/link-to-wishlist-mobile.ejs', {
+        wishlist_total: wishlist.length
+      }, {}, (err, linkToWishlistMobile) => {
+        res.status(200).json({ message: 'Success!', linkToWishlist, linkToWishlistMobile });
+      });
+    });
+
   })
   .catch(err => {
     const error = new Error(err);
