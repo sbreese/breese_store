@@ -211,15 +211,13 @@ exports.getProductPage = (req, res, next) => {
     })
     .then(products => {
 
-      if (req.user) {
-        req.user
-        .populate('cart.items.product')
-        .execPopulate()
-        .then(user => {
+      this.getShoppingCartData(req)
+      .then(user_cart => {
           res.render('newDesign/product', {
             products,
-            cart_items: user.cart.items,
-            cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+            cart_items: user_cart.cart_items,
+            cart_total: user_cart.cart_total,
+            wishlist_total: user_cart.wishlist_total,
             categories,
             pageTitle: 'Product',
             path: '/product',
@@ -236,23 +234,6 @@ exports.getProductPage = (req, res, next) => {
           error.httpStatusCode = 500;
           return next(error);
         });
-      } else {
-        const cart_items = req.session.cart_items || [];
-        res.render('newDesign/product', {
-          products,
-          cart_items,
-          cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-          categories,
-          pageTitle: 'Product',
-          path: '/product',
-          currentPage: page,
-          hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-          hasPreviousPage: page > 1,
-          nextPage: page + 1,
-          previousPage: page - 1,
-          lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
-        });
-      }
     })
   })
   .catch(err => {
