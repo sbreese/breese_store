@@ -171,7 +171,7 @@ exports.getIndex = (req, res, next) => {
           products,
           cart_items,
           cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-          wishlist_total: 0,
+          wishlist_total: req.session.wishlist && req.session.wishlist.length || 0,
           categories,
           seasonYear: getSeasonYear(),
           pageTitle: 'Shop',
