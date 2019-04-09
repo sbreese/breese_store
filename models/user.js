@@ -115,7 +115,8 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
     });
   }
   const updatedCart = {
-    items: updatedCartItems
+    items: updatedCartItems,
+    ...updatedCart
   };
   this.cart = updatedCart;
   return this.save();
