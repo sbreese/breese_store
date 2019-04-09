@@ -564,14 +564,14 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
 
     if (add) {
       req.user.addProductToWishlist(prodId);
-      console.log("What did I get back?", req.user.cart.wishlist);
       return req.user.cart.wishlist;
 
       console.log("Should not get here 1");
     } else {
+      console.log("OK, lets remove this shit:", prodId);
       req.user.removeProductFromWishlist(prodId);
       
-        console.log("what is wishlist now", req.user.cart.wishlist);
+        console.log("what is wishlist now after removal", req.user.cart.wishlist);
         return req.user.cart.wishlist;
       console.log("Should def not get here 3");
     }
