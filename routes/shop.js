@@ -25,6 +25,9 @@ router.get('/products/:productId', shopController.getProduct);
 // /change-cart/:productId/:qtyChange => PATCH
 router.patch('/change-cart/:productId/:qtyChange', shopController.patchCartQtyChange);
 
+// /wishlist/:productId/:add => PATCH
+router.patch('/wishlist/:productId/:add', shopController.patchAddRemoveFromWishlist);
+
 // router.get('/cart', isAuth, shopController.getCart);
 router.get('/cart', shopController.getCart); // OLD
 router.get('/shopping-cart', shopController.getShoppingCart); // NEW

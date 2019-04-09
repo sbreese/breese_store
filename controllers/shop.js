@@ -581,6 +581,82 @@ exports.patchCartQtyChange = (req, res, next) => {
   });
 };
 
+exports.patchAddRemoveFromWishlist = (req, res, next) => {
+  const prodId = req.params.productId;
+  const add = Number(req.params.add);
+
+  console.log("OK, lets see what we got here?");
+  console.log(prodId);
+  console.log("|"+add+"|");
+  Product.findById(prodId)
+  .then(product => {
+
+  if (req.user) {
+
+    if (add) {
+      req.user
+      .addProductToWishlist(prodId)
+      .then(result => {
+        return result.cart.wishlist;
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    } else {
+      req.user
+      .removeProductFromWishlist(prodId)
+      .then(result => {
+        return result.cart.wishlist;
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    }
+
+
+  } else {
+    // for guests, check if product already exists in wishlist
+    let wishlistProductIndex = -1;
+    if (req.session.wishlist && req.session.wishlist.length > 0) {
+      
+      wishlistProductIndex = req.session.wishlist.findIndex(wl => {
+        return wl._id.toString() === prodId;
+      });
+    } else {
+      req.session.wishlist = [];
+    }
+    if (wishlistProductIndex === -1 && add) {
+      // add to session wishlist
+      return req.session.wishlist.push(prodId);
+    } else {
+      // remove from session wishlist
+      return req.session.wishlist.filter(item => {
+        console.log("Lets check if this is existing (equals above):");
+        console.log(`${item.product._id.toString()} == ${prodId}`);
+        return item._id.toString() !== prodId;
+      });
+    }
+  }
+
+  })
+  .then(wishlist => {
+    ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
+      wishlist_total: wishlist.length
+    }, {}, (err, linkToWishlist) => {
+        res.status(200).json({ message: 'Success!', linkToWishlist });
+    })
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
+
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   if (req.user) {

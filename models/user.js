@@ -144,6 +144,14 @@ userSchema.methods.addProductToWishlist = function(prod_id) {
   return this.save();
 };
 
+userSchema.methods.removeProductFromWishlist = function(product) {
+  const updatedWishlistItems = this.cart.wishlist.filter(item => {
+    return item._id.toString() !== product;
+  });
+  this.cart.wishlist = updatedWishlistItems;
+  return this.save();
+};
+
 module.exports = mongoose.model('User', userSchema, 'breeseMethodUsers');
 
 // const mongodb = require('mongodb');

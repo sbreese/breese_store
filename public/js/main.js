@@ -292,6 +292,53 @@
     });
 
     /*==================================================================
+    [ +/- add-to-wishlist ]*/
+
+    const addRemoveFromWishlist = (prodId, add, csrf) => {
+      
+        fetch(`/wishlist/${prodId}/${add}`, {
+          method: 'PATCH',
+          headers: {
+            'csrf-token': csrf
+          }
+        })
+          .then(result => {
+            return result.json();
+          })
+          .then(data => {
+            console.log(data);
+            if (data.linkToWishlist) {
+                $('.dis-block.icon-header-noti').replaceWith(data.linkToWishlist);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
+
+    $('.js-addwish-b2').on('click', function(e){
+        e.preventDefault();
+    });
+
+    $('.js-addwish-b2').each(function(){
+        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+        //let prod_id = $(this).attr('id');
+        const prodId = $(this).parent().children('[name=productId]').val();
+        const csrf = $(this).parent().children('[name=_csrf]').val();
+        $(this).on('click', function(){
+            swal(nameProduct, "is added to wishlist !" + prodId + "|" + csrf + "|", "success");
+
+            if ($(this).hasClass('js-addedwish-b2')) {
+                $(this).removeClass('js-addedwish-b2');
+                addRemoveFromWishlist(prodId, 0, csrf);
+            } else {
+                $(this).addClass('js-addedwish-b2');
+                addRemoveFromWishlist(prodId, 1, csrf);
+            }
+            // $(this).off('click');
+        });
+    });
+    /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
         var item = $(this).find('.item-rating');
