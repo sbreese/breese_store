@@ -217,7 +217,7 @@ exports.getProductPage = (req, res, next) => {
             products,
             cart_items: user.cart.items,
             cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-            wishlist_total: user.cart.wishlist.length,
+            wishlist_total: user.cart.wishlist && user.cart.wishlist.length,
             categories,
             pageTitle: 'Product',
             path: '/product',
