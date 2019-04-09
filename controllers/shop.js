@@ -365,29 +365,11 @@ exports.getBlogDetail = (req, res, next) => {
 
 exports.getAbout = (req, res, next) => {
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
-      const cart_items = user.cart.items;
-      res.render('newDesign/about', {
-        cart_items,
-        cart_total: sumPropertyValue(cart_items, 'quantity'),
-        pageTitle: 'About',
-        path: '/about'
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-    const cart_items = req.session.cart_items || [];
+  this.getShoppingCartData(req)
+    .then(user_cart => {
     res.render('newDesign/about', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -395,7 +377,12 @@ exports.getAbout = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getContact = (req, res, next) => {
