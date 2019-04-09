@@ -141,7 +141,7 @@ userSchema.methods.clearCart = function() {
 
 userSchema.methods.addProductToWishlist = function(prod_id) {
   const alreadyExists = this.cart.wishlist.some(item => {
-    return item._id.toString() === product;
+    return item._id.toString() === prod_id;
   });
   console.log("1 if it exists:", alreadyExists);
   if (!alreadyExists) {
