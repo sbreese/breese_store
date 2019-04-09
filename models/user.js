@@ -140,7 +140,10 @@ userSchema.methods.clearCart = function() {
 };
 
 userSchema.methods.addProductToWishlist = function(prod_id) {
-  if (!this.cart.wishlist.includes(prod_id)) {
+  const alreadyExists = this.cart.wishlist.some(item => {
+    return item._id.toString() === product;
+  });
+  if (!alreadyExists) {
     this.cart.wishlist.push(prod_id);
   }
   return this.save();
