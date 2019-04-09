@@ -593,17 +593,10 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   if (req.user) {
 
     if (add) {
-      req.user
-      .addProductToWishlist(prodId)
-      .then(saved_user => {
-        console.log("What did I get back?", saved_user.cart.wishlist);
-        return saved_user;
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
+      req.user.addProductToWishlist(prodId);
+      console.log("What did I get back?", saved_user.cart.wishlist);
+      return req.user.cart.wishlist;
+
       console.log("Should not get here 1");
     } else {
       req.user
