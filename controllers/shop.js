@@ -387,28 +387,11 @@ exports.getAbout = (req, res, next) => {
 
 exports.getContact = (req, res, next) => {
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
-      res.render('newDesign/contact', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-        pageTitle: 'Contact',
-        path: '/contact'
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-    const cart_items = req.session.cart_items || [];
+  this.getShoppingCartData(req)
+    .then(user_cart => {
     res.render('newDesign/contact', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -416,7 +399,12 @@ exports.getContact = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getCart = (req, res, next) => {
