@@ -62,9 +62,10 @@
 
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+			let prod_id = $(this).attr('id');
 
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
+				swal(nameProduct, "is added to wishlist !" + prod_id, "success");
 
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');

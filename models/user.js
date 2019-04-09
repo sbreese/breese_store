@@ -55,7 +55,8 @@ const userSchema = new Schema({
         },
         quantity: { type: Number, required: true }
       }
-    ]
+    ],
+    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
   },
   access_level: {
     type: Number,
@@ -135,6 +136,11 @@ userSchema.methods.removeFromCart = function(product) {
 
 userSchema.methods.clearCart = function() {
   this.cart = { items: [] };
+  return this.save();
+};
+
+userSchema.methods.addProductToWishlist = function(prod_id) {
+  this.cart.wishlist.push(prod_id);
   return this.save();
 };
 
