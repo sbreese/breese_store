@@ -24,8 +24,6 @@ exports.getShoppingCartData = req => {
 
   return new Promise((resolve, reject) => {
     if (req.user) {
-      console.log("Here is req user");
-      console.log(req.user);
       req.user
       .populate('cart.items.product')
       .execPopulate()
@@ -622,7 +620,8 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   })
   .then(cart_items => {
-
+    console.log("So, what do I have here?");
+    console.log(cart_items);
     ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
