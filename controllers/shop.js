@@ -596,7 +596,7 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
       req.user
       .addProductToWishlist(prodId)
       .then(saved_user => {
-        console.log("What did I get back?", saved_user);
+        console.log("What did I get back?", saved_user.cart.wishlist);
         return saved_user;
       })
       .catch(err => {
@@ -643,9 +643,9 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   }
 
   })
-  .then(wishlist => {
+  .then(saved_user => {
     console.log("OK, lets see what we got in 2nd phase?");
-    console.log(wishlist);
+    console.log(saved_user);
 
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
       wishlist_total: wishlist.length
