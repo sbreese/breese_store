@@ -277,6 +277,7 @@ exports.getProductDetail = (req, res, next) => {
         res.render('newDesign/product-detail', {
           cart_items: user_cart.cart_items,
           cart_total: user_cart.cart_total,
+          wishlist_total: user_cart.wishlist_total,
           products: products,
           product: product,
           pageTitle: product.title,
@@ -315,6 +316,7 @@ exports.getBlog = (req, res, next) => {
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      wishlist_total: user_cart.wishlist_total,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -338,6 +340,7 @@ exports.getBlogDetail = (req, res, next) => {
       res.render('newDesign/blog-detail', {
         cart_items: user_cart.cart_items,
         cart_total: user_cart.cart_total,
+        wishlist_total: user_cart.wishlist_total,
         pageTitle: 'Blog Detail',
         path: '/blog-detail'
       }).catch(err => {
@@ -360,6 +363,7 @@ exports.getAbout = (req, res, next) => {
     res.render('newDesign/about', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      wishlist_total: user_cart.wishlist_total,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -382,6 +386,7 @@ exports.getContact = (req, res, next) => {
     res.render('newDesign/contact', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      wishlist_total: user_cart.wishlist_total,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -437,6 +442,7 @@ exports.getShoppingCart = (req, res, next) => {
     res.render('newDesign/shopping-cart', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      wishlist_total: user_cart.wishlist_total,
       totalSum: formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
