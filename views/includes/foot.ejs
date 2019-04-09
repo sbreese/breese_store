@@ -65,7 +65,7 @@
 			let prod_id = $(this).attr('id');
 
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !" + prod_id, "success");
+				swal(nameProduct, "is added to wishlist !" + prod_id + "|", "success");
 
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
