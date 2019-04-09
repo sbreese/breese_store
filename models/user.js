@@ -143,6 +143,7 @@ userSchema.methods.addProductToWishlist = function(prod_id) {
   const alreadyExists = this.cart.wishlist.some(item => {
     return item._id.toString() === product;
   });
+  console.log("1 if it exists:", alreadyExists);
   if (!alreadyExists) {
     this.cart.wishlist.push(prod_id);
     console.log("OK I pushed it!");
