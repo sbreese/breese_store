@@ -236,7 +236,10 @@
             if (data.showCart) {
                 $('.limiter-menu-desktop .js-show-cart').replaceWith(data.showCart);
             }
+            console.log("Here is what showCartMobile is!");
+            console.log(data.showCartMobile);
             if (data.showCartMobile) {
+                console.log($('.wrap-header-mobile .js-show-cart').length);
                 $('.wrap-header-mobile .js-show-cart').replaceWith(data.showCartMobile);
             }
           })
