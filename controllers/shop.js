@@ -614,7 +614,8 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   } else {
         // if (qtyChange > 0) {
-          return req.user.addQtyToCart(product, qtyChange);
+          req.user.addQtyToCart(product, qtyChange);
+          return req.user.cart.items;
         // }
   }
 
