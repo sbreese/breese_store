@@ -22,7 +22,7 @@ const ITEMS_PER_PAGE = 20;
 
 exports.getShoppingCartData = req => {
 
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (req.user) {
       req.user
       .populate('cart.items.product')
@@ -37,7 +37,7 @@ exports.getShoppingCartData = req => {
       .catch(err => {
         const error = new Error(err);
         error.httpStatusCode = 500;
-        return next(error);
+        reject(error);
       });
     } else {
       const cart_items = req.session.cart_items || [];
@@ -320,28 +320,11 @@ exports.getProductDetail = (req, res, next) => {
 
 exports.getBlog = (req, res, next) => {
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
-      res.render('newDesign/blog', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
-        pageTitle: 'Blog',
-        path: '/blog'
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-    const cart_items = req.session.cart_items || [];
+  shopController.getShoppingCartData(req)
+    .then(user_cart => {
     res.render('newDesign/blog', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -349,7 +332,13 @@ exports.getBlog = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
-  }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+
 };
 
 exports.getBlogDetail = (req, res, next) => {
