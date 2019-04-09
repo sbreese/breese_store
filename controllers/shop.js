@@ -32,7 +32,7 @@ exports.getShoppingCartData = req => {
         resolve({
           cart_items,
           cart_total: sumPropertyValue(cart_items, 'quantity'),
-          wishlist_total: user.cart.wishlist.length
+          wishlist: user.cart.wishlist
         });
       })
       .catch(err => {
@@ -45,7 +45,7 @@ exports.getShoppingCartData = req => {
       resolve({
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-        wishlist_total: req.session.wishlist && req.session.wishlist.length || 0
+        wishlist: req.session.wishlist && req.session.wishlist.length || []
       });
     }
   });
@@ -146,7 +146,7 @@ exports.getIndex = (req, res, next) => {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
-            wishlist_total: user_cart.wishlist_total,
+            wishlist: user_cart.wishlist,
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
@@ -195,7 +195,7 @@ exports.getProductPage = (req, res, next) => {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
-            wishlist_total: user_cart.wishlist_total,
+            wishlist: user_cart.wishlist,
             categories,
             pageTitle: 'Product',
             path: '/product',
@@ -236,7 +236,7 @@ exports.getProductDetail = (req, res, next) => {
         res.render('newDesign/product-detail', {
           cart_items: user_cart.cart_items,
           cart_total: user_cart.cart_total,
-          wishlist_total: user_cart.wishlist_total,
+          wishlist: user_cart.wishlist,
           products: products,
           product: product,
           pageTitle: product.title,
@@ -275,7 +275,7 @@ exports.getBlog = (req, res, next) => {
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
-      wishlist_total: user_cart.wishlist_total,
+      wishlist: user_cart.wishlist,
       pageTitle: 'Blog',
       path: '/blog'
     }).catch(err => {
@@ -299,7 +299,7 @@ exports.getBlogDetail = (req, res, next) => {
       res.render('newDesign/blog-detail', {
         cart_items: user_cart.cart_items,
         cart_total: user_cart.cart_total,
-        wishlist_total: user_cart.wishlist_total,
+        wishlist: user_cart.wishlist,
         pageTitle: 'Blog Detail',
         path: '/blog-detail'
       }).catch(err => {
@@ -322,7 +322,7 @@ exports.getAbout = (req, res, next) => {
     res.render('newDesign/about', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
-      wishlist_total: user_cart.wishlist_total,
+      wishlist: user_cart.wishlist,
       pageTitle: 'Shop',
       path: '/about'
     }).catch(err => {
@@ -345,7 +345,7 @@ exports.getContact = (req, res, next) => {
     res.render('newDesign/contact', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
-      wishlist_total: user_cart.wishlist_total,
+      wishlist: user_cart.wishlist,
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {
@@ -401,7 +401,7 @@ exports.getShoppingCart = (req, res, next) => {
     res.render('newDesign/shopping-cart', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
-      wishlist_total: user_cart.wishlist_total,
+      wishlist: user_cart.wishlist,
       totalSum: formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
@@ -568,18 +568,11 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
 
       console.log("Should not get here 1");
     } else {
-      req.user
-      .removeProductFromWishlist(prodId)
-      .then(result => {
-        console.log("Should not get here 2");
-        return result.cart.wishlist;
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-      });
-      console.log("Should not get here 3");
+      req.user.removeProductFromWishlist(prodId);
+      
+        console.log("what is wishlist now", req.user.cart.wishlist);
+        return req.user.cart.wishlist;
+      console.log("Should def not get here 3");
     }
     console.log("Should not get here 4");
 
@@ -613,10 +606,10 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     console.log(wishlist);
 
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
-      wishlist_total: wishlist.length
+      wishlist
     }, {}, (err, linkToWishlist) => {
       ejs.renderFile('/app/views/includes/link-to-wishlist-mobile.ejs', {
-        wishlist_total: wishlist.length
+        wishlist
       }, {}, (err, linkToWishlistMobile) => {
         res.status(200).json({ message: 'Success!', linkToWishlist, linkToWishlistMobile });
       });
