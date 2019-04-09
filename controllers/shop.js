@@ -24,6 +24,8 @@ exports.getShoppingCartData = req => {
 
   return new Promise((resolve, reject) => {
     if (req.user) {
+      console.log("Here is req user");
+      console.log(req.user);
       req.user
       .populate('cart.items.product')
       .execPopulate()
