@@ -308,10 +308,10 @@
           .then(data => {
             console.log(data);
             if (data.linkToWishlist) {
-                $('.icon-header-item.p-l-22.icon-header-noti').replaceWith(data.linkToWishlist);
+                $('.dis-block.p-l-22.icon-header-noti').replaceWith(data.linkToWishlist);
             }
             if (data.linkToWishlistMobile) {
-                $('.icon-header-item.p-l-10.icon-header-noti').replaceWith(data.linkToWishlistMobile);
+                $('.dis-block.p-l-10.icon-header-noti').replaceWith(data.linkToWishlistMobile);
             }
           })
           .catch(err => {
