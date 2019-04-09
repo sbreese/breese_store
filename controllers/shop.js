@@ -534,12 +534,15 @@ exports.patchCartQtyChange = (req, res, next) => {
         quantity: qtyChange
       });
     }
+    console.log("Should not get here 1");
     return req.session.cart_items = updatedCartItems;
 
   } else {
+    console.log("Should not get here 2");
     req.user.addQtyToCart(product, qtyChange);
     return req.user.cart.items;
   }
+  console.log("Should not get here 3");
 
   })
   .then(cart_items => {
