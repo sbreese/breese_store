@@ -142,7 +142,7 @@ exports.getIndex = (req, res, next) => {
 
       this.getShoppingCartData(req)
       .then(user_cart => {
-        console.log("Heres what sending for wishlist:", user_cart.wishlist);
+        console.log("Heres what sending for wishlist:", user_cart);
           res.render('newDesign/index', {
             products,
             cart_items: user_cart.cart_items,
