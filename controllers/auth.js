@@ -400,6 +400,7 @@ exports.postLogin = (req, res, next) => {
           if (req.session.wishlist && req.session.wishlist.length) {
             const bothWishArr = [req.session.wishlist,user.cart.wishlist];
             user.cart.wishlist = [...new Set([].concat(...bothWishArr))];
+            user.cart.wishlist = [...new Set(user.cart.wishlist)];
             req.session.wishlist = [];
             user.save();
           }
