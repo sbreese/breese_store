@@ -506,13 +506,14 @@ console.log(req.session.cart_items)
     })
     .then(user => {
 
+      console.log("Here is user:", user);
       // steves additions            
       req.session.isLoggedIn = true;
       req.session.user = user;
       req.session.wishlist = [];
 
       let signUpRedirect = '/';
-      if (req.session.cart_items.length) {
+      if (req.session.cart_items && req.session.cart_items.length) {
         req.session.cart_items = [];
         signUpRedirect += 'checkout';
       }
