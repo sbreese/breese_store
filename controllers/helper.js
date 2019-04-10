@@ -7,8 +7,8 @@ exports.formatter = new Intl.NumberFormat('en-US', {
 
 exports.calcTotalPrice = cart_items => {
     let total = 0;
-    user_cart.cart_items.forEach(p => {
-    total += p.quantity * p.product.price;
+    cart_items.forEach(p => {
+        total += p.quantity * p.product.price;
     });
     return this.formatter.format(total);
 }
