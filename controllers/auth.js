@@ -134,9 +134,18 @@ exports.getShippingAddress = (req, res, next) => {
     });
   } else {
     const cart_items = req.session.cart_items || [];
+    const wishlist = req.session.wishlist || [];
+    let total = 0;
+    cart_items.forEach(p => {
+      total += p.quantity * p.product.price;
+    });
+    const totalSum = formatter.format(total);
+
     res.render('newDesign/checkout-shipping-address', {
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      wishlist,
+      totalSum,
       pageTitle: 'Checkout - Shipping Address',
       path: '/checkout-shipping-address',
       errorMessage: message,
