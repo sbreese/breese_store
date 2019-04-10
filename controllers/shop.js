@@ -565,6 +565,7 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
       }
     } else {
       // for guests, check if product already exists in wishlist
+      console.log("OK we are not logged in!");
       let wishlistProductIndex = -1;
       if (req.session.wishlist && req.session.wishlist.length > 0) {
         
@@ -574,6 +575,9 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
       }
       if (wishlistProductIndex === -1 && add) {
         // add to session wishlist
+        if (!req.session.wishlist) {
+          req.session.wishlist = [];
+        }
         req.session.wishlist.push({_id: prodId});
       } 
       if (!add) {
