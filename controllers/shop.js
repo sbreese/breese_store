@@ -142,11 +142,18 @@ exports.getIndex = (req, res, next) => {
 
       this.getShoppingCartData(req)
       .then(user_cart => {
-        // console.log("Heres what sending for wishlist:", user_cart);
+        
+        let total = 0;
+        cart_items.forEach(p => {
+          total += p.quantity * p.product.price;
+        });
+        const totalSum = formatter.format(total);
+
           res.render('newDesign/index', {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
+            totalSum,
             wishlist: user_cart.wishlist,
             categories,
             seasonYear: getSeasonYear(),
