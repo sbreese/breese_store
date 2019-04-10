@@ -185,6 +185,7 @@ exports.getEditAccount = (req, res, next) => {
       wishlist,
       errorMessage: message,
       oldInput: {
+        access_level: req.user.access_level,
         email: req.user.email,
         first_name: req.user.first_name,
         last_name: req.user.last_name,
@@ -225,6 +226,7 @@ exports.getConfirmInformation = (req, res, next) => {
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
       errorMessage: message,
       oldInput: {
+        access_level: req.user.access_level,
         email: user.email,
         first_name: user.first_name,
         last_name: user.last_name,
@@ -684,4 +686,25 @@ exports.postNewPassword = (req, res, next) => {
       return next(error);
     });
 
+};
+
+exports.deleteUser = (req, res, next) => {
+  
+  User.findById(req.session.user._id)
+    .then(user => {
+      if (!user) {
+        return next(new Error('User not found.'));
+      }
+      return User.deleteOne({ _id: req.session.user._id });
+    })
+    .then(() => {
+      console.log('DELETED USER');
+      req.session.destroy(err => {
+        console.log(err);
+        res.redirect('/');
+      });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Deleting user failed.' });
+    });
 };

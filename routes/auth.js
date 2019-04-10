@@ -68,6 +68,11 @@ router.post(
   authController.postLogin
 );
 
+router.post(
+  '/delete-account',
+  authController.deleteUser
+);
+
 // .normalizeEmail(),
 router.post(
   '/checkout-shipping-address',

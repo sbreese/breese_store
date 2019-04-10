@@ -94,7 +94,10 @@ exports.deleteUser = (req, res, next) => {
   User.findById(userId)
     .then(user => {
       if (!user) {
-        return next(new Error('Order not found.'));
+        return next(new Error('User not found.'));
+      }
+      if (user.access_level > 5) {
+        return next(new Error('Admin accounts cannot be deleted through the UI.'));
       }
       return User.deleteOne({ _id: userId });
     })
