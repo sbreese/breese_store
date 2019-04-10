@@ -5,7 +5,7 @@ exports.formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2
 });
 
-exports calcTotalPrice = cart_items => {
+exports.calcTotalPrice = cart_items => {
     let total = 0;
     user_cart.cart_items.forEach(p => {
     total += p.quantity * p.product.price;
