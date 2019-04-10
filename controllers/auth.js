@@ -479,8 +479,9 @@ exports.postSignup = (req, res, next) => {
       validationErrors: errors.array()
     });
   }
-console.log("Wow, no errors!  Here is wishlist:");
+console.log("Wow, no errors!  Here is wishlist & cart items:");
 console.log(req.session.wishlist);
+console.log(req.session.cart_items)
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
