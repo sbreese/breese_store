@@ -392,9 +392,16 @@ exports.postLogin = (req, res, next) => {
         })
         .then(user => {
           if (req.session.cart_items && req.session.cart_items.length) {
-            user.cart.items = req.session.cart_items;
+            const bothCartArr = [req.session.cart_items,user.cart.items];
+            user.cart.items = [...new Set([].concat(...bothCartArr))];
             req.session.cart_items = [];
-            return user.save();
+            user.save();
+          }
+          if (req.session.wishlist && req.session.wishlist.length) {
+            const bothWishArr = [req.session.wishlist,user.cart.wishlist];
+            user.cart.wishlist = [...new Set([].concat(...bothWishArr))];
+            req.session.wishlist = [];
+            user.save();
           }
           return user;
         })
