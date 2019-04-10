@@ -77,6 +77,7 @@ exports.getCreateUserAccount = (req, res, next) => {
     pageTitle: 'Create User Account',
     cart_items,
     cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+    wishlist: req.session.wishlist.length && req.session.wishlist || [],
     errorMessage: message,
     oldInput: {
       email: '',

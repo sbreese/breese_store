@@ -549,8 +549,6 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   const prodId = req.params.productId;
   const add = Number(req.params.add);
 
-  
-  console.log("|"+add+"|");
   Product.findById(prodId)
   .then(product => {
 
@@ -565,7 +563,6 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
       }
     } else {
       // for guests, check if product already exists in wishlist
-      console.log("OK we are not logged in!");
       let wishlistProductIndex = -1;
       if (req.session.wishlist && req.session.wishlist.length > 0) {
         
