@@ -147,7 +147,7 @@ exports.getIndex = (req, res, next) => {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
-            wishlist: [],
+            wishlist: user_cart.wishlist,
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
@@ -584,7 +584,7 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     }
     if (wishlistProductIndex === -1 && add) {
       // add to session wishlist
-      return req.session.wishlist.push(prodId);
+      return req.session.wishlist.push({_id: prodId});
     } else {
       // remove from session wishlist
       return req.session.wishlist.filter(item => {
