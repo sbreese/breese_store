@@ -393,7 +393,7 @@ exports.postLogin = (req, res, next) => {
         .then(user => {
           if (req.session.cart_items && req.session.cart_items.length) {
             // de-duplicate cart items
-            // user.cart.items = [...req.session.cart_items,...user.cart.items].filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index);
+            user.cart.items = [...req.session.cart_items,...user.cart.items].filter((thing, index, self) => self.findIndex(t => t.product._id.toString() === thing.product._id.toString()) === index);
             req.session.cart_items = [];
             user.save();
           }
