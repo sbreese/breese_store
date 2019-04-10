@@ -93,8 +93,7 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
     return cp.product._id.toString() === product._id.toString();
   });
   // let newQuantity = 1;
-  const updatedCartItems = this.cart.items;
-
+  let updatedCartItems = this.cart.items;
   
   console.log("Change " + qtyChange);
   if (cartProductIndex >= 0) {
