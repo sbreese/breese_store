@@ -8,13 +8,6 @@ const { validationResult } = require('express-validator/check');
 const User = require('../models/user');
 const helper = require('./helper');
 
-/*
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2
-});*/
-
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {

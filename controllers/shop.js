@@ -191,6 +191,7 @@ exports.getProductPage = (req, res, next) => {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
+            totalSum: helper.calcTotalPrice(user_cart.cart_items),
             wishlist: user_cart.wishlist,
             categories,
             pageTitle: 'Product',
@@ -344,6 +345,7 @@ exports.getContact = (req, res, next) => {
     res.render('newDesign/contact', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
       pageTitle: 'Contact',
       path: '/contact'
@@ -400,6 +402,7 @@ exports.getShoppingCart = (req, res, next) => {
     res.render('newDesign/shopping-cart', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
       totalSum: helper.formatter.format(total),
       pageTitle: 'Shopping Cart',
