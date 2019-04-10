@@ -8,15 +8,10 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 const Product = require('../models/product');
 const Order = require('../models/order');
 const Category = require('../models/category');
+const helper = require('./helper');
 
 // usage: sumPropertyValue(items, 'quantity')
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
-// usage: formatter.format(total)
-exports.formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2
-});
 
 const ITEMS_PER_PAGE = 20;
 
@@ -147,7 +142,7 @@ exports.getIndex = (req, res, next) => {
         user_cart.cart_items.forEach(p => {
           total += p.quantity * p.product.price;
         });
-        const totalSum = this.formatter.format(total);
+        const totalSum = helper.formatter.format(total);
 
           res.render('newDesign/index', {
             products,
@@ -410,7 +405,7 @@ exports.getShoppingCart = (req, res, next) => {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
       wishlist: user_cart.wishlist,
-      totalSum: formatter.format(total),
+      totalSum: helper.formatter.format(total),
       pageTitle: 'Shopping Cart',
       path: '/shopping-cart'
     }).catch(err => {
@@ -518,7 +513,7 @@ exports.patchCartQtyChange = (req, res, next) => {
     cart_items.forEach(p => {
       total += p.quantity * p.product.price;
     });
-    const totalSum = formatter.format(total);
+    const totalSum = helper.formatter.format(total);
 
     ejs.renderFile('/app/views/includes/cart.ejs', {
       cart_items, totalSum, csrfToken: req.csrfToken()
@@ -660,7 +655,7 @@ exports.getCheckout = (req, res, next) => {
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         wishlist,
-        totalSum: formatter.format(total)
+        totalSum: helper.formatter.format(total)
       });
     })
     .catch(err => {
@@ -754,7 +749,7 @@ console.log("Here is the orders:");
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         orders: user.orders,
-        totalSum: formatter.format(total)
+        totalSum: helper.formatter.format(total)
       });
     })
     .catch(err => {
@@ -815,11 +810,11 @@ exports.getInvoice = (req, res, next) => {
               ' - ' +
               prod.quantity +
               ' x ' +
-              formatter.format(prod.product.price)
+              helper.formatter.format(prod.product.price)
           );
       });
       pdfDoc.text('-----------------------');
-      pdfDoc.fontSize(20).text('Total Price: ' + formatter.format(totalPrice));
+      pdfDoc.fontSize(20).text('Total Price: ' + helper.formatter.format(totalPrice));
 
       pdfDoc.end();
       // fs.readFile(invoicePath, (err, data) => {

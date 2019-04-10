@@ -6,7 +6,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check');
 
 const User = require('../models/user');
-const shop = require('./shop');
+const helper = require('./helper');
 
 /*
 const formatter = new Intl.NumberFormat('en-US', {
@@ -116,7 +116,7 @@ exports.getShippingAddress = (req, res, next) => {
       user_cart.cart_items.forEach(p => {
         total += p.quantity * p.product.price;
       });
-      const totalSum = shop.formatter.format(total);
+      const totalSum = helper.formatter.format(total);
 
       res.render('newDesign/checkout-shipping-address', {
         cart_items: user.cart.items,
@@ -147,7 +147,7 @@ exports.getShippingAddress = (req, res, next) => {
     cart_items.forEach(p => {
       total += p.quantity * p.product.price;
     });
-    const totalSum = shop.formatter.format(total);
+    const totalSum = helper.formatter.format(total);
 
     res.render('newDesign/checkout-shipping-address', {
       cart_items,
