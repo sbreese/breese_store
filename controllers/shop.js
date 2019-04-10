@@ -533,9 +533,6 @@ exports.patchCartQtyChange = (req, res, next) => {
             cart_total
           }, {}, (err, showCartMobile) => {
 
-            console.log("Do we still got the cart?");
-            console.log(cart);
-
             res.status(200).json({ message: 'Success!', cart, fullCart, showCart, showCartMobile });
           })
 
