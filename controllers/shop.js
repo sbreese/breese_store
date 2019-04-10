@@ -583,11 +583,12 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
     if (wishlistProductIndex === -1 && add) {
       // add to session wishlist
       req.session.wishlist.push({_id: prodId});
-    } else {
+    } 
+    if (!add) {
       // remove from session wishlist
       req.session.wishlist = req.session.wishlist.filter(item => {
         console.log("Lets check if this is existing (equals above):");
-        console.log(`${item.product._id.toString()} == ${prodId}`);
+        console.log(`${item._id.toString()} == ${prodId}`);
         return item._id.toString() !== prodId;
       });
     }
