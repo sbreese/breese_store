@@ -271,6 +271,7 @@ exports.getBlog = (req, res, next) => {
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
       pageTitle: 'Blog',
       path: '/blog'
@@ -295,6 +296,7 @@ exports.getBlogDetail = (req, res, next) => {
       res.render('newDesign/blog-detail', {
         cart_items: user_cart.cart_items,
         cart_total: user_cart.cart_total,
+        totalSum: helper.calcTotalPrice(user_cart.cart_items),
         wishlist: user_cart.wishlist,
         pageTitle: 'Blog Detail',
         path: '/blog-detail'
