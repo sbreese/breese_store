@@ -511,6 +511,9 @@ exports.patchCartQtyChange = (req, res, next) => {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
 
+      console.log("Here is standard right cart:");
+      console.log(cart);
+
       let total = 0;
       cart_items.forEach(p => {
         total += p.quantity * p.product.price;
@@ -529,6 +532,10 @@ exports.patchCartQtyChange = (req, res, next) => {
           ejs.renderFile('/app/views/includes/show-cart-mobile.ejs', {
             cart_total
           }, {}, (err, showCartMobile) => {
+
+            console.log("Do we still got the cart?");
+            console.log(cart);
+
             res.status(200).json({ message: 'Success!', cart, fullCart, showCart, showCartMobile });
           })
 
