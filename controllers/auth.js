@@ -492,7 +492,10 @@ exports.postSignup = (req, res, next) => {
         state,
         postalCode,
         country,
-        cart: { items: req.session.cart_items.length ? req.session.cart_items : [] },
+        cart: { 
+          items: req.session.cart_items.length ? req.session.cart_items : [],
+          wishlist: req.session.wishlist.length ? req.session.wishlist : []
+        },
         access_level: 1
       });
       return user.save();
@@ -502,6 +505,7 @@ exports.postSignup = (req, res, next) => {
       // steves additions            
       req.session.isLoggedIn = true;
       req.session.user = user;
+      req.session.wishlist = [];
 
       let signUpRedirect = '/';
       if (req.session.cart_items.length) {
