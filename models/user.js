@@ -106,6 +106,7 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
     } else {
       // Change results in 0 or less products.  Remove from temp cart:
       updatedCartItems = this.cart.items.filter(item => {
+        console.log(`Does ${item.product._id.toString()} !== ${product._id.toString()}?`);
         return item.product._id.toString() !== product._id.toString();
       });
       console.log("Here is updatedCart Items:");
