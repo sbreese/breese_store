@@ -142,7 +142,7 @@
 
                     <form class="login-form" action="/delete-account" method="POST" novalidate>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button class="btn" type="submit" <%- oldInput.access_level > 5 && 'disabled ' %>onclick="confirm('Are you sure you want to delete your account?')">Delete Account</button>
+                        <button class="btn" type="submit" <%- oldInput.access_level > 5 ? 'disabled ' : '' %>onclick="confirm('Are you sure you want to delete your account?')">Delete Account</button>
                     </form>
                     <% if (oldInput.access_level > 5) { %>
                     <p>Delete Account action is disabled because you are an admin.</p>
