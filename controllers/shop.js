@@ -472,19 +472,15 @@ exports.patchCartQtyChange = (req, res, next) => {
   .then(product => {
 
   if (!req.user) {
-
-    // const productTitle = req.body.productTitle;
     
     let cartProductIndex = -1;
     if (req.session.cart_items && req.session.cart_items.length > 0) {
-      
       cartProductIndex = req.session.cart_items.findIndex(cp => {
         return cp.product._id.toString() === prodId;
       });
     } else {
       req.session.cart_items = [];
     }
-    
     let updatedCartItems = [...req.session.cart_items];
     if (cartProductIndex >= 0) {
       const newQuantity = req.session.cart_items[cartProductIndex].quantity + qtyChange;
@@ -493,8 +489,6 @@ exports.patchCartQtyChange = (req, res, next) => {
       } else {
         // Change results in 0 or less products.  Remove from temp cart:
         updatedCartItems = req.session.cart_items.filter(item => {
-          console.log("Lets check if this is existing (equals above):");
-          console.log(`${item.product._id.toString()} == ${prodId}`);
           return item.product._id.toString() !== prodId;
         });
       }
@@ -560,45 +554,39 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
   Product.findById(prodId)
   .then(product => {
 
-  if (req.user) {
+    if (req.user) {
 
-    if (add) {
-      req.user.addProductToWishlist(prodId);
-      return req.user.cart.wishlist;
+      if (add) {
+        req.user.addProductToWishlist(prodId);
+        return req.user.cart.wishlist;
+      } else {
+        req.user.removeProductFromWishlist(prodId);
+        return req.user.cart.wishlist;
+      }
     } else {
-      req.user.removeProductFromWishlist(prodId);
-      return req.user.cart.wishlist;
+      // for guests, check if product already exists in wishlist
+      let wishlistProductIndex = -1;
+      if (req.session.wishlist && req.session.wishlist.length > 0) {
+        
+        wishlistProductIndex = req.session.wishlist.findIndex(wl => {
+          return wl._id.toString() === prodId;
+        });
+      }
+      if (wishlistProductIndex === -1 && add) {
+        // add to session wishlist
+        req.session.wishlist.push({_id: prodId});
+      } 
+      if (!add) {
+        // remove from session wishlist
+        req.session.wishlist = req.session.wishlist.filter(item => {
+          return item._id.toString() !== prodId;
+        });
+      }
+      return req.session.wishlist;
     }
-  } else {
-    console.log("OK, lets add or remove this shit:", prodId);
-    console.log("Pre add/remove:", req.session.wishlist);
-    // for guests, check if product already exists in wishlist
-    let wishlistProductIndex = -1;
-    if (req.session.wishlist && req.session.wishlist.length > 0) {
-      
-      wishlistProductIndex = req.session.wishlist.findIndex(wl => {
-        return wl._id.toString() === prodId;
-      });
-    }
-    if (wishlistProductIndex === -1 && add) {
-      // add to session wishlist
-      req.session.wishlist.push({_id: prodId});
-    } 
-    if (!add) {
-      // remove from session wishlist
-      req.session.wishlist = req.session.wishlist.filter(item => {
-        console.log("Lets check if this is existing (equals above):");
-        console.log(`${item._id.toString()} == ${prodId}`);
-        return item._id.toString() !== prodId;
-      });
-    }
-    return req.session.wishlist;
-  }
 
   })
   .then(wishlist => {
-    console.log("OK, lets see what we got in 2nd phase?");
-    console.log(wishlist);
 
     ejs.renderFile('/app/views/includes/link-to-wishlist.ejs', {
       wishlist
