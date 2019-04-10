@@ -475,7 +475,7 @@ exports.postSignup = (req, res, next) => {
       },
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      wishlist: req.session.wishlist.length ? req.session.wishlist : [],
+      wishlist: req.session.wishlist ? req.session.wishlist : [],
       validationErrors: errors.array()
     });
   }
@@ -497,8 +497,8 @@ console.log(req.session.cart_items)
         postalCode,
         country,
         cart: { 
-          items: req.session.cart_items.length ? req.session.cart_items : [],
-          wishlist: req.session.wishlist.length ? req.session.wishlist : []
+          items: req.session.cart_items ? req.session.cart_items : [],
+          wishlist: req.session.wishlist ? req.session.wishlist : []
         },
         access_level: 1
       });
