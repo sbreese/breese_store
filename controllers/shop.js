@@ -142,12 +142,12 @@ exports.getIndex = (req, res, next) => {
 
       this.getShoppingCartData(req)
       .then(user_cart => {
-        console.log("Heres what sending for wishlist:", user_cart);
+        // console.log("Heres what sending for wishlist:", user_cart);
           res.render('newDesign/index', {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
-            wishlist: ['123'],
+            wishlist: [],
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
