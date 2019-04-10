@@ -147,7 +147,7 @@ exports.getIndex = (req, res, next) => {
         user_cart.cart_items.forEach(p => {
           total += p.quantity * p.product.price;
         });
-        const totalSum = formatter.format(total);
+        const totalSum = this.formatter.format(total);
 
           res.render('newDesign/index', {
             products,
