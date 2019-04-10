@@ -31,6 +31,7 @@ exports.getLogin = (req, res, next) => {
     pageTitle: 'Login',
     cart_items,
     cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+    wishlist: ['123'],
     errorMessage: message,
     oldInput: {
       email: '',
