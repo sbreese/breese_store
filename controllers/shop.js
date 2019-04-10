@@ -147,7 +147,7 @@ exports.getIndex = (req, res, next) => {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
-            wishlist: ['123'], // wishlist: user_cart.wishlist,
+            wishlist: ['123'],
             categories,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
