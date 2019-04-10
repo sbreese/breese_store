@@ -475,10 +475,12 @@ exports.postSignup = (req, res, next) => {
       },
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      wishlist: req.session.wishlist.length ? req.session.wishlist : [],
       validationErrors: errors.array()
     });
   }
-
+console.log("Wow, no errors!  Here is wishlist:");
+console.log(req.session.wishlist);
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {
