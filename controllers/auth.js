@@ -392,16 +392,13 @@ exports.postLogin = (req, res, next) => {
         })
         .then(user => {
           if (req.session.cart_items && req.session.cart_items.length) {
-            const bothCartArr = [req.session.cart_items,user.cart.items];
-            user.cart.items = [...new Set([].concat(...bothCartArr))];
+            // de-duplicate cart items
+            user.cart.items = [...req.session.cart_items,...user.cart.items].filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index);
             req.session.cart_items = [];
             user.save();
           }
           if (req.session.wishlist && req.session.wishlist.length) {
-            // const bothWishArr = [...req.session.wishlist,...user.cart.wishlist];
-            // user.cart.wishlist = [...new Set([].concat(...bothWishArr))];
-            // user.cart.wishlist = [...new Set(user.cart.wishlist)];
-            // de-duplicate products
+            // de-duplicate wishlist
             user.cart.wishlist = [...req.session.wishlist,...user.cart.wishlist].filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index);
             req.session.wishlist = [];
             user.save();
