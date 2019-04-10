@@ -511,7 +511,8 @@ exports.patchCartQtyChange = (req, res, next) => {
       cart_items, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
 
-      console.log("Here is standard right cart:");
+      console.log("Here is standard right cart items an cart:");
+      console.log(cart_items);
       console.log(cart);
 
       let total = 0;
