@@ -14,17 +14,12 @@
         </div>
         
         <div class="header-cart-content flex-w js-pscroll">
-        <% if (cart_items.length > 0) { 
-            let total = 0;
-            %>
+        <% if (cart_items.length > 0) { %>
             <ul class="header-cart-wrapitem w-full">
                 <% cart_items.forEach(p => { %>
                     <li class="header-cart-item flex-w flex-t m-b-12">
 
-                        <% 
-                        if (p.product) { 
-                            total += p.quantity * p.product.price;
-                        %>
+                        <% if (p.product) { %>
                             <div class="header-cart-item-img">
                                 <img src="<%= p.product.image1Url %>" alt="<%= p.product.title %>">
                             </div>
@@ -47,7 +42,7 @@
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Total: $<%= total %>
+                    Total: $<%= totalSum %>
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">

@@ -507,21 +507,22 @@ exports.patchCartQtyChange = (req, res, next) => {
 
   })
   .then(cart_items => {
+    let total = 0;
+    cart_items.forEach(p => {
+      total += p.quantity * p.product.price;
+    });
+    const totalSum = formatter.format(total);
+
     ejs.renderFile('/app/views/includes/cart.ejs', {
-      cart_items, csrfToken: req.csrfToken()
+      cart_items, totalSum, csrfToken: req.csrfToken()
     }, {}, (err, cart) => {
 
       console.log("Here is standard right cart items an cart:");
       console.log(cart_items);
       console.log(cart);
 
-      let total = 0;
-      cart_items.forEach(p => {
-        total += p.quantity * p.product.price;
-      });
-
       ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
-        cart_items, totalSum: formatter.format(total), csrfToken: req.csrfToken()
+        cart_items, totalSum, csrfToken: req.csrfToken()
       }, {}, (err, fullCart) => {
 
         const cart_total = sumPropertyValue(cart_items, 'quantity');
