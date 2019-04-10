@@ -15,6 +15,41 @@
         
         <div class="header-cart-content flex-w js-pscroll">
 
+        <% if (cart_items.length > 0) { 
+            let total = 0;
+            %>
+            <ul class="header-cart-wrapitem w-full">
+cool
+            </ul>
+
+            <div class="w-full">
+                <div class="header-cart-total w-full p-tb-40">
+                    Total: $<%# total %>Beans
+                </div>
+
+                <div class="header-cart-buttons flex-w w-full">
+                    <a href="/shopping-cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        View Cart
+                    </a>
+
+                    <a href="/<%= isAuthenticated ? 'confirm-information' : 'customer-information' %>" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        Check Out
+                    </a>
+                </div>
+            </div>
+                        
+            <% } else { %>
+                <div class="w-full">
+                    <div class="header-cart-total w-full p-tb-40">
+                        Your Shopping Cart is empty.
+                    </div>
+                </div>
+                <div class="w-full">
+                    <div class="header-cart-total w-full p-tb-40">
+                            Continue shopping on the <a href="/">The Breese Method homepage</a>.
+                    </div>
+                </div>
+            <% } %>
 
         </div>
     </div>
