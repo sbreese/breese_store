@@ -103,9 +103,18 @@ exports.getShippingAddress = (req, res, next) => {
     .populate('cart.items.product')
     .execPopulate()
     .then(user => {
+
+      let total = 0;
+      user_cart.cart_items.forEach(p => {
+        total += p.quantity * p.product.price;
+      });
+      const totalSum = formatter.format(total);
+
       res.render('newDesign/checkout-shipping-address', {
         cart_items: user.cart.items,
         cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        wishlist: user.cart.wishlist,
+        totalSum,
         pageTitle: 'Checkout - Shipping Address',
         path: '/checkout-shipping-address',
         errorMessage: message,
