@@ -579,20 +579,19 @@ exports.patchAddRemoveFromWishlist = (req, res, next) => {
       wishlistProductIndex = req.session.wishlist.findIndex(wl => {
         return wl._id.toString() === prodId;
       });
-    } else {
-      req.session.wishlist = [];
     }
     if (wishlistProductIndex === -1 && add) {
       // add to session wishlist
-      return req.session.wishlist.push({_id: prodId});
+      req.session.wishlist.push({_id: prodId});
     } else {
       // remove from session wishlist
-      return req.session.wishlist.filter(item => {
+      req.session.wishlist = req.session.wishlist.filter(item => {
         console.log("Lets check if this is existing (equals above):");
         console.log(`${item.product._id.toString()} == ${prodId}`);
         return item._id.toString() !== prodId;
       });
     }
+    return req.session.wishlist;
   }
 
   })
