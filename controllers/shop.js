@@ -519,7 +519,6 @@ exports.patchCartQtyChange = (req, res, next) => {
 
       console.log("Here is standard right cart items an cart:");
       console.log(cart_items);
-      console.log(cart);
 
       ejs.renderFile('/app/views/includes/shopping-cart-full.ejs', {
         cart_items, totalSum, csrfToken: req.csrfToken()

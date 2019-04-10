@@ -1,4 +1,6 @@
-<%# usage: priceFormatter(total) %>
+<%# usage: priceFormatter(total) 
+This is used in includes/shopping-cart-full.ejs to format the total price for each product in the cart (i.e. qty x price).
+%>
 <%
 priceFormatter = function(price) {
     return new Intl.NumberFormat('en-US', {
