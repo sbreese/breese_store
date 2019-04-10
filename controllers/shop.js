@@ -45,7 +45,7 @@ exports.getShoppingCartData = req => {
       resolve({
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-        wishlist: req.session.wishlist && req.session.wishlist.length || []
+        wishlist: req.session.wishlist && req.session.wishlist || []
       });
     }
   });
