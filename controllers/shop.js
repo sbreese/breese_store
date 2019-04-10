@@ -12,7 +12,7 @@ const Category = require('../models/category');
 // usage: sumPropertyValue(items, 'quantity')
 const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 // usage: formatter.format(total)
-const formatter = new Intl.NumberFormat('en-US', {
+exports.formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
   minimumFractionDigits: 2
