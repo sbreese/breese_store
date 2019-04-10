@@ -176,11 +176,13 @@ exports.getEditAccount = (req, res, next) => {
   .execPopulate()
   .then(user => {
     const cart_items = user.cart.items;
+    const wishlist = user.cart.wishlist;
     res.render('auth/edit-account', {
       path: '/edit-account',
       pageTitle: 'Edit Account',
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      wishlist,
       errorMessage: message,
       oldInput: {
         email: req.user.email,
