@@ -401,6 +401,7 @@ exports.postLogin = (req, res, next) => {
             const bothWishArr = [req.session.wishlist,user.cart.wishlist];
             user.cart.wishlist = [...new Set([].concat(...bothWishArr))];
             user.cart.wishlist = [...new Set(user.cart.wishlist)];
+            user.cart.wishlist = user.cart.wishlist.filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index);
             req.session.wishlist = [];
             user.save();
           }
