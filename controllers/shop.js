@@ -637,6 +637,7 @@ exports.getCheckout = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const cart_items = user.cart.items;
+      const wishlist = user.cart.wishlist;
       let total = 0;
       cart_items.forEach(p => {
         total += p.quantity * p.product.price;
@@ -646,6 +647,7 @@ exports.getCheckout = (req, res, next) => {
         pageTitle: 'Checkout - Payment',
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        wishlist,
         totalSum: formatter.format(total)
       });
     })
