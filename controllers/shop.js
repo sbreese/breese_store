@@ -468,7 +468,6 @@ exports.patchCartQtyChange = (req, res, next) => {
   const prodId = req.params.productId;
   const qtyChange = Number(req.params.qtyChange);
 
-  console.log("OK lets remove "+ qtyChange + " from prodId!");
   Product.findById(prodId)
   .then(product => {
 

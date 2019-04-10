@@ -94,23 +94,16 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
   });
   // let newQuantity = 1;
   let updatedCartItems = this.cart.items;
-  
-  console.log("Change " + qtyChange);
   if (cartProductIndex >= 0) {
     newQuantity = this.cart.items[cartProductIndex].quantity + qtyChange;
-    console.log("New Quantity: " + newQuantity);
     if (newQuantity > 0) {
      
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       // Change results in 0 or less products.  Remove from temp cart:
       updatedCartItems = this.cart.items.filter(item => {
-        console.log(`Does ${item.product._id.toString()} !== ${product._id.toString()}?`);
         return item.product._id.toString() !== product._id.toString();
       });
-      console.log("Here is updatedCart Items:");
-      console.log(updatedCartItems);
-
     }
   } else {
     updatedCartItems.push({
@@ -118,10 +111,6 @@ userSchema.methods.addQtyToCart = function(product, qtyChange) {
       quantity: qtyChange
     });
   }
-  /*const updatedCart = {
-    items: updatedCartItems,
-    ...updatedCart
-  };*/
   this.cart.items = updatedCartItems;
   return this.save();
 };
