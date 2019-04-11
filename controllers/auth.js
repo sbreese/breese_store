@@ -74,6 +74,7 @@ exports.getCreateUserAccount = (req, res, next) => {
   }
 
   const cart_items = req.session.cart_items || [];
+  const wishlist = req.session.wishlist || [];
   console.log("Here is cart_items");
   console.log(cart_items);
   res.render('newDesign/create-user-account', {
@@ -82,7 +83,7 @@ exports.getCreateUserAccount = (req, res, next) => {
     cart_items,
     cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
     totalSum: helper.calcTotalPrice(cart_items),
-    wishlist: req.session.wishlist.length && req.session.wishlist || [],
+    wishlist,
     errorMessage: message,
     oldInput: {
       email: '',
