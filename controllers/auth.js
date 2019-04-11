@@ -6,6 +6,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check');
 
 const User = require('../models/user');
+const shopController = require('../controllers/shop');
 const helper = require('./helper');
 
 const transporter = nodemailer.createTransport(
@@ -104,45 +105,13 @@ exports.getShippingAddress = (req, res, next) => {
     message = null;
   }
 
-  if (req.user) {
-    req.user
-    .populate('cart.items.product')
-    .execPopulate()
-    .then(user => {
-
-      const cart_items = user.cart.items;
-
-      res.render('newDesign/checkout-shipping-address', {
-        cart_items,
-        cart_total: sumPropertyValue(cart_items, 'quantity'),
-        totalSum: helper.calcTotalPrice(cart_items),
-        wishlist: user.cart.wishlist,
-        pageTitle: 'Checkout - Shipping Address',
-        path: '/checkout-shipping-address',
-        errorMessage: message,
-        oldInput: {
-          email: '',
-          password: '',
-          confirmPassword: ''
-        },
-        products: req.session.cart_items,
-        validationErrors: []
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  } else {
-    const cart_items = req.session.cart_items || [];
-    const wishlist = req.session.wishlist || [];
-
+  shopController.getShoppingCartData(req)
+  .then(user_cart => {
     res.render('newDesign/checkout-shipping-address', {
-      cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
-      totalSum: helper.calcTotalPrice(cart_items),
-      wishlist,
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
+      wishlist: user_cart.wishlist,
       pageTitle: 'Checkout - Shipping Address',
       path: '/checkout-shipping-address',
       errorMessage: message,
@@ -153,12 +122,13 @@ exports.getShippingAddress = (req, res, next) => {
       },
       products: req.session.cart_items,
       validationErrors: []
-    }).catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
     });
-  }
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getEnterNewPassword = (req, res, next) => {
