@@ -266,6 +266,7 @@ exports.getFeatured = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+console.log("OK, let's get featured!");
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -276,6 +277,7 @@ exports.getFeatured = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
+      console.log("OK, let's get shopping cart data!");
 
       this.getShoppingCartData(req)
       .then(user_cart => {
