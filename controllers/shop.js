@@ -266,7 +266,6 @@ exports.getFeatured = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
-console.log("OK, let's get featured!");
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -281,13 +280,13 @@ console.log("OK, let's get featured!");
 
       this.getShoppingCartData(req)
       .then(user_cart => {
+        console.log("OK, let's render this!");
           res.render('newDesign/featured', {
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
             totalSum: helper.calcTotalPrice(user_cart.cart_items),
             wishlist: user_cart.wishlist,
-            categories,
             pageTitle: 'Featured',
             path: '/featured',
             currentPage: page,
