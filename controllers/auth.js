@@ -202,6 +202,7 @@ exports.getEditAccount = (req, res, next) => {
       pageTitle: 'Edit Account',
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      totalSum: helper.calcTotalPrice(cart_items),
       wishlist,
       errorMessage: message,
       oldInput: {
