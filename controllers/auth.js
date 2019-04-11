@@ -107,17 +107,13 @@ exports.getShippingAddress = (req, res, next) => {
     .execPopulate()
     .then(user => {
 
-      let total = 0;
-      user_cart.cart_items.forEach(p => {
-        total += p.quantity * p.product.price;
-      });
-      const totalSum = helper.formatter.format(total);
+      const cart_items = user.cart.items;
 
       res.render('newDesign/checkout-shipping-address', {
-        cart_items: user.cart.items,
-        cart_total: sumPropertyValue(user.cart.items, 'quantity'),
+        cart_items,
+        cart_total: sumPropertyValue(cart_items, 'quantity'),
+        totalSum: helper.calcTotalPrice(cart_items),
         wishlist: user.cart.wishlist,
-        totalSum,
         pageTitle: 'Checkout - Shipping Address',
         path: '/checkout-shipping-address',
         errorMessage: message,
@@ -138,17 +134,12 @@ exports.getShippingAddress = (req, res, next) => {
   } else {
     const cart_items = req.session.cart_items || [];
     const wishlist = req.session.wishlist || [];
-    let total = 0;
-    cart_items.forEach(p => {
-      total += p.quantity * p.product.price;
-    });
-    const totalSum = helper.formatter.format(total);
 
     res.render('newDesign/checkout-shipping-address', {
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      totalSum: helper.calcTotalPrice(cart_items),
       wishlist,
-      totalSum,
       pageTitle: 'Checkout - Shipping Address',
       path: '/checkout-shipping-address',
       errorMessage: message,
@@ -241,11 +232,14 @@ exports.getConfirmInformation = (req, res, next) => {
   .execPopulate()
   .then(user => {
     const cart_items = user.cart.items;
+    const wishlist = user.cart.wishlist;
     res.render('auth/edit-account', {
       path: '/confirm-information',
       pageTitle: 'Confirm Your Information',
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      totalSum: helper.calcTotalPrice(cart_items),
+      wishlist,
       errorMessage: message,
       oldInput: {
         access_level: req.user.access_level,
@@ -290,11 +284,14 @@ exports.updateAccount = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const cart_items = user.cart.items;
+      const wishlist = user.cart.wishlist;
       return res.status(422).render(req.body.other_user_id ? 'auth/edit-anothers-account' : 'auth/edit-account', {
         path: req.body.other_user_id ? '/edit-anothers-account' : '/edit-account',
         pageTitle: 'Edit Account',
         cart_items,
         cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        totalSum: helper.calcTotalPrice(cart_items),
+        wishlist,
         errorMessage: errors.array()[0].msg,
         oldInput: {
           _id: req.body.other_user_id ? req.body.other_user_id : '',
@@ -501,6 +498,7 @@ exports.postSignup = (req, res, next) => {
       },
       cart_items,
       cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      totalSum: helper.calcTotalPrice(cart_items),
       wishlist: req.session.wishlist ? req.session.wishlist : [],
       validationErrors: errors.array()
     });
