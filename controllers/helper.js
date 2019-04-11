@@ -1,9 +1,12 @@
-// usage: this.formatter.format(total)
+// usage: helper.formatter.format(total)
 exports.formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
 });
+
+// usage: helper.sumPropertyValue(items, 'quantity')
+exports.sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
 exports.calcTotalPrice = cart_items => {
     let total = 0;

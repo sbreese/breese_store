@@ -10,8 +10,8 @@ const Order = require('../models/order');
 const Category = require('../models/category');
 const helper = require('./helper');
 
-// usage: sumPropertyValue(items, 'quantity')
-const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
+
+// const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
 
 const ITEMS_PER_PAGE = 20;
 
@@ -26,7 +26,7 @@ exports.getShoppingCartData = req => {
         const cart_items = user.cart.items;
         resolve({
           cart_items,
-          cart_total: sumPropertyValue(cart_items, 'quantity'),
+          cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
           wishlist: user.cart.wishlist
         });
       })
@@ -39,7 +39,7 @@ exports.getShoppingCartData = req => {
       const cart_items = req.session.cart_items || [];
       resolve({
         cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         wishlist: req.session.wishlist && req.session.wishlist || []
       });
     }
@@ -525,7 +525,7 @@ exports.patchCartQtyChange = (req, res, next) => {
         cart_items, totalSum, csrfToken: req.csrfToken()
       }, {}, (err, fullCart) => {
 
-        const cart_total = sumPropertyValue(cart_items, 'quantity');
+        const cart_total = helper.sumPropertyValue(cart_items, 'quantity');
         
         ejs.renderFile('/app/views/includes/show-cart.ejs', {
           cart_total
@@ -652,7 +652,7 @@ exports.getCheckout = (req, res, next) => {
         path: '/checkout',
         pageTitle: 'Checkout - Payment',
         cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         wishlist,
         totalSum: helper.formatter.format(total)
       });
@@ -746,7 +746,7 @@ console.log("Here is the orders:");
         path: '/my-orders',
         pageTitle: 'Your Orders',
         cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
         orders: user.orders,
         totalSum: helper.formatter.format(total)
       });
