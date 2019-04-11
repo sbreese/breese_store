@@ -74,6 +74,8 @@ exports.getCreateUserAccount = (req, res, next) => {
   }
 
   const cart_items = req.session.cart_items || [];
+  console.log("Here is cart_items");
+  console.log(cart_items);
   res.render('newDesign/create-user-account', {
     path: '/create-user-account',
     pageTitle: 'Create User Account',
