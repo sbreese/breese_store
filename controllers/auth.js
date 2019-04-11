@@ -18,8 +18,6 @@ const transporter = nodemailer.createTransport(
   })
 );
 
-const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
-
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -32,7 +30,7 @@ exports.getLogin = (req, res, next) => {
     path: '/login',
     pageTitle: 'Login',
     cart_items,
-    cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+    cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
     totalSum: helper.calcTotalPrice(cart_items),
     wishlist: ['123'],
     errorMessage: message,
@@ -76,13 +74,12 @@ exports.getCreateUserAccount = (req, res, next) => {
 
   const cart_items = req.session.cart_items || [];
   const wishlist = req.session.wishlist || [];
-  console.log("Here is cart_items");
-  console.log(cart_items);
+
   res.render('newDesign/create-user-account', {
     path: '/create-user-account',
     pageTitle: 'Create User Account',
     cart_items,
-    cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+    cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
     totalSum: helper.calcTotalPrice(cart_items),
     wishlist,
     errorMessage: message,
@@ -166,7 +163,7 @@ exports.getEditAccount = (req, res, next) => {
       path: '/edit-account',
       pageTitle: 'Edit Account',
       cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
       totalSum: helper.calcTotalPrice(cart_items),
       wishlist,
       errorMessage: message,
@@ -210,7 +207,7 @@ exports.getConfirmInformation = (req, res, next) => {
       path: '/confirm-information',
       pageTitle: 'Confirm Your Information',
       cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
       totalSum: helper.calcTotalPrice(cart_items),
       wishlist,
       errorMessage: message,
@@ -262,7 +259,7 @@ exports.updateAccount = (req, res, next) => {
         path: req.body.other_user_id ? '/edit-anothers-account' : '/edit-account',
         pageTitle: 'Edit Account',
         cart_items,
-        cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
         totalSum: helper.calcTotalPrice(cart_items),
         wishlist,
         errorMessage: errors.array()[0].msg,
@@ -470,15 +467,13 @@ exports.postSignup = (req, res, next) => {
         country
       },
       cart_items,
-      cart_total: cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+      cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
       totalSum: helper.calcTotalPrice(cart_items),
       wishlist: req.session.wishlist ? req.session.wishlist : [],
       validationErrors: errors.array()
     });
   }
-console.log("Wow, no errors!  Here is wishlist & cart items:");
-console.log(req.session.wishlist);
-console.log(req.session.cart_items)
+
   bcrypt
     .hash(password, 12)
     .then(hashedPassword => {

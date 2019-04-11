@@ -10,9 +10,6 @@ const Order = require('../models/order');
 const Category = require('../models/category');
 const helper = require('./helper');
 
-
-// const sumPropertyValue = (items, prop) => items.reduce((a, b) => a + b[prop], 0);
-
 const ITEMS_PER_PAGE = 20;
 
 exports.getShoppingCartData = req => {
@@ -39,7 +36,7 @@ exports.getShoppingCartData = req => {
       const cart_items = req.session.cart_items || [];
       resolve({
         cart_items,
-        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
         wishlist: req.session.wishlist && req.session.wishlist || []
       });
     }
@@ -652,7 +649,7 @@ exports.getCheckout = (req, res, next) => {
         path: '/checkout',
         pageTitle: 'Checkout - Payment',
         cart_items,
-        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
         wishlist,
         totalSum: helper.formatter.format(total)
       });
@@ -746,7 +743,7 @@ console.log("Here is the orders:");
         path: '/my-orders',
         pageTitle: 'Your Orders',
         cart_items,
-        cart_total: helper.sumPropertyValue(cart_items, 'quantity'), // cart_items.length ? sumPropertyValue(cart_items, 'quantity') : 0,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
         orders: user.orders,
         totalSum: helper.formatter.format(total)
       });
