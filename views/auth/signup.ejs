@@ -1,133 +1,175 @@
-<%- include('../includes/headOLD.ejs') %>
+<!-- HTML Head -->
+<%- include('../includes/head.ejs') %>
+
+	<!-- Template Helper Functions -->
+    <% include ../includes/functions %>
+    
     <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/auth.css">
-    <% if (products && products.length) { %>
-        <link rel="stylesheet" href="/css/cart.css">
-    <% } %>
-</head>
 
-<body>
-   <%- include('../includes/navigation.ejs') %>
+	<!-- Header -->
+	<%- include('../includes/header.ejs') %>
 
-    <main>
+	<!-- Cart -->
+    <%- include('../includes/cart.ejs') %>
 
-        <% if (products && products.length) { %>
-            <ul class="cart__item-list">
-                <% products.forEach(p => { %>
-                    <li class="cart__item">
-                        <h1><%= p.product.title %></h1>
-                        <h2>Quantity: <%= p.quantity %></h2>
-                    </li>
-                <% }) %>
-            </ul>
-            <hr>
-        <% } %>
 
-        <% if (errorMessage) { %>
-            <div class="user-message user-message--error"><%= errorMessage %></div>
-        <% } %>
-        <form class="login-form" action="/signup" method="POST" novalidate>
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    value="<%= oldInput.email %>">
+    <!-- breadcrumb -->
+    <div class="container">
+        <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+            <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+                Home
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+            
+            <% if (path === '/confirm-information') { %>
+            <a href="shopping-cart" class="stext-109 cl8 hov-cl1 trans-04">
+                    Shopping Cart
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
+            <span class="stext-109 cl4">
+                Checkout - Shipping Information
+            </span>
+            <% } else { %>
+            <span class="stext-109 cl4">
+                Edit Account Information
+            </span>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+
+                    <h3><%= pageTitle %></h3>
+
+                <% if (products && products.length) { %>
+                    <ul class="cart__item-list">
+                        <% products.forEach(p => { %>
+                            <li class="cart__item">
+                                <h1><%= p.product.title %></h1>
+                                <h2>Quantity: <%= p.quantity %></h2>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <hr>
+                <% } %>
+
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                <% } %>
+                    <form class="login-form" action="/signup" method="POST" novalidate>
+                        <div class="form-control">
+                            <label for="email">E-Mail</label>
+                            <input 
+                                class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                value="<%= oldInput.email %>">
+                        </div>
+                        <div class="form-control">
+                            <label for="password">Password</label>
+                            <input 
+                                class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                                type="password" 
+                                name="password" 
+                                id="password" 
+                                value="<%= oldInput.password %>">
+                        </div>
+                        <div class="form-control">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input 
+                                class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                                type="password" 
+                                name="confirmPassword" 
+                                id="confirmPassword" 
+                                value="<%= oldInput.confirmPassword %>">
+                        </div>
+                        <div class="form-control">
+                            <label for="first_name">First Name</label>
+                            <input 
+                                class="<%= validationErrors.find(e => e.param === 'first_name') ? 'invalid' : '' %>"
+                                type="first_name" 
+                                name="first_name" 
+                                id="first_name" 
+                                value="<%= oldInput.first_name %>">
+                        </div>
+                        <div class="form-control">
+                            <label for="last_name">Last Name</label>
+                            <input 
+                                class="<%= validationErrors.find(e => e.param === 'last_name') ? 'invalid' : '' %>"
+                                type="last_name"
+                                name="last_name"
+                                id="last_name"
+                                value="<%= oldInput.last_name %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="address_line1">Address Line 1</label>
+                                <input 
+                                    class="<%= validationErrors.find(e => e.param === 'address_line1') ? 'invalid' : '' %>"
+                                    type="address_line1"
+                                    name="address_line1"
+                                    id="address_line1"
+                                    value="<%= oldInput.address_line1 %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="last_name">Address Line 2</label>
+                                <input 
+                                    class="<%= validationErrors.find(e => e.param === 'address_line2') ? 'invalid' : '' %>"
+                                    type="address_line2"
+                                    name="address_line2"
+                                    id="address_line2"
+                                    value="<%= oldInput.address_line2 %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="city">City</label>
+                                <input 
+                                    class="<%= validationErrors.find(e => e.param === 'city') ? 'invalid' : '' %>"
+                                    type="city"
+                                    name="city"
+                                    id="city"
+                                    value="<%= oldInput.city %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="state">State</label>
+                                <input 
+                                    class="<%= validationErrors.find(e => e.param === 'state') ? 'invalid' : '' %>"
+                                    type="state"
+                                    name="state"
+                                    id="state"
+                                    value="<%= oldInput.state %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="state">Postal Code</label>
+                                <input 
+                                    class="<%= validationErrors.find(e => e.param === 'postalCode') ? 'invalid' : '' %>"
+                                    type="postalCode"
+                                    name="postalCode"
+                                    id="postalCode"
+                                    value="<%= oldInput.postalCode %>">
+                        </div>
+                        <div class="form-control">
+                                <label for="country">Country</label>
+                                <input
+                                    class="<%= validationErrors.find(e => e.param === 'country') ? 'invalid' : '' %>"
+                                    type="country"
+                                    name="country"
+                                    id="country"
+                                    value="<%= oldInput.country ? oldInput.country : 'USA' %>">
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="btn" type="submit"><%= products && products.length ? 'Continue to Payment' : 'Signup' %></button>
+                    </form>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    value="<%= oldInput.password %>">
-            </div>
-            <div class="form-control">
-                <label for="confirmPassword">Confirm Password</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
-                    type="password" 
-                    name="confirmPassword" 
-                    id="confirmPassword" 
-                    value="<%= oldInput.confirmPassword %>">
-            </div>
-            <div class="form-control">
-                <label for="first_name">First Name</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'first_name') ? 'invalid' : '' %>"
-                    type="first_name" 
-                    name="first_name" 
-                    id="first_name" 
-                    value="<%= oldInput.first_name %>">
-            </div>
-            <div class="form-control">
-                <label for="last_name">Last Name</label>
-                <input 
-                    class="<%= validationErrors.find(e => e.param === 'last_name') ? 'invalid' : '' %>"
-                    type="last_name"
-                    name="last_name"
-                    id="last_name"
-                    value="<%= oldInput.last_name %>">
-            </div>
-            <div class="form-control">
-                    <label for="address_line1">Address Line 1</label>
-                    <input 
-                        class="<%= validationErrors.find(e => e.param === 'address_line1') ? 'invalid' : '' %>"
-                        type="address_line1"
-                        name="address_line1"
-                        id="address_line1"
-                        value="<%= oldInput.address_line1 %>">
-            </div>
-            <div class="form-control">
-                    <label for="last_name">Address Line 2</label>
-                    <input 
-                        class="<%= validationErrors.find(e => e.param === 'address_line2') ? 'invalid' : '' %>"
-                        type="address_line2"
-                        name="address_line2"
-                        id="address_line2"
-                        value="<%= oldInput.address_line2 %>">
-            </div>
-            <div class="form-control">
-                    <label for="city">City</label>
-                    <input 
-                        class="<%= validationErrors.find(e => e.param === 'city') ? 'invalid' : '' %>"
-                        type="city"
-                        name="city"
-                        id="city"
-                        value="<%= oldInput.city %>">
-            </div>
-            <div class="form-control">
-                    <label for="state">State</label>
-                    <input 
-                        class="<%= validationErrors.find(e => e.param === 'state') ? 'invalid' : '' %>"
-                        type="state"
-                        name="state"
-                        id="state"
-                        value="<%= oldInput.state %>">
-            </div>
-            <div class="form-control">
-                    <label for="state">Postal Code</label>
-                    <input 
-                        class="<%= validationErrors.find(e => e.param === 'postalCode') ? 'invalid' : '' %>"
-                        type="postalCode"
-                        name="postalCode"
-                        id="postalCode"
-                        value="<%= oldInput.postalCode %>">
-            </div>
-            <div class="form-control">
-                    <label for="country">Country</label>
-                    <input
-                        class="<%= validationErrors.find(e => e.param === 'country') ? 'invalid' : '' %>"
-                        type="country"
-                        name="country"
-                        id="country"
-                        value="<%= oldInput.country ? oldInput.country : 'USA' %>">
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit"><%= products && products.length ? 'Continue to Payment' : 'Signup' %></button>
-        </form>
-    </main>
-<%- include('../includes/end.ejs') %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('../includes/footer.ejs') %>
+
+<!-- Foot -->
+<%- include('../includes/foot.ejs') %>
