@@ -45,17 +45,17 @@
 
                     <h3><%= pageTitle %></h3>
 
-                    <%if (false) { %>
+                    <% if (false) { %>
                         <% if (cart_items.length) { %>
                             <ul class="cart__item-list">
-                                <% cart_items.forEach(p => { 
+                                <% cart_items.forEach(p => { %>
                                     <li class="cart__item">
                                         <h2><%= p.product.title %></h2>
-                                        <h3>Quantity: <%#= p.quantity </h3>
+                                        <h3>Quantity: <%= p.quantity %> </h3>
                                     </li>
                                 <% }) %> 
                             </ul>
-                            <hr-->
+                            <hr>
                         <% } %>
                     <% } %>
 
