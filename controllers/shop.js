@@ -305,6 +305,49 @@ exports.getFeatured = (req, res, next) => {
     });
 };
 
+exports.getNewArrivals = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalItems;
+
+  Product.find()
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts;
+      return Product.find()
+        .populate('category')
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then(products => {
+      console.log("OK, let's get shopping cart data!");
+
+      this.getShoppingCartData(req)
+      .then(user_cart => {
+        console.log("OK, let's render this!");
+          res.render('newDesign/new-arrivals', {
+            products,
+            cart_items: user_cart.cart_items,
+            cart_total: user_cart.cart_total,
+            totalSum: helper.calcTotalPrice(user_cart.cart_items),
+            wishlist: user_cart.wishlist,
+            pageTitle: 'New Arrivals',
+            path: '/new-arrivals',
+            currentPage: page,
+            hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+            hasPreviousPage: page > 1,
+            nextPage: page + 1,
+            previousPage: page - 1,
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+          });
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
+    });
+};
+
 exports.getBlog = (req, res, next) => {
 
   this.getShoppingCartData(req)
