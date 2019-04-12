@@ -26,13 +26,14 @@ exports.getLogin = (req, res, next) => {
     message = null;
   }
   const cart_items = req.session.cart_items || [];
+  const wishlist = req.session.wishlist || [];
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
     cart_items,
     cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
     totalSum: helper.calcTotalPrice(cart_items),
-    wishlist: ['123'],
+    wishlist,
     errorMessage: message,
     oldInput: {
       email: '',
@@ -49,9 +50,16 @@ exports.getSignup = (req, res, next) => {
   } else {
     message = null;
   }
+
+  const cart_items = req.session.cart_items || [];
+  const wishlist = req.session.wishlist || [];
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
+    cart_items,
+    cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
+    totalSum: helper.calcTotalPrice(cart_items),
+    wishlist,
     errorMessage: message,
     oldInput: {
       email: '',
@@ -74,7 +82,6 @@ exports.getCreateUserAccount = (req, res, next) => {
 
   const cart_items = req.session.cart_items || [];
   const wishlist = req.session.wishlist || [];
-
   res.render('newDesign/create-user-account', {
     path: '/create-user-account',
     pageTitle: 'Create User Account',
