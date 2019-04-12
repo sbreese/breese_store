@@ -21,18 +21,18 @@
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
             
-            <% if (path === '/confirm-information') { %>
+            <% if (path === '/customer-information') { %>
             <a href="shopping-cart" class="stext-109 cl8 hov-cl1 trans-04">
                     Shopping Cart
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
             <span class="stext-109 cl4">
-                Checkout - Shipping Information
+                Checkout - Customer Information
             </span>
             <% } else { %>
             <span class="stext-109 cl4">
-                Edit Account Information
+                Edit Account Information<%= pageTitle %>
             </span>
             <% } %>
         </div>
@@ -45,12 +45,12 @@
 
                     <h3><%= pageTitle %></h3>
 
-                <% if (products && products.length) { %>
+                <% if (cart_items && cart_items.length) { %>
                     <ul class="cart__item-list">
-                        <% products.forEach(p => { %>
+                        <% cart_items.forEach(p => { %>
                             <li class="cart__item">
-                                <h1><%= p.product.title %></h1>
-                                <h2>Quantity: <%= p.quantity %></h2>
+                                <h2><%= p.product.title %></h2>
+                                <h3>Quantity: <%= p.quantity %></h3>
                             </li>
                         <% }) %>
                     </ul>

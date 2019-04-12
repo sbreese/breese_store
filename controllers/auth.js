@@ -66,7 +66,6 @@ exports.getSignup = (req, res, next) => {
       password: '',
       confirmPassword: ''
     },
-    products: req.session.cart_items,
     validationErrors: []
   });
 };
