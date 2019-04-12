@@ -230,6 +230,7 @@ exports.getProductDetail = (req, res, next) => {
         res.render('newDesign/product-detail', {
           cart_items: user_cart.cart_items,
           cart_total: user_cart.cart_total,
+          totalSum: helper.calcTotalPrice(user_cart.cart_items),
           wishlist: user_cart.wishlist,
           products: products,
           product: product,
