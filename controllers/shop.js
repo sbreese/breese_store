@@ -309,6 +309,7 @@ exports.getNewArrivals = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+ Category.find().then(categories => {
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -325,11 +326,13 @@ exports.getNewArrivals = (req, res, next) => {
       .then(user_cart => {
         console.log("OK, let's render this!");
           res.render('newDesign/new-arrivals', {
+            categories,
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
             totalSum: helper.calcTotalPrice(user_cart.cart_items),
             wishlist: user_cart.wishlist,
+            seasonYear: getSeasonYear(),
             pageTitle: 'New Arrivals',
             path: '/new-arrivals',
             currentPage: page,
@@ -346,6 +349,12 @@ exports.getNewArrivals = (req, res, next) => {
           return next(error);
         });
     });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getBlog = (req, res, next) => {
