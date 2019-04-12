@@ -11,7 +11,7 @@ router.get('/', shopController.getIndex);
 router.get('/product', shopController.getProductPage);
 router.get('/product-detail/:productId', shopController.getProductDetail);
 router.get('/featured', shopController.getFeatured);
-router.get('/new-arrivals', shopController.newArrivals);
+router.get('/new-arrivals', shopController.getNewArrivals);
 
 router.get('/about', shopController.getAbout);
 
