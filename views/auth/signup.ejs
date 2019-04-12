@@ -161,7 +161,7 @@
                                     value="<%= oldInput.country ? oldInput.country : 'USA' %>">
                         </div>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button class="btn" type="submit"><%= products && products.length ? 'Continue to Payment' : 'Signup' %></button>
+                        <button class="btn" type="submit"><%= cart_items && cart_items.length ? 'Continue to Payment' : 'Signup' %></button>
                     </form>
                 </div>
             </div>
