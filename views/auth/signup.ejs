@@ -21,7 +21,7 @@
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
             
-            <% if (path === '/customer-information') { %>
+            <% if (cart_items.length) { %>
             <a href="shopping-cart" class="stext-109 cl8 hov-cl1 trans-04">
                     Shopping Cart
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
@@ -32,7 +32,7 @@
             </span>
             <% } else { %>
             <span class="stext-109 cl4">
-                Edit Account Information<%= pageTitle %>
+                Create User Account
             </span>
             <% } %>
         </div>
@@ -45,7 +45,7 @@
 
                     <h3><%= pageTitle %></h3>
 
-                <% if (cart_items && cart_items.length) { %>
+                <% if (cart_items.length) { %>
                     <ul class="cart__item-list">
                         <% cart_items.forEach(p => { %>
                             <li class="cart__item">
@@ -161,7 +161,7 @@
                                     value="<%= oldInput.country ? oldInput.country : 'USA' %>">
                         </div>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button class="btn" type="submit"><%= cart_items && cart_items.length ? 'Continue to Payment' : 'Signup' %></button>
+                        <button class="btn" type="submit"><%= cart_items.length ? 'Continue to Payment' : 'Signup' %></button>
                     </form>
                 </div>
             </div>

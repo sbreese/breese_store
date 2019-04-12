@@ -71,7 +71,6 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.getCreateUserAccount = (req, res, next) => {
-
   let message = req.flash('error');
   if (message.length > 0) {
     message = message[0];
@@ -94,10 +93,8 @@ exports.getCreateUserAccount = (req, res, next) => {
       password: '',
       confirmPassword: ''
     },
-    products: req.session.cart_items,
     validationErrors: []
   });
-
 }
 
 exports.getShippingAddress = (req, res, next) => {
