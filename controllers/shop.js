@@ -10,7 +10,7 @@ const Order = require('../models/order');
 const Category = require('../models/category');
 const helper = require('./helper');
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 16;
 
 exports.getShoppingCartData = req => {
 
