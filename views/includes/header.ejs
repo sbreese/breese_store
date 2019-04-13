@@ -129,17 +129,18 @@
                         Help & FAQs
                     </a>
 
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                    <% if (!isAuthenticated) { %>
+                        <a class="flex-c-m p-lr-10 trans-04<%= path === '/login' ? ' active' : '' %>" href="/login">Login</a>
+                        <a class="flex-c-m p-lr-10 trans-04<%= path === '/create-user-account' ? ' active' : '' %>" href="/<%- cart_total ? 'checkout-shipping-address">Checkout' : 'create-user-account">Signup' %></a>
+                    <% } else { %>
+                    <a href="/edit-account" class="flex-c-m p-lr-10 trans-04<%= path === '/edit-account' ? ' active' : '' %>">
                         My Account
                     </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        EN
-                    </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        USD
-                    </a>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="flex-c-m p-lr-10 trans-04" type="submit" style="font-family: Poppins-Regular;font-size: 12px;line-height: 1.8;height: 100%;color: #b2b2b2;border-right: 1px solid rgba(255,255,255,0.3);">Logout</button>
+                    </form>
+                <% } %>
                 </div>
             </li>
         </ul>
