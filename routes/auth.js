@@ -74,7 +74,7 @@ router.post(
 
 // .normalizeEmail(),
 router.post(
-  'create-user-account',
+  '/create-user-account',
   [
     check('email')
       .isEmail()
