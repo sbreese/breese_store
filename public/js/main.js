@@ -192,6 +192,16 @@
     $(document).on('keypress',function(e) {
         if (e.which == 13 && $('.js-show-search').hasClass('show-search')) {
             alert('You pressed enter! Here is the value: ' + $('[name=search-product]').val());
+            window.location.href = "/product/search/" + $('[name=search-product]').val();
+
+/* 
+https://www.amazon.com/s?k=butter+farts&s=price-desc-rank&qid=1555269068&ref=sr_st_price-desc-rank
+Goal: display this bar under the search box:
+<div class="a-section a-spacing-small a-spacing-top-small">
+                <span>1-48 of 472 results for</span><span> </span><span class="a-color-state a-text-bold">"butter tarts"</span>
+            </div>
+            */
+
         }
     });
 
