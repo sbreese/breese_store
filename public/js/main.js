@@ -200,6 +200,10 @@ Goal: display this bar under the search box:
 <div class="a-section a-spacing-small a-spacing-top-small">
                 <span>1-48 of 472 results for</span><span> </span><span class="a-color-state a-text-bold">"butter tarts"</span>
             </div>
+
+<div class="a-section a-spacing-small a-spacing-top-small">
+    <span>1-48 of 152 results for</span><span> </span><span class="a-color-state a-text-bold">"chocolate penis"</span>
+</div>
             */
 
         }
