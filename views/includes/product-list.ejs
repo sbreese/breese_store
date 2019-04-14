@@ -234,6 +234,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- Result info -->
+        <% if (resultInfo) { %>
+        <div class="dis-none panel-search w-full p-t-10 p-b-15">
+            <div class="bor8 dis-flex p-l-15">
+                <%- resultInfo %>
+            </div>
+        </div>
+
         <div class="row isotope-grid">                
             <% for (let product of products) { %>
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= product.category.code %>">
