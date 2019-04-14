@@ -43,7 +43,7 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
-exports.getSignup = (req, res, next) => {
+exports.getCreateUserAccount = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
     message = message[0];
@@ -53,9 +53,9 @@ exports.getSignup = (req, res, next) => {
 
   const cart_items = req.session.cart_items || [];
   const wishlist = req.session.wishlist || [];
-  res.render('auth/signup', {
-    path: '/signup',
-    pageTitle: 'Signup',
+  res.render('auth/create-user-account', {
+    path: '/create-user-account',
+    pageTitle: cart_items.length ? 'Checkout - Customer Information' : 'Create User Account',
     cart_items,
     cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
     totalSum: helper.calcTotalPrice(cart_items),
@@ -69,33 +69,6 @@ exports.getSignup = (req, res, next) => {
     validationErrors: []
   });
 };
-
-exports.getCreateUserAccount = (req, res, next) => {
-  let message = req.flash('error');
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
-
-  const cart_items = req.session.cart_items || [];
-  const wishlist = req.session.wishlist || [];
-  res.render('newDesign/create-user-account', {
-    path: '/create-user-account',
-    pageTitle: 'Create User Account',
-    cart_items,
-    cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
-    totalSum: helper.calcTotalPrice(cart_items),
-    wishlist,
-    errorMessage: message,
-    oldInput: {
-      email: '',
-      password: '',
-      confirmPassword: ''
-    },
-    validationErrors: []
-  });
-}
 
 exports.getShippingAddress = (req, res, next) => {
   let message = req.flash('error');
