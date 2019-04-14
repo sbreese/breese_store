@@ -200,7 +200,7 @@ exports.getProductPage = (req, res, next) => {
             totalSum: helper.calcTotalPrice(user_cart.cart_items),
             wishlist: user_cart.wishlist,
             categories,
-            resultInfo: `<span>${(ITEMS_PER_PAGE < totalItems ? `${(page - 1) * ITEMS_PER_PAGE + 1}-${ITEMS_PER_PAGE} of ` : '' ) + `${totalItems} results` + (param_1_value ? ` for </span><span> </span><span class="a-color-state a-text-bold">"${param_1_value}"</span>` : '</span>')}`,
+            resultInfo: `<span>${(ITEMS_PER_PAGE < totalItems ? `${(page - 1) * ITEMS_PER_PAGE + 1}-${ITEMS_PER_PAGE} of ` : '' ) + `${totalItems} results` + (param_1_value ? ` for </span><span> </span><span class="a-color-state a-text-bold"><q>${param_1_value}</q></span>` : '</span>')}`,
             pageTitle: 'Product',
             path: '/product',
             currentPage: page,
