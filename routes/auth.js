@@ -11,7 +11,7 @@ router.get('/login', authController.getLogin);
 router.get('/create-user-account', authController.getCreateUserAccount);
 router.get('/checkout-shipping-address', authController.getShippingAddress);
 
-router.get('/customer-information', authController.getSignup);
+router.get('/customer-information', authController.getCreateUserAccount);
 router.get('/confirm-information', authController.getConfirmInformation);
 
 router.get('/edit-account', authController.getEditAccount);
