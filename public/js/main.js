@@ -192,7 +192,7 @@
     $(document).on('keypress',function(e) {
         if (e.which == 13 && $('.js-show-search').hasClass('show-search')) {
             alert('You pressed enter! Here is path name: ' + window.location.pathname);
-            window.location.href = "/product/search/" + $('[name=search-product]').val();
+            window.location.href = "/product/search/" + $('[name=search-product]').val().split(' ').join('+');
 
 /* 
 https://www.amazon.com/s?k=butter+farts&s=price-desc-rank&qid=1555269068&ref=sr_st_price-desc-rank
