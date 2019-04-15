@@ -191,7 +191,7 @@
 
     $('#sort-by>li>a').on('click', function(e){
         event.preventDefault();
-        let sort_by = $.trim($(e.target).text()).split(' ').join('_').toLowerCase();
+        let sort_by = $.trim($(e.target).text()).split(' ').join('_');
         if ($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);

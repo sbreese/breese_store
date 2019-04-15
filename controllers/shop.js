@@ -219,23 +219,23 @@ exports.getProductPage = (req, res, next) => {
       console.log("Here is the param value: ");
       console.log(param_1_value);
       switch (param_1_value) {
-        case 'popularity':
+        case 'Popularity':
           console.log("Popularity");
           sort_by = { _id : -1 };
         break;
-        case 'average_rating':
+        case 'Average_rating':
           console.log("Average rating");
           sort_by = { _id : 1 };
         break;
-        case 'newness':
+        case 'Newness':
           console.log("Newness");
           sort_by = { _id : -1 };
         break;
-        case 'price:_low_to_high':
+        case 'Price:_Low_to_High':
           console.log("Price: Low to High");
           sort_by = { price : 1 };
         break;
-        case 'price:_high_to_low':
+        case 'Price:_High_to_Low':
           console.log("Price: High to Low");
           sort_by = { price : -1 };
         break;
@@ -268,6 +268,7 @@ exports.getProductPage = (req, res, next) => {
             wishlist: user_cart.wishlist,
             categories,
             resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
+            sort_by: param_1_value,
             color: param_1_value,
             price_range: param_1_value,
             pageTitle: 'Product',
