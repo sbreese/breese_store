@@ -235,6 +235,7 @@ exports.getProductPage = (req, res, next) => {
         case 'Price: High to Low':
           console.log("Price: High to Low");
         break;
+      } // END sort_by switch
     } // END sort_by
   } // END param_1_value
   // End process URL parameters
