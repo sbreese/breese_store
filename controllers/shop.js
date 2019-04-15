@@ -122,7 +122,7 @@ exports.getIndex = (req, res, next) => {
 
     // Begin process URL parameters:
     const param_1_key = req.params.param_1_key;
-    const param_1_value = req.params.param_1_value;
+    const param_1_value = req.params.param_1_value.split('+').join(' ');
     let filter;
     if (param_1_key && param_1_value && param_1_key === 'search') {
       filter = { $text: { $search: param_1_value } };
@@ -182,7 +182,7 @@ exports.getProductPage = (req, res, next) => {
 
   // Begin process URL parameters:
   const param_1_key = req.params.param_1_key;
-  const param_1_value = req.params.param_1_value;
+  const param_1_value = req.params.param_1_value.split('+').join(' ');
   let filter;
   if (param_1_key && param_1_value && param_1_key === 'search') {
     filter = { $text: { $search: param_1_value } };
