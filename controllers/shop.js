@@ -213,6 +213,28 @@ exports.getProductPage = (req, res, next) => {
       } else {
         filter = { "price": { "$gte": priceArray[0] } };
       }
+      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+    } else if (param_1_key === 'sort_by') {
+      param_1_value = param_1_value.replace('_',' ').replace('-',' - ');
+      
+      console.log("Here is the param value: ");
+      console.log(param_1_value);
+      switch(param_1_value) {
+        case 'Popularity':
+          console.log("Popularity");
+        break;
+        case 'Average rating':
+          console.log("Average rating");
+        break;
+        case 'Newness':
+          console.log("Newness");
+        break;
+        case 'Price: Low to High':
+          console.log("Price: Low to High");
+        break;
+        case 'Price: High to Low':
+          console.log("Price: High to Low");
+        break;
     }
   }
   // End process URL parameters
@@ -228,8 +250,6 @@ exports.getProductPage = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-
-      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
 
       this.getShoppingCartData(req)
       .then(user_cart => {
