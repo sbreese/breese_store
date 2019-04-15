@@ -197,7 +197,6 @@
             $('.panel-filter').slideUp(400);
         }
         window.location.href = `/product/color/${color}`;
-
     });
 
     $(document).on('keypress',function(e) {
