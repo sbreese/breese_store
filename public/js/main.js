@@ -191,7 +191,7 @@
 
     $(document).on('keypress',function(e) {
         if (e.which == 13 && $('.js-show-search').hasClass('show-search')) {
-            alert('You pressed enter! Here is path name: ' + window.location.pathname);
+            // alert('You pressed enter! Here is path name: ' + window.location.pathname);
             window.location.href = "/product/search/" + $('[name=search-product]').val().split(' ').join('+');
 
 /* 
