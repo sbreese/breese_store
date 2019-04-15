@@ -240,7 +240,7 @@ exports.getProductPage = (req, res, next) => {
           sort_by = { price : -1 };
         break;
       } // END sort_by switch
-      param_1_value = param_1_value.replace('_',' ');
+      param_1_value = param_1_value.split('_').join(' ');
     } // END sort_by
   } // END param_1_value
   // End process URL parameters
