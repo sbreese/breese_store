@@ -182,7 +182,7 @@ exports.getProductPage = (req, res, next) => {
 
   // Begin process URL parameters:
   const param_1_key = req.params.param_1_key;
-  let param_1_value;
+  let param_1_value = '';
   let filter;
   if (req.params.param_1_value) {
     param_1_value = req.params.param_1_value.split('+').join(' ');
@@ -216,6 +216,7 @@ exports.getProductPage = (req, res, next) => {
             wishlist: user_cart.wishlist,
             categories,
             resultInfo: helper.formatResultInfo(param_1_value, ITEMS_PER_PAGE, totalItems, page),
+            color: param_1_value,
             pageTitle: 'Product',
             path: '/product',
             currentPage: page,
