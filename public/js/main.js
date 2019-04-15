@@ -196,7 +196,6 @@
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
         }
-        console.log(price);
         window.location.href = `/product/price/${price}`;
     });
 
