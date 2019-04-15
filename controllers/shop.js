@@ -190,7 +190,7 @@ exports.getProductPage = (req, res, next) => {
         filter = { $text: { $search: param_1_value } };
     } else if (param_1_key === 'color') {
       filter = { "colors": { "$regex": param_1_value, "$options": "i" } };
-    } else if (param_1_key === 'price') {
+    } else if (param_1_key === 'price' && param_1_value !== 'all') {
       const priceArray = param_1_value.replace(/\$/g, '').split('-');
       console.log("Here is price array:");
       console.log(priceArray);
