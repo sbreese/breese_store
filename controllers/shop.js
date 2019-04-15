@@ -192,15 +192,11 @@ exports.getProductPage = (req, res, next) => {
       filter = { "colors": { "$regex": param_1_value, "$options": "i" } };
     } else if (param_1_key === 'price' && param_1_value !== 'all') {
       const priceArray = param_1_value.replace(/\$/g, '').split('-');
-      console.log("Here is price array:");
-      console.log(priceArray);
       if (priceArray[1]) {
         filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
       } else {
         filter = { "price": { "$gte": priceArray[0] } };
       }
-      
-      console.log(filter);
     }
   }
   // End process URL parameters
@@ -228,6 +224,7 @@ exports.getProductPage = (req, res, next) => {
             categories,
             resultInfo: helper.formatResultInfo(param_1_value, ITEMS_PER_PAGE, totalItems, page),
             color: param_1_value,
+            price_range: param_1_value,
             pageTitle: 'Product',
             path: '/product',
             currentPage: page,

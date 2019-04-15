@@ -99,37 +99,37 @@
 
                         <ul id="price-filter">
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === 'all' || !price_range ? ' filter-link-active' : '' %>">
                                     All
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === '$0.00 - $50.00' ? ' filter-link-active' : '' %>">
                                     $0.00 - $50.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === '$50.00 - $100.00' ? ' filter-link-active' : '' %>">
                                     $50.00 - $100.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === '$100.00 - $150.00' ? ' filter-link-active' : '' %>">
                                     $100.00 - $150.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === '$150.00 - $200.00' ? ' filter-link-active' : '' %>">
                                     $150.00 - $200.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="#" class="filter-link stext-106 trans-04<%- price_range === '$200.00+' ? ' filter-link-active' : '' %>">
                                     $200.00+
                                 </a>
                             </li>
