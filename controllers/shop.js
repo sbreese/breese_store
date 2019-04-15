@@ -120,14 +120,26 @@ exports.getIndex = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
-    // Begin process URL parameters:
-    const param_1_key = req.params.param_1_key;
-    const param_1_value = req.params.param_1_value.split('+').join(' ');
-    let filter;
-    if (param_1_key && param_1_value && param_1_key === 'search') {
-      filter = { $text: { $search: param_1_value } };
+  // Begin process URL parameters:
+  const param_1_key = req.params.param_1_key;
+  let param_1_value = '';
+  let filter;
+  if (req.params.param_1_value) {
+    param_1_value = req.params.param_1_value.split('+').join(' ');
+    if (param_1_key && param_1_key === 'search') {
+        filter = { $text: { $search: param_1_value } };
+    } else if (param_1_key === 'color') {
+      filter = { "colors": { "$regex": param_1_value, "$options": "i" } };
+    } else if (param_1_key === 'price' && param_1_value !== 'all') {
+      const priceArray = param_1_value.replace(/\$/g, '').split('-');
+      if (priceArray[1]) {
+        filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
+      } else {
+        filter = { "price": { "$gte": priceArray[0] } };
+      }
     }
-    // End process URL parameters
+  }
+  // End process URL parameters
 
   Category.find().then(categories => {
   Product.find(filter)
@@ -141,6 +153,8 @@ exports.getIndex = (req, res, next) => {
     })
     .then(products => {
 
+      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+
       this.getShoppingCartData(req)
       .then(user_cart => {
           res.render('newDesign/index', {
@@ -151,6 +165,8 @@ exports.getIndex = (req, res, next) => {
             wishlist: user_cart.wishlist,
             categories,
             resultInfo: helper.formatResultInfo(param_1_value, ITEMS_PER_PAGE, totalItems, page),
+            color: param_1_value,
+            price_range: param_1_value,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
             path: '/',
