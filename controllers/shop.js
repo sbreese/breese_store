@@ -194,7 +194,12 @@ exports.getProductPage = (req, res, next) => {
       const priceArray = param_1_value.replace(/\$/g, '').split('-');
       console.log("Here is price array:");
       console.log(priceArray);
-      filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
+      if (priceArray[1]) {
+        filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
+      } else {
+        filter = { "price": { "$gte": priceArray[0] } };
+      }
+      
       console.log(filter);
     }
   }
