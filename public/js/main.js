@@ -191,12 +191,12 @@
 
     $('#price-filter>li>a').on('click', function(e){
         event.preventDefault();
-        let price = $.trim($(e.target).text()).replace(/\s+/g, '');
+        let price = $.trim($(e.target).text());
         if ($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
         }
-        window.location.href = `/product/price/${price}`;
+        window.location.href = `/product/price/${price.replace(/\s+/g, '')}`;
     });
 
     $('#color-filter>li>a').on('click', function(e){
