@@ -191,7 +191,7 @@
 
     $('#color-filter>li>a').on('click', function(e){
         event.preventDefault();
-        let color = $.trim($(e.target).text());
+        let color = $.trim($(e.target).text()).toLowerCase();
         if ($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
