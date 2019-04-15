@@ -189,7 +189,7 @@
         }    
     });
 
-    $('#color-filter>li>a').on('click', function(event){
+    $('#color-filter>li>a').on('click', function(e){
         event.preventDefault();
         let color = $(e.target).text();
         if ($('.js-show-filter').hasClass('show-filter')) {

@@ -185,7 +185,9 @@ exports.getProductPage = (req, res, next) => {
   const param_1_value = req.params.param_1_value.split('+').join(' ');
   let filter;
   if (param_1_key && param_1_value && param_1_key === 'search') {
-    filter = { $text: { $search: param_1_value } };
+      filter = { $text: { $search: param_1_value } };
+  } else if (param_1_key === 'color' && param_1_value) {
+    filter = { "colors": `/${param_1_value}/i` };
   }
   // End process URL parameters
 
