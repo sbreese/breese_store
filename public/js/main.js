@@ -191,12 +191,11 @@
 
     $('#price-filter>li>a').on('click', function(e){
         event.preventDefault();
-        let price = $.trim($(e.target).text()).replace(' - ','').replace(/\s+/g, '');
+        let price = $.trim($(e.target).text()).replace(' - ','-');
         if ($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
         }
-        alert("Ah nice and removed: " + price);
         console.log(price);
         window.location.href = `/product/price/${price}`;
     });
