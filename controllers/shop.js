@@ -120,12 +120,21 @@ exports.getIndex = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+    // Begin process URL parameters:
+    const param_1_key = req.params.param_1_key;
+    const param_1_value = req.params.param_1_value;
+    let filter;
+    if (param_1_key && param_1_value && param_1_key === 'search') {
+      filter = { $text: { $search: param_1_value } };
+    }
+    // End process URL parameters
+
   Category.find().then(categories => {
-  Product.find()
+  Product.find(filter)
     .countDocuments()
     .then(numProducts => {
       totalItems = numProducts;
-      return Product.find()
+      return Product.find(filter)
         .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
