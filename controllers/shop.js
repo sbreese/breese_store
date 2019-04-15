@@ -213,6 +213,8 @@ exports.getProductPage = (req, res, next) => {
     })
     .then(products => {
 
+      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+
       this.getShoppingCartData(req)
       .then(user_cart => {
           res.render('newDesign/product', {
