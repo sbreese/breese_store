@@ -197,6 +197,7 @@
             $('.panel-filter').slideUp(400);
         }
         alert("Ah nice and removed: " + price);
+        console.log(price);
         window.location.href = `/product/price/${price}`;
     });
 
