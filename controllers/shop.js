@@ -199,7 +199,7 @@ exports.getProductPage = (req, res, next) => {
   // Begin process URL parameters:
   const param_1_key = req.params.param_1_key;
   let param_1_value = '';
-  let filter;
+  let filter, sort_by;
   if (req.params.param_1_value) {
     param_1_value = req.params.param_1_value.split('+').join(' ');
     if (param_1_key && param_1_key === 'search') {
@@ -221,18 +221,23 @@ exports.getProductPage = (req, res, next) => {
       switch (param_1_value) {
         case 'popularity':
           console.log("Popularity");
+          sort_by = { _id : -1 };
         break;
         case 'average_rating':
           console.log("Average rating");
+          sort_by = { _id : 1 };
         break;
         case 'newness':
           console.log("Newness");
+          sort_by = { _id : -1 };
         break;
         case 'price:_low_to_high':
           console.log("Price: Low to High");
+          sort_by = { price : 1 };
         break;
         case 'price:_high_to_low':
           console.log("Price: High to Low");
+          sort_by = { price : -1 };
         break;
       } // END sort_by switch
       param_1_value = param_1_value.replace('_',' ');
@@ -246,6 +251,7 @@ exports.getProductPage = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
       return Product.find(filter)
+        .sort(sort_by)
         .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
