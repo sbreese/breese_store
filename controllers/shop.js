@@ -215,27 +215,27 @@ exports.getProductPage = (req, res, next) => {
       }
       param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
     } else if (param_1_key === 'sort_by') {
-      param_1_value = param_1_value.replace('_',' ').replace('-',' - ');
-      
+
       console.log("Here is the param value: ");
       console.log(param_1_value);
       switch (param_1_value) {
-        case 'Popularity':
+        case 'popularity':
           console.log("Popularity");
         break;
-        case 'Average rating':
+        case 'average_rating':
           console.log("Average rating");
         break;
-        case 'Newness':
+        case 'newness':
           console.log("Newness");
         break;
-        case 'Price: Low to High':
+        case 'price:_low_to_high':
           console.log("Price: Low to High");
         break;
-        case 'Price: High to Low':
+        case 'price:_high_to_low':
           console.log("Price: High to Low");
         break;
       } // END sort_by switch
+      param_1_value = param_1_value.replace('_',' ');
     } // END sort_by
   } // END param_1_value
   // End process URL parameters
