@@ -165,6 +165,7 @@ exports.getIndex = (req, res, next) => {
             wishlist: user_cart.wishlist,
             categories,
             resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
+            sort_by: param_1_value,
             color: param_1_value,
             price_range: param_1_value,
             seasonYear: getSeasonYear(),
@@ -248,7 +249,7 @@ exports.getProductPage = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
       return Product.find(filter)
-        // .sort(sort_by)
+        .sort(sort_by)
         .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
