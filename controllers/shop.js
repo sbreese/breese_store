@@ -254,11 +254,10 @@ exports.getProductPage = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-      console.log("Did I make it this far products?");
-      console.log(products);
 
       this.getShoppingCartData(req)
       .then(user_cart => {
+        console.log("Did I make it this far user cart?");
           res.render('newDesign/product', {
             products,
             cart_items: user_cart.cart_items,
