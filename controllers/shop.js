@@ -168,6 +168,7 @@ exports.getIndex = (req, res, next) => {
             sort_by: param_1_value,
             color: param_1_value,
             price_range: param_1_value,
+            tag: param_1_value,
             seasonYear: getSeasonYear(),
             pageTitle: 'Shop',
             path: '/',
