@@ -8,7 +8,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
-const errorHandler = require('errorhandler');
 
 const errorController = require('./controllers/error');
 const shopController = require('./controllers/shop');
@@ -136,10 +135,6 @@ app.use((error, req, res, next) => {
     errorMsg: error
   });
 });
-
-
-    errorHandler.title = "OOps...";
-    app.use(errorHandler());
 
 mongoose
   .connect(MONGODB_URI)
