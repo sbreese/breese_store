@@ -5,5 +5,10 @@
     <%- include('includes/navigation.ejs') %>
     <h1>Some error occurred!</h1>
     <p>We're working on fixing this, sorry for the inconvenience!</p>
+    <% if (errorMsg) { %>
+    <p>Here is the error message in all its glory:<br>
+        <%- errorMsg %>
+    </p>
+    <% } %>
 
 <%- include('includes/end.ejs') %>
