@@ -258,6 +258,7 @@ exports.getProductPage = (req, res, next) => {
       this.getShoppingCartData(req)
       .then(user_cart => {
         console.log("Did I make it this far user cart?");
+        console.log(products);
           res.render('newDesign/product', {
             products: [],
             cart_items: user_cart.cart_items,
