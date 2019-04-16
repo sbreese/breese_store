@@ -236,7 +236,7 @@ exports.getProductPage = (req, res, next) => {
       } // END sort_by switch
       param_1_value = param_1_value.split('_').join(' ');
     } else if (param_1_key === 'tag') {
-      // filter = { "tags": param_1_value };
+      filter = { "tags": param_1_value };
     } // END tag
   } // END param_1_value
   // End process URL parameters
