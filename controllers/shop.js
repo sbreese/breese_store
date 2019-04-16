@@ -260,7 +260,7 @@ exports.getProductPage = (req, res, next) => {
         console.log("Did I make it this far user cart?");
         console.log(products);
           res.render('newDesign/product', {
-            products: [],
+            products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
             totalSum: helper.calcTotalPrice(user_cart.cart_items),
