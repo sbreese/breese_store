@@ -240,8 +240,7 @@ exports.getProductPage = (req, res, next) => {
   } // END param_1_value
   // End process URL parameters
 
-console.log("Did I make it this far?");
-console.log(filter);
+
 
   Category.find().then(categories => {
   Product.find(filter)
@@ -255,6 +254,8 @@ console.log(filter);
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
+      console.log("Did I make it this far products?");
+      console.log(products);
 
       this.getShoppingCartData(req)
       .then(user_cart => {
