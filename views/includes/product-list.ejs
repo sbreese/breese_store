@@ -44,7 +44,7 @@
                     <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
                 </div>	
             </div>
-<!-- BEGIN ALL GOOD -->
+
             <!-- Filter -->
             <div class="dis-none panel-filter w-full p-t-10">
                 <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
@@ -236,7 +236,30 @@
         </div>
 
 
-<!-- ENND ALL GOOD-->
+<!-- BEGIN PROBLEMATIC -->
+        <!-- Result info -->
+
+    
+            <div class="row isotope-grid">                
+                <% for (let product of products) { %>
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= product.category.code %>">
+                        <%- include('../includes/product-card', {product, wishlist, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+                    </div>
+                <% } %>
+            </div>
+    
+                
+            <!-- Pagination -->
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+    
+            <!-- Load more -->
+            <!--div class="flex-c-m flex-w w-full p-t-45">
+                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                    Load More
+                </a>
+            </div-->
+
+<!-- END PROBLEMATIC -->
 
     </div>
 </section>
