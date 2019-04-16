@@ -258,7 +258,7 @@ exports.getProductPage = (req, res, next) => {
       this.getShoppingCartData(req)
       .then(user_cart => {
         console.log("Did I make it this far user cart?");
-        console.log(products);
+        // console.log(products);
           res.render('newDesign/product', {
             prods: products,
             cart_items: user_cart.cart_items,
@@ -279,6 +279,12 @@ exports.getProductPage = (req, res, next) => {
             nextPage: page + 1,
             previousPage: page - 1,
             lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+          }).catch(err => {
+            console.log("Steve here is the error:");
+            console.log(err);
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
           });
         })
         .catch(err => {
