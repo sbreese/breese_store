@@ -216,32 +216,27 @@ exports.getProductPage = (req, res, next) => {
       param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
     } else if (param_1_key === 'sort_by') {
 
-      console.log("Here is the param value: ");
-      console.log(param_1_value);
       switch (param_1_value) {
         case 'Popularity':
-          console.log("Popularity");
           sort_by = { _id : -1 };
         break;
         case 'Average_rating':
-          console.log("Average rating");
           sort_by = { _id : 1 };
         break;
         case 'Newness':
-          console.log("Newness");
           sort_by = { _id : -1 };
         break;
         case 'Price:_Low_to_High':
-          console.log("Price: Low to High");
           sort_by = { price : 1 };
         break;
         case 'Price:_High_to_Low':
-          console.log("Price: High to Low");
           sort_by = { price : -1 };
         break;
       } // END sort_by switch
       param_1_value = param_1_value.split('_').join(' ');
-    } // END sort_by
+    } else if (param_1_key === 'tag') {
+      filter = { "tags": param_1_value };
+    } // END tag
   } // END param_1_value
   // End process URL parameters
 
@@ -271,6 +266,7 @@ exports.getProductPage = (req, res, next) => {
             sort_by: param_1_value,
             color: param_1_value,
             price_range: param_1_value,
+            tag: param_1_value,
             pageTitle: 'Product',
             path: '/product',
             currentPage: page,

@@ -219,6 +219,16 @@
         window.location.href = `/product/color/${color}`;
     });
 
+    $('#tag-filter>a').on('click', function(e){
+        event.preventDefault();
+        let tag = $.trim($(e.target).text());
+        if ($('.js-show-filter').hasClass('show-filter')) {
+            $('.js-show-filter').removeClass('show-filter');
+            $('.panel-filter').slideUp(400);
+        }
+        window.location.href = `/product/tag/${tag}`;
+    });
+
     $(document).on('keypress',function(e) {
         if (e.which == 13 && $('.js-show-search').hasClass('show-search')) {
             // alert('You pressed enter! Here is path name: ' + window.location.pathname);
