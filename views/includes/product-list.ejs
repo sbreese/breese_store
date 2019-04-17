@@ -245,7 +245,7 @@
             </div>
             <% } %>
     
-            <!-- BEGIN PROBLEMATIC -->
+            <!-- Product list -->
             <div class="row isotope-grid">  
                 <% if (products.length > 0) { %>       
                     <% for (let product of products) { %>       
@@ -255,7 +255,7 @@
                     <% } %>
                 <% } %>
             </div>
-    <!-- END PROBLEMATIC -->
+        <!-- End Product list -->
                 
             <!-- Pagination -->
             <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>

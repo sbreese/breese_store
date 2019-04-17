@@ -243,8 +243,6 @@ exports.getProductPage = (req, res, next) => {
   } // END param_1_value
   // End process URL parameters
 
-
-
   Category.find().then(categories => {
   Product.find(filter)
     .countDocuments()
