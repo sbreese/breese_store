@@ -391,7 +391,8 @@ exports.patchFilterSearch = (req, res, next) => {
           lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
           hasNextPage: ITEMS_PER_PAGE * page < totalItems, 
           hasPreviousPage: page > 1,
-          csrfToken: req.csrfToken()
+          csrfToken: req.csrfToken(),
+          path: req.originalUrl
         }, {}, (err, productList) => {
             res.status(200).json({ message: 'Success!', productList });
         }); // closer ejs.renderFile
