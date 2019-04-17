@@ -12,7 +12,7 @@
                 <% if (products.length > 0) { %>       
                     <% for (let product of products) { %>       
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= product.category.code %>">
-                            <%- include('../includes/product-card', {product, wishlist, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+                            <%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
                         </div>
                     <% } %>
                 <% } %>
@@ -20,7 +20,7 @@
         <!-- End Product list -->
                 
             <!-- Pagination -->
-            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+            <%- include('../includes/pagination.ejs', {currentPage, nextPage, previousPage, lastPage, hasNextPage, hasPreviousPage}) %>
     
             <!-- Load more -->
             <!--div class="flex-c-m flex-w w-full p-t-45">
