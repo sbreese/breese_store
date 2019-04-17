@@ -328,7 +328,7 @@ Goal: display this bar under the search box:
     const filterSearch = (param_1_key, param_1_value) => {
         
         const csrf = getFirstElementByName('_csrf').value;
-        const path = getElementById('url-path').value;
+        const path = document.getElementById('url-path').value;
       
         fetch(`/filter-search/${param_1_key}/${param_1_value}`, {
           method: 'PATCH',
