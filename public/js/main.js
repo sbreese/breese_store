@@ -249,6 +249,8 @@ Goal: display this bar under the search box:
         }
     });
 
+    $('.how-active1').click();
+
     /*==================================================================
     [ Cart ]*/
     $(document.body).on('click', '.js-show-cart', function(){
