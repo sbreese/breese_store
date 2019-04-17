@@ -465,6 +465,7 @@ exports.getNewArrivals = (req, res, next) => {
             color: param_1_value,
             price_range: param_1_value,
             tag: param_1_value,
+            categoryKey: param_1_key && param_1_key.toLowerCase(),
             resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
             seasonYear: getSeasonYear(),
             pageTitle: 'New Arrivals',
