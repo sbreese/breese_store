@@ -189,6 +189,12 @@
         }    
     });
 
+    const resetFilters = () => {
+        $("#price-filter>li>a").removeClass("filter-link-active");
+        $("#color-filter>li>a").removeClass("filter-link-active");
+        $("#tag-filter>a").removeClass("tag-filter-link-active");
+    }
+
     $('#sort-by>li>a').on('click', function(e){
         event.preventDefault();
         let sort_by = $.trim($(e.target).text()).split(' ').join('_');
@@ -206,7 +212,19 @@
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
         }
-        window.location.href = `/product/price/${price}`;
+
+        let onSomeStupidPage = false;
+        if (onSomeStupidPage) {
+            window.location.href = `/product/price/${price}`;
+        } else {
+            resetFilters();
+            $(e.target).addClass("filter-link-active");
+            filterSearch('price', price);
+            if ($('.js-show-filter').hasClass('show-filter')) {
+                $('.js-show-filter').removeClass('show-filter');
+                $('.panel-filter').slideUp(400);
+            }
+        }
     });
 
     $('#color-filter>li>a').on('click', function(e){
@@ -217,7 +235,7 @@
         if (onSomeStupidPage) {
             window.location.href = `/product/color/${color}`;
         } else {
-            $("#color-filter>li>a").removeClass("filter-link-active");
+            resetFilters();
             $(e.target).addClass("filter-link-active");
             filterSearch('color', color);
             if ($('.js-show-filter').hasClass('show-filter')) {
@@ -235,7 +253,7 @@
         if (onSomeStupidPage) {
             window.location.href = `/product/tag/${tag}`;
         } else {
-            $("#tag-filter>a").removeClass("tag-filter-link-active");
+            resetFilters();
             $(e.target).addClass("tag-filter-link-active");
             filterSearch('tag', tag);
             if ($('.js-show-filter').hasClass('show-filter')) {
