@@ -212,11 +212,19 @@
     $('#color-filter>li>a').on('click', function(e){
         event.preventDefault();
         let color = $.trim($(e.target).text()).toLowerCase();
-        if ($('.js-show-filter').hasClass('show-filter')) {
-            $('.js-show-filter').removeClass('show-filter');
-            $('.panel-filter').slideUp(400);
+
+        let onSomeStupidPage = false;
+        if (onSomeStupidPage) {
+            window.location.href = `/product/color/${color}`;
+        } else {
+            $("#color-filter>li>a").removeClass("filter-link-active");
+            $(e.target).addClass("filter-link-active");
+            filterSearch('color', color);
+            if ($('.js-show-filter').hasClass('show-filter')) {
+                $('.js-show-filter').removeClass('show-filter');
+                $('.panel-filter').slideUp(400);
+            }
         }
-        window.location.href = `/product/color/${color}`;
     });
 
     $('#tag-filter>a').on('click', function(e){
@@ -227,8 +235,7 @@
         if (onSomeStupidPage) {
             window.location.href = `/product/tag/${tag}`;
         } else {
-            $("#tag-filter a").removeClass("tag-filter-link-active");
-            // $(e.target).css({backgroundColor: '#6c7ae0', color: 'white'});
+            $("#tag-filter>a").removeClass("tag-filter-link-active");
             $(e.target).addClass("tag-filter-link-active");
             filterSearch('tag', tag);
             if ($('.js-show-filter').hasClass('show-filter')) {
