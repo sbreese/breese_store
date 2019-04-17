@@ -222,17 +222,17 @@
     $('#tag-filter>a').on('click', function(e){
         event.preventDefault();
         let tag = $.trim($(e.target).text());
-        if ($('.js-show-filter').hasClass('show-filter')) {
-            $('.js-show-filter').removeClass('show-filter');
-            $('.panel-filter').slideUp(400);
-        }
 
         let onSomeStupidPage = false;
         if (onSomeStupidPage) {
             window.location.href = `/product/tag/${tag}`;
         } else {
+            $(e.target).css({backgroundColor: '#6c7ae0', color: 'white'});
             filterSearch('tag', tag);
-            // TODO: add CSS class to make tag active
+            if ($('.js-show-filter').hasClass('show-filter')) {
+                $('.js-show-filter').removeClass('show-filter');
+                $('.panel-filter').slideUp(400);
+            }
         }
     });
 
