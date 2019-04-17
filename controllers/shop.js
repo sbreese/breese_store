@@ -57,7 +57,7 @@ exports.getProducts = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-      res.render('shop/product-list', {
+      res.render('shop/product-filter-search-list', {
         prods: products,
         pageTitle: 'Products',
         path: '/products',
