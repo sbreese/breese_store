@@ -342,7 +342,7 @@ Goal: display this bar under the search box:
           })
           .then(data => {
             console.log(data);
-            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, '/".PUBLIC_MEMBER_LIST_URL."/Member/'+JSON.First_Name+'_'+JSON.Last_Name.replace(/ /g,'_'));
+            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, `${path}/${param_1_key}/${param_1_value}`);
             if (data.productList) {
                 $('product-list').html(data.productList);
             }
