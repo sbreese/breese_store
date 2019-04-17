@@ -327,7 +327,7 @@ Goal: display this bar under the search box:
     }
     const filterSearch = (param_1_key, param_1_value) => {
         
-        const csrf = getFirstElementByName('_csrf');
+        const csrf = getFirstElementByName('_csrf').value;
 
         alert(csrf);
       
