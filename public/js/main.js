@@ -395,7 +395,7 @@ Goal: display this bar under the search box:
                 addRemoveFromWishlist(prodId, 0, csrf);
             } else {
                 $(this).addClass('js-addedwish-b2');
-                swal(nameProduct, "is added to wishlist !", "success");
+                swal(nameProduct, "is added to wishlist!", "success");
                 addRemoveFromWishlist(prodId, 1, csrf);
             }
             // $(this).off('click');
