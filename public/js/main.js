@@ -190,6 +190,7 @@
     });
 
     const resetFilters = () => {
+        $("#sort-by>li>a").removeClass("filter-link-active");
         $("#price-filter>li>a").removeClass("filter-link-active");
         $("#color-filter>li>a").removeClass("filter-link-active");
         $("#tag-filter>a").removeClass("tag-filter-link-active");
@@ -198,20 +199,20 @@
     $('#sort-by>li>a').on('click', function(e){
         event.preventDefault();
         let sort_by = $.trim($(e.target).text()).split(' ').join('_');
-        if ($('.js-show-filter').hasClass('show-filter')) {
-            $('.js-show-filter').removeClass('show-filter');
-            $('.panel-filter').slideUp(400);
+
+        let onSomeStupidPage = false;
+        if (onSomeStupidPage) {
+            window.location.href = `/product/sort_by/${sort_by}`;
+        } else {
+            resetFilters();
+            $(e.target).addClass("filter-link-active");
+            filterSearch('sort_by', sort_by);
         }
-        window.location.href = `/product/sort_by/${sort_by}`;
     });
 
     $('#price-filter>li>a').on('click', function(e){
         event.preventDefault();
         let price = $.trim($(e.target).text()).replace(' - ','-').toLowerCase();
-        if ($('.js-show-filter').hasClass('show-filter')) {
-            $('.js-show-filter').removeClass('show-filter');
-            $('.panel-filter').slideUp(400);
-        }
 
         let onSomeStupidPage = false;
         if (onSomeStupidPage) {
@@ -220,10 +221,6 @@
             resetFilters();
             $(e.target).addClass("filter-link-active");
             filterSearch('price', price);
-            if ($('.js-show-filter').hasClass('show-filter')) {
-                $('.js-show-filter').removeClass('show-filter');
-                $('.panel-filter').slideUp(400);
-            }
         }
     });
 
@@ -238,10 +235,6 @@
             resetFilters();
             $(e.target).addClass("filter-link-active");
             filterSearch('color', color);
-            if ($('.js-show-filter').hasClass('show-filter')) {
-                $('.js-show-filter').removeClass('show-filter');
-                $('.panel-filter').slideUp(400);
-            }
         }
     });
 
@@ -256,10 +249,6 @@
             resetFilters();
             $(e.target).addClass("tag-filter-link-active");
             filterSearch('tag', tag);
-            if ($('.js-show-filter').hasClass('show-filter')) {
-                $('.js-show-filter').removeClass('show-filter');
-                $('.panel-filter').slideUp(400);
-            }
         }
     });
 
@@ -368,9 +357,15 @@ Goal: display this bar under the search box:
           })
           .then(data => {
             console.log(data);
-            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, `${path.substring(1)}/${param_1_key}/${param_1_value}`);
             if (data.productList) {
+                history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, `${path.substring(1)}/${param_1_key}/${param_1_value}`);
+
                 $('#product-list').html(data.productList);
+
+                if ($('.js-show-filter').hasClass('show-filter')) {
+                    $('.js-show-filter').removeClass('show-filter');
+                    $('.panel-filter').slideUp(400);
+                }
             }
           })
           .catch(err => {
