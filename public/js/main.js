@@ -226,7 +226,14 @@
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
         }
-        window.location.href = `/product/tag/${tag}`;
+
+        let onSomeStupidPage = false;
+        if (onSomeStupidPage) {
+            window.location.href = `/product/tag/${tag}`;
+        } else {
+            filterSearch('tag', tag);
+            // TODO: add CSS class to make tag active
+        }
     });
 
     $(document).on('keypress',function(e) {
@@ -300,6 +307,42 @@ Goal: display this bar under the search box:
             }
             if (data.showCartMobile) {
                 $('.wrap-header-mobile .js-show-cart').replaceWith(data.showCartMobile);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
+
+    /*==================================================================
+    [ filter or search clicked ]*/
+
+    const getFirstElementByName = (element_name) => {
+        var elements = document.getElementsByName(element_name);
+        if (elements.length) {
+            return elements[0];
+        } else {
+            return undefined;
+        }
+    }
+    const filterSearch = (param_1_key, param_1_value) => {
+        
+        const csrf = getFirstElementByName('_csrf');
+      
+        fetch(`/filter-search/${param_1_key}/${param_1_value}`, {
+          method: 'PATCH',
+          headers: {
+            'csrf-token': csrf
+          }
+        })
+          .then(result => {
+            return result.json();
+          })
+          .then(data => {
+            console.log(data);
+            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, '/".PUBLIC_MEMBER_LIST_URL."/Member/'+JSON.First_Name+'_'+JSON.Last_Name.replace(/ /g,'_'));
+            if (data.productList) {
+                $('product-list').html(data.productList);
             }
           })
           .catch(err => {

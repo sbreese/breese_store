@@ -27,6 +27,9 @@ router.get('/products/:productId', shopController.getProduct);
 // /change-cart/:productId/:qtyChange => PATCH
 router.patch('/change-cart/:productId/:qtyChange', shopController.patchCartQtyChange);
 
+// /filter-search/:param_1_key/:param_1_value => PATCH
+router.patch('/filter-search/:param_1_key?/:param_1_value?', shopController.patchFilterSearch);
+
 // /wishlist/:productId/:add => PATCH
 router.patch('/wishlist/:productId/:add', shopController.patchAddRemoveFromWishlist);
 

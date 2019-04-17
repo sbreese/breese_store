@@ -123,7 +123,7 @@ exports.getIndex = (req, res, next) => {
   // Begin process URL parameters:
   const param_1_key = req.params.param_1_key;
   let param_1_value = '';
-  let filter;
+  let filter, sort_by;
   if (req.params.param_1_value) {
     param_1_value = req.params.param_1_value.split('+').join(' ');
     if (param_1_key && param_1_key === 'search') {
@@ -137,8 +137,31 @@ exports.getIndex = (req, res, next) => {
       } else {
         filter = { "price": { "$gte": priceArray[0] } };
       }
-    }
-  }
+      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+    } else if (param_1_key === 'sort_by') {
+
+      switch (param_1_value) {
+        case 'Popularity':
+          sort_by = { _id : -1 };
+        break;
+        case 'Average_rating':
+          sort_by = { _id : 1 };
+        break;
+        case 'Newness':
+          sort_by = { _id : -1 };
+        break;
+        case 'Price:_Low_to_High':
+          sort_by = { price : 1 };
+        break;
+        case 'Price:_High_to_Low':
+          sort_by = { price : -1 };
+        break;
+      } // END sort_by switch
+      param_1_value = param_1_value.split('_').join(' ');
+    } else if (param_1_key === 'tag') {
+      filter = { "tags": param_1_value };
+    } // END tag
+  } // END param_1_value
   // End process URL parameters
 
   Category.find().then(categories => {
@@ -296,6 +319,97 @@ exports.getProductPage = (req, res, next) => {
     return next(error);
   });
 };
+
+exports.patchFilterSearch = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalItems;
+
+  // Begin process URL parameters:
+  const param_1_key = req.params.param_1_key;
+  let param_1_value = '';
+  let filter, sort_by;
+  if (req.params.param_1_value) {
+    param_1_value = req.params.param_1_value.split('+').join(' ');
+    if (param_1_key && param_1_key === 'search') {
+        filter = { $text: { $search: param_1_value } };
+    } else if (param_1_key === 'color') {
+      filter = { "colors": { "$regex": param_1_value, "$options": "i" } };
+    } else if (param_1_key === 'price' && param_1_value !== 'all') {
+      const priceArray = param_1_value.replace(/\$/g, '').split('-');
+      if (priceArray[1]) {
+        filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
+      } else {
+        filter = { "price": { "$gte": priceArray[0] } };
+      }
+      param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+    } else if (param_1_key === 'sort_by') {
+
+      switch (param_1_value) {
+        case 'Popularity':
+          sort_by = { _id : -1 };
+        break;
+        case 'Average_rating':
+          sort_by = { _id : 1 };
+        break;
+        case 'Newness':
+          sort_by = { _id : -1 };
+        break;
+        case 'Price:_Low_to_High':
+          sort_by = { price : 1 };
+        break;
+        case 'Price:_High_to_Low':
+          sort_by = { price : -1 };
+        break;
+      } // END sort_by switch
+      param_1_value = param_1_value.split('_').join(' ');
+    } else if (param_1_key === 'tag') {
+      filter = { "tags": param_1_value };
+    } // END tag
+  } // END param_1_value
+  // End process URL parameters
+
+  Product.find(filter)
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts;
+      return Product.find(filter)
+        .populate('category')
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then(products => {
+        
+      this.getShoppingCartData(req)
+      .then(user_cart => {
+        ejs.renderFile('/app/views/includes/product-list.ejs', {
+          resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
+          products, 
+          wishlist: user_cart.wishlist,
+          currentPage: page, 
+          nextPage: page + 1,
+          previousPage: page - 1,
+          lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
+          hasNextPage: ITEMS_PER_PAGE * page < totalItems, 
+          hasPreviousPage: page > 1,
+          csrfToken: req.csrfToken()
+        }, {}, (err, productList) => {
+            res.status(200).json({ message: 'Success!', productList });
+        }); // closer ejs.renderFile
+        
+    }) // close user_cart
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+
+  }) // close products
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+}; // close handler
 
 exports.getProductDetail = (req, res, next) => {
   const prodId = req.params.productId;
