@@ -341,7 +341,7 @@ Goal: display this bar under the search box:
           })
           .then(data => {
             console.log(data);
-            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, `${path}/${param_1_key}/${param_1_value}`);
+            history.pushState(null, `Breese.store Products (${param_1_key} = ${param_1_value})`, `${window.location.hostname}${path}/${param_1_key}/${param_1_value}`);
             if (data.productList) {
                 $('product-list').html(data.productList);
             }
