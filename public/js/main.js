@@ -328,6 +328,8 @@ Goal: display this bar under the search box:
     const filterSearch = (param_1_key, param_1_value) => {
         
         const csrf = getFirstElementByName('_csrf');
+
+        alert(csrf);
       
         fetch(`/filter-search/${param_1_key}/${param_1_value}`, {
           method: 'PATCH',
