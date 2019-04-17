@@ -7,13 +7,11 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get('/:param_1_key?/:param_1_value?', shopController.getIndex);
+router.get('/about', shopController.getAbout);
 router.get('/product/:param_1_key?/:param_1_value?', shopController.getProductPage);
 router.get('/product-detail/:productId', shopController.getProductDetail);
 router.get('/featured', shopController.getFeatured);
 router.get('/new-arrivals', shopController.getNewArrivals);
-
-router.get('/about', shopController.getAbout);
 
 router.get('/blog', shopController.getBlog);
 router.get('/blog-detail', shopController.getBlogDetail);
@@ -49,5 +47,7 @@ router.get('/orders', isAuth, shopController.getOrders);
 router.get('/my-orders', isAuth, shopController.getMyOrders);
 
 router.get('/orders/:orderId', isAuth, shopController.getInvoice);
+
+router.get('/:param_1_key?/:param_1_value?', shopController.getIndex);
 
 module.exports = router;
