@@ -1,0 +1,30 @@
+            <!-- Result info -->
+            <% if (resultInfo) { %>
+            <div class="panel-search w-full p-t-10 p-b-15">
+                <div class="bor8 p-l-15">
+                    <%- resultInfo %>
+                </div>
+            </div>
+            <% } %>
+    
+            <!-- Product list -->
+            <div class="row isotope-grid">  
+                <% if (products.length > 0) { %>       
+                    <% for (let product of products) { %>       
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%= product.category.code %>">
+                            <%- include('../includes/product-card', {product, wishlist, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        <!-- End Product list -->
+                
+            <!-- Pagination -->
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+    
+            <!-- Load more -->
+            <!--div class="flex-c-m flex-w w-full p-t-45">
+                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                    Load More
+                </a>
+            </div-->
