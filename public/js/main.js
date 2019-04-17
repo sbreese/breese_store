@@ -227,7 +227,9 @@
         if (onSomeStupidPage) {
             window.location.href = `/product/tag/${tag}`;
         } else {
-            $(e.target).css({backgroundColor: '#6c7ae0', color: 'white'});
+            $("#tag-filter a").removeClass("tag-filter-link-active");
+            // $(e.target).css({backgroundColor: '#6c7ae0', color: 'white'});
+            $(e.target).addClass("tag-filter-link-active");
             filterSearch('tag', tag);
             if ($('.js-show-filter').hasClass('show-filter')) {
                 $('.js-show-filter').removeClass('show-filter');
