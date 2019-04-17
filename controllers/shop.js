@@ -170,6 +170,7 @@ exports.getIndex = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
       return Product.find(filter)
+        .sort(sort_by)
         .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
@@ -373,6 +374,7 @@ exports.patchFilterSearch = (req, res, next) => {
     .then(numProducts => {
       totalItems = numProducts;
       return Product.find(filter)
+        .sort(sort_by)
         .populate('category')
         .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE);
