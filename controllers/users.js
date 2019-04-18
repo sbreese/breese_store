@@ -1,6 +1,7 @@
 const User = require('../models/user');
 
 const ejs = require('ejs');
+const { validationResult } = require('express-validator/check');
 
 const ITEMS_PER_PAGE = 10;
 
