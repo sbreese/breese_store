@@ -111,13 +111,13 @@ exports.deleteUser = (req, res, next) => {
 };
 
 exports.postContact = (req, res, next) => {
-
+console.log("Got here, yippee!");
   const visitorEmail = req.body.visitorEmail;
   const visitorMsg = req.body.visitorMsg;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-
+    console.log("Hmm, looks like there are some errors!");
     ejs.renderFile('/app/views/includes/contact-form.ejs', {
       contactSubmitSuccess: false,
       errorMessage: errors.array()[0].msg,
