@@ -119,6 +119,7 @@ exports.postContact = (req, res, next) => {
   if (!errors.isEmpty()) {
 
     ejs.renderFile('/app/views/includes/contact-form.ejs', {
+      contactSubmitSuccess: false,
       errorMessage: errors.array()[0].msg,
       oldInput: {
         visitorEmail,
@@ -133,7 +134,7 @@ exports.postContact = (req, res, next) => {
   } else {
 
     ejs.renderFile('/app/views/includes/contact-form.ejs', {
-      success: true
+      contactSubmitSuccess: true,
     }, {}, (err, contactForm) => {
 
       res.status(200).json({ message: 'Success!', contactForm });

@@ -685,6 +685,7 @@ exports.getContact = (req, res, next) => {
   this.getShoppingCartData(req)
     .then(user_cart => {
     res.render('newDesign/contact', {
+      contactSubmitSuccess: false,
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
