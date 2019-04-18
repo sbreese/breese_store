@@ -18,6 +18,6 @@ router.delete('/user/:userId', isAuth, usersController.deleteUser);
 
 router.post('/contact-form', usersController.postContact);
 
-router.get('/contact', shopController.getContact);
+router.get('/contact', usersController.getContact);
 
 module.exports = router;
