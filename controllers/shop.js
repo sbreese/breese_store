@@ -688,6 +688,10 @@ exports.getContact = (req, res, next) => {
       contactSubmitSuccess: false,
       errorMessage: null,
       validationErrors: [],
+      oldInput: {
+        visitorEmail: '',
+        visitorMsg: ''
+      },
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
