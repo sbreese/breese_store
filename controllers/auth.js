@@ -85,7 +85,7 @@ exports.getShippingAddress = (req, res, next) => {
     res.render('auth/checkout-shipping-address', {
       path: '/checkout-shipping-address',
       pageTitle: cart_items.length ? 'Checkout - Shipping Information' : 'Create User Account',
-      cart_items: user_cart.cart_items,
+      cart_items: [], // user_cart.cart_items,
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
