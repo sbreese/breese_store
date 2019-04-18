@@ -1,5 +1,7 @@
 const User = require('../models/user');
 
+const ejs = require('ejs');
+
 const ITEMS_PER_PAGE = 10;
 
 exports.getUsers = (req, res, next) => {
