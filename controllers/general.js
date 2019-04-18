@@ -57,6 +57,15 @@ exports.postContact = (req, res, next) => {
 
       res.status(200).json({ message: 'Error!', contactForm });
     });
+  } else {
+
+    ejs.renderFile('/app/views/includes/contact-form.ejs', {
+      contactSubmitSuccess: true,
+    }, {}, (err, contactForm) => {
+
+      res.status(200).json({ message: 'Success!', contactForm });
+    });
+
   }
 
   // res.status(200).json({ message: 'Success!', contactForm: visitorEmail + 'nice!' + visitorMsg });
