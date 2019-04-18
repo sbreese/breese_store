@@ -482,7 +482,7 @@ Goal: display this bar under the search box:
         console.log(JSON.stringify({
             visitorEmail,
             visitorMsg
-        });
+        }));
 		fetch('/contact-form',{
 			method: 'POST',
 			body: JSON.stringify({
