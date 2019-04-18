@@ -333,7 +333,7 @@ exports.postLogin = (req, res, next) => {
     });
   }
 
-  User.findOne({ email: email })
+  User.findOne({ email })
     .populate('cart.items.product')
     .then(user => {
       if (!user) {
@@ -347,8 +347,8 @@ exports.postLogin = (req, res, next) => {
           cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
           errorMessage: 'Invalid email or password.',
           oldInput: {
-            email: email,
-            password: password
+            email,
+            password
           },
           validationErrors: []
         });
@@ -364,8 +364,8 @@ exports.postLogin = (req, res, next) => {
             pageTitle: 'Login',
             errorMessage: 'Invalid email or password.',
             oldInput: {
-              email: email,
-              password: password
+              email,
+              password
             },
             validationErrors: []
           });
