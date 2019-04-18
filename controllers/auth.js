@@ -82,7 +82,7 @@ exports.getShippingAddress = (req, res, next) => {
   .then(user_cart => {
     console.log("Here is weird shopping cart:");
     console.log(user_cart);
-    res.render('newDesign/checkout-shipping-address', {
+    res.render('auth/checkout-shipping-address', {
       path: '/checkout-shipping-address',
       pageTitle: cart_items.length ? 'Checkout - Shipping Information' : 'Create User Account',
       cart_items: user_cart.cart_items,
