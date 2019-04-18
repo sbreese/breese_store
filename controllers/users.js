@@ -150,6 +150,6 @@ exports.getContact = (req, res, next) => {
 exports.postContact = (req, res, next) => {
   console.log("Got here, yippee!");
 
-  res.status(200).json({ message: 'Success!', 'nice!' });
+  res.status(200).json({ message: 'Success!', contactForm: 'nice!' });
 
 };
