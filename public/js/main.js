@@ -490,6 +490,7 @@ Goal: display this bar under the search box:
 				visitorMsg
 			}),
 			headers: {
+                'Accept': 'application/json',
 				'Content-Type': 'application/json',
 				'csrf-token': csrf
 			}

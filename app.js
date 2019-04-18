@@ -61,6 +61,7 @@ const orderRoutes = require('./routes/orders');
 const usersRoutes = require('./routes/users');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).array('images', 4) // .single('image')
 );
