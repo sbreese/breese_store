@@ -498,7 +498,8 @@ Goal: display this bar under the search box:
 		.then(response => {
 			return response.json()
 		}).then(data => {
-			console.log(data);
+            console.log(data);
+            $('#contact-form-div').replaceWith(data.contactForm);
 		}).catch(err => {
 			console.log(err);
 		});
