@@ -323,6 +323,7 @@ exports.postLogin = (req, res, next) => {
       pageTitle: 'Login',
       cart_items,
       wishlist,
+      cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
