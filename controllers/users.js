@@ -117,28 +117,28 @@ exports.postContact = (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).render('auth/login', {
-      path: '/login',
-      pageTitle: 'Login',
+
+    ejs.renderFile('/app/views/includes/contact-form.ejs', {
       errorMessage: errors.array()[0].msg,
       oldInput: {
         visitorEmail,
         visitorMsg
       },
-      validationErrors: errors.array()
+      validationErrors: errors.array(),
+      csrfToken: req.csrfToken(),
+    }, {}, (err, contactForm) => {
+
+      res.status(200).json({ message: 'Error!', contactForm });
     });
+  } else {
+
+    ejs.renderFile('/app/views/includes/contact-form.ejs', {
+      success: true
+    }, {}, (err, contactForm) => {
+
+      res.status(200).json({ message: 'Success!', contactForm });
+    });
+
   }
-
-  if (!visitorEmail || ) {
-      return res.status(400).send({ error:true, message: 'Please provide task' });
-  }
-
-  //var task = req.body.task;
-
-  var query = mc.query("INSERT INTO tasks SET ? ", { task: task}, function (error, results, fields) {
-      if (error) throw error;
-      console.log(task);
-      return res.send({ error: false, data: results, message: 'New task has been created successfully.' });
-  });
 
 };

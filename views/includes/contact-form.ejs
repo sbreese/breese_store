@@ -1,25 +1,28 @@
+<% if (success) { %>
+<div><h4>Message submitted successfully!</h4></div>
+<% } else { %>
 <form>
+    <h4 class="mtext-105 cl2 txt-center p-b-30">
+        Send Me A Message
+    </h4>
 
-        <h4 class="mtext-105 cl2 txt-center p-b-30">
-            Send Me A Message
-        </h4>
+    <% if (errorMessage) { %>
+        <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
 
-        <% if (errorMessage) { %>
-            <div class="user-message user-message--error"><%= errorMessage %></div>
-        <% } %>
+    <div class="bor8 m-b-20 how-pos4-parent">
+        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorEmail') ? ' invalid' : '' %>" type="text" name="visitorEmail" value="<%= oldInput.visitorEmail %>" placeholder="Your Email Address">
+        <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
+    </div>
 
-        <div class="bor8 m-b-20 how-pos4-parent">
-            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorEmail') ? ' invalid' : '' %>" type="text" name="visitorEmail" value="<%= oldInput.visitorEmail %>" placeholder="Your Email Address">
-            <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
-        </div>
+    <div class="bor8 m-b-30">
+        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25<%- validationErrors.find(e => e.param === 'visitorMsg') ? ' invalid' : '' %>" name="visitorMsg" value="<%= oldInput.visitorMsg %>" placeholder="How Can We Help?"></textarea>
+    </div>
 
-        <div class="bor8 m-b-30">
-            <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25<%- validationErrors.find(e => e.param === 'visitorMsg') ? ' invalid' : '' %>" name="visitorMsg" value="<%= oldInput.visitorMsg %>" placeholder="How Can We Help?"></textarea>
-        </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-
-        <button id="contact-form-submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-            Submit
-        </button>
-    </form>
+    <button id="contact-form-submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+        Submit
+    </button>
+</form>
+<% } %>
