@@ -115,34 +115,7 @@ exports.deleteUser = (req, res, next) => {
 
 exports.postContact = (req, res, next) => {
 console.log("Got here, yippee!");
-  const visitorEmail = req.body.visitorEmail;
-  const visitorMsg = req.body.visitorMsg;
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    console.log("Hmm, looks like there are some errors!");
-    ejs.renderFile('/app/views/includes/contact-form.ejs', {
-      contactSubmitSuccess: false,
-      errorMessage: errors.array()[0].msg,
-      oldInput: {
-        visitorEmail,
-        visitorMsg
-      },
-      validationErrors: errors.array(),
-      csrfToken: req.csrfToken(),
-    }, {}, (err, contactForm) => {
-
-      res.status(200).json({ message: 'Error!', contactForm });
-    });
-  } else {
-
-    ejs.renderFile('/app/views/includes/contact-form.ejs', {
-      contactSubmitSuccess: true,
-    }, {}, (err, contactForm) => {
-
-      res.status(200).json({ message: 'Success!', contactForm });
-    });
-
-  }
+res.status(200).json({ message: 'Success!', contactForm });
 
 };
