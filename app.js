@@ -121,8 +121,8 @@ app.use('/admin', categoryRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', usersRoutes);
 app.use(generalRoutes);
-app.use(shopRoutes);
 app.use(authRoutes);
+app.use(shopRoutes);
 
 app.get('/500', errorController.get500);
 
