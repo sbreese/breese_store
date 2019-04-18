@@ -689,6 +689,7 @@ exports.getContact = (req, res, next) => {
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
+      csrfToken: req.csrfToken(),
       pageTitle: 'Contact',
       path: '/contact'
     }).catch(err => {

@@ -35,7 +35,7 @@ router.patch('/wishlist/:productId/:add', shopController.patchAddRemoveFromWishl
 router.get('/cart', shopController.getCart); // OLD
 router.get('/shopping-cart', shopController.getShoppingCart); // NEW
 
-// router.post('/cart', isAuth, shopController.postCart);
+// router.post('/cart', shopController.postCart);
 router.post('/cart', shopController.postCart);
 
 // router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
