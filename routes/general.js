@@ -4,9 +4,7 @@ const { body } = require('express-validator/check');
 const generalController = require('../controllers/general');
 const isAuth = require('../middleware/is-auth');
 
-router.post('/contact-form', generalController.postContact);
-
-router.get('/contact', [
+router.post('/contact-form', [
     body('visitorEmail')
       .isEmail()
       .withMessage('Please enter a valid email address.'),
@@ -14,6 +12,8 @@ router.get('/contact', [
       .isLength({ min: 5, max: 400 })
       .withMessage('Message must be between 5 and 400 characters')
       .trim()
-], generalController.getContact);
+], generalController.postContact);
+
+router.get('/contact', generalController.getContact);
 
 module.exports = router;
