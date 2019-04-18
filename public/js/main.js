@@ -485,10 +485,10 @@ Goal: display this bar under the search box:
         }));
 		fetch('/contact-form',{
 			method: 'POST',
-			body: {
+			body: JSON.stringify({
 				visitorEmail,
 				visitorMsg
-			},
+			}),
 			headers: {
 				'Content-Type': 'application/json',
 				'csrf-token': csrf
