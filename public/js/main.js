@@ -414,7 +414,7 @@ Goal: display this bar under the search box:
             const numProduct = $(this).parent().find('[name=num-product]').val();
             const csrf = $(this).parent().find('[name=_csrf]').val();
             changeQuantity(productId, numProduct, csrf);
-            swal(nameProduct, "is added to cart !", "success");
+            swal(nameProduct, "is added to your cart!", "success");
             $('.js-modal-all').removeClass('show-modal1');
         });
     });
