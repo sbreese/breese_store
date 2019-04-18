@@ -337,6 +337,8 @@ exports.postLogin = (req, res, next) => {
     .populate('cart.items.product')
     .then(user => {
       if (!user) {
+        const cart_items = req.session.cart_items || [];
+        const wishlist = req.session.wishlist || [];
         return res.status(422).render('auth/login', {
           path: '/login',
           pageTitle: 'Login',
