@@ -31,7 +31,7 @@
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="btn">Order Now!</button>
                             </form>-->
-                            <a class="btn" href="/<%= cart_items.length ? 'customer-information' : 'confirm-information' %>">Order Now!</a>
+                            <a class="btn" href="/<%= isAuthenticated ? 'confirm-information' : 'checkout-shipping-address' %>">Order Now!</a>
                     </div>
                     
                 <% } else { %>

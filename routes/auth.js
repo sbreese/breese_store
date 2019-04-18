@@ -8,10 +8,8 @@ const router = express.Router();
 
 router.get('/login', authController.getLogin);
 
-router.get('/create-user-account', authController.getCreateUserAccount);
 router.get('/checkout-shipping-address', authController.getShippingAddress);
 
-router.get('/customer-information', authController.getCreateUserAccount);
 router.get('/confirm-information', authController.getConfirmInformation);
 
 router.get('/edit-account', authController.getEditAccount);
@@ -74,7 +72,7 @@ router.post(
 
 // .normalizeEmail(),
 router.post(
-  '/create-user-account',
+  '/checkout-shipping-address',
   [
     check('email')
       .isEmail()

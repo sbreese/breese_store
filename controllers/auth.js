@@ -53,8 +53,8 @@ exports.getCreateUserAccount = (req, res, next) => {
 
   const cart_items = req.session.cart_items || [];
   const wishlist = req.session.wishlist || [];
-  res.render('auth/create-user-account', {
-    path: '/create-user-account',
+  res.render('auth/checkout-shipping-address', {
+    path: '/checkout-shipping-address',
     pageTitle: cart_items.length ? 'Checkout - Customer Information' : 'Create User Account',
     cart_items,
     cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
@@ -81,19 +81,18 @@ exports.getShippingAddress = (req, res, next) => {
   shopController.getShoppingCartData(req)
   .then(user_cart => {
     res.render('newDesign/checkout-shipping-address', {
+      path: '/checkout-shipping-address',
+      pageTitle: cart_items.length ? 'Checkout - Shipping Information' : 'Create User Account',
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
-      pageTitle: 'Checkout - Shipping Address',
-      path: '/checkout-shipping-address',
       errorMessage: message,
       oldInput: {
         email: '',
         password: '',
         confirmPassword: ''
       },
-      products: req.session.cart_items,
       validationErrors: []
     });
   })
