@@ -470,6 +470,33 @@ Goal: display this bar under the search box:
         });
     });
     /*==================================================================
+    [ Contact Form ]*/
+    $(document.body).on('click', '#contact-form-submit', function(){
+		const visitorEmail = $('[name=email]').val();
+		const visitorMsg = $('[name=msg]').val();
+		const csrf = $('[name=_csrf]').val();
+		
+		fetch('/contact-form',{
+			method: 'POST',
+			body: JSON.stringify({
+				visitorEmail,
+				visitorMsg
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				'csrf-token': csrf
+			}
+		})
+		.then(response => {
+			return response.json()
+		}).then(data => {
+			console.log(data);
+		}).catch(err => {
+			console.log(err);
+		});
+			
+	});
+    /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
         var item = $(this).find('.item-rating');
