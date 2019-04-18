@@ -54,6 +54,7 @@ app.set('views', 'views');
 
 const productRoutes = require('./routes/products');
 const categoryRoutes = require('./routes/categories');
+const generalRoutes = require('./routes/general');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 const orderRoutes = require('./routes/orders');
@@ -118,6 +119,7 @@ app.use('/admin', productRoutes);
 app.use('/admin', categoryRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', usersRoutes);
+app.use(generalRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 

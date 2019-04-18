@@ -16,8 +16,4 @@ router.get('/users', isAuth, usersController.getUsers);
 // /admin/user => DELETE
 router.delete('/user/:userId', isAuth, usersController.deleteUser);
 
-router.post('/contact-form', usersController.postContact);
-
-router.get('/contact', usersController.getContact);
-
 module.exports = router;
