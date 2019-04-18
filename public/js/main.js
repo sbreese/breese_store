@@ -472,8 +472,8 @@ Goal: display this bar under the search box:
     /*==================================================================
     [ Contact Form ]*/
     $(document.body).on('click', '#contact-form-submit', function(){
-		const visitorEmail = $('[name=email]').val();
-		const visitorMsg = $('[name=msg]').val();
+		const visitorEmail = $('[name=visitorEmail]').val();
+		const visitorMsg = $('[name=visitorMsg]').val();
 		const csrf = $('[name=_csrf]').val();
 		
 		fetch('/contact-form',{
