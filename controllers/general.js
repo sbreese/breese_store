@@ -37,7 +37,9 @@ exports.getContact = (req, res, next) => {
 
 exports.postContact = (req, res, next) => {
   console.log("Got here, yippee!");
+  const visitorEmail = req.body.visitorEmail;
+  const visitorMsg = req.body.visitorMsg;
 
-  res.status(200).json({ message: 'Success!', contactForm: 'nice!' });
+  res.status(200).json({ message: 'Success!', contactForm: visitorEmail + 'nice!' + visitorMsg });
 
 };
