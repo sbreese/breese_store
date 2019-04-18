@@ -16,8 +16,6 @@ router.get('/new-arrivals', shopController.getNewArrivals);
 router.get('/blog', shopController.getBlog);
 router.get('/blog-detail', shopController.getBlogDetail);
 
-router.get('/contact', shopController.getContact);
-
 router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId', shopController.getProduct);
