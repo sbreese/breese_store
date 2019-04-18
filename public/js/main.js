@@ -475,7 +475,14 @@ Goal: display this bar under the search box:
 		const visitorEmail = $('[name=visitorEmail]').val();
 		const visitorMsg = $('[name=visitorMsg]').val();
 		const csrf = $('[name=_csrf]').val();
-		
+    
+        console.log(visitorEmail);
+        console.log(visitorMsg);
+
+        console.log(JSON.stringify({
+            visitorEmail,
+            visitorMsg
+        });
 		fetch('/contact-form',{
 			method: 'POST',
 			body: JSON.stringify({
