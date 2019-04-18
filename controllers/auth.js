@@ -316,9 +316,13 @@ exports.postLogin = (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    const cart_items = req.session.cart_items || [];
+    const wishlist = req.session.wishlist || [];
     return res.status(422).render('auth/login', {
       path: '/login',
       pageTitle: 'Login',
+      cart_items,
+      wishlist,
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
