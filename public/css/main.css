@@ -3340,3 +3340,37 @@ input.num-product::-webkit-inner-spin-button {
   background-color: #6c7ae0;
   color: white;
 }
+
+/* WTS spinner */
+.wts-loader-container {
+  position:absolute;
+  top:0px;
+  right:0px;
+  width:100%;
+  height:100%;
+  background-color:#666;
+  background-repeat:no-repeat;
+  background-position:center;
+  z-index:1000;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  vertical-align: middle;
+}
+.wts-loader {
+  margin: 200px auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
