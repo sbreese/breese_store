@@ -129,3 +129,52 @@ exports.getAbout = (req, res, next) => {
     return next(error);
   });
 };
+
+exports.getBlog = (req, res, next) => {
+
+  this.getShoppingCartData(req)
+    .then(user_cart => {
+    res.render('newDesign/blog', {
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
+      wishlist: user_cart.wishlist,
+      pageTitle: 'Blog',
+      path: '/blog'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+
+};
+
+exports.getBlogDetail = (req, res, next) => {
+
+  this.getShoppingCartData(req)
+    .then(user_cart => {
+      res.render('newDesign/blog-detail', {
+        cart_items: user_cart.cart_items,
+        cart_total: user_cart.cart_total,
+        totalSum: helper.calcTotalPrice(user_cart.cart_items),
+        wishlist: user_cart.wishlist,
+        pageTitle: 'Blog Detail',
+        path: '/blog-detail'
+      }).catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};

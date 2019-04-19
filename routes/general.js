@@ -16,5 +16,7 @@ router.post('/contact-form', [
 
 router.get('/contact', generalController.getContact);
 router.get('/about', generalController.getAbout);
+router.get('/blog', generalController.getBlog);
+router.get('/blog-detail', generalController.getBlogDetail);
 
 module.exports = router;
