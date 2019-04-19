@@ -931,6 +931,10 @@ exports.getOrders = (req, res, next) => {
       res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders',
+        cart_items,
+        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
+        wishlist,
+        totalSum: helper.formatter.format(total),
         orders
       });
     })
