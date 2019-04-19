@@ -928,15 +928,25 @@ exports.postOrder = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find({ 'user': req.user._id })
     .then(orders => {
-      res.render('shop/orders', {
-        path: '/orders',
-        pageTitle: 'Your Orders',
-        cart_items,
-        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
-        wishlist,
-        totalSum: helper.formatter.format(total),
-        orders
+
+      helper.getShoppingCartData(req)
+      .then(user_cart => {
+        res.render('shop/orders', {
+          path: '/orders',
+          pageTitle: 'Your Orders',
+          cart_items,
+          cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
+          wishlist,
+          totalSum: helper.formatter.format(total),
+          orders
+        });
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
+
     })
     .catch(err => {
       const error = new Error(err);
