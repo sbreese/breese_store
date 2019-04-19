@@ -132,7 +132,7 @@ exports.getAbout = (req, res, next) => {
 
 exports.getBlog = (req, res, next) => {
 
-  this.getShoppingCartData(req)
+  shopController.getShoppingCartData(req)
     .then(user_cart => {
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
@@ -157,7 +157,7 @@ exports.getBlog = (req, res, next) => {
 
 exports.getBlogDetail = (req, res, next) => {
 
-  this.getShoppingCartData(req)
+  shopController.getShoppingCartData(req)
     .then(user_cart => {
       res.render('newDesign/blog-detail', {
         cart_items: user_cart.cart_items,
