@@ -505,8 +505,10 @@ Goal: display this bar under the search box:
     
     /* [ Used on Contact an Footer to display email address in spam-free format ]*/
     const protectmail = (name,address,link,subject) => {
-        document.write('<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>');
+        // document.write('<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>');
+        return '<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>';
     };
+    document.getElementById("contact-email-link").innerHTML = protectmail("me","stevebreese.com","me&commat;stevebreese.com","Breese.Store%20Contact%20Page");
     /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
