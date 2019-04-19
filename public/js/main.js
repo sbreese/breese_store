@@ -501,7 +501,12 @@ Goal: display this bar under the search box:
 			console.log(err);
 		});
 			
-	});
+    });
+    
+    /* [ Used on Contact an Footer to display email address in spam-free format ]*/
+    const protectmail = (name,address,link,subject) => {
+        document.write('<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>');
+    };
     /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
