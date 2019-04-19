@@ -6,7 +6,6 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { validationResult } = require('express-validator/check');
 
 const User = require('../models/user');
-const shopController = require('../controllers/shop');
 const helper = require('./helper');
 
 const transporter = nodemailer.createTransport(
@@ -78,7 +77,7 @@ exports.getShippingAddress = (req, res, next) => {
     message = null;
   }
 
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
   .then(user_cart => {
     console.log("Here is weird shopping cart:");
     console.log(user_cart);

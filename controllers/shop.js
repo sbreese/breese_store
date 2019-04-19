@@ -12,38 +12,6 @@ const helper = require('./helper');
 
 const ITEMS_PER_PAGE = 16;
 
-exports.getShoppingCartData = req => {
-
-  return new Promise((resolve, reject) => {
-    if (req.user) {
-      req.user
-      .populate('cart.items.product')
-      .execPopulate()
-      .then(user => {
-        const cart_items = user.cart.items;
-        resolve({
-          cart_items,
-          cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
-          wishlist: user.cart.wishlist
-        });
-      })
-      .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        reject(error);
-      });
-    } else {
-      const cart_items = req.session.cart_items || [];
-      resolve({
-        cart_items,
-        cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
-        wishlist: req.session.wishlist && req.session.wishlist || []
-      });
-    }
-  });
-
-}
-
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
@@ -179,7 +147,7 @@ exports.getIndex = (req, res, next) => {
 
       param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
 
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
           res.render('newDesign/index', {
             products,
@@ -280,7 +248,7 @@ exports.getProductPage = (req, res, next) => {
     })
     .then(products => {
 
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
         console.log("Did I make it this far user cart?");
         // console.log(products);
@@ -381,7 +349,7 @@ exports.patchFilterSearch = (req, res, next) => {
     })
     .then(products => {
         
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
         ejs.renderFile('/app/views/includes/product-list.ejs', {
           resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
@@ -424,7 +392,7 @@ exports.getProductDetail = (req, res, next) => {
     Product.findById(prodId)
     .then(product => {
 
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
         res.render('newDesign/product-detail', {
           cart_items: user_cart.cart_items,
@@ -478,7 +446,7 @@ exports.getFeatured = (req, res, next) => {
     .then(products => {
       console.log("OK, let's get shopping cart data!");
 
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
         console.log("OK, let's render this!");
           res.render('newDesign/featured', {
@@ -566,7 +534,7 @@ exports.getNewArrivals = (req, res, next) => {
     .then(products => {
       console.log("OK, let's get shopping cart data!");
 
-      this.getShoppingCartData(req)
+      helper.getShoppingCartData(req)
       .then(user_cart => {
         console.log("OK, let's render this!");
           res.render('newDesign/new-arrivals', {
@@ -637,7 +605,7 @@ exports.getCart = (req, res, next) => {
 
 exports.getShoppingCart = (req, res, next) => {
 
-  this.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
   .then(user_cart => {
     let total = 0;
     user_cart.cart_items.forEach(p => {

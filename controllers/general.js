@@ -2,13 +2,12 @@ const ejs = require('ejs');
 const { validationResult } = require('express-validator/check');
 const sendmail = require('sendmail')();
 
-const shopController = require('../controllers/shop');
 const helper = require('./helper');
 const Message = require('../models/message');
 
 exports.getContact = (req, res, next) => {
 
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
     .then(user_cart => {
     res.render('newDesign/contact', {
       contactSubmitSuccess: false,
@@ -108,7 +107,7 @@ www.Breese.Store`,
 
 exports.getAbout = (req, res, next) => {
 
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
     .then(user_cart => {
     res.render('newDesign/about', {
       cart_items: user_cart.cart_items,
@@ -132,7 +131,7 @@ exports.getAbout = (req, res, next) => {
 
 exports.getBlog = (req, res, next) => {
 
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
     .then(user_cart => {
     res.render('newDesign/blog', {
       cart_items: user_cart.cart_items,
@@ -157,7 +156,7 @@ exports.getBlog = (req, res, next) => {
 
 exports.getBlogDetail = (req, res, next) => {
 
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
     .then(user_cart => {
       res.render('newDesign/blog-detail', {
         cart_items: user_cart.cart_items,

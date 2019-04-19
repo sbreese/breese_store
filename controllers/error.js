@@ -1,8 +1,7 @@
-
-const shopController = require('../controllers/shop');
+const helper = require('./helper');
 
 exports.get404 = (req, res, next) => {
-  shopController.getShoppingCartData(req)
+  helper.getShoppingCartData(req)
     .then(user_cart => {
       res.status(404).render('404', {
         pageTitle: 'Page Not Found',
