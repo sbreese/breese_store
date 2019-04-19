@@ -931,13 +931,14 @@ exports.getOrders = (req, res, next) => {
 
       helper.getShoppingCartData(req)
       .then(user_cart => {
+        const cart_items = user.cart.items;
+        const wishlist = user.cart.wishlist;
         res.render('shop/orders', {
           path: '/orders',
           pageTitle: 'Your Orders',
           cart_items,
           cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
           wishlist,
-          totalSum: helper.formatter.format(total),
           orders
         });
       })
