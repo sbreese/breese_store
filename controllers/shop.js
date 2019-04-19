@@ -656,30 +656,6 @@ exports.getBlogDetail = (req, res, next) => {
     });
 };
 
-exports.getAbout = (req, res, next) => {
-
-  this.getShoppingCartData(req)
-    .then(user_cart => {
-    res.render('newDesign/about', {
-      cart_items: user_cart.cart_items,
-      cart_total: user_cart.cart_total,
-      totalSum: helper.calcTotalPrice(user_cart.cart_items),
-      wishlist: user_cart.wishlist,
-      pageTitle: 'Shop',
-      path: '/about'
-    }).catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-  })
-  .catch(err => {
-    const error = new Error(err);
-    error.httpStatusCode = 500;
-    return next(error);
-  });
-};
-
 exports.getCart = (req, res, next) => {
   if (req.user) {
     req.user
