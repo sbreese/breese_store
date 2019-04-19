@@ -64,8 +64,6 @@ exports.postContact = (req, res, next) => {
     });
   } else {
 
-
-
     // BEGIN mail()
     sendmail({
       from: 'no-reply@breese.store',
