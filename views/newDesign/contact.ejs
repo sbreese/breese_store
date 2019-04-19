@@ -78,10 +78,31 @@
 	
 	
 	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="42.123415" data-map-y="-88.065210" data-pin="/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+	<div class="mapContainer">
+		<!--div class="size-303" id="google_map" data-map-x="42.123415" data-map-y="-88.065210" data-pin="/images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div-->
 	</div>
+<script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<script>
+// Initialize the platform object:
+// API credentials can be obtained here: https://developer.here.com/projects/PROD-17076975-8a9d-4eb5-a592-eaafd0255705
+var platform = new H.service.Platform({
+'app_id': 'jLHjZHOy9dqZsJLFKpnK',
+'app_code': 'xiBwfMXbgBbXkS_XdolUfQ'
+});
 
+// Obtain the default map types from the platform object
+var maptypes = platform.createDefaultLayers();
+
+// Instantiate (and display) a map object:
+var map = new H.Map(
+document.getElementById('mapContainer'),
+maptypes.normal.map,
+{
+	zoom: 10,
+	center: { lng: -88.065210, lat: 42.123415 }
+});
+</script>
 
 
 	<!-- Footer -->
