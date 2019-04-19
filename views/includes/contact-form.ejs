@@ -10,6 +10,11 @@
         <div class="alert alert-warning"><%= errorMessage %></div>
     <% } %>
 
+
+    <div class="bor8 m-b-20 how-pos4-parent">
+        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorName') ? ' form-control form-control-warning' : '' %>" type="text" name="visitorName" value="<%= oldInput.visitorName %>" placeholder="Your Name">
+    </div>
+
     <div class="bor8 m-b-20 how-pos4-parent">
         <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorEmail') ? ' form-control form-control-warning' : '' %>" type="text" name="visitorEmail" value="<%= oldInput.visitorEmail %>" placeholder="Your Email Address">
         <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
