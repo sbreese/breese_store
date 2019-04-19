@@ -87,13 +87,13 @@ www.Breese.Store`,
         }, {}, (err, contactForm) => {
 
           ///////////////////////////
-          const message = new Message({
+          const messageDocument = new Message({
             name,
             email,
             message
           });
   
-          return message.save().then(result => {
+          return messageDocument.save().then(result => {
             console.log('MARKED AS SHIPPED!');
             res.status(200).json({ message: 'Success!', contactForm });
           });
