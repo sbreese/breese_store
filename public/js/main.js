@@ -472,6 +472,8 @@ Goal: display this bar under the search box:
     /*==================================================================
     [ Contact Form ]*/
     $(document.body).on('click', '#contact-form-submit', function(){
+
+        document.getElementById("contact-submit-spinner").style.display = block;
         const name = $('[name=name]').val();
 		const email = $('[name=email]').val();
 		const message = $('[name=message]').val();
