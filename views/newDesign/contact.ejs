@@ -87,12 +87,12 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 <script>
-	/*
 // Initialize the platform object:
 // API credentials can be obtained here: https://developer.here.com/projects/PROD-17076975-8a9d-4eb5-a592-eaafd0255705
 var platform = new H.service.Platform({
 'app_id': 'jLHjZHOy9dqZsJLFKpnK',
-'app_code': 'xiBwfMXbgBbXkS_XdolUfQ'
+'app_code': 'xiBwfMXbgBbXkS_XdolUfQ',
+useHTTPS: true
 });
 
 // Obtain the default map types from the platform object
@@ -105,13 +105,13 @@ maptypes.normal.map,
 {
 	zoom: 10,
 	center: { lng: -88.065210, lat: 42.123415 }
-});*/
-
+});
+/*
 /**
  * Moves the map to display over Berlin
  *
  * @param  {H.Map} map      A HERE Map instance within the application
- */
+ *
  function moveMapToBerlin(map){
   map.setCenter({lat:42.123415, lng:-88.065210});
   map.setZoom(14);
@@ -123,7 +123,7 @@ maptypes.normal.map,
 
 /**
  * Boilerplate map initialization code starts below:
- */
+ *
 
 //Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
@@ -151,6 +151,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Now use the map as required...
 moveMapToBerlin(map);
+*/
 </script>
 
 
