@@ -1,8 +1,10 @@
 const ejs = require('ejs');
 const { validationResult } = require('express-validator/check');
+const sendmail = require('sendmail')();
+
 const shopController = require('../controllers/shop');
 const helper = require('./helper');
-const sendmail = require('sendmail')();
+const Message = require('../models/message');
 
 exports.getContact = (req, res, next) => {
 
@@ -13,8 +15,9 @@ exports.getContact = (req, res, next) => {
       errorMessage: null,
       validationErrors: [],
       oldInput: {
-        visitorEmail: '',
-        visitorMsg: ''
+        name: '',
+        email: '',
+        message: ''
       },
       cart_items: user_cart.cart_items,
       cart_total: user_cart.cart_total,
@@ -38,9 +41,9 @@ exports.getContact = (req, res, next) => {
 
 exports.postContact = (req, res, next) => {
 
-  const visitorName = req.body.visitorName;
-  const visitorEmail = req.body.visitorEmail;
-  const visitorMsg = req.body.visitorMsg;
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.message;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -49,9 +52,9 @@ exports.postContact = (req, res, next) => {
       contactSubmitSuccess: false,
       errorMessage: errors.array()[0].msg,
       oldInput: {
-        visitorName,
-        visitorEmail,
-        visitorMsg
+        name,
+        email,
+        message
       },
       validationErrors: errors.array(),
       csrfToken: req.csrfToken(),
@@ -68,10 +71,10 @@ exports.postContact = (req, res, next) => {
       from: 'no-reply@breese.store',
       to: 'sbreese@gmail.com',
       subject: 'Message submitted on Breese.Store',
-      html: `<p>The following message was sent by &quot;${visitorName}&quot; &lt;${visitorEmail}&gt;</p>
+      html: `<p>The following message was sent by &quot;${name}&quot; &lt;${email}&gt;</p>
 <p>
 =================================<br>
-${visitorMsg}<br>
+${message}<br>
 =================================<br>
 <p>Kind regards,</p>
 Steve Breese<br>
@@ -81,12 +84,23 @@ www.Breese.Store`,
       if (err) {
         console.log("Oops, an error has occured:", err && err.stack);
       } else {
-        // sendJSONresponse(res, 200,{ message: `Thanks ${req.body.name}. Your message has been sent to Fix-a-Drink administrators.` });
         ejs.renderFile('/app/views/includes/contact-form.ejs', {
           contactSubmitSuccess: true,
         }, {}, (err, contactForm) => {
-    
-          res.status(200).json({ message: 'Success!', contactForm });
+
+          ///////////////////////////
+          const message = new Message({
+            name,
+            email,
+            message
+          });
+  
+          return message.save().then(result => {
+            console.log('MARKED AS SHIPPED!');
+            res.status(200).json({ message: 'Success!', contactForm });
+          });
+          ///////////////////////////
+          
         });
       }
     });
@@ -97,6 +111,6 @@ www.Breese.Store`,
 
   }
 
-  // res.status(200).json({ message: 'Success!', contactForm: visitorEmail + 'nice!' + visitorMsg });
+  // res.status(200).json({ message: 'Success!', contactForm: email + 'nice!' + message });
 
 };

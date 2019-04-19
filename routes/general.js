@@ -5,10 +5,10 @@ const generalController = require('../controllers/general');
 const isAuth = require('../middleware/is-auth');
 
 router.post('/contact-form', [
-    body('visitorEmail')
+    body('email')
       .isEmail()
       .withMessage('Please enter a valid email address.'),
-    body('visitorMsg')
+    body('message')
       .isLength({ min: 5, max: 400 })
       .withMessage('Message must be between 5 and 400 characters')
       .trim()

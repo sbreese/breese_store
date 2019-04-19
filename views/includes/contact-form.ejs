@@ -12,16 +12,16 @@
 
 
     <div class="bor8 m-b-20 how-pos4-parent">
-        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorName') ? ' form-control form-control-warning' : '' %>" type="text" name="visitorName" value="<%= oldInput.visitorName %>" placeholder="Your Name">
+        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'name') ? ' form-control form-control-warning' : '' %>" type="text" name="name" value="<%= oldInput.name %>" placeholder="Your Name">
     </div>
 
     <div class="bor8 m-b-20 how-pos4-parent">
-        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'visitorEmail') ? ' form-control form-control-warning' : '' %>" type="text" name="visitorEmail" value="<%= oldInput.visitorEmail %>" placeholder="Your Email Address">
+        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30<%- validationErrors.find(e => e.param === 'email') ? ' form-control form-control-warning' : '' %>" type="text" name="email" value="<%= oldInput.email %>" placeholder="Your Email Address">
         <img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON">
     </div>
 
     <div class="bor8 m-b-30">
-        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25<%- validationErrors.find(e => e.param === 'visitorMsg') ? ' form-control form-control-warning' : '' %>" name="visitorMsg" value="<%= oldInput.visitorMsg %>" placeholder="How Can We Help?"></textarea>
+        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25<%- validationErrors.find(e => e.param === 'message') ? ' form-control form-control-warning' : '' %>" name="message" value="<%= oldInput.message %>" placeholder="How Can We Help?"></textarea>
     </div>
 
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">

@@ -472,17 +472,17 @@ Goal: display this bar under the search box:
     /*==================================================================
     [ Contact Form ]*/
     $(document.body).on('click', '#contact-form-submit', function(){
-        const visitorName = $('[name=visitorName]').val();
-		const visitorEmail = $('[name=visitorEmail]').val();
-		const visitorMsg = $('[name=visitorMsg]').val();
+        const name = $('[name=name]').val();
+		const email = $('[name=email]').val();
+		const message = $('[name=message]').val();
 		const csrf = $('[name=_csrf]').val();
 
 		fetch('/contact-form',{
 			method: 'POST',
 			body: JSON.stringify({
-                visitorName,
-				visitorEmail,
-				visitorMsg
+                name,
+				email,
+				message
 			}),
 			headers: {
                 'Accept': 'application/json',
