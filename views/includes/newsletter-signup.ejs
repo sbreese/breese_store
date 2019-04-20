@@ -2,7 +2,7 @@
     <div><h4>Message submitted successfully!</h4></div>
 <% } else { %>
 <div id="newsletter-signup-div">
-    <% if (errorMessage) { %>
+    <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
         <div class="alert alert-warning"><%= errorMessage %></div>
     <% } %>
 
