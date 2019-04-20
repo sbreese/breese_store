@@ -105,6 +105,44 @@ www.Breese.Store`,
   }
 };
 
+exports.postNewsletter = (req, res, next) => {
+
+  const email = req.body.email;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    ejs.renderFile('/app/views/includes/newsletter-signup.ejs', {
+      newsletterSubmitSuccess: false,
+      errorMessage: errors.array()[0].msg,
+      oldInput: {
+        email
+      },
+      validationErrors: errors.array(),
+      csrfToken: req.csrfToken(),
+    }, {}, (err, newsletterForm) => {
+
+      res.status(200).json({ message: 'Error!', newsletterForm });
+    });
+  } else {
+
+    ejs.renderFile('/app/views/includes/contact-form.ejs', {
+      contactSubmitSuccess: true,
+    }, {}, (err, newsletterForm) => {
+
+      ///////////////////////////
+      const newsletterDocument = new Newsletter({
+        email
+      });
+
+      return newsletterDocument.save().then(result => {
+        res.status(200).json({ message: 'Success!', newsletterForm });
+      });
+      ///////////////////////////
+      
+    });
+  }
+};
+
 exports.getAbout = (req, res, next) => {
 
   helper.getShoppingCartData(req)

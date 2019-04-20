@@ -469,12 +469,13 @@ Goal: display this bar under the search box:
             // $(this).off('click');
         });
     });
+
     /*==================================================================
     [ Contact Form ]*/
     $(document.body).on('click', '#contact-form-submit', function(){
 
         document.getElementById("contact-submit-spinner").style.display = 'block';
-        const name = $('[name=name]').val();
+        const name = $('#contact-form-div [name=name]').val();
 		const email = $('[name=email]').val();
 		const message = $('[name=message]').val();
 		const csrf = $('[name=_csrf]').val();
@@ -497,6 +498,36 @@ Goal: display this bar under the search box:
 		}).then(data => {
             console.log(data);
             $('#contact-form-div').replaceWith(data.contactForm);
+		}).catch(err => {
+			console.log(err);
+		});
+			
+    });
+    
+    /*==================================================================
+    [ Newsletter Signup Form ]*/
+    $(document.body).on('click', '#newsletter-form-submit', function(){
+
+        document.getElementById("newsletter-submit-spinner").style.display = 'block';
+		const email = $('#newsletter-signup-div [name=email]').val();
+		const csrf = $('[name=_csrf]').val();
+
+		fetch('/newsletter-form',{
+			method: 'POST',
+			body: JSON.stringify({
+				email
+			}),
+			headers: {
+                'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'csrf-token': csrf
+			}
+		})
+		.then(response => {
+			return response.json()
+		}).then(data => {
+            console.log(data);
+            $('#newsletter-signup-div').replaceWith(data.newsletterForm);
 		}).catch(err => {
 			console.log(err);
 		});

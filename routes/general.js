@@ -7,12 +7,20 @@ const generalController = require('../controllers/general');
 router.post('/contact-form', [
     body('email')
       .isEmail()
-      .withMessage('Please enter a valid email address.'),
+      .withMessage('Please enter a valid email address.')
+      .trim(),
     body('message')
       .isLength({ min: 5, max: 400 })
       .withMessage('Message must be between 5 and 400 characters')
       .trim()
 ], generalController.postContact);
+
+router.post('/newsletter-form', [
+  body('email')
+    .isEmail()
+    .withMessage('Please enter a valid email address.')
+    .trim()
+], generalController.postNewsletter);
 
 router.get('/contact', generalController.getContact);
 router.get('/about', generalController.getAbout);
