@@ -539,7 +539,7 @@ Goal: display this bar under the search box:
         // document.write('<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>');
         return '<a class="email" href=mailto:' + name + '@' + address + '?subject=' + subject + '>' + link + '</a>';
     };
-    document.getElementById("contact-email-link").innerHTML = protectmail("me","stevebreese.com","me&commat;stevebreese.com","Breese.Store%20Contact%20Page");
+    $("contact-email-link").html(protectmail("me","stevebreese.com","me&commat;stevebreese.com","Breese.Store%20Contact%20Page"));
     /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
