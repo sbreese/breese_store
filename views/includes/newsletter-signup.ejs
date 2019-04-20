@@ -1,0 +1,24 @@
+<% if (contactSubmitSuccess) { %>
+    <div><h4>Message submitted successfully!</h4></div>
+<% } else { %>
+<div id="newsletter-signup-div">
+    <% if (errorMessage) { %>
+        <div class="alert alert-warning"><%= errorMessage %></div>
+    <% } %>
+
+    <div class="wrap-input1 w-full p-b-4">
+        <input class="input1 bg-none plh1 stext-107 cl7<%- validationErrors.find(e => e.param === 'email') ? ' form-control form-control-warning' : '' %>" type="text" name="email" value="<%= oldInput.email %>" placeholder="email@example.com">
+        <div class="focus-input1 trans-04"></div>
+    </div>
+
+    <div class="p-t-18">
+        <button id="newsletter-form-submit" class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+            Subscribe
+        </button>
+    </div>
+
+    <div class="wts-loader-container" id="newsletter-submit-spinner" style="display: none;">
+        <div class="wts-loader"></div>
+    </div>
+</div>
+<% } %>
