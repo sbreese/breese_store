@@ -4,6 +4,7 @@ const sendmail = require('sendmail')();
 
 const helper = require('./helper');
 const Message = require('../models/message');
+const Newsletter = require('../models/newsletter');
 
 exports.getContact = (req, res, next) => {
 
