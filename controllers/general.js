@@ -168,6 +168,30 @@ exports.getAbout = (req, res, next) => {
   });
 };
 
+exports.getHelpFaqs = (req, res, next) => {
+
+  helper.getShoppingCartData(req)
+    .then(user_cart => {
+    res.render('newDesign/help_faqs', {
+      cart_items: user_cart.cart_items,
+      cart_total: user_cart.cart_total,
+      totalSum: helper.calcTotalPrice(user_cart.cart_items),
+      wishlist: user_cart.wishlist,
+      pageTitle: 'Help & FAQs',
+      path: '/help_faqs'
+    }).catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
+
 exports.getBlog = (req, res, next) => {
 
   helper.getShoppingCartData(req)
