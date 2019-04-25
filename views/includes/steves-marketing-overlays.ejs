@@ -1,0 +1,67 @@
+<style>
+        .demo-overlay, .demo-overlay-background {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .demo-overlay {
+            z-index: 9;
+            transition-property: opacity;
+        }
+        .TextLink {
+            cursor: pointer;
+        }
+        .demo-overlay-badge-topRight {
+            position: fixed;
+            top: 24px;
+            right: 14px;
+            text-align: center;
+        }
+        .demo-overlay-badge {
+            background-color: #f7e633;
+            color: #363636;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding-left: 9px;
+            padding-right: 9px;
+            height: 52px;
+            line-height: 26px;
+        }
+        .demo-overlay-badge-bottomLeft {
+            position: fixed;
+            bottom: 14px;
+            left: 14px;
+        }
+
+        .pulse {
+         -webkit-animation-name: pulsate;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite
+
+}
+
+@-webkit-keyframes pulsate {
+0% { opacity: 0.0}
+ 10% { opacity: .20}
+ 20% { opacity: .40 }
+ 30% { opacity: .60 }
+ 40% { opacity: .80 } 
+ 50% { opacity: 1.0}
+ 60% { opacity: .80}
+ 70% { opacity: .60}
+ 80% { opacity: .40}
+ 90% { opacity: .20}
+ 100% { opacity: 0.0}
+ }
+        </style>
+<div class="demo-overlay">
+<div class="demo-overlay-background"></div>
+<a href="https://www.SteveBreese.com" target="_blank" class="TextLink demo-overlay-badge demo-overlay-badge-topRight pulse">Fully Working Demo Store<br><span style="font-size:140%">Developed by Steve Breese</span></a>
+<div class="demo-overlay-badge-bottomLeft">~ Created by ~<br><img src="https://www.stevebreese.com/img/HEADSHOT_Big.png" style="width: 100px">
+</div>
+</div>
