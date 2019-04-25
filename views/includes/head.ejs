@@ -36,5 +36,46 @@
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 <!--===============================================================================================-->
+<style>
+.demo-overlay .demo-overlay-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.TextLink {
+    cursor: pointer;
+}
+.demo-overlay-badge-topRight {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+}
+.demo-overlay-badge {
+    background-color: #f7e633;
+    color: #363636;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding-left: 9px;
+    padding-right: 9px;
+    height: 26px;
+    line-height: 26px;
+}
+.demo-overlay-badge-bottomLeft {
+    position: fixed;
+    bottom: 14px;
+    left: 14px;
+}
+</style>
 </head>
 <body class="animsition">
+
+	<div class="demo-overlay">
+		<div class="demo-overlay-background"></div>
+		<a href="https://www.SteveBreese.com" target="_blank" class="TextLink demo-overlay-badge demo-overlay-badge-topRight">Fully Working Demo Store<br><span style="font-size:140%">Developed by Steve Breese</span></a>
+		<div class="demo-overlay-badge-bottomLeft">Developed by<br><img src="https://www.stevebreese.com/img/HEADSHOT_Big.png">
+		</div>
+	</div>
