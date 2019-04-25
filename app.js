@@ -8,6 +8,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const forceDomain = require('forcedomain');
 
 const errorController = require('./controllers/error');
 const shopController = require('./controllers/shop');
@@ -21,6 +22,11 @@ const User = require('./models/user');
 const MONGODB_URI = 'mongodb://breese:breese@ds059634.mongolab.com:59634/breese';
 
 const app = express();
+
+app.use(forceDomain({
+  hostname: 'www.breese.store'
+}));
+
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
