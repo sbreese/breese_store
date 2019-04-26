@@ -28,6 +28,7 @@ exports.getProducts = (req, res, next) => {
     .then(products => {
       res.render('includes/product-filter-search-list', {
         categories,
+        categoryKey: param_1_key && param_1_key.toLowerCase(),
         prods: products,
         pageTitle: 'Products',
         path: '/products',
