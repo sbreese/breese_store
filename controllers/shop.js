@@ -16,6 +16,7 @@ exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+  Category.find().then(categories => {
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -26,6 +27,7 @@ exports.getProducts = (req, res, next) => {
     })
     .then(products => {
       res.render('includes/product-filter-search-list', {
+        categories,
         prods: products,
         pageTitle: 'Products',
         path: '/products',
@@ -42,6 +44,12 @@ exports.getProducts = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getProduct = (req, res, next) => {
