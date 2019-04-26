@@ -525,6 +525,7 @@ exports.getFeatured = (req, res, next) => {
       helper.getShoppingCartData(req)
       .then(user_cart => {
         console.log("OK, let's render this!");
+        console.log(marketingCategories);
           res.render('newDesign/featured', {
             marketingCategories,
             marketingCategoryKey: param_1_key && param_1_key.toLowerCase(),
