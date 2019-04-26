@@ -11,9 +11,9 @@
                 </a>
 
 
-                <% if (categories.length > 0) { %>
+                <% if (marketingCategories.length > 0) { %>
                     <div class="grid">
-                        <% for (let category of categories) { %>
+                        <% for (let category of marketingCategories) { %>
                             <article class="card category-item">
                                 <header class="card__header">
                                     <h1 class="category__title">
@@ -39,7 +39,7 @@
                             <% } %>
                     </div>
                     <% } else { %>
-                        <h1>No Categories Found!</h1>
+                        <h1>No Marketing Categories Found!</h1>
                         <% } %>
             </main>
             <%- include('../includes/end.ejs') %>

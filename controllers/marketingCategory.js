@@ -142,7 +142,7 @@ exports.getMarketingCategories = (req, res, next) => {
     .then(marketingCategories => {
       console.log(marketingCategories);
       res.render('categories/marketing-categories', {
-        categories,
+        marketingCategories,
         pageTitle: 'Admin Marketing Categories',
         path: '/categories/marketing-categories'
       });
