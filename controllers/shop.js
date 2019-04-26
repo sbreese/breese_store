@@ -16,6 +16,50 @@ exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+    // Begin process URL parameters:
+    const param_1_key = req.params.param_1_key;
+    let param_1_value = '';
+    let filter, sort_by;
+    if (req.params.param_1_value) {
+      param_1_value = req.params.param_1_value.split('+').join(' ');
+      if (param_1_key && param_1_key === 'search') {
+          filter = { $text: { $search: param_1_value } };
+      } else if (param_1_key === 'color') {
+        filter = { "colors": { "$regex": param_1_value, "$options": "i" } };
+      } else if (param_1_key === 'price' && param_1_value !== 'all') {
+        const priceArray = param_1_value.replace(/\$/g, '').split('-');
+        if (priceArray[1]) {
+          filter = { "price": { "$gte": priceArray[0], "$lt": priceArray[1] } };
+        } else {
+          filter = { "price": { "$gte": priceArray[0] } };
+        }
+        param_1_value = param_1_value.replace('00 ','00+').replace('-',' - ');
+      } else if (param_1_key === 'sort_by') {
+  
+        switch (param_1_value) {
+          case 'Popularity':
+            sort_by = { _id : -1 };
+          break;
+          case 'Average_rating':
+            sort_by = { _id : 1 };
+          break;
+          case 'Newness':
+            sort_by = { _id : -1 };
+          break;
+          case 'Price:_Low_to_High':
+            sort_by = { price : 1 };
+          break;
+          case 'Price:_High_to_Low':
+            sort_by = { price : -1 };
+          break;
+        } // END sort_by switch
+        param_1_value = param_1_value.split('_').join(' ');
+      } else if (param_1_key === 'tag') {
+        filter = { "tags": param_1_value };
+      } // END tag
+    } // END param_1_value
+    // End process URL parameters
+
   Category.find().then(categories => {
   Product.find()
     .countDocuments()
