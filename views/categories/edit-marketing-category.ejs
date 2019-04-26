@@ -10,7 +10,7 @@
         <% if (errorMessage) { %>
             <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
-        <form class="category-form" action="/admin/<% if (editing) { %>edit-category<% } else { %>add-category<% } %>" method="POST" enctype="multipart/form-data">
+        <form class="category-form" action="/admin/<% if (editing) { %>edit-marketing-category<% } else { %>add-marketing-category<% } %>" method="POST" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="code">Code</label>
                 <input 
@@ -51,7 +51,7 @@
             <% } %>
 
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit"><% if (editing) { %>Update Category<% } else { %>Add Category<% } %></button>
+            <button class="btn" type="submit"><% if (editing) { %>Update Marketing Category<% } else { %>Add Marketing Category<% } %></button>
         </form>
     </main>
 <%- include('../includes/end.ejs') %>
