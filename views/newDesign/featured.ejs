@@ -182,7 +182,7 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item p-b-10">
-						<a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
+						<a class="nav-link<%- !marketingCategories.some(o => o.code === marketingCategoryKey) ? ' active' : '' %>" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
 					</li>
 
 					<li class="nav-item p-b-10">
@@ -199,7 +199,7 @@
 
 					<% for (let marketingCategory of marketingCategories) { %>
 						<li class="nav-item p-b-10"></li>
-							<a class="nav-link<%- !categories.some(o => o.code === marketingCategoryKey) == marketingCategory.code ? ' active' : '' %>" data-toggle="tab" href="#<%= marketingCategory.code %>" role="tab">
+							<a class="nav-link<%- marketingCategoryKey == marketingCategory.code ? ' active' : '' %>" data-toggle="tab" href="#<%= marketingCategory.code %>" role="tab">
 								<%= marketingCategory.title %>
 							</a>
 						</li>
