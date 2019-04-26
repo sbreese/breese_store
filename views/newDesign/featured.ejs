@@ -181,27 +181,10 @@
 			<div class="tab01">
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="nav-item p-b-10">
-						<a class="nav-link<%- !marketingCategories.some(o => o.code === marketingCategoryKey) ? ' active' : '' %>" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
-					</li>
-
-					<li class="nav-item p-b-10">
-						<a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
-					</li>
-
-					<li class="nav-item p-b-10">
-						<a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
-					</li>
-
-					<li class="nav-item p-b-10">
-						<a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
-					</li>
 
 					<% for (let marketingCategory of marketingCategories) { %>
 						<li class="nav-item p-b-10">
-							<a class="nav-link<%- marketingCategoryKey == marketingCategory.code ? ' active' : '' %>" data-toggle="tab" href="#<%= marketingCategory.code %>" role="tab">
-								<%= marketingCategory.title %>
-							</a>
+							<a class="nav-link<%- marketingCategoryKey == marketingCategory.code ? ' active' : '' %>" data-toggle="tab" href="#<%= marketingCategory.code %>" role="tab"><%= marketingCategory.title %></a>
 						</li>
 					<% } %>
 				</ul>
@@ -969,7 +952,7 @@
 					</div>
 
 					<!-- - -->
-					<div class="tab-pane fade" id="top-rate" role="tabpanel">
+					<div class="tab-pane fade" id="top-rated" role="tabpanel">
 						<!-- Slide2 -->
 						<div class="wrap-slick2">
 							<div class="slick2">
