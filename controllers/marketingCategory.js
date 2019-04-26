@@ -52,8 +52,8 @@ exports.postAddMarketingCategory = (req, res, next) => {
     .save()
     .then(result => {
       // console.log(result);
-      console.log('Created Category');
-      res.redirect('/admin/categories');
+      console.log('Created Marketing Category');
+      res.redirect('/admin/marketing-categories');
     })
     .catch(err => {
       const error = new Error(err);
@@ -125,7 +125,7 @@ exports.postEditMarketingCategory = (req, res, next) => {
         marketingCategory.displayOrder = updatedDisplayOrder;
       return marketingCategory.save().then(result => {
         console.log('UPDATED MARKETING CATEGORY!');
-        res.redirect('/admin/marketingCategories');
+        res.redirect('/admin/marketing-categories');
       });
     })
     .catch(err => {
