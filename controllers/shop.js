@@ -8,6 +8,7 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 const Product = require('../models/product');
 const Order = require('../models/order');
 const Category = require('../models/category');
+const MarketingCategory = require('../models/marketingCategory');
 const helper = require('./helper');
 
 const ITEMS_PER_PAGE = 16;
@@ -504,6 +505,11 @@ exports.getFeatured = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalItems;
 
+    // Begin process URL parameters:
+    const param_1_key = req.params.param_1_key;
+    // End process URL parameters
+
+  MarketingCategory.find().then(marketingCategories => {
   Product.find()
     .countDocuments()
     .then(numProducts => {
@@ -520,6 +526,8 @@ exports.getFeatured = (req, res, next) => {
       .then(user_cart => {
         console.log("OK, let's render this!");
           res.render('newDesign/featured', {
+            marketingCategories,
+            marketingCategoryKey: param_1_key && param_1_key.toLowerCase(),
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
@@ -541,6 +549,12 @@ exports.getFeatured = (req, res, next) => {
           return next(error);
         });
     });
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.getNewArrivals = (req, res, next) => {

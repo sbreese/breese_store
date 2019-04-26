@@ -196,6 +196,14 @@
 					<li class="nav-item p-b-10">
 						<a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
 					</li>
+
+					<% for (let marketingCategory of marketingCategories) { %>
+						<li class="nav-item p-b-10"></li>
+							<a class="nav-link<%- !categories.some(o => o.code === marketingCategoryKey) == marketingCategory.code ? ' active' : '' %>" data-toggle="tab" href="#<%= marketingCategory.code %>" role="tab">
+								<%= marketingCategory.title %>
+							</a>
+						</li>
+					<% } %>
 				</ul>
 
 				<!-- Tab panes -->
@@ -209,7 +217,7 @@
 									<!-- Block2 -->
 									<div class="block2">
 										<div class="block2-pic hov-img0">
-											<img src="images/product-01.jpg" alt="IMG-PRODUCT">
+											<img src="/images/product-01.jpg" alt="IMG-PRODUCT">
 
 											<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 												Quick View

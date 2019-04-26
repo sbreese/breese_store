@@ -21,4 +21,4 @@ const marketingCategorySchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('MarketingCategory', marketingCategorySchema);
+module.exports = mongoose.model('MarketingCategory', marketingCategorySchema, 'marketingCategories');
