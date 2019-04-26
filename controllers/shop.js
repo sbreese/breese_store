@@ -528,7 +528,7 @@ exports.getFeatured = (req, res, next) => {
         console.log(marketingCategories);
           res.render('newDesign/featured', {
             marketingCategories,
-            marketingCategoryKey: param_1_key && param_1_key.toLowerCase(),
+            marketingCategoryKey: param_1_key && param_1_key.toLowerCase() || marketingCategories[0].code,
             products,
             cart_items: user_cart.cart_items,
             cart_total: user_cart.cart_total,
