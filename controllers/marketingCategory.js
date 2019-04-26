@@ -4,12 +4,12 @@ const fileHelper = require('../util/file');
 
 const { validationResult } = require('express-validator/check');
 
-const Category = require('../models/category');
+const MarketingCategory = require('../models/marketingCategory');
 
-exports.getAddCategory = (req, res, next) => {
-  res.render('categories/edit-category', {
-    pageTitle: 'Add Category',
-    path: '/admin/add-category',
+exports.getAddMarketingCategory = (req, res, next) => {
+  res.render('categories/edit-marketing-category', {
+    pageTitle: 'Add Marketing Category',
+    path: '/admin/add-marketing-category',
     editing: false,
     hasError: false,
     errorMessage: null,
@@ -17,7 +17,7 @@ exports.getAddCategory = (req, res, next) => {
   });
 };
 
-exports.postAddCategory = (req, res, next) => {
+exports.postAddMarketingCategory = (req, res, next) => {
   const code = req.body.code;
   const title = req.body.title;
   const description = req.body.description;
@@ -26,9 +26,9 @@ exports.postAddCategory = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render('categories/edit-category', {
-      pageTitle: 'Add Category',
-      path: '/admin/add-category',
+    return res.status(422).render('categories/edit-marketing-category', {
+      pageTitle: 'Add Marketing Category',
+      path: '/admin/add-marketing-category',
       editing: false,
       hasError: true,
       category: {
@@ -42,13 +42,13 @@ exports.postAddCategory = (req, res, next) => {
     });
   }
 
-  const category = new Category({
+  const marketingCategory = new MarketingCategory({
     code,
     title,
     description,
     displayOrder
   });
-  category
+  marketingCategory
     .save()
     .then(result => {
       // console.log(result);
@@ -68,14 +68,14 @@ exports.getEditCategory = (req, res, next) => {
     return res.redirect('/');
   }
   const categoryId = req.params.categoryId;
-  Category.findById(categoryId)
+  MarketingCategory.findById(categoryId)
     .then(category => {
       if (!category) {
         return res.redirect('/');
       }
-      res.render('categories/edit-category', {
-        pageTitle: 'Edit Category',
-        path: '/admin/edit-category',
+      res.render('categories/edit-marketing-category', {
+        pageTitle: 'Edit Marketing Category',
+        path: '/admin/edit-marketing-category',
         editing: editMode,
         category,
         hasError: false,
@@ -90,7 +90,7 @@ exports.getEditCategory = (req, res, next) => {
     });
 };
 
-exports.postEditCategory = (req, res, next) => {
+exports.postEditMarketingCategory = (req, res, next) => {
   const categoryId = req.body.categoryId;
   const updatedCode = req.body.code;
   const updatedTitle = req.body.title;
@@ -100,9 +100,9 @@ exports.postEditCategory = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).render('categories/edit-category', {
-      pageTitle: 'Edit Category',
-      path: '/admin/edit-category',
+    return res.status(422).render('categories/edit-marketing-category', {
+      pageTitle: 'Edit Marketing Category',
+      path: '/admin/edit-marketing-category',
       editing: true,
       hasError: true,
       category: {
@@ -117,15 +117,15 @@ exports.postEditCategory = (req, res, next) => {
     });
   }
 
-  Category.findById(categoryId)
-    .then(category => {
-      category.code = updatedCode;
-      category.title = updatedTitle;
-      category.description = updatedDesc;
-      category.displayOrder = updatedDisplayOrder;
-      return category.save().then(result => {
-        console.log('UPDATED CATEGORY!');
-        res.redirect('/admin/categories');
+  MarketingCategory.findById(categoryId)
+    .then(marketingCategory => {
+        marketingCategory.code = updatedCode;
+        marketingCategory.title = updatedTitle;
+        marketingCategory.description = updatedDesc;
+        marketingCategory.displayOrder = updatedDisplayOrder;
+      return marketingCategory.save().then(result => {
+        console.log('UPDATED MARKETING CATEGORY!');
+        res.redirect('/admin/marketingCategories');
       });
     })
     .catch(err => {
@@ -135,16 +135,16 @@ exports.postEditCategory = (req, res, next) => {
     });
 };
 
-exports.getCategories = (req, res, next) => {
-  Category.find()
+exports.getMarketingCategories = (req, res, next) => {
+    MarketingCategory.find()
     // .select('title price -_id')
     // .populate('userId', 'name')
-    .then(categories => {
-      console.log(categories);
-      res.render('categories/categories', {
+    .then(marketingCategories => {
+      console.log(marketingCategories);
+      res.render('categories/marketing-categories', {
         categories,
-        pageTitle: 'Admin Categories',
-        path: '/categories/categories'
+        pageTitle: 'Admin Marketing Categories',
+        path: '/categories/marketing-categories'
       });
     })
     .catch(err => {
@@ -154,17 +154,17 @@ exports.getCategories = (req, res, next) => {
     });
 };
 
-exports.deleteCategory = (req, res, next) => {
+exports.deleteMarketingCategory = (req, res, next) => {
   const categoryId = req.params.categoryId;
-  Category.findById(categoryId)
-    .then(category => {
-      if (!category) {
+  MarketingCategory.findById(categoryId)
+    .then(marketingCategory => {
+      if (!marketingCategory) {
         return next(new Error('Category not found.'));
       }
-      return Category.deleteOne({ _id: categoryId });
+      return MarketingCategory.deleteOne({ _id: categoryId });
     })
     .then(() => {
-      console.log('DESTROYED CATEGORY');
+      console.log('DESTROYED MARKETING CATEGORY');
       res.status(200).json({ message: 'Success!' });
     })
     .catch(err => {

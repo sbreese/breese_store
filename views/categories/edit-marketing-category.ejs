@@ -1,0 +1,57 @@
+<%- include('../includes/headOLD.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form class="category-form" action="/admin/<% if (editing) { %>edit-category<% } else { %>add-category<% } %>" method="POST" enctype="multipart/form-data">
+            <div class="form-control">
+                <label for="code">Code</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'code') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="code" 
+                    id="code" 
+                    value="<% if (editing || hasError) { %><%= category.code %><% } %>">
+            </div>
+            <div class="form-control">
+                    <label for="category">Category Title</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
+                        type="text" 
+                        name="title" 
+                        id="title" 
+                        value="<% if (editing || hasError) { %><%= category.title %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea 
+                    class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
+                    name="description" 
+                    id="description" 
+                    rows="5"><% if (editing || hasError) { %><%= category.description %><% } %></textarea>
+            </div>
+            <div class="form-control">
+                    <label for="displayOrder">Display Order</label>
+                    <input 
+                        class="<%= validationErrors.find(e => e.param === 'displayOrder') ? 'invalid' : '' %>"
+                        type="text" 
+                        name="displayOrder" 
+                        id="displayOrder" 
+                        value="<% if (editing || hasError) { %><%= category.displayOrder %><% } %>">
+            </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= category._id %>" name="categoryId">
+            <% } %>
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn" type="submit"><% if (editing) { %>Update Category<% } else { %>Add Category<% } %></button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
