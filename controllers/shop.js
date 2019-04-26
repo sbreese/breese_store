@@ -70,23 +70,35 @@ exports.getProducts = (req, res, next) => {
         .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-      res.render('includes/product-filter-search-list', {
-        categories,
-        categoryKey: param_1_key && param_1_key.toLowerCase(),
-        resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
-        sort_by: param_1_value,
-        color: param_1_value,
-            price_range: param_1_value,
-            tag: param_1_value,
-        products,
-        pageTitle: 'Products',
-        path: '/products',
-        currentPage: page,
-        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
-        hasPreviousPage: page > 1,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+      helper.getShoppingCartData(req)
+      .then(user_cart => {
+        res.render('includes/product-filter-search-list', {
+          cart_items: user_cart.cart_items,
+          cart_total: user_cart.cart_total,
+          totalSum: helper.calcTotalPrice(user_cart.cart_items),
+          wishlist: user_cart.wishlist,
+          categories,
+          categoryKey: param_1_key && param_1_key.toLowerCase(),
+          resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
+          sort_by: param_1_value,
+          color: param_1_value,
+              price_range: param_1_value,
+              tag: param_1_value,
+          products,
+          pageTitle: 'Products',
+          path: '/products',
+          currentPage: page,
+          hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+        });
+      })
+      .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
     })
     .catch(err => {
