@@ -62,7 +62,7 @@ exports.postAddMarketingCategory = (req, res, next) => {
     });
 };
 
-exports.getEditCategory = (req, res, next) => {
+exports.getEditMarketingCategory = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect('/');
