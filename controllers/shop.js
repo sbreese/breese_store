@@ -73,6 +73,11 @@ exports.getProducts = (req, res, next) => {
       res.render('includes/product-filter-search-list', {
         categories,
         categoryKey: param_1_key && param_1_key.toLowerCase(),
+        resultInfo: helper.formatResultInfo(param_1_key, param_1_value, ITEMS_PER_PAGE, totalItems, page),
+            sort_by: param_1_value,
+            color: param_1_value,
+            price_range: param_1_value,
+            tag: param_1_value,
         prods: products,
         pageTitle: 'Products',
         path: '/products',
