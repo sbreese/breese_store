@@ -72,7 +72,7 @@ exports.getProducts = (req, res, next) => {
     .then(products => {
       helper.getShoppingCartData(req)
       .then(user_cart => {
-        res.render('includes/product-filter-search-list', {
+        res.render('shop/product-list', {
           cart_items: user_cart.cart_items,
           cart_total: user_cart.cart_total,
           totalSum: helper.calcTotalPrice(user_cart.cart_items),
