@@ -46,7 +46,8 @@ const productSchema = new Schema({
     ref: 'User',
     required: true
   },
-  tags: [String]
+  tags: [String],
+  marketingCategories: [String]
 });
 
 module.exports = mongoose.model('Product', productSchema);

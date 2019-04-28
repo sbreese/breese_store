@@ -951,6 +951,73 @@
 						</div>
 					</div>
 
+
+
+            <!-- Best Seller list -->
+			<div class="tab-pane fade" id="best-seller" role="tabpanel">
+				<!-- Slide2 -->
+				<div class="wrap-slick2">
+					<div class="slick2">
+					<% if (products.length > 0) { %>       
+						<% for (let product of products.filter(product => product.marketingCategories.includes('best-seller'))) { %>       
+							<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+								<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+							</div>
+						<% } %>
+					<% } %>
+					</div>
+				</div>
+			</div>
+
+			<!-- Featured list -->
+			<div class="tab-pane fade" id="featured" role="tabpanel">
+				<!-- Slide2 -->
+				<div class="wrap-slick2">
+					<div class="slick2">
+						<% if (products.length > 0) { %>       
+							<% for (let product of products.filter(product => product.marketingCategories.includes('featured')))) { %>       
+								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+									<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+								</div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+			</div>
+
+			<!-- Sale list -->
+			<div class="tab-pane fade" id="sale" role="tabpanel">
+				<!-- Slide2 -->
+				<div class="wrap-slick2">
+					<div class="slick2">
+						<% if (products.length > 0) { %>       
+							<% for (let product of products.filter(product => product.marketingCategories.includes('sale')))) { %>       
+								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+									<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+								</div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+			</div>
+	
+			<!-- Top-Rated list -->
+			<div class="tab-pane fade" id="top-rated" role="tabpanel">
+				<!-- Slide2 -->
+				<div class="wrap-slick2">
+					<div class="slick2">
+					<% if (products.length > 0) { %>       
+						<% for (let product of products.filter(product => product.marketingCategories.includes('top-rated')))) { %>       
+							<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+								<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
+							</div>
+						<% } %>
+					<% } %>
+					</div>
+				</div>
+			</div>
+
+
 					<!-- - -->
 					<div class="tab-pane fade" id="top-rated" role="tabpanel">
 						<!-- Slide2 -->
