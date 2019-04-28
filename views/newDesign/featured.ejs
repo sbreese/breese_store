@@ -975,7 +975,7 @@
 				<div class="wrap-slick2">
 					<div class="slick2">
 						<% if (products.length > 0) { %>       
-							<% for (let product of products.filter(product => product.marketingCategories.includes('featured')))) { %>       
+							<% for (let product of products.filter(product => product.marketingCategories.includes('featured'))) { %>       
 								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 									<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
 								</div>
@@ -991,7 +991,7 @@
 				<div class="wrap-slick2">
 					<div class="slick2">
 						<% if (products.length > 0) { %>       
-							<% for (let product of products.filter(product => product.marketingCategories.includes('sale')))) { %>       
+							<% for (let product of products.filter(product => product.marketingCategories.includes('sale'))) { %>       
 								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 									<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
 								</div>
@@ -1007,7 +1007,7 @@
 				<div class="wrap-slick2">
 					<div class="slick2">
 					<% if (products.length > 0) { %>       
-						<% for (let product of products.filter(product => product.marketingCategories.includes('top-rated')))) { %>       
+						<% for (let product of products.filter(product => product.marketingCategories.includes('top-rated'))) { %>       
 							<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 								<%- include('../includes/product-card', {product, onWishlist: wishlist.some(item => item._id.toString() === product._id.toString())}) %>
 							</div>
