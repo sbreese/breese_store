@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-complete-guide",
-  "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "name": "breese-store",
+  "version": "1.0.1",
+  "description": "A fully working e-commerce solution developed by Steve Breese (www.SteveBreese.com)",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production MONGO_USER=breese MONGO_PASSWORD=breese MONTO_DEFAULT_DATABASE=breese SENDGRID_API_KEY=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 FROM_EMAIL=me@stevebreese.com STRIPE_KEY=pk_test_EhTLCvipLAoiGNczGzmVjq8m node app.js",
@@ -9,8 +9,9 @@
     "star:dev": "nodemon app.js",
     "start-server": "node app.js"
   },
-  "author": "Maximilian Schwarzmüller",
-  "license": "ISC",
+  "author": "Steve Breese",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "nodemon": "^1.18.3"
   },

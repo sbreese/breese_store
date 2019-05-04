@@ -21,15 +21,18 @@
 				<div class="col-md-7 col-lg-8">
 					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Story
+							<!--Our Story-->About Breese.Store
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
+							Breese.Store is a fully-functioning eCommerce solution built on Node.js and MongoDB.  I built the site 100% from scratch, complete with a credit card payment integration, order management system, and automated email communications.  Later, I integrated a front-end "skin", complete with mock fashion photos, which was developed by a 3rd party.
+							I chose to use Node.js because is great in building fast, scalable web applications.   It’s capable of handling a huge number of simultaneous connections with high throughput, which equates to high scalability.  I felt that alterntive languages like PHP, Python, and Ruby just could not compete would result in a eCommerce experience that seemed slow, boggy, and non-responsive.
+
 						</p>
 
 						<p class="stext-113 cl6 p-b-26">
-							Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. 
+							The LAMP stack was the frist web development platform I learned and over the years have built dozens of web applications on it.  Some utilized frameworks such as Drupal and Wordpress, while others were built on custom MVC and object-oriented solutions.  The drawback to scripting languages like these are that each web request is assigned their own CPU thread.  If 100 users request a page at the exact moment, 100 threads would queue up to use the CPU.  If a particular thread needs to perform a high intensive I/O operation, all later requests have to wait until this requests has completed before they can even begin. 
+							With Node.js, it is different.  When 100 users simutaneously send request to a Node.js HTTPS server, they all share a single thread which all immediately get access to the CPU via the Node.js Event Loop.  In this scenario, if a particular request requires an intensive I/O operation, this is automatically put off to the side, freeing up the CPU to handle more requests.  This asynchronous process allows the server to handle web traffic in a much more efficient manner, ultimately resulting in a cleaner and more consistent experience for the web application user.
 						</p>
 
 						<p class="stext-113 cl6 p-b-26">
