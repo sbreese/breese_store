@@ -24,7 +24,7 @@ exports.getContact = (req, res, next) => {
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
       csrfToken: req.csrfToken(),
-      pageTitle: 'Contact',
+      pageTitle: 'Breese.Store &mdash; Contact Steve Breese',
       path: '/contact'
     }).catch(err => {
       const error = new Error(err);
@@ -153,7 +153,7 @@ exports.getAbout = (req, res, next) => {
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
-      pageTitle: 'Shop',
+      pageTitle: 'About Breese.Store',
       path: '/about'
     }).catch(err => {
       const error = new Error(err);
@@ -177,7 +177,7 @@ exports.getHelpFaqs = (req, res, next) => {
       cart_total: user_cart.cart_total,
       totalSum: helper.calcTotalPrice(user_cart.cart_items),
       wishlist: user_cart.wishlist,
-      pageTitle: 'Help & FAQs',
+      pageTitle: 'Breese.Store &mdash; Help & FAQs',
       path: '/help_faqs'
     }).catch(err => {
       const error = new Error(err);
@@ -226,7 +226,7 @@ exports.getBlogDetail = (req, res, next) => {
         cart_total: user_cart.cart_total,
         totalSum: helper.calcTotalPrice(user_cart.cart_items),
         wishlist: user_cart.wishlist,
-        pageTitle: 'Blog Detail',
+        pageTitle: 'Breese.Store &mdash; Blog Detail',
         path: '/blog-detail'
       }).catch(err => {
         const error = new Error(err);
