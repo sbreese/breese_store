@@ -366,19 +366,20 @@ exports.postLogin = (req, res, next) => {
             console.log("Hey, the passwords do match!")
             console.log(user)
             return user
+          } else {
+            console.log("Hey, the password " + password + " DOESN'T match!")
+            console.log(user)
+            return res.status(422).render('auth/login', {
+              path: '/login',
+              pageTitle: 'Login',
+              errorMessage: 'Invalid email or password.',
+              oldInput: {
+                email,
+                password
+              },
+              validationErrors: []
+            })
           }
-          console.log("Hey, the password " + password + " DOESN'T match!")
-          console.log(user)
-          return res.status(422).render('auth/login', {
-            path: '/login',
-            pageTitle: 'Login',
-            errorMessage: 'Invalid email or password.',
-            oldInput: {
-              email,
-              password
-            },
-            validationErrors: []
-          })
         })
         .then(user => {
           console.log("Are we getting here?  What for?")
