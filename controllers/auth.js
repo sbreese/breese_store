@@ -340,6 +340,8 @@ exports.postLogin = (req, res, next) => {
   User.findOne({email})
     .populate('cart.items.product')
     .then(user => {
+      console.log("Resulting findOne user:")
+      console.log(user)
       if (!user) {
         const cart_items = req.session.cart_items || []
         const wishlist = req.session.wishlist || []
@@ -387,8 +389,7 @@ exports.postLogin = (req, res, next) => {
             req.session.wishlist = []
             user.save()
           }
-          console.log("Resulting user:")
-          console.log(user)
+
           return user
         })
         .then(user => {
