@@ -367,6 +367,8 @@ exports.postLogin = (req, res, next) => {
             console.log(user)
             return user
           }
+          console.log("Hey, the password " + password + " DOESN'T match!")
+          console.log(user)
           return res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
