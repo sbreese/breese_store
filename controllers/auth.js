@@ -572,6 +572,8 @@ exports.postReset = (req, res, next) => {
       return res.redirect('/reset')
     }
     const token = buffer.toString('hex')
+    console.log("OK we got a reqest to reset this shit!")
+    console.log(req.body.email)
     User.findOne({email: req.body.email})
       .then(user => {
         if (!user) {
