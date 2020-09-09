@@ -369,7 +369,7 @@ exports.postLogin = (req, res, next) => {
           }
           console.log("Hey, the password " + password + " DOESN'T match!")
           console.log(user)
-          res.status(422).render('auth/login', {
+          return res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
             errorMessage: 'Invalid email or password.',
@@ -381,6 +381,8 @@ exports.postLogin = (req, res, next) => {
           })
         })
         .then(user => {
+          console.log("Are we getting here?  What for?")
+          console.log(user)
           if (req.session.cart_items && req.session.cart_items.length) {
             // de-duplicate cart items
             user.cart.items = [...req.session.cart_items, ...user.cart.items].filter((thing, index, self) => self.findIndex(t => t.product._id.toString() === thing.product._id.toString()) === index)
