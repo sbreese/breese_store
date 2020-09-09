@@ -143,6 +143,7 @@ app.use((error, req, res, next) => {
   res.status(500).render('500', {
     pageTitle: 'Error!',
     cart_total: 0,
+    wishlist: [],
     path: '/500',
     isAuthenticated: req.session.isLoggedIn,
     errorMsg: error,
