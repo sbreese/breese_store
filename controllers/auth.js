@@ -375,6 +375,7 @@ exports.postLogin = (req, res, next) => {
               path: '/login',
               pageTitle: 'Login',
               cart_items,
+              wishlist,
               cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
               errorMessage: 'Invalid email or password.',
               oldInput: {
