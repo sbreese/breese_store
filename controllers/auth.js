@@ -371,6 +371,7 @@ exports.postLogin = (req, res, next) => {
             console.log("Hey, the password " + password + " DOESN'T match!")
             console.log(user)
             const cart_items = req.session.cart_items || []
+            const wishlist = req.session.wishlist || []
             return res.status(422).render('auth/login', {
               path: '/login',
               pageTitle: 'Login',
