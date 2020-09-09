@@ -1,14 +1,28 @@
-<%- include('includes/headOLD.ejs') %>
+<!-- HTML Head -->
+<%- include('../includes/head.ejs') %>
+
+<!-- Header -->
+<%- include('../includes/header.ejs') %>
+
+<!-- Cart -->
+<%- include('../includes/cart.ejs') %>
+<!--%- include('includes/headOLD.ejs') %>
 </head>
 
 <body>
-    <%- include('includes/navigation.ejs') %>
-    <h1>Some error occurred!</h1>
-    <p>We're working on fixing this, sorry for the inconvenience!</p>
-    <% if (errorMsg) { %>
-    <p>Here is the error message in all its glory:<br>
-        <pre><%- errorMsg %></pre>
-    </p>
-    <% } %>
+<-%- include('includes/navigation.ejs') %-->
+<h1>Some error occurred!</h1>
+<p>We're working on fixing this, sorry for the inconvenience!</p>
+<% if (errorMsg) { %>
+<p>Here is the error message in all its glory:<br>
+<pre><%- errorMsg %></pre>
+</p>
+<% } %>
 
-<%- include('includes/end.ejs') %>
+<!--%- include('includes/end.ejs') %-->
+
+<!-- Footer -->
+<%- include('../includes/footer.ejs') %>
+
+<!-- Foot -->
+<%- include('../includes/foot.ejs') %>
