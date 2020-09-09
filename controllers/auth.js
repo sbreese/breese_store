@@ -387,6 +387,8 @@ exports.postLogin = (req, res, next) => {
             req.session.wishlist = []
             user.save()
           }
+          console.log("Resulting user:")
+          console.log(user)
           return user
         })
         .then(user => {
