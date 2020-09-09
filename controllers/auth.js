@@ -557,6 +557,7 @@ exports.getReset = (req, res, next) => {
   res.render('auth/reset', {
     cart_items,
     cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
+    wishlist: req.session.wishlist || [],
     path: '/reset',
     pageTitle: 'Reset Password',
     errorMessage: message
