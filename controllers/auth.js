@@ -363,6 +363,8 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then(doMatch => {
           if (doMatch) {
+            console.log("Hey, the passwords do match!")
+            console.log(user)
             return user
           }
           return res.status(422).render('auth/login', {
