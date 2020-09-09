@@ -384,20 +384,22 @@ exports.postLogin = (req, res, next) => {
         .then(user => {
           console.log("Are we getting here?  What for?")
           console.log(user)
-          if (req.session.cart_items && req.session.cart_items.length) {
-            // de-duplicate cart items
-            user.cart.items = [...req.session.cart_items, ...user.cart.items].filter((thing, index, self) => self.findIndex(t => t.product._id.toString() === thing.product._id.toString()) === index)
-            req.session.cart_items = []
-            user.save()
-          }
-          if (req.session.wishlist && req.session.wishlist.length) {
-            // de-duplicate wishlist
-            user.cart.wishlist = [...req.session.wishlist, ...user.cart.wishlist].filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index)
-            req.session.wishlist = []
-            user.save()
-          }
+          if (user) {
+            if (req.session.cart_items && req.session.cart_items.length) {
+              // de-duplicate cart items
+              user.cart.items = [...req.session.cart_items, ...user.cart.items].filter((thing, index, self) => self.findIndex(t => t.product._id.toString() === thing.product._id.toString()) === index)
+              req.session.cart_items = []
+              user.save()
+            }
+            if (req.session.wishlist && req.session.wishlist.length) {
+              // de-duplicate wishlist
+              user.cart.wishlist = [...req.session.wishlist, ...user.cart.wishlist].filter((thing, index, self) => self.findIndex(t => t._id.toString() === thing._id.toString()) === index)
+              req.session.wishlist = []
+              user.save()
+            }
 
-          return user
+            return user
+          }
         })
         .then(user => {
 
