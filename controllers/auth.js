@@ -402,26 +402,26 @@ exports.postLogin = (req, res, next) => {
           }
         })
         .then(user => {
+          if (user) {
+            // steves additions
+            Order.find({'user.userId': user._id})
+              .then(orders => {
+                req.session.isLoggedIn = true
+                req.session.user = user
+                req.session.login_orders = orders
 
-          // steves additions
-          Order.find({'user.userId': user._id})
-            .then(orders => {
-              req.session.isLoggedIn = true
-              req.session.user = user
-              req.session.login_orders = orders
+                return req.session.save(err => {
+                  console.log(err)
+                  res.redirect(user.cart.items.length > 0 ? '/shopping-cart' : '/')
+                })
 
-              return req.session.save(err => {
-                console.log(err)
-                res.redirect(user.cart.items.length > 0 ? '/shopping-cart' : '/')
               })
-
-            })
-            .catch(err => {
-              console.log(err)
-              res.redirect('/login')
-            })
-          // end steves addition
-
+              .catch(err => {
+                console.log(err)
+                res.redirect('/login')
+              })
+            // end steves addition
+          }
         })
         .catch(err => {
           console.log(err)
