@@ -67,10 +67,10 @@ const authRoutes = require('./routes/auth')
 const orderRoutes = require('./routes/orders')
 const usersRoutes = require('./routes/users')
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).array('images', 4) // .single('image')
+  multer({storage: fileStorage, fileFilter: fileFilter}).array('images', 4) // .single('image')
 )
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/images', express.static(path.join(__dirname, 'images')))
@@ -103,7 +103,7 @@ app.use((req, res, next) => {
     return next()
   }
   // User.findById(req.session.user._id)
-  User.findOne({ _id: req.session.user._id })
+  User.findOne({_id: req.session.user._id})
     .populate('cart.items.product')
     .then((user) => {
       if (!user) {
@@ -142,6 +142,7 @@ app.use((error, req, res, next) => {
   // res.redirect('/500');
   res.status(500).render('500', {
     pageTitle: 'Error!',
+    cart_total: 0,
     path: '/500',
     isAuthenticated: req.session.isLoggedIn,
     errorMsg: error,
