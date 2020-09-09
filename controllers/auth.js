@@ -342,6 +342,7 @@ exports.postLogin = (req, res, next) => {
     .then(user => {
       console.log("Resulting findOne user:")
       console.log(user)
+
       if (!user) {
         const cart_items = req.session.cart_items || []
         const wishlist = req.session.wishlist || []
@@ -369,9 +370,11 @@ exports.postLogin = (req, res, next) => {
           } else {
             console.log("Hey, the password " + password + " DOESN'T match!")
             console.log(user)
+            const cart_items = req.session.cart_items || []
             return res.status(422).render('auth/login', {
               path: '/login',
               pageTitle: 'Login',
+              cart_items,
               cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
               errorMessage: 'Invalid email or password.',
               oldInput: {
