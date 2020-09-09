@@ -369,7 +369,7 @@ exports.postLogin = (req, res, next) => {
           }
           console.log("Hey, the password " + password + " DOESN'T match!")
           console.log(user)
-          return res.status(422).render('auth/login', {
+          res.status(422).render('auth/login', {
             path: '/login',
             pageTitle: 'Login',
             errorMessage: 'Invalid email or password.',
