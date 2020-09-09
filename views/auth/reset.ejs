@@ -1,22 +1,35 @@
-<%- include('../includes/headOLD.ejs') %>
+<!-- HTML Head -->
+<%- include('../includes/head.ejs') %>
+
+<!-- Header -->
+<%- include('../includes/header.ejs') %>
+
+<!-- Cart -->
+<%- include('../includes/cart.ejs') %>
+<!--%- include('../includes/headOLD.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
 </head>
 
 <body>
-   <%- include('../includes/navigation.ejs') %>
+   <-%- include('../includes/navigation.ejs') %-->
 
-    <main>
-        <% if (errorMessage) { %>
-            <div class="user-message user-message--error"><%= errorMessage %></div>
-        <% } %>
-        <form class="login-form" action="/reset" method="POST">
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Reset Password</button>
-        </form>
-    </main>
-<%- include('../includes/end.ejs') %>
+<main>
+  <% if (errorMessage) { %>
+  <div class="user-message user-message--error"><%= errorMessage %></div>
+  <% } %>
+  <form class="login-form" action="/reset" method="POST">
+    <div class="form-control">
+      <label for="email">E-Mail</label>
+      <input type="email" name="email" id="email">
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn" type="submit">Reset Password</button>
+  </form>
+</main>
+<!--%- include('../includes/end.ejs') %-->
+<!-- Footer -->
+<%- include('../includes/footer.ejs') %>
+
+<!-- Foot -->
+<%- include('../includes/foot.ejs') %>
