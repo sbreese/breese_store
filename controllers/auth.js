@@ -553,7 +553,7 @@ exports.getReset = (req, res, next) => {
   } else {
     message = null
   }
-  const cart_items = req.session.cart_items
+  const cart_items = req.session.cart_items || []
   res.render('auth/reset', {
     cart_items,
     cart_total: helper.sumPropertyValue(cart_items, 'quantity'),
