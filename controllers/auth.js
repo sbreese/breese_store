@@ -572,14 +572,15 @@ exports.postReset = (req, res, next) => {
       return res.redirect('/reset')
     }
     const token = buffer.toString('hex')
-    console.log("OK we got a reqest to reset this shit!")
-    console.log(req.body.email)
+
     User.findOne({email: req.body.email})
       .then(user => {
         if (!user) {
           req.flash('error', 'No account with that email found.')
           return res.redirect('/reset')
         }
+        console.log("OK we got a reqest to reset this shit!")
+        console.log(user)
         user.passwordResetToken = token
         user.passwordResetExpires = Date.now() + 3600000
         return user.save()
