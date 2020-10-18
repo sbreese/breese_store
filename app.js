@@ -17,7 +17,9 @@ const User = require('./models/user')
 
 // const MONGODB_URI =
 //  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-ntrwp.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
-const MONGODB_URI = 'mongodb://breese:breese@ds059634.mongolab.com:59634/breese'
+
+// STEVE - I commented this out on October 18, 2020 after adding the following Atlas one
+// const MONGODB_URI = 'mongodb://breese:breese@ds059634.mongolab.com:59634/breese'
 
 const MONGODB_URI =
   'mongodb+srv://forever_home:Mongorocks123@cluster0-drgc3.mongodb.net/breese_store?retryWrites=true&w=majority'
