@@ -16,10 +16,11 @@ const isAuth = require('./middleware/is-auth')
 const User = require('./models/user')
 
 // const MONGODB_URI =
-//  'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/shop';
-// const MONGODB_URI =
 //  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-ntrwp.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 const MONGODB_URI = 'mongodb://breese:breese@ds059634.mongolab.com:59634/breese'
+
+const MONGODB_URI =
+  'mongodb+srv://forever_home:Mongorocks123@cluster0-drgc3.mongodb.net/breese_store?retryWrites=true&w=majority'
 
 const app = express()
 
@@ -30,7 +31,7 @@ app.use(forceDomain({
 
 const store = new MongoDBStore({
   uri: MONGODB_URI,
-  collection: 'sessions',
+  collection: 'sessions'
 })
 const csrfProtection = csrf()
 
@@ -41,7 +42,7 @@ const fileStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname)
-  },
+  }
 })
 
 const fileFilter = (req, file, cb) => {
@@ -67,10 +68,10 @@ const authRoutes = require('./routes/auth')
 const orderRoutes = require('./routes/orders')
 const usersRoutes = require('./routes/users')
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(
-  multer({storage: fileStorage, fileFilter: fileFilter}).array('images', 4) // .single('image')
+  multer({ storage: fileStorage, fileFilter: fileFilter }).array('images', 4) // .single('image')
 )
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/images', express.static(path.join(__dirname, 'images')))
@@ -79,7 +80,7 @@ app.use(
     secret: 'my secret',
     resave: false,
     saveUninitialized: false,
-    store: store,
+    store: store
   })
 )
 
@@ -103,16 +104,16 @@ app.use((req, res, next) => {
     return next()
   }
   // User.findById(req.session.user._id)
-  User.findOne({_id: req.session.user._id})
+  User.findOne({ _id: req.session.user._id })
     .populate('cart.items.product')
-    .then((user) => {
+    .then(user => {
       if (!user) {
         return next()
       }
       req.user = user
       next()
     })
-    .catch((err) => {
+    .catch(err => {
       next(new Error(err))
     })
 })
@@ -146,15 +147,15 @@ app.use((error, req, res, next) => {
     wishlist: [],
     path: '/500',
     isAuthenticated: req.session.isLoggedIn,
-    errorMsg: error,
+    errorMsg: error
   })
 })
 
 mongoose
   .connect(MONGODB_URI)
-  .then((result) => {
+  .then(result => {
     app.listen(process.env.PORT || 3000)
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err)
   })
