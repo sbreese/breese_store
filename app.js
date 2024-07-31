@@ -27,6 +27,7 @@ const MONGODB_URI =
 const app = express()
 
 /*
+
 app.use(forceDomain({
   hostname: 'www.breese.store'
 }));*/
